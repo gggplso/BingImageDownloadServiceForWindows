@@ -547,7 +547,7 @@ namespace ClassLibrary
             }
             catch (Exception ex)
             {
-                MyLogHelper.LogSplit(ShareClass._logPath, "服务初始化", "配置文件初始化失败,请删除文件 " + ShareClass._mainSettingFile + " 并重启。", ClassLibrary.ShareClass._logType, ClassLibrary.ShareClass._logCycle);
+                MyLogHelper.LogSplit(ClassLibrary.ShareClass._logPath, "服务初始化", "配置文件初始化失败,请删除文件 " + ClassLibrary.ShareClass._mainSettingFile + " 并重启。", ClassLibrary.ShareClass._logType, ClassLibrary.ShareClass._logCycle);
                 MyLogHelper.GetExceptionLocation(ex);
                 //throw new InitializationFailedException("初始化失败，配置文件初始化失败。");
                 initializationResult = false;

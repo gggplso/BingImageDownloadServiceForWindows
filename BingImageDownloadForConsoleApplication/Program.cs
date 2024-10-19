@@ -31,17 +31,19 @@ namespace BingImageDownloadForConsoleApplication
 			string strBingImageConfig = File.ReadAllText(ClassLibrary.ShareClass._bingImageSettingFile);
 			Console.WriteLine(strBingImageConfig);
 			Console.WriteLine();
-			#endregion
+            #endregion
 
-			#region 暂停、插入测试代码
+            #region 暂停、插入测试代码
 
-			string userPath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+            Console.WriteLine("系统默认用户主目录");
+            string userPath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
 			string downloadsPath = Path.Combine(userPath, "Downloads");
 			Console.WriteLine(downloadsPath);
 			string windowsSpotlight = Path.Combine(userPath, "AppData", "Local", "Packages", "Microsoft.Windows.ContentDeliveryManager_cw5n1h2txyewy", "LocalState", "Assets");
 			Console.WriteLine(windowsSpotlight);
 			Console.WriteLine();
-			userPath = Directory.GetParent(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)).FullName;
+            Console.WriteLine("用户自定义文档目录");
+            userPath = Directory.GetParent(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)).FullName;
 			Console.WriteLine(userPath);
 			downloadsPath = Path.Combine(userPath, "Downloads");
 			Console.WriteLine(downloadsPath);

@@ -223,6 +223,8 @@ namespace ClassLibrary
         #region 用户目录路径
         #region 注意事项
         /*
+         * 
+         一、
             现象：用程序运行没问题，获取到的是：   D:\WJJ    C:\Users\wjj
 
                   但用Windows服务运行时，获取到的目录路径却是：  C:\WINDOWS\system32\config\systemprofile
@@ -237,8 +239,31 @@ namespace ClassLibrary
             解决方案：
                  在运行Windows服务前，先通过WinForm程序设置好参数配置。
 
+
+         二、
+            服务运行时：
+            MyDocuments 路径：C:\Windows\system32\config\systemprofile\Documents
+            UserProfile 路径：C:\Windows\system32\config\systemprofile
+
+            双击程序运行时：
+            MyDocuments 路径：D:\MyFiles\Documents
+            UserProfile 路径：C:\Users\WJJ
+
+            Windows 服务和普通应用程序在获取用户目录路径时的行为差异是由它们的运行上下文决定的。
+
+            运行上下文的差异
+            Windows 服务：
+
+            运行账户：Windows 服务通常以系统账户（如 LocalSystem、NetworkService 或 LocalService）或指定的用户账户运行。
+            用户配置文件：这些账户通常没有完整的用户配置文件，因此 Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) 和 Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) 返回的是系统账户的路径，而不是普通用户的路径。
+            普通应用程序：
+
+            运行账户：普通应用程序通常以当前登录的用户账户运行。
+            用户配置文件：这些应用程序可以访问当前用户的完整配置文件，因此 Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) 和 Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) 返回的是当前用户的路径。
+
          */
         #endregion
+#if DEBUG
         // Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)
         // 返回的是当前登录用户的主目录路径，通常这个路径是在系统默认的盘符上（通常是 C 盘）。
         // 如果用户将自己的文件夹位置改到了 D 盘，那么这个方法返回的仍然是系统默认的主目录路径。
@@ -246,6 +271,51 @@ namespace ClassLibrary
         // 使用 Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
         // 这个方法返回的是用户的文档目录，即使用户更改了文档目录的位置，它也能返回正确的路径。
         public static readonly string _userPath = Directory.GetParent(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)).FullName;
+        /*
+         很奇怪的问题，同样的文件在另一台电脑上可以正常运行Windows服务，在这台电脑上报错：
+         无法启动服务。
+         System.TypeInitializationException: “ClassLibrary.ShareClass”的类型初始值设定项引发异常。
+             ---> System.ArgumentException: 路径不能为空字符串或全为空白。
+             参数名: path 在 System.IO.Directory.GetParent(String path)
+                          在 ClassLibrary.ShareClass..cctor()
+                          位置 D:\GitFiles\BingImageDownloadServiceForWindows\ClassLibrary\ShareClass.cs:行号 248
+                               --- 内部异常堆栈跟踪的结尾
+                               --- 在 BingImageDownloadServiceForWindows.BingImageDownloadServiceControl.OnStart(String[] args)
+                                   位置 D:\GitFiles\BingImageDownloadServiceForWindows\BingImageDownloadServiceForWindows\BingImageDownloadServiceControl.cs:行号 57 
+                                   在 System.ServiceProcess.ServiceBase.ServiceQueuedMainCallback(Object state)
+         */
+        //为了解决上面的问题，尝试修改代码如下：
+#else
+        public static readonly string _userPath = InitializeUserPath();
+        public static readonly string _systemUserProfilePath = InitializeSystemUserProfilePath();
+
+        private static string InitializeUserPath()
+        {
+            string myDocumentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            ClassLibrary.MyLogHelper.LogSplit(_logPath, "用户自定义文档目录的路径检查", $"MyDocuments路径: {myDocumentsPath}", _logType, _logCycle);
+            if (string.IsNullOrWhiteSpace(myDocumentsPath))
+            {
+                throw new ArgumentException("用户自定义文档目录：路径不能为空字符串或全为空白。", nameof(myDocumentsPath));
+            }
+            return Directory.GetParent(myDocumentsPath).FullName;
+        }
+
+        private static string InitializeSystemUserProfilePath()
+        {
+            string userProfilePath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+            ClassLibrary.MyLogHelper.LogSplit(_logPath, "系统默认用户主目录的路径检查", $"UserProfile路径: {userProfilePath}", _logType, _logCycle);
+            if (string.IsNullOrWhiteSpace(userProfilePath))
+            {
+                throw new ArgumentException("系统默认用户主目录：路径不能为空字符串或全为空白。", nameof(userProfilePath));
+            }
+            return userProfilePath;
+        }
+
+        static ShareClass()
+        {
+            ClassLibrary.MyLogHelper.LogSplit(_logPath, "调试：静态构造函数", "静态构造函数被调用", _logType, _logCycle);
+        }
+#endif
 
         #endregion
 
@@ -554,7 +624,7 @@ namespace ClassLibrary
                 return initializationResult;
             }
 
-            #endregion            
+            #endregion
 
             return initializationResult;
         }

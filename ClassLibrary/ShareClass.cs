@@ -15,6 +15,7 @@ using System.Net.NetworkInformation;
 using System.Threading;
 using System.Net.Http;
 using ClassLibrary.Classes;
+using System.Security.Cryptography;
 
 namespace ClassLibrary
 {
@@ -1211,6 +1212,133 @@ namespace ClassLibrary
          */
 		#endregion
 
+		#region 哈希值补充说明
+		/*
+		            // 异步主方法：将 Main 方法标记为 async Task，并在其中使用 await 调用异步方法。
+					// 避免阻塞：避免在同步方法中使用.Result 和 .Wait()，以防止潜在的死锁问题。
+		 */
+		/*
+		    //空流:
+			//D41D8CD98F00B204E9800998ECF8427E 是空字符串的 MD5 哈希值。
+
+		MD5：
+		创建方法：MD5.Create()
+		示例：using (HashAlgorithm hashAlgorithm = MD5.Create())
+
+		SHA1：
+		创建方法：SHA1.Create()
+		示例：using (HashAlgorithm hashAlgorithm = SHA1.Create())
+
+		SHA256：
+		创建方法：SHA256.Create()
+		示例：using (HashAlgorithm hashAlgorithm = SHA256.Create())
+
+		SHA384：
+		创建方法：SHA384.Create()
+		示例：using (HashAlgorithm hashAlgorithm = SHA384.Create())
+
+		SHA512：
+		创建方法：SHA512.Create()
+		示例：using (HashAlgorithm hashAlgorithm = SHA512.Create())
+
+		RIPEMD160：
+		创建方法：RIPEMD160.Create()
+		示例：using (HashAlgorithm hashAlgorithm = RIPEMD160.Create())
+		
+		 */
+		#endregion
+		/// <summary>
+		/// 根据提供的文件，获取文件的hash哈希值(本地文件)
+		/// </summary>
+		/// <param name="filePath">文件路径</param>
+		/// <param name="hashAlgorithm">所有加密哈希算法实现均必须从中派生的基类。传入参数如：MD5.Create()  SHA256.Create()</param>
+		/// <returns>文件的哈希值，如果失败则返回null</returns>
+		/// <exception cref="ArgumentException"></exception>
+		/// <exception cref="FileNotFoundException"></exception>
+		public static async Task<string> GetFileHashAsync_Local(string filePath, HashAlgorithm hashAlgorithm)
+		{
+			try
+			{
+				if (string.IsNullOrEmpty(filePath))
+				{
+					throw new ArgumentException("文件路径不能为空", nameof(filePath));
+				}
+
+				if (!File.Exists(filePath))
+				{
+					throw new FileNotFoundException("指定的文件不存在", filePath);
+				}
+
+				using (FileStream fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+				{
+					byte[] buffer = new byte[4096];
+					int bytesRead;
+					while ((bytesRead = await fileStream.ReadAsync(buffer, 0, buffer.Length)) > 0)
+					{
+						hashAlgorithm.TransformBlock(buffer, 0, bytesRead, null, 0);
+					}
+
+					hashAlgorithm.TransformFinalBlock(buffer, 0, 0);
+					byte[] hashBytes = hashAlgorithm.Hash;
+
+					string hash = BitConverter.ToString(hashBytes).Replace("-", "").ToLowerInvariant();
+
+					return hash;
+				}
+			}
+			catch (Exception ex)
+			{
+				MyLogHelper.GetExceptionLocation(ex);
+				return null;
+			}
+		}
+		/// <summary>
+		/// 根据提供的地址，获取文件的hash哈希值(可通过Url下载的文件)
+		/// </summary>
+		/// <param name="url">文件Url地址</param>
+		/// <param name="hashAlgorithm">所有加密哈希算法实现均必须从中派生的基类。传入参数如：MD5.Create()  SHA256.Create()</param>
+		/// <returns>文件的哈希值，如果失败则返回null</returns>
+		public static async Task<string> GetFileHashAsync_Url(string url, HashAlgorithm hashAlgorithm)
+		{
+			try
+			{
+				using (var client = MyHttpServiceHelper.GetClient())
+				{
+					using (var response = await client.GetAsync(url, HttpCompletionOption.ResponseHeadersRead))
+					{
+						if (response.IsSuccessStatusCode)
+						{
+							using (var stream = await response.Content.ReadAsStreamAsync())
+							{
+								byte[] buffer = new byte[4096];
+								int bytesRead;
+
+								while ((bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length)) > 0)
+								{
+									hashAlgorithm.TransformBlock(buffer, 0, bytesRead, null, 0);
+								}
+
+								hashAlgorithm.TransformFinalBlock(buffer, 0, 0);
+								byte[] hashBytes = hashAlgorithm.Hash;
+								string hash = BitConverter.ToString(hashBytes).Replace("-", "").ToLowerInvariant();
+
+								return hash;
+							}
+						}
+						else
+						{
+							throw new Exception("请求失败，状态码: " + (int)response.StatusCode);
+						}
+					}
+				}
+			}
+			catch (Exception ex)
+			{
+				MyLogHelper.GetExceptionLocation(ex);
+				return null;
+			}
+		}
+
 		/// <summary>
 		/// 根据提供的地址，下载文件到指定的路径
 		/// </summary>
@@ -1252,6 +1380,7 @@ namespace ClassLibrary
                  */
 			}
 		}
+
 		/// <summary>
 		/// 去除不允许在路径、文件名中使用的字符
 		/// </summary>

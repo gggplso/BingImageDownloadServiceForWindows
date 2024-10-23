@@ -8,195 +8,203 @@ using System.Threading.Tasks;
 
 namespace ClassLibrary.Classes
 {
-    /// <summary>
-    /// 必应每日壁纸下载图片相关参数配置类
-    /// </summary>
-    public class BingImageSettingClass
-    {
-        /// <summary>
-        /// 网络状态测试开关(程序)
-        /// </summary>
-        public bool NetworkStateTestSwitch { get; set; } = true;
-        /// <summary>
-        /// 必应每日壁纸下载开关(程序)
-        /// </summary>
-        public bool BingImageDownloadSwitch { get; set; } = true;
-        /// <summary>
-        /// Windows聚集图片复制开关(程序)
-        /// </summary>
-        public bool WindowsSpotlightSwitch { get; set; } = true;
-        /// <summary>
-        /// 文件分类归档开关(程序)
-        /// </summary>
-        public bool CategorizeAndMoveFileSwitch { get; set; } = true;
-        /// <summary>
-        /// 表示若有同名文件时重新下载覆盖原文件，false则保留原文件不重新下载。
-        /// </summary>
-        public bool Overwrite { get; set; } = false;
-        /// <summary>
-        /// 图片文件保存目录路径
-        /// </summary>
-        //public string ImageFileSavePath { get; set; } = Environment.ExpandEnvironmentVariables(@"D:\%USERNAME%\Downloads");
-        public string ImageFileSavePath { get; set; } = Path.Combine(ClassLibrary.ShareClass._userPath, "Pictures", "Downloads");
-        /// <summary>
-        /// Windows聚集图片所在目录路径
-        /// </summary>
-        //public string WindowsSpotlightPath { get; set; } = Environment.ExpandEnvironmentVariables(@"%USERPROFILE%\AppData\Local\Packages\Microsoft.Windows.ContentDeliveryManager_cw5n1h2txyewy\LocalState\Assets\");
-        public string WindowsSpotlightPath { get; set; } = Path.Combine(ClassLibrary.ShareClass._systemUserProfilePath, "AppData", "Local", "Packages", "Microsoft.Windows.ContentDeliveryManager_cw5n1h2txyewy", "LocalState", "Assets");
-        /// <summary>
-        /// 网络信息
-        /// </summary>
-        public NetworkInformationClass NetworkInformation { get; set; } = new NetworkInformationClass();
-        /// <summary>
-        /// 必应每日壁纸下载API相关
-        /// </summary>
-        public BingImageApiClass BingImageApi { get; set; } = new BingImageApiClass();
-        /// <summary>
-        /// 文件分类并移动的相关参数配置
-        /// </summary>
-        public CategorizeAndMoveSettingClass CategorizeAndMoveSetting { get; set; } = new CategorizeAndMoveSettingClass();
-    }
-    /// <summary>
-    /// 网络信息类
-    /// </summary>
-    public class NetworkInformationClass
-    {
-        /// <summary>
-        /// 通过Socket网络测试对端DNS服务器地址
-        /// 默认阿里云DNS：223.5.5.5
-        /// </summary>
-        public string DnsServerAddress { get; set; } = "223.5.5.5";
-        /// <summary>
-        /// Socket发送数据时的超时时间
-        /// 默认1秒钟
-        /// </summary>
-        public int SocketSendTimeout { get; set; } = 1000;
-        /// <summary>
-        /// Socket接收数据时的超时时间
-        /// 默认1秒钟
-        /// </summary>
-        public int SocketReceiveTimeout { get; set; } = 1000;
-        /// <summary>
-        /// 通过PingReply(ping回复)测试对端域名地址
-        /// 默认必应域名 www.bing.com
-        /// </summary>
-        public string PingReplyDomain { get; set; } = "www.bing.com";
-        /// <summary>
-        /// 指定PingSender(ping发送)重试次数
-        /// 默认5次
-        /// </summary>
-        public int NetRetryCount { get; set; } = 5;
-        /// <summary>
-        /// 暂停指定的时间间隔(Thread.Sleep(NetWaitTime);)
-        /// 默认2秒
-        /// </summary>
-        //public TimeSpan NetWaitTime { get; set; } = TimeSpan.FromSeconds(2);
-        public int NetWaitTime { get; set; } = 5000;
-    }
-    /// <summary>
-    /// 必应每日壁纸下载API相关类
-    /// </summary>
-    public class BingImageApiClass
-    {
-        /// <summary>
-        /// API请求参数
-        /// </summary>
-        public BingApiRequestParamsClass BingApiRequestParams { get; set; } = new BingApiRequestParamsClass();
-        /// <summary>
-        /// API查询结果
-        /// </summary>
-        public BingApiSearchResultsClass BingApiSearchResults { get; set; } = new BingApiSearchResultsClass();
-    }
-    /// <summary>
-    /// 必应每日壁纸下载API请求参数类
-    /// </summary>
-    public class BingApiRequestParamsClass
-    {
-        public string BingUrl1 { get; set; } = "https://";
-        public string BingUrl2 { get; set; } = "www.bing.com";
-        public string BingUrl3 { get; set; } = "/HPImageArchive.aspx?format=js&cc=cn&idx=";
-        public string BingUrl4 { get; set; } = "&n=";
-        public string BingUrl5 { get; set; } = "&video=1";
-        public string BingUrl6 { get; set; } = "&qlt=100";
-        /// <summary>
-        /// 从几天前开始下载
-        /// 默认0是从今天开始
-        /// </summary>
-        public int BingUrlDaysAgo { get; set; } = 0;
-        /// <summary>
-        /// 下载多少数量几天
-        /// 默认8是下载8天(8张)的图片
-        /// </summary>
-        public int BingUrlAFewDays { get; set; } = 8;
-        /// <summary>
-        /// 是否下载高清像素的分辨率(横版：landscape)
-        /// </summary>
-        public bool PixelResolutionIsUHD { get; set; } = true;
-        /// <summary>
-        /// 是否下载手机类像素的分辨率(竖版：portrait)
-        /// </summary>
-        public bool PixelResolutionIsMobile { get; set; } = true;
-        /// <summary>
-        /// 是否用中文来命名文件名
-        /// 默认是，取图片的中文说明来当文件名；否，用图片的英文作为文件名。
-        /// </summary>
-        public bool FileNameLanguageIsChinese { get; set; } = true;
-        /// <summary>
-        /// 是否将图片说标题说明添加到文件名中
-        /// </summary>
-        public bool FileNameAddTitle { get; set; } = true;
-        /// <summary>
-        /// 是否将日期添加到文件名中
-        /// </summary>
-        public bool FileNameAddDate { get; set; } = true;
-        /// <summary>
-        /// 是否全量下载
-        /// 默认是：下载今天往前的8张(idx=0 n=8)，额外再下载7天前往前的8张(idx=7 n=8)，总共15张图片。
-        /// </summary>
-        public bool IsFullDownload { get; set; } = true;
-    }
-    /// <summary>
-    /// 必应每日壁纸下载API查询结果类
-    /// </summary>
-    public class BingApiSearchResultsClass
-    {
-        // 结果在另一个单独类中
-        // ClassLibrary.Classes.BingClass
-    }
-    /// <summary>
-    /// 文件分类并移动的相关参数配置类
-    /// </summary>
-    public class CategorizeAndMoveSettingClass
-    {
-        /// <summary>
-        /// 文件操作类型(处理文件是移动还是复制)
-        /// </summary>
-        public ClassLibrary.ShareClass.FileOperationType fileOperationType { get; set; } = ShareClass.FileOperationType.Move;
-        /// <summary>
-        /// 文件所在目录源路径(需要处理的检索的源目录)
-        /// </summary>
-        public string SearchDirectoryPath { get; set; } = Path.Combine(ClassLibrary.ShareClass._userPath, "Pictures", "Downloads");
-        /// <summary>
-        /// 指定存放电脑壁纸的目标路径
-        /// </summary>
-        public string ComputerWallpaperPath { get; set; } = Path.Combine(ClassLibrary.ShareClass._userPath, "Pictures", "Computer");
-        /// <summary>
-        /// 指定存放手机壁纸的目标路径
-        /// </summary>
-        public string MobileWallpaperPath { get; set; } = Path.Combine(ClassLibrary.ShareClass._userPath, "Pictures", "Mobile");
-        /// <summary>
-        /// 指定存放视频文件的目标路径
-        /// </summary>
-        public string VideoWallpaperPath { get; set; } = Path.Combine(ClassLibrary.ShareClass._userPath, "Pictures", "Landscape");
-        /// <summary>
-        /// 指定存放丢弃抛弃掉的文件的目标路径（Rejected/Discard）
-        /// </summary>
-        public string RejectedPath { get; set; } = Path.Combine(ClassLibrary.ShareClass._userPath, "Pictures", "Rejected");
-    }
+	/// <summary>
+	/// 必应每日壁纸下载图片相关参数配置类
+	/// </summary>
+	public class BingImageSettingClass
+	{
+		/// <summary>
+		/// 网络状态测试开关(程序)
+		/// </summary>
+		public bool NetworkStateTestSwitch { get; set; } = true;
+		/// <summary>
+		/// 必应每日壁纸下载开关(程序)
+		/// </summary>
+		public bool BingImageDownloadSwitch { get; set; } = true;
+		/// <summary>
+		/// Windows聚焦图片复制开关(程序)
+		/// </summary>
+		public bool WindowsSpotlightCopySwitch { get; set; } = true;
+		/// <summary>
+		/// 文件分类归档开关(程序)
+		/// </summary>
+		public bool CategorizeAndMoveFileSwitch { get; set; } = true;
+		/// <summary>
+		/// Windows聚焦API图片下载开关(程序)
+		/// </summary>
+		public bool WindowsSpotlightDownloadSwitch { get; set; } = true;
+		/// <summary>
+		/// 微软官方的Windows聚焦API地址
+		/// </summary>
+		public string WindowsSpotlightAPIUrl { get; set; } = "https://arc.msn.com/v3/Delivery/Placement?pid=209567&fmt=json&cdm=1&pl=zh-CN&lc=zh-CN&ctry=CN";
+		/// <summary>
+		/// 表示若有同名文件时重新下载覆盖原文件，false则保留原文件不重新下载。
+		/// </summary>
+		public bool Overwrite { get; set; } = false;
+		/// <summary>
+		/// 图片文件保存目录路径
+		/// </summary>
+		//public string ImageFileSavePath { get; set; } = Environment.ExpandEnvironmentVariables(@"D:\%USERNAME%\Downloads");
+		public string ImageFileSavePath { get; set; } = Path.Combine(ClassLibrary.ShareClass._userPath, "Pictures", "Downloads");
+		/// <summary>
+		/// Windows聚焦图片所在目录路径
+		/// </summary>
+		//public string WindowsSpotlightPath { get; set; } = Environment.ExpandEnvironmentVariables(@"%USERPROFILE%\AppData\Local\Packages\Microsoft.Windows.ContentDeliveryManager_cw5n1h2txyewy\LocalState\Assets\");
+		public string WindowsSpotlightPath { get; set; } = Path.Combine(ClassLibrary.ShareClass._systemUserProfilePath, "AppData", "Local", "Packages", "Microsoft.Windows.ContentDeliveryManager_cw5n1h2txyewy", "LocalState", "Assets");
+		/// <summary>
+		/// 网络信息
+		/// </summary>
+		public NetworkInformationClass NetworkInformation { get; set; } = new NetworkInformationClass();
+		/// <summary>
+		/// 必应每日壁纸下载API相关
+		/// </summary>
+		public BingImageApiClass BingImageApi { get; set; } = new BingImageApiClass();
+		/// <summary>
+		/// 文件分类并移动的相关参数配置
+		/// </summary>
+		public CategorizeAndMoveSettingClass CategorizeAndMoveSetting { get; set; } = new CategorizeAndMoveSettingClass();
+	}
+	/// <summary>
+	/// 网络信息类
+	/// </summary>
+	public class NetworkInformationClass
+	{
+		/// <summary>
+		/// 通过Socket网络测试对端DNS服务器地址
+		/// 默认阿里云DNS：223.5.5.5
+		/// </summary>
+		public string DnsServerAddress { get; set; } = "223.5.5.5";
+		/// <summary>
+		/// Socket发送数据时的超时时间
+		/// 默认1秒钟
+		/// </summary>
+		public int SocketSendTimeout { get; set; } = 1000;
+		/// <summary>
+		/// Socket接收数据时的超时时间
+		/// 默认1秒钟
+		/// </summary>
+		public int SocketReceiveTimeout { get; set; } = 1000;
+		/// <summary>
+		/// 通过PingReply(ping回复)测试对端域名地址
+		/// 默认必应域名 www.bing.com
+		/// </summary>
+		public string PingReplyDomain { get; set; } = "www.bing.com";
+		/// <summary>
+		/// 指定PingSender(ping发送)重试次数
+		/// 默认5次
+		/// </summary>
+		public int NetRetryCount { get; set; } = 5;
+		/// <summary>
+		/// 暂停指定的时间间隔(Thread.Sleep(NetWaitTime);)
+		/// 默认2秒
+		/// </summary>
+		//public TimeSpan NetWaitTime { get; set; } = TimeSpan.FromSeconds(2);
+		public int NetWaitTime { get; set; } = 5000;
+	}
+	/// <summary>
+	/// 必应每日壁纸下载API相关类
+	/// </summary>
+	public class BingImageApiClass
+	{
+		/// <summary>
+		/// API请求参数
+		/// </summary>
+		public BingApiRequestParamsClass BingApiRequestParams { get; set; } = new BingApiRequestParamsClass();
+		/// <summary>
+		/// API查询结果
+		/// </summary>
+		public BingApiSearchResultsClass BingApiSearchResults { get; set; } = new BingApiSearchResultsClass();
+	}
+	/// <summary>
+	/// 必应每日壁纸下载API请求参数类
+	/// </summary>
+	public class BingApiRequestParamsClass
+	{
+		public string BingUrl1 { get; set; } = "https://";
+		public string BingUrl2 { get; set; } = "www.bing.com";
+		public string BingUrl3 { get; set; } = "/HPImageArchive.aspx?format=js&cc=cn&idx=";
+		public string BingUrl4 { get; set; } = "&n=";
+		public string BingUrl5 { get; set; } = "&video=1";
+		public string BingUrl6 { get; set; } = "&qlt=100";
+		/// <summary>
+		/// 从几天前开始下载
+		/// 默认0是从今天开始
+		/// </summary>
+		public int BingUrlDaysAgo { get; set; } = 0;
+		/// <summary>
+		/// 下载多少数量几天
+		/// 默认8是下载8天(8张)的图片
+		/// </summary>
+		public int BingUrlAFewDays { get; set; } = 8;
+		/// <summary>
+		/// 是否下载高清像素的分辨率(横版：landscape)
+		/// </summary>
+		public bool PixelResolutionIsUHD { get; set; } = true;
+		/// <summary>
+		/// 是否下载手机类像素的分辨率(竖版：portrait)
+		/// </summary>
+		public bool PixelResolutionIsMobile { get; set; } = true;
+		/// <summary>
+		/// 是否用中文来命名文件名
+		/// 默认是，取图片的中文说明来当文件名；否，用图片的英文作为文件名。
+		/// </summary>
+		public bool FileNameLanguageIsChinese { get; set; } = true;
+		/// <summary>
+		/// 是否将图片说标题说明添加到文件名中
+		/// </summary>
+		public bool FileNameAddTitle { get; set; } = true;
+		/// <summary>
+		/// 是否将日期添加到文件名中
+		/// </summary>
+		public bool FileNameAddDate { get; set; } = true;
+		/// <summary>
+		/// 是否全量下载
+		/// 默认是：下载今天往前的8张(idx=0 n=8)，额外再下载7天前往前的8张(idx=7 n=8)，总共15张图片。
+		/// </summary>
+		public bool IsFullDownload { get; set; } = true;
+	}
+	/// <summary>
+	/// 必应每日壁纸下载API查询结果类
+	/// </summary>
+	public class BingApiSearchResultsClass
+	{
+		// 结果在另一个单独类中
+		// ClassLibrary.Classes.BingClass
+	}
+	/// <summary>
+	/// 文件分类并移动的相关参数配置类
+	/// </summary>
+	public class CategorizeAndMoveSettingClass
+	{
+		/// <summary>
+		/// 文件操作类型(处理文件是移动还是复制)
+		/// </summary>
+		public ClassLibrary.ShareClass.FileOperationType fileOperationType { get; set; } = ShareClass.FileOperationType.Move;
+		/// <summary>
+		/// 文件所在目录源路径(需要处理的检索的源目录)
+		/// </summary>
+		public string SearchDirectoryPath { get; set; } = Path.Combine(ClassLibrary.ShareClass._userPath, "Pictures", "Downloads");
+		/// <summary>
+		/// 指定存放电脑壁纸的目标路径
+		/// </summary>
+		public string ComputerWallpaperPath { get; set; } = Path.Combine(ClassLibrary.ShareClass._userPath, "Pictures", "Computer");
+		/// <summary>
+		/// 指定存放手机壁纸的目标路径
+		/// </summary>
+		public string MobileWallpaperPath { get; set; } = Path.Combine(ClassLibrary.ShareClass._userPath, "Pictures", "Mobile");
+		/// <summary>
+		/// 指定存放视频文件的目标路径
+		/// </summary>
+		public string VideoWallpaperPath { get; set; } = Path.Combine(ClassLibrary.ShareClass._userPath, "Pictures", "Landscape");
+		/// <summary>
+		/// 指定存放丢弃抛弃掉的文件的目标路径（Rejected/Discard）
+		/// </summary>
+		public string RejectedPath { get; set; } = Path.Combine(ClassLibrary.ShareClass._userPath, "Pictures", "Rejected");
+	}
 
 
-    #region Bing必应官方接口分析说明
-    /*
+	#region Bing必应官方接口分析说明
+	/*
 
     // https://cn.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1&mkt=zh-CN
 
@@ -237,10 +245,10 @@ namespace ClassLibrary.Classes
     //   qlt 参数：表示图像的质量（Quality）。值为 100 表示最高质量。
 
      */
-    #endregion
+	#endregion
 
-    #region 如何在创建大类的对象时自动初始化所有小类
-    /*
+	#region 如何在创建大类的对象时自动初始化所有小类
+	/*
 
      在 C# 中，如果你有一个较大的类包含了许多较小的类，
      并且希望在创建大类的对象时自动初始化所有的小类对象，可以采用以下几种策略：
@@ -428,10 +436,10 @@ namespace ClassLibrary.Classes
 
 
  */
-    #endregion
+	#endregion
 
-    #region 必应近期图片（Bing的图片分辨率格式种类）
-    /*
+	#region 必应近期图片（Bing的图片分辨率格式种类）
+	/*
      https://cn.bing.com/hp/api/v1/imagegallery?format=json
 
         {
@@ -605,10 +613,10 @@ namespace ClassLibrary.Classes
             "statusMessage": ""
         }
      */
-    #endregion
+	#endregion
 
-    #region 必应接口返回的Json数据（以日期2024-09-28为例）
-    /*
+	#region 必应接口返回的Json数据（以日期2024-09-28为例）
+	/*
      * https://cn.bing.com/HPImageArchive.aspx?format=js&idx=7&n=8&mkt=zh-CN
      
          {
@@ -759,5 +767,284 @@ namespace ClassLibrary.Classes
             }
         }
      */
-    #endregion
+	#endregion
+
+	#region JSON 知识点记录
+	/*
+     遇到的问题：
+                获取到的存入文件后，
+                用浏览器打开的内容是："item": "{"f":"raf","v":"1.0","rdr":
+                用记事本打开的内容是： "item": "{\u0022f\u0022:\u0022raf\u0022,\u0022v\u0022:\u00221.0\u0022,\u0022rdr\u0022:
+                为什么？
+     AI回复：
+            你遇到的问题是因为 JSON 字符串中的某些字符被转义了，特别是双引号 " 被转义成了 \u0022。这通常发生在嵌套的 JSON 字符串中，即 JSON 字符串中包含了另一个 JSON 字符串。
+
+            问题分析
+            浏览器显示：浏览器会自动解析转义的 Unicode 字符，所以你看到的是 "。
+            记事本显示：记事本不会解析转义的 Unicode 字符，所以你看到的是 \u0022。
+            解决方案
+            你需要确保在写入文件之前，嵌套的 JSON 字符串被正确解析和格式化。以下是一些可能的解决方案：
+
+            示例：使用 System.Text.Json
+
+                    private static readonly HttpClient _client = new HttpClient();
+                    ……
+                    string strJson = string.Empty;
+                    ……
+                    // 访问Url获取Json数据
+                    strJson = await _client.GetStringAsync(strUrl);
+                    // 将JSON字符串格式化
+	                JsonDocument jsonDoc = JsonDocument.Parse(strJson);
+	                // 将JsonElement序列化为格式化的字符串
+	                string formattedJson = JsonSerializer.Serialize(jsonDoc, new JsonSerializerOptions { WriteIndented = true });
+                    ……
+
+                说明：
+                在使用 JsonConvert.SerializeObject() 方法将对象序列化为 JSON 字符串时，如果对象中包含特殊字符（如双引号 "），这些字符会被转义为 \u0022。
+                这是为了确保生成的 JSON 字符串在各种环境中都能正确解析和传输。
+                为什么会出现转义字符？
+                标准合规性：JSON 标准要求某些字符（如双引号 "、反斜杠 \、控制字符等）在 JSON 字符串中必须被转义，以确保 JSON 字符串的合法性。
+                安全性：转义字符可以防止注入攻击，确保数据的安全传输。
+                如何避免转义字符？
+                如果你希望在序列化时避免这些转义字符，可以使用 JsonSerializerSettings 来配置 JsonConvert.SerializeObject() 方法。具体来说，可以设置 EscapeHtml 属性为 false。
+    
+    Newtonsoft.Json;
+                    // 假设这是从 URL 获取到的 JSON 数据
+                    string jsonString = @"{""item"": ""{\u0022f\u0022:\u0022raf\u0022,\u0022v\u0022:\u00221.0\u0022,\u0022rdr\u0022:""}""}";
+
+                    // 解析 JSON 字符串
+                    var jsonObject = JsonConvert.DeserializeObject(jsonString);
+
+                    // 配置序列化选项，禁用 HTML 转义
+                    var settings = new JsonSerializerSettings
+                    {
+                        EscapeHtml = false,
+                        Formatting = Formatting.Indented
+                    };
+
+                    // 序列化为格式化的字符串
+                    string formattedJson = JsonConvert.SerializeObject(jsonObject, settings);
+
+                    // 写入文件
+                    File.WriteAllText("output.json", formattedJson);
+
+    System.Text.Json;
+                    
+                    // 假设这是从 URL 获取到的 JSON 数据
+                    string jsonString = @"{""item"": ""{\u0022f\u0022:\u0022raf\u0022,\u0022v\u0022:\u00221.0\u0022,\u0022rdr\u0022:""}""}";
+
+                    // 解析 JSON 字符串
+                    var jsonObject = JsonSerializer.Deserialize<JsonElement>(jsonString);
+
+                    // 解析内部的 JSON 字符串
+                    var innerJsonObject = JsonSerializer.Deserialize<JsonElement>(jsonObject.GetProperty("item").GetString());
+
+                    // 创建一个新的 JSON 对象
+                    var newJsonObject = new JsonDocument(new JsonObject
+                    {
+                        { "item", innerJsonObject }
+                    });
+
+                    // 配置序列化选项，禁用 HTML 转义
+                    var options = new JsonSerializerOptions
+                    {
+                        WriteIndented = true,
+                        Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping
+                    };
+
+                    // 序列化为格式化的字符串
+                    string formattedJson = JsonSerializer.Serialize(newJsonObject.RootElement, options);
+
+                    // 写入文件
+                    File.WriteAllText("output.json", formattedJson);
+
+        
+    System.Text.Json;
+                                string strUrl = "https://example.com/api/data"; // 替换为实际的 URL
+                                string strJson = await _client.GetStringAsync(strUrl);
+
+								// 解析 JSON 字符串
+								var jsonObject = JsonSerializer.Deserialize<JsonElement>(strJson);
+
+								// 解析内部的 JSON 字符串
+								var innerJsonString = jsonObject.GetProperty("item").GetString();
+								var innerJsonObject = JsonNode.Parse(innerJsonString).AsObject();
+
+								// 创建一个新的 JSON 对象
+								var newJsonObject = new JsonObject
+								{
+									{ "item", innerJsonObject }
+								};
+
+								// 配置序列化选项，禁用 HTML 转义
+								var options = new JsonSerializerOptions
+								{
+									WriteIndented = true,
+									Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping
+								};
+
+								// 序列化为格式化的字符串
+								string formattedJsonNew = JsonSerializer.Serialize(newJsonObject, options);
+
+								// 写入文件
+								File.WriteAllText("output.json", formattedJson);
+
+								Console.WriteLine("JSON数据已成功写入文件: output.json");
+
+
+    因：
+     //CA1869: 避免为每个序列化操作创建新的“JsonSerializerOptions”实例。请改为缓存和重用实例。
+								//// 配置序列化选项，禁用 HTML 转义
+								//var options = new JsonSerializerOptions
+								//{
+								//	WriteIndented = true,
+								//	Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping
+								//};
+    System.Text.Json;修改后：
+                            using System;
+                            using System.IO;
+                            using System.Net.Http;
+                            using System.Text.Json;
+                            using System.Text.Json.Nodes;
+                            using System.Threading.Tasks;
+
+                            public class Program
+                            {
+                                private static readonly HttpClient _client = new HttpClient();
+                                private static readonly JsonSerializerOptions _jsonSerializerOptions = new JsonSerializerOptions
+                                {
+                                    WriteIndented = true,
+                                    Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping
+                                };
+
+                                public static async Task Main(string[] args)
+                                {
+                                    string strUrl = "https://example.com/api/data"; // 替换为实际的 URL
+                                    string strJson = await _client.GetStringAsync(strUrl);
+
+                                    // 解析 JSON 字符串
+                                    var jsonObject = JsonSerializer.Deserialize<JsonElement>(strJson);
+
+                                    // 解析内部的 JSON 字符串
+                                    var innerJsonString = jsonObject.GetProperty("item").GetString();
+                                    var innerJsonObject = JsonNode.Parse(innerJsonString).AsObject();
+
+                                    // 创建一个新的 JSON 对象
+                                    var newJsonObject = new JsonObject
+                                    {
+                                        { "item", innerJsonObject }
+                                    };
+
+                                    // 序列化为格式化的字符串
+                                    string formattedJson = JsonSerializer.Serialize(newJsonObject, _jsonSerializerOptions);
+
+                                    // 写入文件
+                                    File.WriteAllText("output.json", formattedJson);
+
+                                    Console.WriteLine("JSON数据已成功写入文件: output.json");
+                                }
+                            }
+
+    System.Text.Json;再次修改后：
+                            上面在处理"item"时还是遇到了问题，因为第一层找不到，存在的 "item" 键，它嵌套在多个层级中。具体来说，"item" 键位于 "batchrsp" 对象的 "items" 数组中的某个对象内。
+                            所以需要提取：
+
+                            using System;
+                            using System.IO;
+                            using System.Net.Http;
+                            using System.Text.Json;
+                            using System.Text.Json.Nodes;
+                            using System.Threading.Tasks;
+
+                            public class Program
+                            {
+                                private static readonly HttpClient _client = new HttpClient();
+                                private static readonly JsonSerializerOptions _jsonSerializerOptions = new JsonSerializerOptions
+                                {
+                                    WriteIndented = true,
+                                    Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping
+                                };
+
+                                public static async Task Main(string[] args)
+                                {
+                                    string strUrl = "https://example.com/api/data"; // 替换为实际的 URL
+                                    string strJson = await _client.GetStringAsync(strUrl);
+
+                                    // 打印获取到的 JSON 数据，确保它包含 "item" 键
+                                    Console.WriteLine("获取到的 JSON 数据:");
+                                    Console.WriteLine(strJson);
+
+                                    try
+                                    {
+                                        // 解析 JSON 字符串
+                                        var jsonObject = JsonSerializer.Deserialize<JsonElement>(strJson);
+
+                                        // 检查是否包含 "batchrsp" 键
+                                        if (jsonObject.TryGetProperty("batchrsp", out JsonElement batchrspElement))
+                                        {
+                                            // 检查是否包含 "items" 键
+                                            if (batchrspElement.TryGetProperty("items", out JsonElement itemsElement))
+                                            {
+                                                // 遍历 "items" 数组
+                                                foreach (var itemElement in itemsElement.EnumerateArray())
+                                                {
+                                                    // 检查是否包含 "item" 键
+                                                    if (itemElement.TryGetProperty("item", out JsonElement innerItemElement))
+                                                    {
+                                                        // 解析内部的 JSON 字符串
+                                                        var innerJsonString = innerItemElement.GetString();
+                                                        var innerJsonObject = JsonNode.Parse(innerJsonString).AsObject();
+
+                                                        // 创建一个新的 JSON 对象
+                                                        var newJsonObject = new JsonObject
+                                                        {
+                                                            { "item", innerJsonObject }
+                                                        };
+
+                                                        // 序列化为格式化的字符串
+                                                        string formattedJson = JsonSerializer.Serialize(newJsonObject, _jsonSerializerOptions);
+
+                                                        // 写入文件
+                                                        File.WriteAllText("output.json", formattedJson);
+
+                                                        Console.WriteLine("JSON数据已成功写入文件: output.json");
+                                                        return; // 如果只需要处理第一个 "item"，可以在这里返回
+                                                    }
+                                                }
+
+                                                Console.WriteLine("JSON 数据中未找到 'item' 键。");
+                                            }
+                                            else
+                                            {
+                                                Console.WriteLine("JSON 数据中未找到 'items' 键。");
+                                            }
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine("JSON 数据中未找到 'batchrsp' 键。");
+                                        }
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        Console.WriteLine($"发生错误: {ex.Message}");
+                                        Console.WriteLine($"堆栈跟踪: {ex.StackTrace}");
+                                    }
+                                }
+                            }
+            关键步骤：
+                    获取 JSON 数据：使用 HttpClient 从指定的 URL 获取 JSON 数据。
+                    打印 JSON 数据：在控制台中打印获取到的 JSON 数据，确保它包含 "item" 键。
+                    解析 JSON 字符串：使用 JsonSerializer.Deserialize<JsonElement> 将 JSON 字符串解析为 JsonElement 对象。
+                    检查是否包含 "batchrsp" 键：使用 TryGetProperty 方法检查 JsonElement 是否包含 "batchrsp" 键。
+                    检查是否包含 "items" 键：使用 TryGetProperty 方法检查 batchrspElement 是否包含 "items" 键。
+                    遍历 "items" 数组：使用 EnumerateArray 方法遍历 "items" 数组。
+                    检查是否包含 "item" 键：使用 TryGetProperty 方法检查每个 itemElement 是否包含 "item" 键。
+                    解析内部的 JSON 字符串：从 itemElement 中提取内部的 JSON 字符串，并使用 JsonNode.Parse 将其解析为 JsonNode 对象。
+                    创建新的 JSON 对象：使用 JsonObject 创建一个新的 JSON 对象，并将 JsonNode 添加到其中。
+                    序列化为格式化的字符串：使用 JsonSerializer.Serialize 方法，并传入静态的 JsonSerializerOptions 实例。
+                    写入文件：将格式化的字符串写入文件。
+                    添加错误处理：在 try-catch 块中捕获并处理可能的异常。
+
+     */
+	#endregion
 }

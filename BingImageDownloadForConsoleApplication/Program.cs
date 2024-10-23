@@ -31,19 +31,19 @@ namespace BingImageDownloadForConsoleApplication
 			string strBingImageConfig = File.ReadAllText(ClassLibrary.ShareClass._bingImageSettingFile);
 			Console.WriteLine(strBingImageConfig);
 			Console.WriteLine();
-            #endregion
+			#endregion
 
-            #region 暂停、插入测试代码
+			#region 暂停、插入测试代码
 
-            Console.WriteLine("系统默认用户主目录");
-            string userPath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+			Console.WriteLine("系统默认用户主目录");
+			string userPath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
 			string downloadsPath = Path.Combine(userPath, "Downloads");
 			Console.WriteLine(downloadsPath);
 			string windowsSpotlight = Path.Combine(userPath, "AppData", "Local", "Packages", "Microsoft.Windows.ContentDeliveryManager_cw5n1h2txyewy", "LocalState", "Assets");
 			Console.WriteLine(windowsSpotlight);
 			Console.WriteLine();
-            Console.WriteLine("用户自定义文档目录");
-            userPath = Directory.GetParent(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)).FullName;
+			Console.WriteLine("用户自定义文档目录");
+			userPath = Directory.GetParent(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)).FullName;
 			Console.WriteLine(userPath);
 			downloadsPath = Path.Combine(userPath, "Downloads");
 			Console.WriteLine(downloadsPath);
@@ -175,8 +175,8 @@ namespace BingImageDownloadForConsoleApplication
 			}
 			#endregion
 
-			#region 聚焦图片
-			if (bingImageDownloadService.BingImageSetting.WindowsSpotlightSwitch)
+			#region 聚焦图片复制
+			if (bingImageDownloadService.BingImageSetting.WindowsSpotlightCopySwitch)
 			{
 				if (bingImageDownloadService.WindowsSpotlightCopy())
 				{
@@ -203,6 +203,121 @@ namespace BingImageDownloadForConsoleApplication
 				else
 				{
 					Console.WriteLine($"{DateTime.Now}：文件分类归档结束(失败)。");
+				}
+
+				Console.WriteLine();
+			}
+			#endregion
+
+			/*
+			1. .Wait()
+				作用：阻塞当前线程，直到任务完成。
+				返回值：无返回值，仅等待任务完成。
+				异常处理：如果任务抛出异常，Wait 会抛出 AggregateException，其中包含所有内部异常。
+				适用场景：适用于不需要返回值的场景，或者你只关心任务是否完成，而不关心具体的返回值。
+				潜在问题：可能会导致死锁，特别是在 UI 线程中，因为 Wait 会阻塞当前线程，而异步方法可能需要当前线程来完成。
+			2. .GetAwaiter().GetResult()
+				作用：阻塞当前线程，直到任务完成，并返回任务的结果。
+				返回值：返回任务的结果。
+				异常处理：如果任务抛出异常，GetResult 会直接抛出该异常，而不是 AggregateException。
+				适用场景：适用于需要获取任务结果的场景，特别是在 Main 方法中使用时相对安全。
+				潜在问题：可能会导致死锁，特别是在 UI 线程中，因为 GetResult 会阻塞当前线程，而异步方法可能需要当前线程来完成。
+			3. .Result
+				作用：阻塞当前线程，直到任务完成，并返回任务的结果。
+				返回值：返回任务的结果。
+				异常处理：如果任务抛出异常，Result 会抛出 AggregateException，其中包含所有内部异常。
+				适用场景：适用于需要获取任务结果的场景，特别是在 Main 方法中使用时相对安全。
+				潜在问题：可能会导致死锁，特别是在 UI 线程中，因为 Result 会阻塞当前线程，而异步方法可能需要当前线程来完成。
+			总结
+				.Wait()：适用于不需要返回值的场景，但可能会导致死锁。
+				.GetAwaiter().GetResult()：适用于需要获取任务结果的场景，但可能会导致死锁。
+				.Result：适用于需要获取任务结果的场景，但可能会导致死锁。
+			推荐做法
+				使用 await：如果你可以使用 async 版本的 Main 方法，这是最安全和推荐的方式。
+				避免在 UI 线程中使用 .Wait(), .GetAwaiter().GetResult(), 和 .Result：这些方法可能会导致死锁，特别是在 UI 线程中。
+				如果你不能使用 async 版本的 Main 方法，可以考虑使用 Task.Run 结合 await 或 GetAwaiter().GetResult() 来避免潜在的死锁问题。
+			
+			如果你不能使用 async 版本的 Main 方法，但仍然希望避免潜在的死锁问题，可以结合使用 Task.Run 和 await 或 GetAwaiter().GetResult()。以下是两种方法的详细说明和示例代码：
+				1. 使用 Task.Run 和 await
+				虽然 Main 方法不能是 async 的，但你可以在 Main 方法中启动一个新的 Task，并在该任务中使用 await。这样可以避免在 Main 方法中直接阻塞主线程。
+				
+				示例代码
+							public static void Main(string[] args)
+							{
+								try
+								{
+									// 启动一个新的任务来异步调用 WindowsSpotlightDownloadAsync
+									Task.Run(async () =>
+									{
+										bool result = await WindowsSpotlightDownloadAsync();
+										Console.WriteLine($"Download result: {result}");
+									}).Wait(); // 等待任务完成
+								}
+								catch (Exception ex)
+								{
+									Console.WriteLine($"An error occurred: {ex.Message}");
+								}
+							}
+
+							public static async Task<bool> WindowsSpotlightDownloadAsync()
+							{
+								await Task.Delay(1000);
+								return true; // 假设下载成功
+							}
+				2. 使用 Task.Run 和 GetAwaiter().GetResult()
+				你也可以使用 Task.Run 来启动异步方法，并在 Main 方法中使用 GetAwaiter().GetResult() 来获取结果。这种方式在 Main 方法中相对安全，但仍然需要注意潜在的死锁问题。
+
+				示例代码
+							public static void Main(string[] args)
+							{
+								try
+								{
+									// 启动一个新的任务来异步调用 WindowsSpotlightDownloadAsync
+									bool result = Task.Run(() => WindowsSpotlightDownloadAsync()).GetAwaiter().GetResult();
+									Console.WriteLine($"Download result: {result}");
+								}
+								catch (Exception ex)
+								{
+									Console.WriteLine($"An error occurred: {ex.Message}");
+								}
+							}
+
+							public static async Task<bool> WindowsSpotlightDownloadAsync()
+							{
+								await Task.Delay(1000);
+								return true; // 假设下载成功
+							}
+			解释
+				1、使用 Task.Run 和 await：
+				Task.Run(async () => { ... })：启动一个新的任务来异步调用 WindowsSpotlightDownloadAsync。
+				await WindowsSpotlightDownloadAsync()：在新任务中异步等待 WindowsSpotlightDownloadAsync 完成。
+				.Wait()：在 Main 方法中等待新任务完成。这种方式避免了在 Main 方法中直接阻塞主线程，从而减少了死锁的风险。
+
+				2、使用 Task.Run 和 GetAwaiter().GetResult()：
+				Task.Run(() => WindowsSpotlightDownloadAsync())：启动一个新的任务来异步调用 WindowsSpotlightDownloadAsync。
+				.GetAwaiter().GetResult()：在 Main 方法中阻塞当前线程，等待任务完成并获取结果。这种方式在 Main 方法中相对安全，但仍然需要注意潜在的死锁问题。
+				
+			总结
+				使用 Task.Run 和 await：这是最推荐的方式，因为它避免了在 Main 方法中直接阻塞主线程，从而减少了死锁的风险。
+				使用 Task.Run 和 GetAwaiter().GetResult()：这种方式在 Main 方法中相对安全，但仍然需要注意潜在的死锁问题。
+				无论哪种方式，都能确保你能够正确调用异步方法并获取其返回结果 true 或 false。选择适合你具体需求的方法即可。
+
+
+			 Task.Run(() => WindowsSpotlightDownloadAsync).Wait();
+
+			 */
+
+			#region 聚焦API图片下载
+			if (bingImageDownloadService.BingImageSetting.WindowsSpotlightDownloadSwitch)
+			{
+				//if (bingImageDownloadService.WindowsSpotlightDownloadAsync())
+				if (Task.Run(() => bingImageDownloadService.WindowsSpotlightDownloadAsync()).GetAwaiter().GetResult())
+				{
+					Console.WriteLine($"{DateTime.Now}：Windowss聚焦API图片下载结束(成功)。");
+				}
+				else
+				{
+					Console.WriteLine($"{DateTime.Now}：Windowss聚焦API图片下载结束(失败)。");
 				}
 
 				Console.WriteLine();

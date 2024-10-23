@@ -140,6 +140,11 @@ namespace ClassLibrary.Services
 						  + bingImageSetting.BingImageApi.BingApiRequestParams.BingUrl5;
 			try
 			{
+				/*
+				 注意事项：
+						避免混合同步和异步代码: 尽量避免在异步方法中使用同步调用（如 GetResult 或 Result），以防止潜在的死锁问题。
+						异常处理: 使用 try-catch 块来捕获和处理可能的异常。
+				 */
 				strJson = MyHttpServiceHelper.GetClient().GetStringAsync(strUrl).GetAwaiter().GetResult();
 			}
 			catch (Exception ex)
@@ -392,10 +397,7 @@ namespace ClassLibrary.Services
 
 			try
 			{
-				if (!Directory.Exists(BingImageSetting.ImageFileSavePath))
-				{
-					Directory.CreateDirectory(BingImageSetting.ImageFileSavePath);
-				}
+				Directory.CreateDirectory(BingImageSetting.ImageFileSavePath);
 
 				foreach (KeyValuePair<string, List<string>> item in dicBingDownloadUrl)
 				{
@@ -557,6 +559,10 @@ namespace ClassLibrary.Services
 		#endregion
 
 		#region Windows聚焦图片
+		/// <summary>
+		/// Windows聚焦图片复制
+		/// </summary>
+		/// <returns></returns>
 		public bool WindowsSpotlightCopy()
 		{
 			// 定义配置文件路径和相关日志信息
@@ -933,7 +939,25 @@ namespace ClassLibrary.Services
 
 		#endregion
 
+		#region Windows聚集API图片下载
+		/// <summary>
+		/// Windows聚焦API图片下载
+		/// </summary>
+		/// <returns></returns>
+		public async Task<bool> WindowsSpotlightDownloadAsync()
+		{
+			// 定义配置文件路径和相关日志信息
+			var logTitle = "Windows聚焦API图片下载制(方法)";
+			var logType = "WindowsSpotlightDownloadService";
+			var logCycle = "yyyyMMdd";
 
+			bool result = false;
+			string strUrl = BingImageSetting.WindowsSpotlightAPIUrl;
+			string strJson = await MyHttpServiceHelper.GetClient().GetStringAsync(strUrl);
+
+			return result;
+		}
+		#endregion
 
 	}
 }

@@ -265,14 +265,14 @@ namespace ClassLibrary
          */
 		#endregion
 #if DEBUG
-        // Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)
-        // 返回的是当前登录用户的主目录路径，通常这个路径是在系统默认的盘符上（通常是 C 盘）。
-        // 如果用户将自己的文件夹位置改到了 D 盘，那么这个方法返回的仍然是系统默认的主目录路径。
-        public static readonly string _systemUserProfilePath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
-        // 使用 Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
-        // 这个方法返回的是用户的文档目录，即使用户更改了文档目录的位置，它也能返回正确的路径。
-        public static readonly string _userPath = Directory.GetParent(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)).FullName;
-        /*
+		// Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)
+		// 返回的是当前登录用户的主目录路径，通常这个路径是在系统默认的盘符上（通常是 C 盘）。
+		// 如果用户将自己的文件夹位置改到了 D 盘，那么这个方法返回的仍然是系统默认的主目录路径。
+		public static readonly string _systemUserProfilePath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+		// 使用 Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
+		// 这个方法返回的是用户的文档目录，即使用户更改了文档目录的位置，它也能返回正确的路径。
+		public static readonly string _userPath = Directory.GetParent(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)).FullName;
+		/*
          很奇怪的问题，同样的文件在另一台电脑上可以正常运行Windows服务，在这台电脑上报错：
          无法启动服务。
          System.TypeInitializationException: “ClassLibrary.ShareClass”的类型初始值设定项引发异常。
@@ -285,7 +285,7 @@ namespace ClassLibrary
                                    位置 D:\GitFiles\BingImageDownloadServiceForWindows\BingImageDownloadServiceForWindows\BingImageDownloadServiceControl.cs:行号 57 
                                    在 System.ServiceProcess.ServiceBase.ServiceQueuedMainCallback(Object state)
          */
-        //为了解决上面的问题，尝试修改代码如下：
+		//为了解决上面的问题，尝试修改代码如下：
 #else
 		public static readonly string _userPath = InitializeUserPath();
 		public static readonly string _systemUserProfilePath = InitializeSystemUserProfilePath();
@@ -381,7 +381,7 @@ namespace ClassLibrary
 		/// <summary>
 		/// Windows聚集图片复制开关(服务)
 		/// </summary>
-		public static bool _windowsSpotlightService = true;
+		public static bool _windowsSpotlightCopyService = true;
 		/// <summary>
 		/// 文件分类归档开关(服务)
 		/// </summary>
@@ -390,6 +390,10 @@ namespace ClassLibrary
 		/// 网络连接测试开关(服务)
 		/// </summary>
 		public static bool _networkStateTestService = true;
+		/// <summary>
+		/// Windows聚集API图片下载开关(服务)
+		/// </summary>
+		public static bool _windowsSpotlightDownloadService = true;
 		#endregion
 
 		#region 必应每日壁纸下载相关参数配置
@@ -550,14 +554,14 @@ namespace ClassLibrary
 					{
 						ClassLibrary.MyLogHelper.LogSplit(ClassLibrary.ShareClass._logPath, "必应每日壁纸下载配置参数初始化", "配置文件初始化失败，请检查原因。", ClassLibrary.ShareClass._logType, ClassLibrary.ShareClass._logCycle);
 					}
-					if (bingImageSetting is null)
-					{
-						MyLogHelper.LogSplit(ShareClass._logPath, "必应每日壁纸下载配置参数初始化", "配置文件初始化失败,\r\n请删除文件 " + ClassLibrary.ShareClass._bingImageSettingFile + " 并重启程序。", ClassLibrary.ShareClass._logType, ClassLibrary.ShareClass._logCycle);
-					}
-					else
-					{
-						MyLogHelper.LogSplit(ShareClass._logPath, "必应每日壁纸下载配置参数初始化", $"配置文件{ClassLibrary.ShareClass._bingImageSettingFile}读取完成，\r\n参数初始化成功 ", ClassLibrary.ShareClass._logType, ClassLibrary.ShareClass._logCycle);
-					}
+				}
+				if (bingImageSetting is null)
+				{
+					MyLogHelper.LogSplit(ShareClass._logPath, "必应每日壁纸下载配置参数初始化", "配置文件初始化失败,\r\n请删除文件 " + ClassLibrary.ShareClass._bingImageSettingFile + " 并重启程序。", ClassLibrary.ShareClass._logType, ClassLibrary.ShareClass._logCycle);
+				}
+				else
+				{
+					MyLogHelper.LogSplit(ShareClass._logPath, "必应每日壁纸下载配置参数初始化", $"配置文件{ClassLibrary.ShareClass._bingImageSettingFile}读取完成，\r\n参数初始化成功 ", ClassLibrary.ShareClass._logType, ClassLibrary.ShareClass._logCycle);
 				}
 
 				return bingImageSetting;
@@ -592,9 +596,10 @@ namespace ClassLibrary
 				appSettingClass.ServiceRunningWaitTime = ClassLibrary.ShareClass._serviceRunningWaitTime;
 				appSettingClass.LogCounter = ClassLibrary.ShareClass._logCounter;
 				appSettingClass.BingImageDownloadService = ClassLibrary.ShareClass._bingImageDownloadService;
-				appSettingClass.WindowsSpotlightService = ClassLibrary.ShareClass._windowsSpotlightService;
+				appSettingClass.WindowsSpotlightCopyService = ClassLibrary.ShareClass._windowsSpotlightCopyService;
 				appSettingClass.CategorizeAndMoveFileService = ClassLibrary.ShareClass._categorizeAndMoveFileService;
 				appSettingClass.NetworkStateTestService = ClassLibrary.ShareClass._networkStateTestService;
+				appSettingClass.WindowsSpotlightDownloadService = ClassLibrary.ShareClass._windowsSpotlightDownloadService;
 
 
 				if (MyJsonHelper.WriteClassToJsonFile<ClassLibrary.Classes.AppSettingClass>(appSettingClass, ClassLibrary.ShareClass._mainSettingFile))
@@ -625,9 +630,10 @@ namespace ClassLibrary
 				ClassLibrary.ShareClass._serviceRunningWaitTime = appSettingClass.ServiceRunningWaitTime;
 				ClassLibrary.ShareClass._logCounter = appSettingClass.LogCounter;
 				ClassLibrary.ShareClass._bingImageDownloadService = appSettingClass.BingImageDownloadService;
-				ClassLibrary.ShareClass._windowsSpotlightService = appSettingClass.WindowsSpotlightService;
+				ClassLibrary.ShareClass._windowsSpotlightCopyService = appSettingClass.WindowsSpotlightCopyService;
 				ClassLibrary.ShareClass._categorizeAndMoveFileService = appSettingClass.CategorizeAndMoveFileService;
 				ClassLibrary.ShareClass._networkStateTestService = appSettingClass.NetworkStateTestService;
+				ClassLibrary.ShareClass._windowsSpotlightDownloadService = appSettingClass.WindowsSpotlightDownloadService;
 
 				initializationResult = true;
 			}

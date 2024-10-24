@@ -61,7 +61,7 @@ namespace BingImageDownloadServiceForWindows
                         }
                         else
                         {
-                            ClassLibrary.MyLogHelper.LogSplit(ClassLibrary.ShareClass._logPath, logTitle, "读取必应每日壁纸下载地址URL失败，未获取到对应下载地址等元素信息。", "Error_" + logType, logCycle);
+                            ClassLibrary.MyLogHelper.LogSplit(ClassLibrary.ShareClass._logPath, logTitle, "读取必应每日壁纸下载地址URL失败(服务)，未获取到对应下载地址等元素信息。", "Error_" + logType, logCycle);
                         }
                     }
                     catch (Exception ex)

@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using static ClassLibrary.ShareClass;
 using System.Windows.Media.Imaging;
+using ClassLibrary.Classes;
 
 namespace ClassLibrary.Services
 {
@@ -947,14 +948,48 @@ namespace ClassLibrary.Services
 		public async Task<bool> WindowsSpotlightDownloadAsync()
 		{
 			// 定义配置文件路径和相关日志信息
-			var logTitle = "Windows聚焦API图片下载制(方法)";
+			var logTitle = "Windows聚焦API图片下载(方法)";
 			var logType = "WindowsSpotlightDownloadService";
 			var logCycle = "yyyyMMdd";
-
+			int intDownloadCount = 0;
 			bool result = false;
 			string strUrl = BingImageSetting.WindowsSpotlightAPIUrl;
-			string strJson = await MyHttpServiceHelper.GetClient().GetStringAsync(strUrl);
+			string strTemp = string.Empty;
 
+
+			// 获取下载地址等素材
+			string strJson = await MyHttpServiceHelper.GetClient().GetStringAsync(strUrl);
+			string newJson = ClassLibrary.MyJsonHelper.ExtractWindowsSpotlightDownloadUrl(strJson);
+			WindowsSpotlightClass windowsSpotlight = ClassLibrary.MyJsonHelper.ReadJsonToClass<WindowsSpotlightClass>(newJson);
+#if DEBUG
+			File.WriteAllText(Path.Combine(ClassLibrary.ShareClass._logPath, $"{DateTime.Now.ToString("yyyyMMddHHmmssfffffff")}.json"), strJson, Encoding.UTF8);
+			ClassLibrary.MyJsonHelper.WriteClassToJsonFile<WindowsSpotlightClass>(windowsSpotlight, Path.Combine(ClassLibrary.ShareClass._logPath, $"{DateTime.Now.ToString("yyyyMMddHHmmss")}.json"));
+#else
+#endif
+
+			// 准备开始下载
+			string strFileNameLandscape = $"{DateTime.Now.ToString("yyyyMMdd")}_{windowsSpotlight.TitleText.Text}_{windowsSpotlight.HsTitleText.Text}_{windowsSpotlight.ImageFullscreenLandscape.Width}x{windowsSpotlight.ImageFullscreenLandscape.Height}.jpg";
+			strFileNameLandscape = Path.Combine(BingImageSetting.ImageFileSavePath, strFileNameLandscape);
+			bool resultLandscape = ClassLibrary.ShareClass.DownloadFile(windowsSpotlight.ImageFullscreenLandscape.DownloadUrl, strFileNameLandscape);
+			strTemp = $"{strFileNameLandscape}\r\n文件下载结果：{resultLandscape}";
+			Console.WriteLine(strTemp);
+			ClassLibrary.MyLogHelper.LogSplit(ClassLibrary.ShareClass._logPath, logTitle, strTemp, logType, logCycle);
+			if (resultLandscape) { intDownloadCount++; }
+
+			string strFileNamePortrait = $"{DateTime.Now.ToString("yyyyMMdd")}_{windowsSpotlight.TitleText.Text}_{windowsSpotlight.HsTitleText.Text}_{windowsSpotlight.ImageFullscreenPortrait.Width}x{windowsSpotlight.ImageFullscreenPortrait.Height}.jpg";
+			strFileNamePortrait = Path.Combine(BingImageSetting.ImageFileSavePath, strFileNamePortrait);
+			bool resultPortrait = ClassLibrary.ShareClass.DownloadFile(windowsSpotlight.ImageFullscreenPortrait.DownloadUrl, strFileNamePortrait);
+			strTemp = $"{strFileNamePortrait}\r\n文件下载结果：{resultPortrait}";
+			Console.WriteLine(strTemp);
+			ClassLibrary.MyLogHelper.LogSplit(ClassLibrary.ShareClass._logPath, logTitle, strTemp, logType, logCycle);
+			if (resultPortrait) { intDownloadCount++; }
+
+
+			// 记录结果
+			result = (resultLandscape && resultPortrait);
+			strTemp = $"Windows聚焦API图片下载完成({result})：共下载{intDownloadCount}个文件。";
+			Console.WriteLine(strTemp);
+			ClassLibrary.MyLogHelper.LogSplit(ClassLibrary.ShareClass._logPath, logTitle, strTemp, logType, logCycle);
 			return result;
 		}
 		#endregion

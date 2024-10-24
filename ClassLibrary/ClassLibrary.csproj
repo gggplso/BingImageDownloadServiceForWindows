@@ -50,6 +50,7 @@
     <Compile Include="Classes\AppSettingClass.cs" />
     <Compile Include="Classes\BingClass.cs" />
     <Compile Include="Classes\BingImageSettingClass.cs" />
+    <Compile Include="Classes\WindowsSpotlightClass.cs" />
     <Compile Include="MyHttpServiceHelper.cs" />
     <Compile Include="MyJsonHelper.cs" />
     <Compile Include="MyLogHelper.cs" />

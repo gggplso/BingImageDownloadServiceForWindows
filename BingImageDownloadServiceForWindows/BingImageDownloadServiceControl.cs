@@ -334,26 +334,6 @@ namespace BingImageDownloadServiceForWindows
 						}
 
 
-						// 四、根据配置判断是否开启 文件分类归档 的服务
-
-						if (ClassLibrary.ShareClass._categorizeAndMoveFileService)
-						{
-							await BingImageDownloadServiceForWindows.CategorizeAndMoveFileService.CategorizeAndMoveFileServiceAsync(_cancellationTokenSource.Token);
-							if (!strTemp.Contains(strCategorizeAndMoveFileService))
-							{
-								strTemp += strCategorizeAndMoveFileService;
-							}
-						}
-						else
-						{
-							if (_logCount % intFrequency == 0)
-							{
-								ClassLibrary.MyLogHelper.LogSplit($"根据配置，{strCategorizeAndMoveFileService}不开启");
-							}
-							strTemp = strTemp.Replace(strCategorizeAndMoveFileService, "");
-						}
-
-
 						// 五、根据配置判断是否开启 Windows聚焦API图片下载 的服务
 
 						if (ClassLibrary.ShareClass._windowsSpotlightDownloadService)
@@ -381,8 +361,29 @@ namespace BingImageDownloadServiceForWindows
 
 
 
+						// 应该将其他服务放置在 ** 文件分类归档 ** 服务之前，以便及时处理，而不是到下一个循环才处理
 
-						// 应该将其他服务放置在*****服务之前，以便及时处理，而不是到下一个循环才处理
+
+						// 四、根据配置判断是否开启 文件分类归档 的服务
+
+						if (ClassLibrary.ShareClass._categorizeAndMoveFileService)
+						{
+							await BingImageDownloadServiceForWindows.CategorizeAndMoveFileService.CategorizeAndMoveFileServiceAsync(_cancellationTokenSource.Token);
+							if (!strTemp.Contains(strCategorizeAndMoveFileService))
+							{
+								strTemp += strCategorizeAndMoveFileService;
+							}
+						}
+						else
+						{
+							if (_logCount % intFrequency == 0)
+							{
+								ClassLibrary.MyLogHelper.LogSplit($"根据配置，{strCategorizeAndMoveFileService}不开启");
+							}
+							strTemp = strTemp.Replace(strCategorizeAndMoveFileService, "");
+						}
+
+						
 
 						// 最后、根据配置判断是否开******服务
 

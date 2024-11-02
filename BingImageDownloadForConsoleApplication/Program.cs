@@ -1,10 +1,12 @@
 ﻿using ClassLibrary;
 using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -27,6 +29,41 @@ namespace BingImageDownloadForConsoleApplication
             ClassLibrary.Services.BingImageDownloadService bingImageDownloadService = new ClassLibrary.Services.BingImageDownloadService();
 
             // 新写的方法放在这里方便调试
+            Console.WriteLine(Task.Run(async () => { return await bingImageDownloadService.WindowsSpotlightDownloadAsync(); }).GetAwaiter().GetResult());
+            Console.WriteLine();
+
+            Console.WriteLine("输入一个文件的完整路径：");
+            string strFilePath = Console.ReadLine();
+            if (File.Exists(strFilePath))
+            {
+                string hash = ClassLibrary.MyHashHelper.GetFileHashAsync_Local(strFilePath, SHA256.Create()).GetAwaiter().GetResult();
+                //string hash = Task.Run(async () =>
+                //{
+                //    return await ClassLibrary.MyHashHelper.GetFileHashAsync_Local(strFilePath, SHA256.Create());
+                //}).GetAwaiter().GetResult();
+                string tableName = "FileHashes";
+                string createTableColumnScript = $"Id INTEGER PRIMARY KEY AUTOINCREMENT,FileName TEXT NOT NULL,FilePath TEXT NOT NULL,HashValue TEXT NOT NULL,CONSTRAINT uc_HashValue UNIQUE (HashValue)";
+                var necessary = new (string column, object value)[] {
+                                    ("FileName",Path.GetFileName(strFilePath)),
+                                    ("FilePath",strFilePath),
+                                    ("HashValue",hash)
+                            };
+                var conditions = new (string column, object value)[] { ("HashValue", hash) };
+                string connectionString = "Data Source=example.db;Version=3;";
+                var s = new ClassLibrary.MySQLiteHelper(connectionString);
+                List<Dictionary<string, object>> listResult = s.GetExecuteResult(tableName, createTableColumnScript, necessary, conditions);
+                foreach (var item in listResult)
+                {
+                    foreach (KeyValuePair<string, object> keyValuePair in item)
+                    {
+                        Console.WriteLine($"{keyValuePair.Key}：{keyValuePair.Value}");
+                    }
+                }
+            }
+            else
+            {
+                Console.WriteLine("输入有误，无法读取文件，结束。");
+            }
 
 
             Console.WriteLine("暂停");
@@ -205,7 +242,7 @@ namespace BingImageDownloadForConsoleApplication
             if (bingImageDownloadService.BingImageSetting.WindowsSpotlightDownloadSwitch)
             {
                 //if (bingImageDownloadService.WindowsSpotlightDownloadAsync())
-                if (Task.Run(() => bingImageDownloadService.WindowsSpotlightDownloadAsync()).GetAwaiter().GetResult())
+                if (Task.Run(async () => { return await bingImageDownloadService.WindowsSpotlightDownloadAsync(); }).GetAwaiter().GetResult())
                 {
                     Console.WriteLine($"{DateTime.Now}：Windowss聚焦API图片下载结束(成功)。");
                 }
@@ -334,6 +371,96 @@ namespace BingImageDownloadForConsoleApplication
 
 				 Task.Run(() => WindowsSpotlightDownloadAsync).Wait();
 
+          =============================================================================================================
+
+          =============================================================================================================
+
+            GetAwaiter().GetResult()
+            csharp
+            string hash = Task.Run(async () =>
+            {
+                return await ClassLibrary.MyHashHelper.GetFileHashAsync_Local(strFilePath, SHA256.Create());
+            }).GetAwaiter().GetResult();
+            Wait()
+            csharp
+            string hash = Task.Run(async () =>
+            {
+                return await ClassLibrary.MyHashHelper.GetFileHashAsync_Local(strFilePath, SHA256.Create());
+            }).Wait();
+            区别：
+            返回值处理：
+
+            GetAwaiter().GetResult()：返回任务的结果。如果你的任务返回一个值（如 string），GetAwaiter().GetResult() 会返回这个值。
+            Wait()：不返回任务的结果，只等待任务完成。如果你想获取任务的结果，需要使用 Result 属性。
+            异常处理：
+
+            GetAwaiter().GetResult()：如果任务抛出异常，GetAwaiter().GetResult() 会立即抛出该异常。
+            Wait()：如果任务抛出异常，Wait() 会抛出一个 AggregateException，其中包含任务抛出的所有异常。
+            性能和资源管理：
+
+            GetAwaiter().GetResult()：通常更轻量级，因为它直接返回结果，不需要额外的包装。
+            Wait()：可能会稍微重一些，因为它需要创建和处理 AggregateException。
+
+            
+          =============================================================================================================
+
+          =============================================================================================================
+
+
+            1. 直接调用 GetAwaiter().GetResult()
+            csharp
+            string hash = ClassLibrary.MyHashHelper.GetFileHashAsync_Local(strFilePath, SHA256.Create()).GetAwaiter().GetResult();
+            2. 使用 Task.Run 调用 GetAwaiter().GetResult()
+            csharp
+            string hash = Task.Run(async () =>
+            {
+                return await ClassLibrary.MyHashHelper.GetFileHashAsync_Local(strFilePath, SHA256.Create());
+            }).GetAwaiter().GetResult();
+            区别：
+            线程上下文：
+
+            直接调用 GetAwaiter().GetResult()：在当前线程上直接执行异步方法，并阻塞当前线程直到异步操作完成。这通常会导致当前线程（例如 UI 线程）被阻塞，可能导致应用程序无响应。
+            使用 Task.Run：在新的线程池线程上执行异步方法，并阻塞当前线程直到新线程上的异步操作完成。这可以避免阻塞当前线程，特别是在 UI 应用程序中，可以防止界面冻结。
+            性能：
+
+            直接调用 GetAwaiter().GetResult()：通常更轻量级，因为它不需要额外的线程切换开销。
+            使用 Task.Run：可能会稍微重一些，因为它涉及到线程池线程的调度和切换，但可以更好地利用多核处理器的优势。
+            适用场景：
+
+            直接调用 GetAwaiter().GetResult()：适用于简单的同步等待，特别是在不需要考虑线程上下文的控制台应用程序或后台服务中。
+            使用 Task.Run：适用于需要避免阻塞当前线程的场景，特别是在 UI 应用程序中，可以保持界面的响应性。
+            示例代码：
+            直接调用 GetAwaiter().GetResult()
+            csharp
+            string hash = ClassLibrary.MyHashHelper.GetFileHashAsync_Local(strFilePath, SHA256.Create()).GetAwaiter().GetResult();
+            使用 Task.Run 调用 GetAwaiter().GetResult()
+            csharp
+            string hash = Task.Run(async () =>
+            {
+                return await ClassLibrary.MyHashHelper.GetFileHashAsync_Local(strFilePath, SHA256.Create());
+            }).GetAwaiter().GetResult();
+            推荐做法：
+            直接调用 GetAwaiter().GetResult()：适用于简单的同步等待，特别是在不需要考虑线程上下文的控制台应用程序或后台服务中。
+            使用 Task.Run：适用于需要避免阻塞当前线程的场景，特别是在 UI 应用程序中，可以保持界面的响应性。
+            异步方法推荐做法：
+            在现代 C# 编程中，推荐使用 async/await 模式来处理异步操作，以避免阻塞调用和提高代码的可读性和性能。例如：
+
+            csharp
+            using System.Security.Cryptography;
+            using System.Threading.Tasks;
+
+            class Program
+            {
+                static async Task Main()
+                {
+                    string strFilePath = "path/to/your/file.txt";
+
+                    string hash = await ClassLibrary.MyHashHelper.GetFileHashAsync_Local(strFilePath, SHA256.Create());
+
+                    Console.WriteLine("File hash: " + hash);
+                }
+            }
+            这样可以避免阻塞主线程，并且代码更加清晰和易于维护。
 				 */
             #endregion
 

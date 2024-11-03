@@ -288,41 +288,41 @@ namespace ClassLibrary
          */
         //为了解决上面的问题，尝试修改代码如下：
 #else
-		public static readonly string _userPath = InitializeUserPath();
-		public static readonly string _systemUserProfilePath = InitializeSystemUserProfilePath();
+        public static readonly string _userPath = InitializeUserPath();
+        public static readonly string _systemUserProfilePath = InitializeSystemUserProfilePath();
 
-		private static string InitializeUserPath()
-		{
-			string myDocumentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-			ClassLibrary.MyLogHelper.LogSplit(_logPath, "用户自定义文档目录的路径检查", $"MyDocuments路径: {myDocumentsPath}", _logType, _logCycle);
-			if (string.IsNullOrWhiteSpace(myDocumentsPath))
-			{
-				//throw new ArgumentException("用户自定义文档目录：路径不能为空字符串或全为空白。", nameof(myDocumentsPath));
-				myDocumentsPath = "C:\\Users\\Administrator\\Documents";
-			}
-			return Directory.GetParent(myDocumentsPath).FullName;
-		}
+        private static string InitializeUserPath()
+        {
+            string myDocumentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            ClassLibrary.MyLogHelper.LogSplit(_logPath, "用户自定义文档目录的路径检查", $"MyDocuments路径: {myDocumentsPath}", _logType, _logCycle);
+            if (string.IsNullOrWhiteSpace(myDocumentsPath))
+            {
+                //throw new ArgumentException("用户自定义文档目录：路径不能为空字符串或全为空白。", nameof(myDocumentsPath));
+                myDocumentsPath = "C:\\Users\\Administrator\\Documents";
+            }
+            return Directory.GetParent(myDocumentsPath).FullName;
+        }
 
-		private static string InitializeSystemUserProfilePath()
-		{
-			string userProfilePath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
-			ClassLibrary.MyLogHelper.LogSplit(_logPath, "系统默认用户主目录的路径检查", $"UserProfile路径: {userProfilePath}", _logType, _logCycle);
-			if (string.IsNullOrWhiteSpace(userProfilePath))
-			{
-				//throw new ArgumentException("系统默认用户主目录：路径不能为空字符串或全为空白。", nameof(userProfilePath));
-				userProfilePath = "C:\\Users\\Administrator";
-			}
-			return userProfilePath;
-		}
+        private static string InitializeSystemUserProfilePath()
+        {
+            string userProfilePath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+            ClassLibrary.MyLogHelper.LogSplit(_logPath, "系统默认用户主目录的路径检查", $"UserProfile路径: {userProfilePath}", _logType, _logCycle);
+            if (string.IsNullOrWhiteSpace(userProfilePath))
+            {
+                //throw new ArgumentException("系统默认用户主目录：路径不能为空字符串或全为空白。", nameof(userProfilePath));
+                userProfilePath = "C:\\Users\\Administrator";
+            }
+            return userProfilePath;
+        }
 
-		static ShareClass()
-		{
-			ClassLibrary.MyLogHelper.LogSplit(_logPath, "调试：静态构造函数", "静态构造函数被调用", _logType, _logCycle);
-		}
+        static ShareClass()
+        {
+            ClassLibrary.MyLogHelper.LogSplit(_logPath, "调试：静态构造函数", "静态构造函数被调用", _logType, _logCycle);
+        }
 
         #region 当路径为空时设置默认值以防服务启动不了。
-		// 未完成：其实这里不应该这么处理，或许可以通过在服务启动时判断，并给出提示：请先配置参数设置。
-		/*
+        // 未完成：其实这里不应该这么处理，或许可以通过在服务启动时判断，并给出提示：请先配置参数设置。
+        /*
          无法启动服务。System.TypeInitializationException: “ClassLibrary.ShareClass”的类型初始值设定项引发异常。 ---> System.ArgumentException: 用户自定义文档目录：路径不能为空字符串或全为空白。
             参数名: myDocumentsPath
                在 ClassLibrary.ShareClass.InitializeUserPath() 位置 D:\GitFiles\BingImageDownloadServiceForWindows\ClassLibrary\ShareClass.cs:行号 298
@@ -476,38 +476,40 @@ namespace ClassLibrary
         /// <summary>
         /// 数据库连接字符串
         /// </summary>
-        public static readonly string _sqliteConnectionString = $"Data Source={_sqliteDataName};Version=3;";
+        public static readonly string _sqliteConnectionString = $"Data Source={Path.Combine(AppDomain.CurrentDomain.BaseDirectory, _sqliteDataName)};Version=3;";
         /// <summary>
         /// 初始化一张表，用于存储文件的哈希值等信息(FileHashes)
         /// </summary>
         public const string _sqliteCreateTableScript_FileHashes = @"
-    CREATE TABLE FileHashes (
-        Id INTEGER PRIMARY KEY AUTOINCREMENT,
-        FileName TEXT NOT NULL,
-        FilePath TEXT NOT NULL,
-        HashValue TEXT NOT NULL,
-        CreatedTime TEXT DEFAULT (strftime('%Y-%m-%d %H:%M:%f', 'now', 'localtime')),
-        LastModifiedTime TEXT DEFAULT (strftime('%Y-%m-%d %H:%M:%f', 'now', 'localtime')),
-        CONSTRAINT uc_HashValue UNIQUE (HashValue)
-    );
+CREATE TABLE IF NOT EXISTS FileHashes (
+    Id INTEGER PRIMARY KEY AUTOINCREMENT,
+    FileName TEXT NOT NULL,
+    FilePath TEXT NOT NULL,
+    HashValue TEXT NOT NULL,
+    CreatedTime TEXT DEFAULT (strftime('%Y-%m-%d %H:%M:%f', 'now', 'localtime')),
+    LastModifiedTime TEXT DEFAULT (strftime('%Y-%m-%d %H:%M:%f', 'now', 'localtime')),
+    CONSTRAINT uc_HashValue UNIQUE (HashValue)
+);
 
-    CREATE TRIGGER set_created_time
-    BEFORE INSERT ON FileHashes
-    FOR EACH ROW
-    BEGIN
-        WHEN NEW.CreatedTime IS NULL
-        SET NEW.CreatedTime = strftime('%Y-%m-%d %H:%M:%f', 'now', 'localtime');
-    END;
+CREATE TRIGGER IF NOT EXISTS set_created_time
+BEFORE INSERT ON FileHashes
+FOR EACH ROW
+WHEN NEW.CreatedTime IS NULL
+BEGIN
+    UPDATE FileHashes 
+    SET CreatedTime = strftime('%Y-%m-%d %H:%M:%f', 'now', 'localtime') 
+    WHERE id = NEW.id;
+END;
 
-    CREATE TRIGGER update_last_modified_time
-    AFTER UPDATE ON FileHashes
-    FOR EACH ROW
-    BEGIN
-        UPDATE FileHashes 
-        SET LastModifiedTime = strftime('%Y-%m-%d %H:%M:%f', 'now', 'localtime') 
-        WHERE id = OLD.id;
-    END;
-    ";
+CREATE TRIGGER IF NOT EXISTS update_last_modified_time
+AFTER UPDATE ON FileHashes
+FOR EACH ROW
+BEGIN
+    UPDATE FileHashes 
+    SET LastModifiedTime = strftime('%Y-%m-%d %H:%M:%f', 'now', 'localtime') 
+    WHERE id = OLD.id;
+END;
+";
 
         #endregion
 

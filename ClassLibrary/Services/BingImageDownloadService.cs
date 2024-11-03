@@ -698,9 +698,8 @@ namespace ClassLibrary.Services
             var logType = "WindowsSpotlightDownloadService";
             var logCycle = "yyyyMMdd";
             int intDownloadCount = 0;
-            bool result = false;
             string strUrl = BingImageSetting.WindowsSpotlightAPIUrl;
-
+            bool result = false;
             DateTime dateTimeSpotlightBegin = DateTime.Now;
             string strTemp = $"{dateTimeSpotlightBegin}：开始下载Windows聚焦API图片";
             Console.WriteLine(strTemp);
@@ -709,66 +708,87 @@ namespace ClassLibrary.Services
 
             try
             {
-                // 获取下载地址等素材
-                string strJson = await MyHttpServiceHelper.GetClient().GetStringAsync(strUrl);
-                string newJson = ClassLibrary.MyJsonHelper.ExtractWindowsSpotlightDownloadUrl(strJson);
-                WindowsSpotlightClass windowsSpotlight = ClassLibrary.MyJsonHelper.ReadJsonToClass<WindowsSpotlightClass>(newJson);
+                int loopLimit = 0;
+                int loopCount = 0;
+                while (loopLimit < 10)
+                {
+                    // 获取下载地址等素材
+                    string strJson = await MyHttpServiceHelper.GetClient().GetStringAsync(strUrl);
+                    string newJson = ClassLibrary.MyJsonHelper.ExtractWindowsSpotlightDownloadUrl(strJson);
+                    WindowsSpotlightClass windowsSpotlight = ClassLibrary.MyJsonHelper.ReadJsonToClass<WindowsSpotlightClass>(newJson);
 #if DEBUG
-                File.WriteAllText(Path.Combine(ClassLibrary.ShareClass._logPath, $"{DateTime.Now.ToString("yyyyMMddHHmmssfffffff")}.json"), strJson, Encoding.UTF8);
-                ClassLibrary.MyJsonHelper.WriteClassToJsonFile<WindowsSpotlightClass>(windowsSpotlight, Path.Combine(ClassLibrary.ShareClass._logPath, $"{DateTime.Now.ToString("yyyyMMddHHmmss")}.json"));
+                    File.WriteAllText(Path.Combine(ClassLibrary.ShareClass._logPath, $"{DateTime.Now.ToString("yyyyMMddHHmmssfffffff")}.json"), strJson, Encoding.UTF8);
+                    ClassLibrary.MyJsonHelper.WriteClassToJsonFile<WindowsSpotlightClass>(windowsSpotlight, Path.Combine(ClassLibrary.ShareClass._logPath, $"{DateTime.Now.ToString("yyyyMMddHHmmss")}.json"));
 #else
 #endif
+                    int count = 0;
+                    result = false;
+                    bool resultIsRepeat = false;
+                    // 准备开始下载
+                    // 电脑壁纸
+                    bool landscapeIsRepeat = false;
+                    bool resultLandscape = true;
+                    string strFileNameLandscape = $"{DateTime.Now.ToString("yyyyMMdd")}_{windowsSpotlight.TitleText.Text}_{windowsSpotlight.HsTitleText.Text}_{windowsSpotlight.ImageFullscreenLandscape.Width}x{windowsSpotlight.ImageFullscreenLandscape.Height}.jpg";
+                    strFileNameLandscape = Path.Combine(BingImageSetting.CategorizeAndMoveSetting.ComputerWallpaperPath, strFileNameLandscape);
+                    string strFileHashLandscape = ClassLibrary.MyHashHelper.GetFileHashAsync_Url(windowsSpotlight.ImageFullscreenLandscape.DownloadUrl, SHA256.Create()).GetAwaiter().GetResult();
+                    if (!BingImageSetting.Overwrite && ClassLibrary.MyMethodExtension.FileExistsByHash(strFileHashLandscape))
+                    {
+                        strTemp = $"SHA256：{strFileHashLandscape}\r\n{strFileNameLandscape}\r\n文件已存在，根据参数配置不重新下载。";
+                        Console.WriteLine(strTemp);
+                        ClassLibrary.MyLogHelper.LogSplit(ClassLibrary.ShareClass._logPath, logTitle, strTemp, logType, logCycle);
+                        landscapeIsRepeat = true;
+                    }
+                    else
+                    {
+                        resultLandscape = ClassLibrary.ShareClass.DownloadFile(windowsSpotlight.ImageFullscreenLandscape.DownloadUrl, strFileNameLandscape);
+                        ClassLibrary.MyMethodExtension.InsertHashData(strFileNameLandscape, strFileHashLandscape);
+                        strTemp = $"SHA256：{strFileHashLandscape}\r\n{strFileNameLandscape}\r\n文件下载结果：{resultLandscape}";
+                        Console.WriteLine(strTemp);
+                        ClassLibrary.MyLogHelper.LogSplit(ClassLibrary.ShareClass._logPath, logTitle, strTemp, logType, logCycle);
+                        if (resultLandscape) { intDownloadCount++; count++; }
+                    }
 
-                // 准备开始下载
-                // 电脑壁纸
-                bool resultLandscape = true;
-                string strFileNameLandscape = $"{DateTime.Now.ToString("yyyyMMdd")}_{windowsSpotlight.TitleText.Text}_{windowsSpotlight.HsTitleText.Text}_{windowsSpotlight.ImageFullscreenLandscape.Width}x{windowsSpotlight.ImageFullscreenLandscape.Height}.jpg";
-                strFileNameLandscape = Path.Combine(BingImageSetting.CategorizeAndMoveSetting.ComputerWallpaperPath, strFileNameLandscape);
-                string strFileHashLandscape = ClassLibrary.MyHashHelper.GetFileHashAsync_Url(windowsSpotlight.ImageFullscreenLandscape.DownloadUrl, SHA256.Create()).GetAwaiter().GetResult();
-                if (!BingImageSetting.Overwrite && ClassLibrary.MyMethodExtension.FileExistsByHash(strFileHashLandscape))
-                {
-                    strTemp = $"SHA256：{strFileHashLandscape}\r\n{strFileNameLandscape}\r\n文件已存在，根据参数配置不重新复制。";
+                    // 手机壁纸
+                    bool portraitIsRepeat = false;
+                    bool resultPortrait = true;
+                    string strFileNamePortrait = $"{DateTime.Now.ToString("yyyyMMdd")}_{windowsSpotlight.TitleText.Text}_{windowsSpotlight.HsTitleText.Text}_{windowsSpotlight.ImageFullscreenPortrait.Width}x{windowsSpotlight.ImageFullscreenPortrait.Height}.jpg";
+                    strFileNamePortrait = Path.Combine(BingImageSetting.CategorizeAndMoveSetting.MobileWallpaperPath, strFileNamePortrait);
+                    string strFileHashPortrait = ClassLibrary.MyHashHelper.GetFileHashAsync_Url(windowsSpotlight.ImageFullscreenPortrait.DownloadUrl, SHA256.Create()).GetAwaiter().GetResult();
+                    if (!BingImageSetting.Overwrite && ClassLibrary.MyMethodExtension.FileExistsByHash(strFileHashPortrait))
+                    {
+                        strTemp = $"SHA256：{strFileHashPortrait}\r\n{strFileNamePortrait}\r\n文件已存在，根据参数配置不重新下载。";
+                        Console.WriteLine(strTemp);
+                        ClassLibrary.MyLogHelper.LogSplit(ClassLibrary.ShareClass._logPath, logTitle, strTemp, logType, logCycle);
+                        portraitIsRepeat = true;
+                    }
+                    else
+                    {
+                        resultPortrait = ClassLibrary.ShareClass.DownloadFile(windowsSpotlight.ImageFullscreenPortrait.DownloadUrl, strFileNamePortrait);
+                        ClassLibrary.MyMethodExtension.InsertHashData(strFileNamePortrait, strFileHashPortrait);
+                        strTemp = $"SHA256：{strFileHashPortrait}\r\n{strFileNamePortrait}\r\n文件下载结果：{resultPortrait}";
+                        Console.WriteLine(strTemp);
+                        ClassLibrary.MyLogHelper.LogSplit(ClassLibrary.ShareClass._logPath, logTitle, strTemp, logType, logCycle);
+                        if (resultPortrait) { intDownloadCount++; count++; }
+                    }
+
+
+                    // 记录结果
+                    resultIsRepeat = (landscapeIsRepeat && portraitIsRepeat);
+                    if (resultIsRepeat)
+                    {
+                        loopLimit++;
+                        loopCount++;
+                    }
+                    else
+                    {
+                        loopLimit--;
+                    }
+                    result = (resultLandscape && resultPortrait);
+                    int intResult = loopLimit < 10 ? count : intDownloadCount;
+                    strTemp = $"Windows聚焦API图片下载完成({result})重复{loopCount.ToString()}：共下载{intResult}个文件。";
                     Console.WriteLine(strTemp);
                     ClassLibrary.MyLogHelper.LogSplit(ClassLibrary.ShareClass._logPath, logTitle, strTemp, logType, logCycle);
-
                 }
-                else
-                {
-                    resultLandscape = ClassLibrary.ShareClass.DownloadFile(windowsSpotlight.ImageFullscreenLandscape.DownloadUrl, strFileNameLandscape);
-                    ClassLibrary.MyMethodExtension.InsertHashData(strFileNameLandscape, strFileHashLandscape);
-                    strTemp = $"SHA256：{strFileHashLandscape}\r\n{strFileNameLandscape}\r\n文件下载结果：{resultLandscape}";
-                    Console.WriteLine(strTemp);
-                    ClassLibrary.MyLogHelper.LogSplit(ClassLibrary.ShareClass._logPath, logTitle, strTemp, logType, logCycle);
-                    if (resultLandscape) { intDownloadCount++; }
-                }
-
-                // 手机壁纸
-                bool resultPortrait = true;
-                string strFileNamePortrait = $"{DateTime.Now.ToString("yyyyMMdd")}_{windowsSpotlight.TitleText.Text}_{windowsSpotlight.HsTitleText.Text}_{windowsSpotlight.ImageFullscreenPortrait.Width}x{windowsSpotlight.ImageFullscreenPortrait.Height}.jpg";
-                strFileNamePortrait = Path.Combine(BingImageSetting.CategorizeAndMoveSetting.MobileWallpaperPath, strFileNamePortrait);
-                string strFileHashPortrait = ClassLibrary.MyHashHelper.GetFileHashAsync_Url(windowsSpotlight.ImageFullscreenPortrait.DownloadUrl, SHA256.Create()).GetAwaiter().GetResult();
-                if (!BingImageSetting.Overwrite && ClassLibrary.MyMethodExtension.FileExistsByHash(strFileHashPortrait))
-                {
-                    strTemp = $"SHA256：{strFileHashPortrait}\r\n{strFileNamePortrait}\r\n文件已存在，根据参数配置不重新复制。";
-                    Console.WriteLine(strTemp);
-                    ClassLibrary.MyLogHelper.LogSplit(ClassLibrary.ShareClass._logPath, logTitle, strTemp, logType, logCycle);
-                }
-                else
-                {
-                    resultPortrait = ClassLibrary.ShareClass.DownloadFile(windowsSpotlight.ImageFullscreenPortrait.DownloadUrl, strFileNamePortrait);
-                    ClassLibrary.MyMethodExtension.InsertHashData(strFileNamePortrait, strFileHashPortrait);
-                    strTemp = $"SHA256：{strFileHashPortrait}\r\n{strFileNamePortrait}\r\n文件下载结果：{resultPortrait}";
-                    Console.WriteLine(strTemp);
-                    ClassLibrary.MyLogHelper.LogSplit(ClassLibrary.ShareClass._logPath, logTitle, strTemp, logType, logCycle);
-                    if (resultPortrait) { intDownloadCount++; }
-                }
-
-
-                // 记录结果
-                result = (resultLandscape && resultPortrait);
-                strTemp = $"Windows聚焦API图片下载完成({result})：共下载{intDownloadCount}个文件。";
-                Console.WriteLine(strTemp);
-                ClassLibrary.MyLogHelper.LogSplit(ClassLibrary.ShareClass._logPath, logTitle, strTemp, logType, logCycle);
             }
             catch (Exception ex)
             {
@@ -835,19 +855,19 @@ namespace ClassLibrary.Services
 
                     foreach (string filePath in Directory.GetFiles(BingImageSetting.CategorizeAndMoveSetting.SearchDirectoryPath))
                     {
+                        string fileName = Path.GetFileName(filePath);
+                        allFilesCount++;
                         string strFileHash = ClassLibrary.MyHashHelper.GetFileHashAsync_Local(filePath, SHA256.Create()).GetAwaiter().GetResult();
                         if (!BingImageSetting.Overwrite && ClassLibrary.MyMethodExtension.FileExistsByHash(strFileHash))
                         {
-                            strTemp = $"SHA256：{strFileHash}\r\n{strFileHash}\r\n文件已存在，根据参数配置不重新分类归档。";
+                            strTemp = $"SHA256：{strFileHash}\r\n{fileName}\r\n文件已存在，根据参数配置不重新分类归档。";
                             Console.WriteLine(strTemp);
                             ClassLibrary.MyLogHelper.LogSplit(ClassLibrary.ShareClass._logPath, logTitle, strTemp, logType, logCycle);
                         }
                         else
                         {
-                            string fileName = Path.GetFileName(filePath);
                             string fileExtension = Path.GetExtension(filePath);
                             string fileNewName = fileName;
-                            allFilesCount++;
 
                             if (string.IsNullOrEmpty(fileExtension))
                             {

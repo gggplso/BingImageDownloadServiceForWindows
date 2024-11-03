@@ -28,11 +28,12 @@ namespace BingImageDownloadForConsoleApplication
             Console.WriteLine($"配置初始化：{configApplied.ToString()}");
             ClassLibrary.Services.BingImageDownloadService bingImageDownloadService = new ClassLibrary.Services.BingImageDownloadService();
 
+#if DeBug
             // 新写的方法放在这里方便调试
 
-            bingImageDownloadService.CategorizeAndMoveFile();
+            //bingImageDownloadService.WindowsSpotlightDownloadAsync().GetAwaiter().GetResult();
 
-            #region 待调试的测试
+            #region 调试Hash
             /*
             Console.WriteLine(Task.Run(async () => { return await bingImageDownloadService.WindowsSpotlightDownloadAsync(); }).GetAwaiter().GetResult());
             Console.WriteLine();
@@ -72,14 +73,15 @@ namespace BingImageDownloadForConsoleApplication
             */
             #endregion
 
-
             Console.WriteLine("暂停");
             Console.ReadKey(true);
             Console.WriteLine("确定要运行下面的程序？");
             Console.ReadKey(true);
-
+#else
+#endif
 
             #region 参数展示
+            Console.WriteLine("调试----");
             Console.WriteLine("参数配置如下：");
             string strAppConfig = File.ReadAllText(ClassLibrary.ShareClass._mainSettingFile);
             Console.WriteLine(strAppConfig);
@@ -92,7 +94,7 @@ namespace BingImageDownloadForConsoleApplication
             #endregion
 
             #region 暂停、插入测试代码
-
+            Console.WriteLine("测试----");
             Console.WriteLine("系统默认用户主目录");
             string userPath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
             string downloadsPath = Path.Combine(userPath, "Downloads");

@@ -27,6 +27,34 @@ namespace ClassLibrary
         }
 
         /// <summary>
+        /// 执行传入的 SQL 脚本。
+        /// </summary>
+        /// <param name="script">要执行的 SQL 脚本。</param>
+        /// <exception cref="ArgumentException"></exception>
+        public void ExecuteScript(string script)
+        {
+            if (string.IsNullOrWhiteSpace(script))
+            {
+                throw new ArgumentException("脚本不能为空", nameof(script));
+            }
+            try
+            {
+                using (var connection = GetConnection())
+                {
+                    connection.Open();
+                    using (var command = new SQLiteCommand(script, connection))
+                    {
+                        command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ClassLibrary.MyLogHelper.GetExceptionLocation(ex);
+            }
+        }
+
+        /// <summary>
         /// 建表
         /// </summary>
         /// <param name="tableName">表名</param>

@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using static ClassLibrary.ShareClass;
 using System.Windows.Media.Imaging;
 using ClassLibrary.Classes;
+using System.Security.Cryptography;
 
 namespace ClassLibrary.Services
 {
@@ -398,6 +399,10 @@ namespace ClassLibrary.Services
 
             try
             {
+                // 文件分类归档后存放的目录若不存在，则创建
+                Directory.CreateDirectory(BingImageSetting.CategorizeAndMoveSetting.ComputerWallpaperPath);
+                Directory.CreateDirectory(BingImageSetting.CategorizeAndMoveSetting.MobileWallpaperPath);
+                Directory.CreateDirectory(BingImageSetting.CategorizeAndMoveSetting.RejectedPath);
                 Directory.CreateDirectory(BingImageSetting.ImageFileSavePath);
 
                 foreach (KeyValuePair<string, List<string>> item in dicBingDownloadUrl)
@@ -405,6 +410,9 @@ namespace ClassLibrary.Services
                     //string strUrl = item.Value[0];
                     string strUrlIsUHD = item.Value[1];
                     string strUrlISMobile = item.Value[2];
+                    // 获取文件的Hash值
+                    string strUHDHash = ClassLibrary.MyHashHelper.GetFileHashAsync_Url(strUrlIsUHD, SHA256.Create()).GetAwaiter().GetResult();
+                    string strMobileHash = ClassLibrary.MyHashHelper.GetFileHashAsync_Url(strUrlISMobile, SHA256.Create()).GetAwaiter().GetResult();
                     //string strEnglish = item.Value[3];
                     string strEnglishIsUHD = ClassLibrary.ShareClass.RemoveInvalidChars(item.Value[4]);
                     string strEnglishIsMobile = ClassLibrary.ShareClass.RemoveInvalidChars(item.Value[5]);
@@ -427,10 +435,11 @@ namespace ClassLibrary.Services
                     {
                         if (BingImageSetting.BingImageApi.BingApiRequestParams.PixelResolutionIsUHD)
                         {
-                            string strFileNameNew = Path.Combine(BingImageSetting.ImageFileSavePath, strFileName + strChineseIsUHD);
-                            if (File.Exists(strFileNameNew) && !BingImageSetting.Overwrite)
+                            string strFileNameNew = Path.Combine(BingImageSetting.CategorizeAndMoveSetting.ComputerWallpaperPath, strFileName + strChineseIsUHD);
+
+                            if (ClassLibrary.MyMethodExtension.FileExistsByHash(strUHDHash) && !BingImageSetting.Overwrite)
                             {
-                                strTemp = $"{strFileNameNew}\r\n文件已存在，根据参数配置不重新下载。";
+                                strTemp = $"SHA256：{strUHDHash}\r\n{strFileNameNew}\r\n文件已存在，根据参数配置不重新下载。";
                                 Console.WriteLine(strTemp);
                                 ClassLibrary.MyLogHelper.LogSplit(ClassLibrary.ShareClass._logPath, logTitle, strTemp, logType, logCycle);
                                 isDownloadExists = true;
@@ -439,7 +448,8 @@ namespace ClassLibrary.Services
                             else
                             {
                                 result = ClassLibrary.ShareClass.DownloadFile(strUrlIsUHD, strFileNameNew);
-                                strTemp = $"{strFileNameNew}\r\n文件下载结果：{result}";
+                                ClassLibrary.MyMethodExtension.InsertHashData(strFileNameNew, strUHDHash);
+                                strTemp = $"SHA256：{strUHDHash}\r\n{strFileNameNew}\r\n文件下载结果：{result}";
                                 Console.WriteLine(strTemp);
                                 ClassLibrary.MyLogHelper.LogSplit(ClassLibrary.ShareClass._logPath, logTitle, strTemp, logType, logCycle);
                                 intBingUHDCount++;
@@ -447,10 +457,11 @@ namespace ClassLibrary.Services
                         }
                         if (BingImageSetting.BingImageApi.BingApiRequestParams.PixelResolutionIsMobile)
                         {
-                            string strFileNameNew = Path.Combine(BingImageSetting.ImageFileSavePath, strFileName + strChineseIsMobile);
-                            if (File.Exists(strFileNameNew) && !BingImageSetting.Overwrite)
+                            string strFileNameNew = Path.Combine(BingImageSetting.CategorizeAndMoveSetting.MobileWallpaperPath, strFileName + strChineseIsMobile);
+
+                            if (ClassLibrary.MyMethodExtension.FileExistsByHash(strMobileHash) && !BingImageSetting.Overwrite)
                             {
-                                strTemp = $"{strFileNameNew}\r\n文件已存在，根据参数配置不重新下载。";
+                                strTemp = $"SHA256：{strMobileHash}\r\n{strFileNameNew}\r\n文件已存在，根据参数配置不重新下载。";
                                 Console.WriteLine(strTemp);
                                 ClassLibrary.MyLogHelper.LogSplit(ClassLibrary.ShareClass._logPath, logTitle, strTemp, logType, logCycle);
                                 isDownloadExists = true;
@@ -459,7 +470,8 @@ namespace ClassLibrary.Services
                             else
                             {
                                 result = ClassLibrary.ShareClass.DownloadFile(strUrlISMobile, strFileNameNew);
-                                strTemp = $"{strFileNameNew}\r\n文件下载结果：{result}";
+                                ClassLibrary.MyMethodExtension.InsertHashData(strFileNameNew, strMobileHash);
+                                strTemp = $"SHA256：{strMobileHash}\r\n{strFileNameNew}\r\n文件下载结果：{result}";
                                 Console.WriteLine(strTemp);
                                 ClassLibrary.MyLogHelper.LogSplit(ClassLibrary.ShareClass._logPath, logTitle, strTemp, logType, logCycle);
                                 intBingMobileCount++;
@@ -470,10 +482,10 @@ namespace ClassLibrary.Services
                     {
                         if (BingImageSetting.BingImageApi.BingApiRequestParams.PixelResolutionIsUHD)
                         {
-                            string strFileNameNew = Path.Combine(BingImageSetting.ImageFileSavePath, strFileName + strEnglishIsUHD);
-                            if (File.Exists(strFileNameNew) && !BingImageSetting.Overwrite)
+                            string strFileNameNew = Path.Combine(BingImageSetting.CategorizeAndMoveSetting.ComputerWallpaperPath, strFileName + strEnglishIsUHD);
+                            if (ClassLibrary.MyMethodExtension.FileExistsByHash(strUHDHash) && !BingImageSetting.Overwrite)
                             {
-                                strTemp = $"{strFileNameNew}\r\n文件已存在，根据参数配置不重新下载。";
+                                strTemp = $"SHA256：{strUHDHash}\r\n{strFileNameNew}\r\n文件已存在，根据参数配置不重新下载。";
                                 Console.WriteLine(strTemp);
                                 ClassLibrary.MyLogHelper.LogSplit(ClassLibrary.ShareClass._logPath, logTitle, strTemp, logType, logCycle);
                                 isDownloadExists = true;
@@ -482,7 +494,8 @@ namespace ClassLibrary.Services
                             else
                             {
                                 result = ClassLibrary.ShareClass.DownloadFile(strUrlIsUHD, strFileNameNew);
-                                strTemp = $"{strFileNameNew}\r\n文件下载结果：{result}";
+                                ClassLibrary.MyMethodExtension.InsertHashData(strFileNameNew, strUHDHash);
+                                strTemp = $"SHA256：{strUHDHash}\r\n{strFileNameNew}\r\n文件下载结果：{result}";
                                 Console.WriteLine(strTemp);
                                 ClassLibrary.MyLogHelper.LogSplit(ClassLibrary.ShareClass._logPath, logTitle, strTemp, logType, logCycle);
                                 intBingUHDCount++;
@@ -490,10 +503,10 @@ namespace ClassLibrary.Services
                         }
                         if (BingImageSetting.BingImageApi.BingApiRequestParams.PixelResolutionIsMobile)
                         {
-                            string strFileNameNew = Path.Combine(BingImageSetting.ImageFileSavePath, strFileName + strEnglishIsMobile);
-                            if (File.Exists(strFileNameNew) && !BingImageSetting.Overwrite)
+                            string strFileNameNew = Path.Combine(BingImageSetting.CategorizeAndMoveSetting.MobileWallpaperPath, strFileName + strEnglishIsMobile);
+                            if (ClassLibrary.MyMethodExtension.FileExistsByHash(strMobileHash) && !BingImageSetting.Overwrite)
                             {
-                                strTemp = $"{strFileNameNew}\r\n文件已存在，根据参数配置不重新下载。";
+                                strTemp = $"SHA256：{strMobileHash}\r\n{strFileNameNew}\r\n文件已存在，根据参数配置不重新下载。";
                                 Console.WriteLine(strTemp);
                                 ClassLibrary.MyLogHelper.LogSplit(ClassLibrary.ShareClass._logPath, logTitle, strTemp, logType, logCycle);
                                 isDownloadExists = true;
@@ -502,7 +515,8 @@ namespace ClassLibrary.Services
                             else
                             {
                                 result = ClassLibrary.ShareClass.DownloadFile(strUrlISMobile, strFileNameNew);
-                                strTemp = $"{strFileNameNew}\r\n文件下载结果：{result}";
+                                ClassLibrary.MyMethodExtension.InsertHashData(strFileNameNew, strMobileHash);
+                                strTemp = $"SHA256：{strMobileHash}\r\n{strFileNameNew}\r\n文件下载结果：{result}";
                                 Console.WriteLine(strTemp);
                                 ClassLibrary.MyLogHelper.LogSplit(ClassLibrary.ShareClass._logPath, logTitle, strTemp, logType, logCycle);
                                 intBingMobileCount++;
@@ -559,7 +573,7 @@ namespace ClassLibrary.Services
         }
         #endregion
 
-        #region Windows聚焦图片
+        #region 复制Windows聚焦图片
         /// <summary>
         /// Windows聚焦图片复制
         /// </summary>
@@ -591,11 +605,13 @@ namespace ClassLibrary.Services
                 {
                     Directory.GetFiles(strSourcePath, "*", SearchOption.TopDirectoryOnly).ToList().ForEach(x =>
                     {
+                        string strFileHash = ClassLibrary.MyHashHelper.GetFileHashAsync_Local(x, SHA256.Create()).GetAwaiter().GetResult();
                         string strFileName = Path.GetFileName(x) + ".png";
                         string strDownloadFile = Path.Combine(strPath, strFileName);
-                        if (!BingImageSetting.Overwrite && File.Exists(strDownloadFile))
+                        if (!BingImageSetting.Overwrite && ClassLibrary.MyMethodExtension.FileExistsByHash(strFileHash))
                         {
-                            strTemp = $"{strDownloadFile}\r\n文件已存在，根据参数配置不重新复制。";
+                            // 因为现在改为通过Hash值来判断，这里的文件路径strDownloadFile是旧的以文件名来判断时的留存取值，所以可能并不准确。
+                            strTemp = $"SHA256：{strFileHash}\r\n{strDownloadFile}\r\n文件已存在，根据参数配置不重新复制。";
                             Console.WriteLine(strTemp);
                             ClassLibrary.MyLogHelper.LogSplit(ClassLibrary.ShareClass._logPath, logTitle, strTemp, logType, logCycle);
                             intSpotlightCopyCount--;
@@ -619,7 +635,8 @@ namespace ClassLibrary.Services
                                             }
                                             else
                                             {
-                                                strTemp = $"{strDownloadFile}\r\n复制完成。";
+                                                ClassLibrary.MyMethodExtension.InsertHashData(strDownloadFile, strFileHash);
+                                                strTemp = $"SHA256：{strFileHash}\r\n{strDownloadFile}\r\n复制完成。";
                                                 Console.WriteLine(strTemp);
                                                 ClassLibrary.MyLogHelper.LogSplit(ClassLibrary.ShareClass._logPath, logTitle, strTemp, logType, logCycle);
                                                 break;
@@ -670,6 +687,102 @@ namespace ClassLibrary.Services
         }
         #endregion
 
+        #region Windows聚集API图片下载
+        /// <summary>
+        /// Windows聚焦API图片下载
+        /// </summary>
+        /// <returns></returns>
+        public async Task<bool> WindowsSpotlightDownloadAsync()
+        {// 定义配置文件路径和相关日志信息
+            var logTitle = "Windows聚焦API图片下载(方法)";
+            var logType = "WindowsSpotlightDownloadService";
+            var logCycle = "yyyyMMdd";
+            int intDownloadCount = 0;
+            bool result = false;
+            string strUrl = BingImageSetting.WindowsSpotlightAPIUrl;
+
+            DateTime dateTimeSpotlightBegin = DateTime.Now;
+            string strTemp = $"{dateTimeSpotlightBegin}：开始下载Windows聚焦API图片";
+            Console.WriteLine(strTemp);
+            ClassLibrary.MyLogHelper.LogSplit(ClassLibrary.ShareClass._logPath, logTitle, strTemp, logType, logCycle);
+
+
+            try
+            {
+                // 获取下载地址等素材
+                string strJson = await MyHttpServiceHelper.GetClient().GetStringAsync(strUrl);
+                string newJson = ClassLibrary.MyJsonHelper.ExtractWindowsSpotlightDownloadUrl(strJson);
+                WindowsSpotlightClass windowsSpotlight = ClassLibrary.MyJsonHelper.ReadJsonToClass<WindowsSpotlightClass>(newJson);
+#if DEBUG
+                File.WriteAllText(Path.Combine(ClassLibrary.ShareClass._logPath, $"{DateTime.Now.ToString("yyyyMMddHHmmssfffffff")}.json"), strJson, Encoding.UTF8);
+                ClassLibrary.MyJsonHelper.WriteClassToJsonFile<WindowsSpotlightClass>(windowsSpotlight, Path.Combine(ClassLibrary.ShareClass._logPath, $"{DateTime.Now.ToString("yyyyMMddHHmmss")}.json"));
+#else
+#endif
+
+                // 准备开始下载
+                // 电脑壁纸
+                bool resultLandscape = true;
+                string strFileNameLandscape = $"{DateTime.Now.ToString("yyyyMMdd")}_{windowsSpotlight.TitleText.Text}_{windowsSpotlight.HsTitleText.Text}_{windowsSpotlight.ImageFullscreenLandscape.Width}x{windowsSpotlight.ImageFullscreenLandscape.Height}.jpg";
+                strFileNameLandscape = Path.Combine(BingImageSetting.CategorizeAndMoveSetting.ComputerWallpaperPath, strFileNameLandscape);
+                string strFileHashLandscape = ClassLibrary.MyHashHelper.GetFileHashAsync_Url(windowsSpotlight.ImageFullscreenLandscape.DownloadUrl, SHA256.Create()).GetAwaiter().GetResult();
+                if (!BingImageSetting.Overwrite && ClassLibrary.MyMethodExtension.FileExistsByHash(strFileHashLandscape))
+                {
+                    strTemp = $"SHA256：{strFileHashLandscape}\r\n{strFileNameLandscape}\r\n文件已存在，根据参数配置不重新复制。";
+                    Console.WriteLine(strTemp);
+                    ClassLibrary.MyLogHelper.LogSplit(ClassLibrary.ShareClass._logPath, logTitle, strTemp, logType, logCycle);
+
+                }
+                else
+                {
+                    resultLandscape = ClassLibrary.ShareClass.DownloadFile(windowsSpotlight.ImageFullscreenLandscape.DownloadUrl, strFileNameLandscape);
+                    ClassLibrary.MyMethodExtension.InsertHashData(strFileNameLandscape, strFileHashLandscape);
+                    strTemp = $"SHA256：{strFileHashLandscape}\r\n{strFileNameLandscape}\r\n文件下载结果：{resultLandscape}";
+                    Console.WriteLine(strTemp);
+                    ClassLibrary.MyLogHelper.LogSplit(ClassLibrary.ShareClass._logPath, logTitle, strTemp, logType, logCycle);
+                    if (resultLandscape) { intDownloadCount++; }
+                }
+
+                // 手机壁纸
+                bool resultPortrait = true;
+                string strFileNamePortrait = $"{DateTime.Now.ToString("yyyyMMdd")}_{windowsSpotlight.TitleText.Text}_{windowsSpotlight.HsTitleText.Text}_{windowsSpotlight.ImageFullscreenPortrait.Width}x{windowsSpotlight.ImageFullscreenPortrait.Height}.jpg";
+                strFileNamePortrait = Path.Combine(BingImageSetting.CategorizeAndMoveSetting.MobileWallpaperPath, strFileNamePortrait);
+                string strFileHashPortrait = ClassLibrary.MyHashHelper.GetFileHashAsync_Url(windowsSpotlight.ImageFullscreenPortrait.DownloadUrl, SHA256.Create()).GetAwaiter().GetResult();
+                if (!BingImageSetting.Overwrite && ClassLibrary.MyMethodExtension.FileExistsByHash(strFileHashPortrait))
+                {
+                    strTemp = $"SHA256：{strFileHashPortrait}\r\n{strFileNamePortrait}\r\n文件已存在，根据参数配置不重新复制。";
+                    Console.WriteLine(strTemp);
+                    ClassLibrary.MyLogHelper.LogSplit(ClassLibrary.ShareClass._logPath, logTitle, strTemp, logType, logCycle);
+                }
+                else
+                {
+                    resultPortrait = ClassLibrary.ShareClass.DownloadFile(windowsSpotlight.ImageFullscreenPortrait.DownloadUrl, strFileNamePortrait);
+                    ClassLibrary.MyMethodExtension.InsertHashData(strFileNamePortrait, strFileHashPortrait);
+                    strTemp = $"SHA256：{strFileHashPortrait}\r\n{strFileNamePortrait}\r\n文件下载结果：{resultPortrait}";
+                    Console.WriteLine(strTemp);
+                    ClassLibrary.MyLogHelper.LogSplit(ClassLibrary.ShareClass._logPath, logTitle, strTemp, logType, logCycle);
+                    if (resultPortrait) { intDownloadCount++; }
+                }
+
+
+                // 记录结果
+                result = (resultLandscape && resultPortrait);
+                strTemp = $"Windows聚焦API图片下载完成({result})：共下载{intDownloadCount}个文件。";
+                Console.WriteLine(strTemp);
+                ClassLibrary.MyLogHelper.LogSplit(ClassLibrary.ShareClass._logPath, logTitle, strTemp, logType, logCycle);
+            }
+            catch (Exception ex)
+            {
+                ClassLibrary.MyLogHelper.GetExceptionLocation(ex);
+            }
+
+            strTemp = $"{DateTime.Now}：Windows聚焦API图片下载结束，耗时：{ClassLibrary.ShareClass.ToMinutesAgo(dateTimeSpotlightBegin)}";
+            Console.WriteLine(strTemp);
+            ClassLibrary.MyLogHelper.LogSplit(ClassLibrary.ShareClass._logPath, logTitle, strTemp, logType, logCycle);
+
+            return result;
+        }
+        #endregion
+
         #region 文件分类归档
         /// <summary>
         /// 文件分类归档移动(通过文件名来判断目标文件是否存在)
@@ -706,6 +819,7 @@ namespace ClassLibrary.Services
                 Directory.CreateDirectory(BingImageSetting.CategorizeAndMoveSetting.ComputerWallpaperPath);
                 Directory.CreateDirectory(BingImageSetting.CategorizeAndMoveSetting.MobileWallpaperPath);
                 Directory.CreateDirectory(BingImageSetting.CategorizeAndMoveSetting.RejectedPath);
+                Directory.CreateDirectory(BingImageSetting.ImageFileSavePath);
 
                 if (!Directory.Exists(BingImageSetting.CategorizeAndMoveSetting.SearchDirectoryPath))
                 {
@@ -721,139 +835,152 @@ namespace ClassLibrary.Services
 
                     foreach (string filePath in Directory.GetFiles(BingImageSetting.CategorizeAndMoveSetting.SearchDirectoryPath))
                     {
-                        string fileName = Path.GetFileName(filePath);
-                        string fileExtension = Path.GetExtension(filePath);
-                        string fileNewName = fileName;
-                        allFilesCount++;
-
-                        if (string.IsNullOrEmpty(fileExtension))
+                        string strFileHash = ClassLibrary.MyHashHelper.GetFileHashAsync_Local(filePath, SHA256.Create()).GetAwaiter().GetResult();
+                        if (!BingImageSetting.Overwrite && ClassLibrary.MyMethodExtension.FileExistsByHash(strFileHash))
                         {
-                            fileNewName += ".png";
-                            //resultMessage = $"修改文件名：{fileNewName}";
-                            //ClassLibrary.MyLogHelper.LogSplit(strLogTitle, resultMessage, strLogType);
+                            strTemp = $"SHA256：{strFileHash}\r\n{strFileHash}\r\n文件已存在，根据参数配置不重新分类归档。";
+                            Console.WriteLine(strTemp);
+                            ClassLibrary.MyLogHelper.LogSplit(ClassLibrary.ShareClass._logPath, logTitle, strTemp, logType, logCycle);
                         }
-                        //如果有后缀名，且后缀名也是指定的图片格式
-                        // Ensure the file has a valid image extension.
-                        else if (!string.IsNullOrEmpty(fileExtension) && ClassLibrary.ShareClass.ValidImageExtensions.Contains(fileExtension.ToLower()))
-                        {
-                            fileNewName = fileName;
-                        }
-                        //否则，可能不是图片文件，那就跳过
                         else
                         {
-                            continue;
-                        }
+                            string fileName = Path.GetFileName(filePath);
+                            string fileExtension = Path.GetExtension(filePath);
+                            string fileNewName = fileName;
+                            allFilesCount++;
 
-                        #region 老代码会导致：内存不足
-                        //由于System.Drawing.Image.FromFile()方法在加载图像时会将整个图像内容加载到内存中。
-                        //当处理大量大尺寸图像时，尤其是系统资源有限的情况下，内存可能会耗尽。
-                        //为避免这种问题，你可以考虑以下优化策略：
-                        //分批处理：不要一次性加载所有文件，而是可以使用批处理逻辑，每次只处理一定数量的文件，然后释放内存。
-                        //流式处理：使用文件流读取和处理图像，而不是一次性加载整个文件。例如，使用System.IO.FileStream和System.Drawing.Imaging.ImageFormat类来读取和保存图像，这样可以减少内存占用。
-                        //使用更高效库：考虑使用如ImageSharp或SkiaSharp这样的现代图像处理库，它们通常有更好的内存管理和性能。
-                        //优化图像大小：在加载图像之前，先检查文件大小，对过大图像进行压缩或缩小，以减少内存消耗。
-                        //增强系统资源：确保运行该方法的机器有足够的内存和CPU资源来处理大量图像。
-                        //异常处理：在调用System.Drawing.Image.FromFile()时，添加异常处理代码，以便在内存不足时能优雅地处理错误，例如记录日志并继续处理其他文件。
-
-                        /*
-                        string targetFilePath;
-                        using (System.Drawing.Image image = System.Drawing.Image.FromFile(filePath))
-                        {
-                            int width = image.Width;
-                            int height = image.Height;
-
-                            resultMessage = $"{fileNewName} 的像素为：{width} x {height}";
-                            ClassLibrary.MyLogHelper.LogSplit(strLogTitle, resultMessage, strLogType);
-                            //如果图片像素过小，则有可能并不适合作为壁纸，应该抛弃
-                            if (width < 500 || height < 500)
+                            if (string.IsNullOrEmpty(fileExtension))
                             {
-                                targetFilePath = Path.Combine(rejectedPath, fileName);
+                                fileNewName += ".png";
+                                //resultMessage = $"修改文件名：{fileNewName}";
+                                //ClassLibrary.MyLogHelper.LogSplit(strLogTitle, resultMessage, strLogType);
                             }
+                            //如果有后缀名，且后缀名也是指定的图片格式
+                            // Ensure the file has a valid image extension.
+                            else if (!string.IsNullOrEmpty(fileExtension) && ClassLibrary.ShareClass.ValidImageExtensions.Contains(fileExtension.ToLower()))
+                            {
+                                fileNewName = fileName;
+                            }
+                            //否则，可能不是图片文件，那就跳过
                             else
                             {
-                                if (IsLandscapeImage(width, height))
+                                continue;
+                            }
+
+                            #region 老代码会导致：内存不足
+                            //由于System.Drawing.Image.FromFile()方法在加载图像时会将整个图像内容加载到内存中。
+                            //当处理大量大尺寸图像时，尤其是系统资源有限的情况下，内存可能会耗尽。
+                            //为避免这种问题，你可以考虑以下优化策略：
+                            //分批处理：不要一次性加载所有文件，而是可以使用批处理逻辑，每次只处理一定数量的文件，然后释放内存。
+                            //流式处理：使用文件流读取和处理图像，而不是一次性加载整个文件。例如，使用System.IO.FileStream和System.Drawing.Imaging.ImageFormat类来读取和保存图像，这样可以减少内存占用。
+                            //使用更高效库：考虑使用如ImageSharp或SkiaSharp这样的现代图像处理库，它们通常有更好的内存管理和性能。
+                            //优化图像大小：在加载图像之前，先检查文件大小，对过大图像进行压缩或缩小，以减少内存消耗。
+                            //增强系统资源：确保运行该方法的机器有足够的内存和CPU资源来处理大量图像。
+                            //异常处理：在调用System.Drawing.Image.FromFile()时，添加异常处理代码，以便在内存不足时能优雅地处理错误，例如记录日志并继续处理其他文件。
+
+                            /*
+                            string targetFilePath;
+                            using (System.Drawing.Image image = System.Drawing.Image.FromFile(filePath))
+                            {
+                                int width = image.Width;
+                                int height = image.Height;
+
+                                resultMessage = $"{fileNewName} 的像素为：{width} x {height}";
+                                ClassLibrary.MyLogHelper.LogSplit(strLogTitle, resultMessage, strLogType);
+                                //如果图片像素过小，则有可能并不适合作为壁纸，应该抛弃
+                                if (width < 500 || height < 500)
                                 {
-                                    targetFilePath = Path.Combine(computerTargetPath, fileNewName);
+                                    targetFilePath = Path.Combine(rejectedPath, fileName);
                                 }
                                 else
                                 {
-                                    targetFilePath = Path.Combine(mobileTargetPath, fileNewName);
+                                    if (IsLandscapeImage(width, height))
+                                    {
+                                        targetFilePath = Path.Combine(computerTargetPath, fileNewName);
+                                    }
+                                    else
+                                    {
+                                        targetFilePath = Path.Combine(mobileTargetPath, fileNewName);
+                                    }
                                 }
                             }
-                        }
-                        */
-                        #endregion
+                            */
+                            #endregion
 
-                        string targetFilePath;
-                        // 使用 BitmapDecoder 获取图像尺寸，避免加载整个图像到内存
-                        using (FileStream stream = new FileStream(filePath, FileMode.Open, FileAccess.Read))
-                        {
-                            // 需在项目-引用处添加程序集-框架-WindowsBase： using System.Windows.Media.Imaging;
-                            BitmapDecoder decoder = BitmapDecoder.Create(stream, BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.None);
-                            int width = (int)decoder.Frames[0].PixelWidth;
-                            int height = (int)decoder.Frames[0].PixelHeight;
+                            string targetFilePath;
+                            // 使用 BitmapDecoder 获取图像尺寸，避免加载整个图像到内存
+                            using (FileStream stream = new FileStream(filePath, FileMode.Open, FileAccess.Read))
+                            {
+                                // 需在项目-引用处添加程序集-框架-WindowsBase： using System.Windows.Media.Imaging;
+                                BitmapDecoder decoder = BitmapDecoder.Create(stream, BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.None);
+                                int width = (int)decoder.Frames[0].PixelWidth;
+                                int height = (int)decoder.Frames[0].PixelHeight;
 
-                            strTemp = $"{fileNewName} 的像素为：{width} x {height}";
-                            Console.WriteLine(strTemp);
-                            ClassLibrary.MyLogHelper.LogSplit(ClassLibrary.ShareClass._logPath, logTitle, strTemp, logType, logCycle);
+                                strTemp = $"{fileNewName} 的像素为：{width} x {height}";
+                                Console.WriteLine(strTemp);
+                                ClassLibrary.MyLogHelper.LogSplit(ClassLibrary.ShareClass._logPath, logTitle, strTemp, logType, logCycle);
 
-                            if (width < 500 || height < 500)
-                            {
-                                targetFilePath = Path.Combine(BingImageSetting.CategorizeAndMoveSetting.RejectedPath, fileName);
-                            }
-                            else if (ClassLibrary.ShareClass.IsLandscapeImage(width, height))
-                            {
-                                targetFilePath = Path.Combine(BingImageSetting.CategorizeAndMoveSetting.ComputerWallpaperPath, fileNewName);
-                            }
-                            else
-                            {
-                                targetFilePath = Path.Combine(BingImageSetting.CategorizeAndMoveSetting.MobileWallpaperPath, fileNewName);
-                            }
-                        }
-                        // 根据需要处理文件已经存在的情况。
-                        // Handle file already exists situation based on your requirements.
-                        // 例如，您可以选择覆盖、跳过或重命名文件。
-                        // For example, you can choose to overwrite, skip, or rename the file.
-                        if (File.Exists(targetFilePath))
-                        {
-                            // 执行适当的处理策略。
-                            // TODO: Implement appropriate handling strategy.
-                            strTemp = $"未移动：{fileNewName} 在 {targetFilePath} 中已存在";
-                            Console.WriteLine(strTemp);
-                            ClassLibrary.MyLogHelper.LogSplit(ClassLibrary.ShareClass._logPath, logTitle, strTemp, logType, logCycle);
-                            continue;
-                        }
-
-                        //File.Move(filePath, targetFilePath);
-                        try
-                        {
-                            string strFileOperationType = string.Empty;
-                            switch (BingImageSetting.CategorizeAndMoveSetting.fileOperationType)
-                            {
-                                case ClassLibrary.ShareClass.FileOperationType.Move:
-                                    File.Move(filePath, targetFilePath);
-                                    strFileOperationType = "移动到";
-                                    break;
-                                case ClassLibrary.ShareClass.FileOperationType.Copy:
-                                    File.Copy(filePath, targetFilePath);
-                                    strFileOperationType = "复制到";
-                                    break;
-                                default:
-                                    throw new ArgumentException("指定的文件操作类型无效。\r\nInvalid file operation type specified.", nameof(BingImageSetting.CategorizeAndMoveSetting.fileOperationType));
+                                if (width < 500 || height < 500)
+                                {
+                                    targetFilePath = Path.Combine(BingImageSetting.CategorizeAndMoveSetting.RejectedPath, fileName);
+                                }
+                                else if (ClassLibrary.ShareClass.IsLandscapeImage(width, height))
+                                {
+                                    targetFilePath = Path.Combine(BingImageSetting.CategorizeAndMoveSetting.ComputerWallpaperPath, fileNewName);
+                                }
+                                else
+                                {
+                                    targetFilePath = Path.Combine(BingImageSetting.CategorizeAndMoveSetting.MobileWallpaperPath, fileNewName);
+                                }
                             }
 
-                            processedFilesCount++;
-                            strTemp = $"{processedFilesCount}：{fileNewName} {strFileOperationType} {targetFilePath}";
-                            Console.WriteLine(strTemp);
-                            ClassLibrary.MyLogHelper.LogSplit(ClassLibrary.ShareClass._logPath, logTitle, strTemp, logType, logCycle);
-                        }
-                        catch (Exception ex)
-                        {
-                            result = false;
-                            ClassLibrary.MyLogHelper.GetExceptionLocation(ex);
-                            strTemp = $"处理文件时，程序发生错误：{ex.Message}";
-                            Console.WriteLine(strTemp);
-                            ClassLibrary.MyLogHelper.LogSplit(ClassLibrary.ShareClass._logPath, logTitle, strTemp, logType, logCycle);
+                            #region 在外层就用Hash判断文件是否已存在，所以这里的判断注释掉不执行
+                            //// 根据需要处理文件已经存在的情况。
+                            //// Handle file already exists situation based on your requirements.
+                            //// 例如，您可以选择覆盖、跳过或重命名文件。
+                            //// For example, you can choose to overwrite, skip, or rename the file.
+                            //if (File.Exists(targetFilePath))
+                            //{
+                            //    // 执行适当的处理策略。
+                            //    // TODO: Implement appropriate handling strategy.
+                            //    strTemp = $"未移动：{fileNewName} 在 {targetFilePath} 中已存在";
+                            //    Console.WriteLine(strTemp);
+                            //    ClassLibrary.MyLogHelper.LogSplit(ClassLibrary.ShareClass._logPath, logTitle, strTemp, logType, logCycle);
+                            //    continue;
+                            //} 
+                            #endregion
+
+                            //File.Move(filePath, targetFilePath);
+                            try
+                            {
+                                string strFileOperationType = string.Empty;
+                                switch (BingImageSetting.CategorizeAndMoveSetting.fileOperationType)
+                                {
+                                    case ClassLibrary.ShareClass.FileOperationType.Move:
+                                        File.Move(filePath, targetFilePath);
+                                        strFileOperationType = "移动到";
+                                        break;
+                                    case ClassLibrary.ShareClass.FileOperationType.Copy:
+                                        File.Copy(filePath, targetFilePath);
+                                        strFileOperationType = "复制到";
+                                        break;
+                                    default:
+                                        throw new ArgumentException("指定的文件操作类型无效。\r\nInvalid file operation type specified.", nameof(BingImageSetting.CategorizeAndMoveSetting.fileOperationType));
+                                }
+                                ClassLibrary.MyMethodExtension.InsertHashData(targetFilePath, strFileHash);
+                                processedFilesCount++;
+                                strTemp = $"{processedFilesCount}：{fileNewName} {strFileOperationType} {targetFilePath}";
+                                Console.WriteLine(strTemp);
+                                ClassLibrary.MyLogHelper.LogSplit(ClassLibrary.ShareClass._logPath, logTitle, strTemp, logType, logCycle);
+                            }
+                            catch (Exception ex)
+                            {
+                                result = false;
+                                ClassLibrary.MyLogHelper.GetExceptionLocation(ex);
+                                strTemp = $"处理文件时，程序发生错误：{ex.Message}";
+                                Console.WriteLine(strTemp);
+                                ClassLibrary.MyLogHelper.LogSplit(ClassLibrary.ShareClass._logPath, logTitle, strTemp, logType, logCycle);
+                            }
                         }
                     }
                     result = true;
@@ -938,75 +1065,6 @@ namespace ClassLibrary.Services
          */
         #endregion
 
-        #endregion
-
-        #region Windows聚集API图片下载
-        /// <summary>
-        /// Windows聚焦API图片下载
-        /// </summary>
-        /// <returns></returns>
-        public async Task<bool> WindowsSpotlightDownloadAsync()
-        {// 定义配置文件路径和相关日志信息
-            var logTitle = "Windows聚焦API图片下载(方法)";
-            var logType = "WindowsSpotlightDownloadService";
-            var logCycle = "yyyyMMdd";
-            int intDownloadCount = 0;
-            bool result = false;
-            string strUrl = BingImageSetting.WindowsSpotlightAPIUrl;
-
-            DateTime dateTimeSpotlightBegin = DateTime.Now;
-            string strTemp = $"{dateTimeSpotlightBegin}：开始下载Windows聚焦API图片";
-            Console.WriteLine(strTemp);
-            ClassLibrary.MyLogHelper.LogSplit(ClassLibrary.ShareClass._logPath, logTitle, strTemp, logType, logCycle);
-
-
-            try
-            {
-                // 获取下载地址等素材
-                string strJson = await MyHttpServiceHelper.GetClient().GetStringAsync(strUrl);
-                string newJson = ClassLibrary.MyJsonHelper.ExtractWindowsSpotlightDownloadUrl(strJson);
-                WindowsSpotlightClass windowsSpotlight = ClassLibrary.MyJsonHelper.ReadJsonToClass<WindowsSpotlightClass>(newJson);
-#if DEBUG
-			File.WriteAllText(Path.Combine(ClassLibrary.ShareClass._logPath, $"{DateTime.Now.ToString("yyyyMMddHHmmssfffffff")}.json"), strJson, Encoding.UTF8);
-			ClassLibrary.MyJsonHelper.WriteClassToJsonFile<WindowsSpotlightClass>(windowsSpotlight, Path.Combine(ClassLibrary.ShareClass._logPath, $"{DateTime.Now.ToString("yyyyMMddHHmmss")}.json"));
-#else
-#endif
-
-                // 准备开始下载
-                string strFileNameLandscape = $"{DateTime.Now.ToString("yyyyMMdd")}_{windowsSpotlight.TitleText.Text}_{windowsSpotlight.HsTitleText.Text}_{windowsSpotlight.ImageFullscreenLandscape.Width}x{windowsSpotlight.ImageFullscreenLandscape.Height}.jpg";
-                strFileNameLandscape = Path.Combine(BingImageSetting.ImageFileSavePath, strFileNameLandscape);
-                bool resultLandscape = ClassLibrary.ShareClass.DownloadFile(windowsSpotlight.ImageFullscreenLandscape.DownloadUrl, strFileNameLandscape);
-                strTemp = $"{strFileNameLandscape}\r\n文件下载结果：{resultLandscape}";
-                Console.WriteLine(strTemp);
-                ClassLibrary.MyLogHelper.LogSplit(ClassLibrary.ShareClass._logPath, logTitle, strTemp, logType, logCycle);
-                if (resultLandscape) { intDownloadCount++; }
-
-                string strFileNamePortrait = $"{DateTime.Now.ToString("yyyyMMdd")}_{windowsSpotlight.TitleText.Text}_{windowsSpotlight.HsTitleText.Text}_{windowsSpotlight.ImageFullscreenPortrait.Width}x{windowsSpotlight.ImageFullscreenPortrait.Height}.jpg";
-                strFileNamePortrait = Path.Combine(BingImageSetting.ImageFileSavePath, strFileNamePortrait);
-                bool resultPortrait = ClassLibrary.ShareClass.DownloadFile(windowsSpotlight.ImageFullscreenPortrait.DownloadUrl, strFileNamePortrait);
-                strTemp = $"{strFileNamePortrait}\r\n文件下载结果：{resultPortrait}";
-                Console.WriteLine(strTemp);
-                ClassLibrary.MyLogHelper.LogSplit(ClassLibrary.ShareClass._logPath, logTitle, strTemp, logType, logCycle);
-                if (resultPortrait) { intDownloadCount++; }
-
-
-                // 记录结果
-                result = (resultLandscape && resultPortrait);
-                strTemp = $"Windows聚焦API图片下载完成({result})：共下载{intDownloadCount}个文件。";
-                Console.WriteLine(strTemp);
-                ClassLibrary.MyLogHelper.LogSplit(ClassLibrary.ShareClass._logPath, logTitle, strTemp, logType, logCycle);
-            }
-            catch (Exception ex)
-            {
-                ClassLibrary.MyLogHelper.GetExceptionLocation(ex);
-            }
-
-            strTemp = $"{DateTime.Now}：Windows聚焦API图片下载结束，耗时：{ClassLibrary.ShareClass.ToMinutesAgo(dateTimeSpotlightBegin)}";
-            Console.WriteLine(strTemp);
-            ClassLibrary.MyLogHelper.LogSplit(ClassLibrary.ShareClass._logPath, logTitle, strTemp, logType, logCycle);
-
-            return result;
-        }
         #endregion
 
     }

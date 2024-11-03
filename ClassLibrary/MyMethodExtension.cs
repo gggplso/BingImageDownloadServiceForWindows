@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,6 +28,21 @@ namespace ClassLibrary
                 result = true;
             }
             return result;
+        }
+        /// <summary>
+        /// 将文件的Hash值等相关信息插入表中
+        /// </summary>
+        /// <param name="filePath">文件完整路径</param>
+        /// <param name="hash">文件的Hash值</param>
+        public static void InsertHashData(string filePath, string hash)
+        {
+            var necessary = new (string column, object value)[] {
+                                    ("FileName",Path.GetFileName(filePath)),
+                                    ("FilePath",filePath),
+                                    ("HashValue",hash)
+                            };
+            ClassLibrary.MySQLiteHelper mySQLite = new MySQLiteHelper(ClassLibrary.ShareClass._sqliteConnectionString);
+            mySQLite.InsertData("FileHashes", necessary);
         }
     }
 }

@@ -29,6 +29,11 @@ namespace BingImageDownloadForConsoleApplication
             ClassLibrary.Services.BingImageDownloadService bingImageDownloadService = new ClassLibrary.Services.BingImageDownloadService();
 
             // 新写的方法放在这里方便调试
+
+            bingImageDownloadService.CategorizeAndMoveFile();
+
+            #region 待调试的测试
+            /*
             Console.WriteLine(Task.Run(async () => { return await bingImageDownloadService.WindowsSpotlightDownloadAsync(); }).GetAwaiter().GetResult());
             Console.WriteLine();
 
@@ -63,7 +68,9 @@ namespace BingImageDownloadForConsoleApplication
             else
             {
                 Console.WriteLine("输入有误，无法读取文件，结束。");
-            }
+            } 
+            */
+            #endregion
 
 
             Console.WriteLine("暂停");

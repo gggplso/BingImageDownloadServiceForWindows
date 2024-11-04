@@ -38,6 +38,11 @@ namespace ClassLibrary.Classes
 		/// </summary>
 		public string WindowsSpotlightAPIUrl { get; set; } = "https://arc.msn.com/v3/Delivery/Placement?pid=209567&fmt=json&cdm=1&pl=zh-CN&lc=zh-CN&ctry=CN";
 		/// <summary>
+		/// Windows聚焦API图片下载重复次数
+		/// 循环访问，最大重复次数后退出循环
+		/// </summary>
+		public int WindowsSpotlightAPIRepeatLimit { get; set; } = 20;
+		/// <summary>
 		/// 表示若有同名文件时重新下载覆盖原文件，false则保留原文件不重新下载。
 		/// </summary>
 		public bool Overwrite { get; set; } = false;

@@ -714,7 +714,7 @@ namespace ClassLibrary.Services
 			{
 				int loopLimit = 0;
 				int loopCount = 0;
-				while (loopLimit < 10)
+				while (loopLimit < BingImageSetting.WindowsSpotlightAPIRepeatLimit)
 				{
 					// 获取下载地址等素材
 					string strJson = await MyHttpServiceHelper.GetClient().GetStringAsync(strUrl);
@@ -777,18 +777,22 @@ namespace ClassLibrary.Services
 
 
 					// 记录结果
+					loopCount++;
 					resultIsRepeat = (landscapeIsRepeat && portraitIsRepeat);
 					if (resultIsRepeat)
 					{
 						loopLimit++;
-						loopCount++;
 					}
 					else
 					{
-						if (loopLimit > 0)
-						{
-							loopLimit--;
-						}
+						// 按必须连续的方式
+						loopLimit = 0;
+
+						//// 按倒减的方式
+						//	if (loopLimit > 0)
+						//	{
+						//		loopLimit--;
+						//	}
 					}
 					result = (resultLandscape && resultPortrait);
 					int intResult = loopLimit < 10 ? count : intDownloadCount;

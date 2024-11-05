@@ -294,9 +294,9 @@ namespace ClassLibrary
 		private static string InitializeUserPath()
 		{
 			string myDocumentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-			ClassLibrary.MyLogHelper.LogSplit(_logPath, "用户自定义文档目录的路径检查", $"MyDocuments路径: {myDocumentsPath}", _logType, _logCycle);
 			if (string.IsNullOrWhiteSpace(myDocumentsPath))
 			{
+				ClassLibrary.MyLogHelper.LogSplit(_logPath, "用户自定义文档目录的路径检查", $"MyDocuments路径: {myDocumentsPath}", _logType, _logCycle);
 				//throw new ArgumentException("用户自定义文档目录：路径不能为空字符串或全为空白。", nameof(myDocumentsPath));
 				myDocumentsPath = "C:\\Users\\Administrator\\Documents";
 			}
@@ -306,9 +306,9 @@ namespace ClassLibrary
 		private static string InitializeSystemUserProfilePath()
 		{
 			string userProfilePath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
-			ClassLibrary.MyLogHelper.LogSplit(_logPath, "系统默认用户主目录的路径检查", $"UserProfile路径: {userProfilePath}", _logType, _logCycle);
 			if (string.IsNullOrWhiteSpace(userProfilePath))
 			{
+				ClassLibrary.MyLogHelper.LogSplit(_logPath, "系统默认用户主目录的路径检查", $"UserProfile路径: {userProfilePath}", _logType, _logCycle);
 				//throw new ArgumentException("系统默认用户主目录：路径不能为空字符串或全为空白。", nameof(userProfilePath));
 				userProfilePath = "C:\\Users\\Administrator";
 			}
@@ -317,7 +317,7 @@ namespace ClassLibrary
 
 		static ShareClass()
 		{
-			ClassLibrary.MyLogHelper.LogSplit(_logPath, "调试：静态构造函数", "静态构造函数被调用", _logType, _logCycle);
+			ClassLibrary.MyLogHelper.LogSplit(_logPath, "调试用：静态构造函数", "静态构造函数被调用", _logType, _logCycle);
 		}
 
 		#region 当路径为空时设置默认值以防服务启动不了。

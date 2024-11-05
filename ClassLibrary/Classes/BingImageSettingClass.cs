@@ -26,36 +26,22 @@ namespace ClassLibrary.Classes
 		/// </summary>
 		public bool WindowsSpotlightCopySwitch { get; set; } = true;
 		/// <summary>
-		/// 文件分类归档开关(程序)
-		/// </summary>
-		public bool CategorizeAndMoveFileSwitch { get; set; } = true;
-		/// <summary>
 		/// Windows聚焦API图片下载开关(程序)
 		/// </summary>
 		public bool WindowsSpotlightDownloadSwitch { get; set; } = true;
 		/// <summary>
-		/// 微软官方的Windows聚焦API地址
+		/// 文件分类归档开关(程序)
 		/// </summary>
-		public string WindowsSpotlightAPIUrl { get; set; } = "https://arc.msn.com/v3/Delivery/Placement?pid=209567&fmt=json&cdm=1&pl=zh-CN&lc=zh-CN&ctry=CN";
-		/// <summary>
-		/// Windows聚焦API图片下载重复次数
-		/// 循环访问，最大重复次数后退出循环
-		/// </summary>
-		public int WindowsSpotlightAPIRepeatLimit { get; set; } = 20;
+		public bool CategorizeAndMoveFileSwitch { get; set; } = true;
 		/// <summary>
 		/// 表示若有同名文件时重新下载覆盖原文件，false则保留原文件不重新下载。
 		/// </summary>
 		public bool Overwrite { get; set; } = false;
 		/// <summary>
-		/// 图片文件保存目录路径
+		/// 不能直接分类归档的图片文件保存目录路径
 		/// </summary>
 		//public string ImageFileSavePath { get; set; } = Environment.ExpandEnvironmentVariables(@"D:\%USERNAME%\Downloads");
 		public string ImageFileSavePath { get; set; } = Path.Combine(ClassLibrary.ShareClass._userPath, "Pictures", "Downloads");
-		/// <summary>
-		/// Windows聚焦图片所在目录路径
-		/// </summary>
-		//public string WindowsSpotlightPath { get; set; } = Environment.ExpandEnvironmentVariables(@"%USERPROFILE%\AppData\Local\Packages\Microsoft.Windows.ContentDeliveryManager_cw5n1h2txyewy\LocalState\Assets\");
-		public string WindowsSpotlightPath { get; set; } = Path.Combine(ClassLibrary.ShareClass._systemUserProfilePath, "AppData", "Local", "Packages", "Microsoft.Windows.ContentDeliveryManager_cw5n1h2txyewy", "LocalState", "Assets");
 		/// <summary>
 		/// 网络信息
 		/// </summary>
@@ -64,6 +50,10 @@ namespace ClassLibrary.Classes
 		/// 必应每日壁纸下载API相关
 		/// </summary>
 		public BingImageApiClass BingImageApi { get; set; } = new BingImageApiClass();
+		/// <summary>
+		/// Windows聚焦的相关参数配置
+		/// </summary>
+		public WindowsSpotlightSettingClass WindowsSpotlightSetting { get; set; } = new WindowsSpotlightSettingClass();
 		/// <summary>
 		/// 文件分类并移动的相关参数配置
 		/// </summary>
@@ -125,22 +115,77 @@ namespace ClassLibrary.Classes
 	/// </summary>
 	public class BingApiRequestParamsClass
 	{
-		public string BingUrl1 { get; set; } = "https://";
-		public string BingUrl2 { get; set; } = "www.bing.com";
-		public string BingUrl3 { get; set; } = "/HPImageArchive.aspx?format=js&cc=cn&idx=";
-		public string BingUrl4 { get; set; } = "&n=";
-		public string BingUrl5 { get; set; } = "&video=1";
+		//// https://www.bing.com/HPImageArchive.aspx?format=js&cc=cn&idx=0&n=8&video=1
+		//public string BingUrl1 { get; set; } = "https://";
+		//public string BingUrl2 { get; set; } = "www.bing.com";
+		//public string BingUrl3 { get; set; } = "/HPImageArchive.aspx?format=js&cc=cn&idx=";
+		//public string BingUrl4 { get; set; } = "&n=";
+		//public string BingUrl5 { get; set; } = "&video=1";
 		public string BingUrl6 { get; set; } = "&qlt=100";
+
 		/// <summary>
-		/// 从几天前开始下载
+		/// 方案（Scheme）
+		/// </summary>
+		public string Scheme { get; set; } = "https";
+		/// <summary>
+		/// 主机（Host）
+		/// </summary>
+		public string Host { get; set; } = "www.bing.com";
+		/// <summary>
+		/// 端口（Port）
+		/// </summary>
+		public int Port { get; set; } = 443;
+		/// <summary>
+		/// 路径（Path）
+		/// </summary>
+		public string Path { get; set; } = "/HPImageArchive.aspx";
+		/// <summary>
+		/// 查询字符串（Query）FORMAT
+		/// </summary>
+		public string Query1 { get; set; } = "format";
+		/// <summary>
+		/// format：下载格式
+		/// </summary>
+		public string Query1Value1 { get; set; } = "js";
+		/// <summary>
+		/// format：下载格式
+		/// </summary>
+		public string Query1Value2 { get; set; } = "xml";
+		/// <summary>
+		/// 查询字符串（Query）CC
+		/// </summary>
+		public string Query2 { get; set; } = "cc";
+		/// <summary>
+		/// cc：国家？
+		/// </summary>
+		public string Query2Value { get; set; } = "cn";
+		/// <summary>
+		/// 查询字符串（Query）IDX
+		/// </summary>
+		public string Query3 { get; set; } = "idx";
+		/// <summary>
+		/// idx：从几天前开始下载
 		/// 默认0是从今天开始
 		/// </summary>
-		public int BingUrlDaysAgo { get; set; } = 0;
+		public int Query3Value { get; set; } = 0;
 		/// <summary>
-		/// 下载多少数量几天
+		/// 查询字符串（Query）N
+		/// </summary>
+		public string Query4 { get; set; } = "n";
+		/// <summary>
+		/// n：下载多少数量几天
 		/// 默认8是下载8天(8张)的图片
 		/// </summary>
-		public int BingUrlAFewDays { get; set; } = 8;
+		public int Query4Value { get; set; } = 8;
+		/// <summary>
+		/// 查询字符串（Query）VIDEO
+		/// </summary>
+		public string Query5 { get; set; } = "video";
+		/// <summary>
+		/// video：是否包含视频
+		/// </summary>
+		public string Query5Value { get; set; } = "1";
+
 		/// <summary>
 		/// 是否下载高清像素的分辨率(横版：landscape)
 		/// </summary>
@@ -177,6 +222,109 @@ namespace ClassLibrary.Classes
 		// ClassLibrary.Classes.BingClass
 	}
 	/// <summary>
+	/// Windows聚焦的相关参数配置类
+	/// </summary>
+	public class WindowsSpotlightSettingClass
+	{
+		/// <summary>
+		/// Windows聚焦图片所在目录路径
+		/// </summary>
+		//public string WindowsSpotlightPath { get; set; } = Environment.ExpandEnvironmentVariables(@"%USERPROFILE%\AppData\Local\Packages\Microsoft.Windows.ContentDeliveryManager_cw5n1h2txyewy\LocalState\Assets\");
+		public string WindowsSpotlightPath { get; set; } = Path.Combine(ClassLibrary.ShareClass._systemUserProfilePath, "AppData", "Local", "Packages", "Microsoft.Windows.ContentDeliveryManager_cw5n1h2txyewy", "LocalState", "Assets");
+		/// <summary>
+		/// 微软官方的Windows聚焦API地址
+		/// </summary>
+		public WindowsSpotlightAPIUrlClass WindowsSpotlightAPIUrl { get; set; } = new WindowsSpotlightAPIUrlClass();
+		/// <summary>
+		/// Windows聚焦API图片下载重复次数
+		/// 循环访问，最大重复次数后退出循环
+		/// </summary>
+		public int WindowsSpotlightAPIRepeatLimit { get; set; } = 20;
+	}
+	public class WindowsSpotlightAPIUrlClass
+	{
+		/// <summary>
+		/// 方案（Scheme）
+		/// </summary>
+		public string Scheme { get; set; } = "https";
+		/// <summary>
+		/// 主机（Host）
+		/// </summary>
+		public string Host { get; set; } = "arc.msn.com";
+		/// <summary>
+		/// 端口（Port）
+		/// </summary>
+		public int Port { get; set; } = 443;
+		/// <summary>
+		/// 路径（Path）
+		/// </summary>
+		public string Path { get; set; } = "/v3/Delivery/Placement";
+		/// <summary>
+		/// 查询字符串（Query）PID
+		/// </summary>
+		public string Query1 { get; set; } = "pid";
+		/// <summary>
+		/// pid：Windows锁屏的公共订阅ID。请勿更改此值(209567/209563)
+		/// </summary>
+		public string Query1Value1 { get; set; } = "209563";
+		/// <summary>
+		/// pid：Windows锁屏的公共订阅ID。请勿更改此值(209567/209563)
+		/// </summary>
+		public string Query1Value2 { get; set; } = "209567";
+		/// <summary>
+		/// 查询字符串（Query）FMT
+		/// </summary>
+		public string Query2 { get; set; } = "fmt";
+		/// <summary>
+		/// fmt：输出格式，例如json
+		/// </summary>
+		public string Query2Value1 { get; set; } = "json";
+		/// <summary>
+		/// fmt：输出格式，例如json
+		/// </summary>
+		public string Query2Value2 { get; set; } = "xml";
+		/// <summary>
+		/// 查询字符串（Query）CDM
+		/// </summary>
+		public string Query3 { get; set; } = "cdm";
+		public string Query3Value { get; set; } = "1";
+		/// <summary>
+		/// 查询字符串（Query）PL
+		/// </summary>
+		public string Query4 { get; set; } = "pl";
+		/// <summary>
+		/// pl：语言环境，例如en-US
+		/// </summary>
+		public string Query4Value { get; set; } = "zh-CN";
+		/// <summary>
+		/// 查询字符串（Query）LC
+		/// </summary>
+		public string Query5 { get; set; } = "lc";
+		/// <summary>
+		/// lc：语言，例如en-US
+		/// </summary>
+		public string Query5Value { get; set; } = "";
+		/// <summary>
+		/// 查询字符串（Query）CTRY
+		/// </summary>
+		public string Query6 { get; set; } = "ctry";
+		/// <summary>
+		/// ctry：国家，例如us,World
+		/// </summary>
+		public string Query6Value { get; set; } = "CN";
+
+		/// <summary>
+		/// 其他没用到的参数说明：
+		///  rafb ：目的目前未知，可选
+		///  ua ：客户端用户代理字符串
+		///  disphorzres：屏幕宽度（以像素为单位）
+		///  dispvertres：屏幕高度（以像素为单位）
+		///  lo ：目前未知的用途，可选
+		///  time ：时间，例如 2017-12-31T23:59:59Z
+		/// </summary>
+
+	}
+	/// <summary>
 	/// 文件分类并移动的相关参数配置类
 	/// </summary>
 	public class CategorizeAndMoveSettingClass
@@ -210,7 +358,7 @@ namespace ClassLibrary.Classes
 
 	#region Bing必应官方接口分析说明
 	/*
-
+       
     // https://cn.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1&mkt=zh-CN
 
     //    format （非必需）

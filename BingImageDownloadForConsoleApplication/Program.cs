@@ -31,6 +31,7 @@ namespace BingImageDownloadForConsoleApplication
 #if DEBUG
 			// 新写的方法放在这里方便调试
 
+			// bingImageDownloadService.CategorizeAndMoveFile();
 			// Dictionary<string, List<string>> dicBingDownloadUrltest = bingImageDownloadService.GetDownloadUrlFromResultList();
 			// bingImageDownloadService.WindowsSpotlightDownloadAsync().GetAwaiter().GetResult();
 

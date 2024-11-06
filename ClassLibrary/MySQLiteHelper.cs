@@ -8,257 +8,282 @@ using System.Threading.Tasks;
 
 namespace ClassLibrary
 {
-    public class MySQLiteHelper
-    {
-        private string _connectionString;
+	public class MySQLiteHelper
+	{
+		private string _connectionString;
 
-        public MySQLiteHelper(string connectionString)
-        {
-            _connectionString = connectionString;
-        }
+		public MySQLiteHelper(string connectionString)
+		{
+			_connectionString = connectionString;
+		}
 
-        /// <summary>
-        /// 连接数据库
-        /// </summary>
-        /// <returns></returns>
-        private SQLiteConnection GetConnection()
-        {
-            return new SQLiteConnection(_connectionString);
-        }
+		/// <summary>
+		/// 连接数据库
+		/// </summary>
+		/// <returns></returns>
+		private SQLiteConnection GetConnection()
+		{
+			return new SQLiteConnection(_connectionString);
+		}
 
-        /// <summary>
-        /// 执行传入的 SQL 脚本。
-        /// </summary>
-        /// <param name="script">要执行的 SQL 脚本。</param>
-        /// <exception cref="ArgumentException"></exception>
-        public void ExecuteScript(string script)
-        {
-            if (string.IsNullOrWhiteSpace(script))
-            {
-                throw new ArgumentException("脚本不能为空", nameof(script));
-            }
-            try
-            {
-                using (var connection = GetConnection())
-                {
-                    connection.Open();
-                    using (var command = new SQLiteCommand(script, connection))
-                    {
-                        command.ExecuteNonQuery();
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                ClassLibrary.MyLogHelper.GetExceptionLocation(ex);
-            }
-        }
+		/// <summary>
+		/// 执行传入的 SQL 脚本。
+		/// </summary>
+		/// <param name="script">要执行的 SQL 脚本。</param>
+		/// <exception cref="ArgumentException"></exception>
+		public void ExecuteScript(string script)
+		{
+			if (string.IsNullOrWhiteSpace(script))
+			{
+				throw new ArgumentException("脚本不能为空", nameof(script));
+			}
+			try
+			{
+				using (var connection = GetConnection())
+				{
+					connection.Open();
+					using (var command = new SQLiteCommand(script, connection))
+					{
+						command.ExecuteNonQuery();
+					}
+				}
+			}
+			catch (Exception ex)
+			{
+				ClassLibrary.MyLogHelper.GetExceptionLocation(ex);
+			}
+		}
 
-        /// <summary>
-        /// 建表
-        /// </summary>
-        /// <param name="tableName">表名</param>
-        /// <param name="columns">列相关脚本，详细建表语句中列名括号内的那部分，如：CONSTRAINT uc_HashValue UNIQUE (HashValue)
-        /// 示例：string createTableQuery = @"
-        /// <para />CREATE TABLE IF NOT EXISTS FileHashes(
-        ///         Id INTEGER PRIMARY KEY AUTOINCREMENT,
-        ///         FilePath TEXT NOT NULL,FileName TEXT NOT NULL,
-        ///         HashValue TEXT NOT NULL,
-        ///         CONSTRAINT uc_HashValue UNIQUE (HashValue));
-        /// <para />";</param>
-        public void CreateTableIfNotExists(string tableName, string columnScript)
-        {
-            try
-            {
-                using (var connection = GetConnection())
-                {
-                    connection.Open();
-                    string query = $"CREATE TABLE IF NOT EXISTS {tableName} ({columnScript});";
-                    using (var command = new SQLiteCommand(query, connection))
-                    {
-                        command.ExecuteNonQuery();
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                ClassLibrary.MyLogHelper.GetExceptionLocation(ex);
-            }
-        }
+		/// <summary>
+		/// 建表
+		/// </summary>
+		/// <param name="tableName">表名</param>
+		/// <param name="columns">列相关脚本，详细建表语句中列名括号内的那部分，如：CONSTRAINT uc_HashValue UNIQUE (HashValue)
+		/// 示例：string createTableQuery = @"
+		/// <para />CREATE TABLE IF NOT EXISTS FileHashes(
+		///         Id INTEGER PRIMARY KEY AUTOINCREMENT,
+		///         FilePath TEXT NOT NULL,FileName TEXT NOT NULL,
+		///         HashValue TEXT NOT NULL,
+		///         CONSTRAINT uc_HashValue UNIQUE (HashValue));
+		/// <para />";</param>
+		public void CreateTableIfNotExists(string tableName, string columnScript)
+		{
+			try
+			{
+				using (var connection = GetConnection())
+				{
+					connection.Open();
+					string query = $"CREATE TABLE IF NOT EXISTS {tableName} ({columnScript});";
+					using (var command = new SQLiteCommand(query, connection))
+					{
+						command.ExecuteNonQuery();
+					}
+				}
+			}
+			catch (Exception ex)
+			{
+				ClassLibrary.MyLogHelper.GetExceptionLocation(ex);
+			}
+		}
 
-        /// <summary>
-        /// 检查表是否存在
-        /// </summary>
-        /// <param name="tableName">表名</param>
-        /// <returns>表是否存在</returns>
-        public bool TableExists(string tableName)
-        {
-            try
-            {
-                using (var connection = GetConnection())
-                {
-                    connection.Open();
-                    string query = "SELECT name FROM sqlite_master WHERE type='table' AND name=@tableName;";
-                    using (var command = new SQLiteCommand(query, connection))
-                    {
-                        command.Parameters.AddWithValue("@tableName", tableName);
-                        using (var reader = command.ExecuteReader())
-                        {
-                            // 如果结果集有可以获取的行，则返回True
-                            return reader.HasRows;
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                ClassLibrary.MyLogHelper.GetExceptionLocation(ex);
-                return false;
-            }
-        }
+		/// <summary>
+		/// 检查表是否存在
+		/// </summary>
+		/// <param name="tableName">表名</param>
+		/// <returns>表是否存在</returns>
+		public bool TableExists(string tableName)
+		{
+			try
+			{
+				using (var connection = GetConnection())
+				{
+					connection.Open();
+					string query = "SELECT name FROM sqlite_master WHERE type='table' AND name=@tableName;";
+					using (var command = new SQLiteCommand(query, connection))
+					{
+						command.Parameters.AddWithValue("@tableName", tableName);
+						using (var reader = command.ExecuteReader())
+						{
+							// 如果结果集有可以获取的行，则返回True
+							return reader.HasRows;
+						}
+					}
+				}
+			}
+			catch (Exception ex)
+			{
+				ClassLibrary.MyLogHelper.GetExceptionLocation(ex);
+				return false;
+			}
+		}
 
-        /// <summary>
-        /// 查询指定表中存在指定条件数据的行数
-        /// </summary>
-        /// <param name="tableName">表名</param>
-        /// <param name="conditions">查询条件数组，每个元素是一个键值对字符串，如： ("HashValue", "abc123")； ("Age", 30)；</param>
-        /// <returns>空：出错；count：表中数据行数</returns>
-        public long? DataExists(string tableName, params (string column, object value)[] conditions)
-        {
-            try
-            {
-                using (var connection = GetConnection())
-                {
-                    connection.Open();
-                    string query = $"SELECT COUNT(*) FROM {tableName} WHERE 1=1";
-                    if (conditions != null && conditions.Length > 0)
-                    {
-                        for (int i = 0; i < conditions.Length; i++)
-                        {
-                            query += $" AND {conditions[i].column} = @p{i}";
-                        }
-                    }
-                    query += ";";
-                    using (var command = new SQLiteCommand(query, connection))
-                    {
-                        if (conditions != null && conditions.Length > 0)
-                        {
-                            for (int i = 0; i < conditions.Length; i++)
-                            {
-                                command.Parameters.AddWithValue($"@p{i}", conditions[i].value);
-                            }
-                        }
+		/// <summary>
+		/// 查询指定表中存在指定条件数据的行数
+		/// </summary>
+		/// <param name="tableName">表名</param>
+		/// <param name="conditions">查询条件数组，每个元素是一个键值对字符串，如： ("HashValue", "abc123")； ("Age", 30)；</param>
+		/// <returns>空：出错；count：表中数据行数</returns>
+		public long? DataExists(string tableName, params (string column, object value)[] conditions)
+		{
+			try
+			{
+				using (var connection = GetConnection())
+				{
+					connection.Open();
+					string query = $"SELECT COUNT(*) FROM {tableName} WHERE 1=1";
+					if (conditions != null && conditions.Length > 0)
+					{
+						for (int i = 0; i < conditions.Length; i++)
+						{
+							query += $" AND {conditions[i].column} = @p{i}";
+						}
+					}
+					query += ";";
+					using (var command = new SQLiteCommand(query, connection))
+					{
+						if (conditions != null && conditions.Length > 0)
+						{
+							for (int i = 0; i < conditions.Length; i++)
+							{
+								command.Parameters.AddWithValue($"@p{i}", conditions[i].value);
+							}
+						}
 
-                        long count;
-                        object result = command.ExecuteScalar();
-                        if (result != null && Int64.TryParse(result.ToString(), out count))
-                        {
-                            return count;
-                        }
-                        else
-                        {
-                            return null;
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                ClassLibrary.MyLogHelper.GetExceptionLocation(ex);
-                return null;
-            }
-        }
+						long count;
+						object result = command.ExecuteScalar();
+						if (result != null && Int64.TryParse(result.ToString(), out count))
+						{
+							return count;
+						}
+						else
+						{
+							return null;
+						}
+					}
+				}
+			}
+			catch (Exception ex)
+			{
+				ClassLibrary.MyLogHelper.GetExceptionLocation(ex);
+				return null;
+			}
+		}
 
-        /// <summary>
-        /// 插入数据
-        /// </summary>
-        /// <param name="tableName">表名</param>
-        /// <param name="necessary">必须的列和值数组，每个元素是一个键值对字符串，如： ("HashValue", "abc123")
-        ///  <para />用于拼凑：INSERT OR IGNORE INTO FileHashes(FilePath, FileName, HashValue) VALUES(@FilePath, @FileName, @HashValue);</param>
-        public void InsertData(string tableName, (string column, object value)[] necessary)
-        {
-            if (necessary != null && necessary.Length > 0)
-            {
-                try
-                {
-                    using (var connection = GetConnection())
-                    {
-                        connection.Open();
-                        StringBuilder sbColumns = new StringBuilder();
-                        StringBuilder sbValues = new StringBuilder();
+		/// <summary>
+		/// 插入数据
+		/// </summary>
+		/// <param name="tableName">表名</param>
+		/// <param name="necessary">必须的列和值数组，每个元素是一个键值对字符串，如： ("HashValue", "abc123")
+		///  <para />用于拼凑：INSERT OR IGNORE INTO FileHashes(FilePath, FileName, HashValue) VALUES(@FilePath, @FileName, @HashValue);</param>
+		public void InsertData(string tableName, (string column, object value)[] necessary)
+		{
+			if (necessary != null && necessary.Length > 0)
+			{
+				try
+				{
+					using (var connection = GetConnection())
+					{
+						connection.Open();
+						StringBuilder sbColumns = new StringBuilder();
+						StringBuilder sbValues = new StringBuilder();
 
-                        for (int i = 0; i < necessary.Length; i++)
-                        {
-                            sbColumns.Append(necessary[i].column + ",");
-                            sbValues.Append($"@p{i},");
-                        }
-                        sbColumns.Length--;
-                        sbValues.Length--;
-                        string query = $"INSERT OR IGNORE INTO {tableName}({sbColumns.ToString()}) VALUES ({sbValues.ToString()});";
+						for (int i = 0; i < necessary.Length; i++)
+						{
+							sbColumns.Append(necessary[i].column + ",");
+							sbValues.Append($"@p{i},");
+						}
+						sbColumns.Length--;
+						sbValues.Length--;
+						string query = $"INSERT OR IGNORE INTO {tableName}({sbColumns.ToString()}) VALUES ({sbValues.ToString()});";
 
-                        using (var command = new SQLiteCommand(query, connection))
-                        {
-                            for (int i = 0; i < necessary.Length; i++)
-                            {
-                                command.Parameters.AddWithValue($"@p{i}", necessary[i].value);
-                            }
-                            command.ExecuteNonQuery();
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    ClassLibrary.MyLogHelper.GetExceptionLocation(ex);
-                }
-            }
-        }
+						using (var command = new SQLiteCommand(query, connection))
+						{
+							for (int i = 0; i < necessary.Length; i++)
+							{
+								command.Parameters.AddWithValue($"@p{i}", necessary[i].value);
+							}
+							command.ExecuteNonQuery();
+						}
+					}
+				}
+				catch (Exception ex)
+				{
+					ClassLibrary.MyLogHelper.GetExceptionLocation(ex);
+				}
+			}
+		}
 
-        /// <summary>
-        /// 查询数据明细
-        /// </summary>
-        /// <param name="tableName">表名</param>
-        /// <param name="columns">列名，如： FilePath,FileName,HashValue </param>
-        /// <param name="conditions">查询条件数组，每个元素是一个键值对字符串，如： ("HashValue", "abc123") </param>
-        /// <returns>SQLiteDataReader</returns>
-        public DataTable QueryData(string tableName, string columns, params (string column, object value)[] conditions)
-        {
-            try
-            {
-                DataTable dtResult = new DataTable();
-                using (var connection = GetConnection())
-                {
-                    connection.Open();
-                    string query = $"SELECT {columns} FROM {tableName} WHERE 1=1";
-                    if (conditions != null && conditions.Length > 0)
-                    {
-                        for (int i = 0; i < conditions.Length; i++)
-                        {
-                            query += $" AND {conditions[i].column} = @p{i}";
-                        }
-                    }
-                    query += ";";
-                    using (var command = new SQLiteCommand(query, connection))
-                    {
-                        if (conditions != null && conditions.Length > 0)
-                        {
-                            for (int i = 0; i < conditions.Length; i++)
-                            {
-                                command.Parameters.AddWithValue($"@p{i}", conditions[i].value);
-                            }
-                        }
-                        dtResult.Load(command.ExecuteReader());
-                        return dtResult;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                ClassLibrary.MyLogHelper.GetExceptionLocation(ex);
-                return null;
-            }
-        }
-        #region 参数化 查询数据明细
-        /*
+		/// <summary>
+		/// 查询数据明细
+		/// </summary>
+		/// <param name="tableName">表名</param>
+		/// <param name="columns">列名，如： FilePath,FileName,HashValue </param>
+		/// <param name="conditions">查询条件数组，每个元素是一个键值对字符串，如： ("HashValue", "abc123") </param>
+		/// <returns>SQLiteDataReader</returns>
+		public DataTable QueryData(string tableName, string columns, params (string column, object value)[] conditions)
+		{
+			try
+			{
+				DataTable dtResult = new DataTable();
+				using (var connection = GetConnection())
+				{
+					connection.Open();
+					string query = $"SELECT {columns} FROM {tableName} WHERE 1=1";
+					if (conditions != null && conditions.Length > 0)
+					{
+						for (int i = 0; i < conditions.Length; i++)
+						{
+							query += $" AND {conditions[i].column} = @p{i}";
+						}
+					}
+					query += ";";
+					using (var command = new SQLiteCommand(query, connection))
+					{
+						if (conditions != null && conditions.Length > 0)
+						{
+							for (int i = 0; i < conditions.Length; i++)
+							{
+								command.Parameters.AddWithValue($"@p{i}", conditions[i].value);
+							}
+						}
+						dtResult.Load(command.ExecuteReader());
+						return dtResult;
+					}
+				}
+			}
+			catch (Exception ex)
+			{
+				ClassLibrary.MyLogHelper.GetExceptionLocation(ex);
+				return null;
+			}
+		}
+
+		public DataTable QueryData(string sqliteScript)
+		{
+			DataTable dtResult = new DataTable();
+			if (string.IsNullOrWhiteSpace(sqliteScript))
+			{
+				throw new ArgumentException("脚本不能为空", nameof(sqliteScript));
+			}
+			try
+			{
+				using (var connection = GetConnection())
+				{
+					connection.Open();
+					using (var command = new SQLiteCommand(sqliteScript, connection))
+					{
+						dtResult.Load(command.ExecuteReader());
+					}
+				}
+			}
+			catch (Exception ex)
+			{
+				ClassLibrary.MyLogHelper.GetExceptionLocation(ex);
+			}
+			return dtResult;
+		}
+		#region 参数化 查询数据明细
+		/*
 		 
 			使用示例
 		无条件查询
@@ -322,115 +347,145 @@ namespace ClassLibrary
 				command.ExecuteReader() 返回一个 SQLiteDataReader 对象，可以在 using 语句中使用它来读取查询结果。
 		 
 		 */
-        #endregion
+		#endregion
 
-        /// <summary>
-        /// 执行常用操作ExecuteCommonOperations(判断表是否存在，查询数据是否存在，插入数据，返回结果)
-        /// </summary>
-        /// <param name="tableName">表名</param>
-        /// <param name="columnScript">若表不存在则建表时用到的列脚本</param>
-        /// <param name="necessary">必须的列和值数组，用于插入数据和查询列名</param>
-        /// <param name="conditions">查询条件</param>
-        /// <returns></returns>
-        public DataTable ExecuteCommonOperations(string tableName, string columnScript,
-                        (string column, object value)[] necessary, params (string column, object value)[] conditions)
-        {
-            try
-            {
-                // 判断表是否存在
-                if (!TableExists(tableName))
-                {
-                    CreateTableIfNotExists(tableName, columnScript);
-                }
+		/// <summary>
+		/// 执行常用操作ExecuteCommonOperations(判断表是否存在，查询数据是否存在，插入数据，返回结果)
+		/// </summary>
+		/// <param name="tableName">表名</param>
+		/// <param name="columnScript">若表不存在则建表时用到的列脚本</param>
+		/// <param name="necessary">必须的列和值数组，用于插入数据和查询列名</param>
+		/// <param name="conditions">查询条件</param>
+		/// <returns></returns>
+		public DataTable ExecuteCommonOperations(string tableName, string columnScript,
+						(string column, object value)[] necessary, params (string column, object value)[] conditions)
+		{
+			try
+			{
+				// 判断表是否存在
+				if (!TableExists(tableName))
+				{
+					CreateTableIfNotExists(tableName, columnScript);
+				}
 
-                // 查询数据是否存在
-                long? count = DataExists(tableName, conditions);
-                bool ifInsert = false;
-                if (count is null)
-                {
-                    ifInsert = true;
-                }
-                else if (count == 0)
-                {
-                    ifInsert = true;
-                }
-                else
-                {
-                    ifInsert = false;
-                }
+				// 查询数据是否存在
+				long? count = DataExists(tableName, conditions);
+				bool ifInsert = false;
+				if (count is null)
+				{
+					ifInsert = true;
+				}
+				else if (count == 0)
+				{
+					ifInsert = true;
+				}
+				else
+				{
+					ifInsert = false;
+				}
 
-                // 插入数据
-                if (ifInsert)
-                {
-                    InsertData(tableName, necessary);
-                }
+				// 插入数据
+				if (ifInsert)
+				{
+					InsertData(tableName, necessary);
+				}
 
-                // 查询结果(数据明细)
-                StringBuilder sbColumns = new StringBuilder();
-                // 从必须的列和值数组 necessary 中获取插入数据时的列名，作为查询列
-                if (necessary != null && necessary.Length > 0)
-                {
-                    for (int i = 0; i < necessary.Length; i++)
-                    {
-                        sbColumns.Append(necessary[i].column + ",");
-                    }
-                }
-                if (sbColumns.Length > 0)
-                {
-                    sbColumns.Length--;
-                }
-                string columns = sbColumns.ToString();
-                if (string.IsNullOrWhiteSpace(columns))
-                {
-                    columns = "*";
-                }
+				// 查询结果(数据明细)
+				StringBuilder sbColumns = new StringBuilder();
+				// 从必须的列和值数组 necessary 中获取插入数据时的列名，作为查询列
+				if (necessary != null && necessary.Length > 0)
+				{
+					for (int i = 0; i < necessary.Length; i++)
+					{
+						sbColumns.Append(necessary[i].column + ",");
+					}
+				}
+				if (sbColumns.Length > 0)
+				{
+					sbColumns.Length--;
+				}
+				string columns = sbColumns.ToString();
+				if (string.IsNullOrWhiteSpace(columns))
+				{
+					columns = "*";
+				}
 
-                return QueryData(tableName, columns, conditions);
+				return QueryData(tableName, columns, conditions);
 
-            }
-            catch (Exception ex)
-            {
-                ClassLibrary.MyLogHelper.GetExceptionLocation(ex);
-                return null;
-            }
-        }
-        /// <summary>
-        /// 将获取到的结果存入List列表返回
-        /// </summary>
-        /// <param name="connectionString">数据库连接字符串</param>
-        /// <param name="tableName">表名</param>
-        /// <param name="columnScript">建表脚本(括号内设定列的那部分)</param>
-        /// <param name="necessary">必要条件组(包含列名及插入数据时列对应的值)</param>
-        /// <param name="conditions">查询条件组(包含列名及查询值)</param>
-        /// <returns></returns>
-        public List<Dictionary<string, object>> GetExecuteResult(string tableName, string columnScript,
-                        (string column, object value)[] necessary, params (string column, object value)[] conditions)
-        {
-            List<Dictionary<string, object>> listResult = new List<Dictionary<string, object>>();
-            if (necessary != null && necessary.Length > 0)
-            {
-                using (var connection = GetConnection())
-                {
-                    connection.Open();
+			}
+			catch (Exception ex)
+			{
+				ClassLibrary.MyLogHelper.GetExceptionLocation(ex);
+				return null;
+			}
+		}
+		/// <summary>
+		/// 将获取到的结果存入List列表返回
+		/// </summary>
+		/// <param name="connectionString">数据库连接字符串</param>
+		/// <param name="tableName">表名</param>
+		/// <param name="columnScript">建表脚本(括号内设定列的那部分)</param>
+		/// <param name="necessary">必要条件组(包含列名及插入数据时列对应的值)</param>
+		/// <param name="conditions">查询条件组(包含列名及查询值)</param>
+		/// <returns></returns>
+		public List<Dictionary<string, object>> GetExecuteResult(string tableName, string columnScript,
+						(string column, object value)[] necessary, params (string column, object value)[] conditions)
+		{
+			List<Dictionary<string, object>> listResult = new List<Dictionary<string, object>>();
+			if (necessary != null && necessary.Length > 0)
+			{
+				using (var connection = GetConnection())
+				{
+					connection.Open();
 
-                    using (var reader = ExecuteCommonOperations(tableName, columnScript, necessary, conditions))
-                    {
-                        // 输出 DataTable 的内容
-                        foreach (DataRow row in reader.Rows)
-                        {
-                            Dictionary<string, object> dicResult = new Dictionary<string, object>();
-                            foreach (DataColumn column in reader.Columns)
-                            {
-                                dicResult.Add(column.ColumnName, row[column]);
-                            }
-                            listResult.Add(dicResult);
-                        }
-                    }
-                }
-            }
-            return listResult;
-        }
-    }
+					using (var reader = ExecuteCommonOperations(tableName, columnScript, necessary, conditions))
+					{
+						// 输出 DataTable 的内容
+						foreach (DataRow row in reader.Rows)
+						{
+							Dictionary<string, object> dicResult = new Dictionary<string, object>();
+							foreach (DataColumn column in reader.Columns)
+							{
+								dicResult.Add(column.ColumnName, row[column]);
+							}
+							listResult.Add(dicResult);
+						}
+					}
+				}
+			}
+			return listResult;
+		}
+
+		public List<Dictionary<string, object>> GetExecuteResult(string sqliteScript)
+		{
+			List<Dictionary<string, object>> listResult = new List<Dictionary<string, object>>();
+			if (string.IsNullOrWhiteSpace(sqliteScript))
+			{
+				throw new ArgumentException("脚本不能为空", nameof(sqliteScript));
+			}
+			try
+			{
+				using (var reader = QueryData(sqliteScript))
+				{
+					// 输出 DataTable 的内容
+					foreach (DataRow row in reader.Rows)
+					{
+						Dictionary<string, object> dicResult = new Dictionary<string, object>();
+						foreach (DataColumn column in reader.Columns)
+						{
+							dicResult.Add(column.ColumnName, row[column]);
+						}
+						listResult.Add(dicResult);
+					}
+				}
+			}
+			catch (Exception ex)
+			{
+				ClassLibrary.MyLogHelper.GetExceptionLocation(ex);
+			}
+			return listResult;
+		}
+	}
 }
 #region 报错记录
 // 一

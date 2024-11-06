@@ -463,7 +463,7 @@ namespace ClassLibrary.Services
 							else
 							{
 								result = ClassLibrary.ShareClass.DownloadFile(strUrlIsUHD, strFileNameNew);
-								ClassLibrary.MyMethodExtension.InsertHashData(strFileNameNew, strUHDHash);
+								ClassLibrary.MyMethodExtension.InsertHashData(strFileNameNew, strUHDHash, 0);
 								strTemp = $"SHA256：{strUHDHash}\r\n{strFileNameNew}\r\n文件下载结果：{result}";
 								Console.WriteLine(strTemp);
 								ClassLibrary.MyLogHelper.LogSplit(ClassLibrary.ShareClass._logPath, logTitle, strTemp, logType, logCycle);
@@ -485,7 +485,7 @@ namespace ClassLibrary.Services
 							else
 							{
 								result = ClassLibrary.ShareClass.DownloadFile(strUrlISMobile, strFileNameNew);
-								ClassLibrary.MyMethodExtension.InsertHashData(strFileNameNew, strMobileHash);
+								ClassLibrary.MyMethodExtension.InsertHashData(strFileNameNew, strMobileHash, 1);
 								strTemp = $"SHA256：{strMobileHash}\r\n{strFileNameNew}\r\n文件下载结果：{result}";
 								Console.WriteLine(strTemp);
 								ClassLibrary.MyLogHelper.LogSplit(ClassLibrary.ShareClass._logPath, logTitle, strTemp, logType, logCycle);
@@ -509,7 +509,7 @@ namespace ClassLibrary.Services
 							else
 							{
 								result = ClassLibrary.ShareClass.DownloadFile(strUrlIsUHD, strFileNameNew);
-								ClassLibrary.MyMethodExtension.InsertHashData(strFileNameNew, strUHDHash);
+								ClassLibrary.MyMethodExtension.InsertHashData(strFileNameNew, strUHDHash, 0);
 								strTemp = $"SHA256：{strUHDHash}\r\n{strFileNameNew}\r\n文件下载结果：{result}";
 								Console.WriteLine(strTemp);
 								ClassLibrary.MyLogHelper.LogSplit(ClassLibrary.ShareClass._logPath, logTitle, strTemp, logType, logCycle);
@@ -530,7 +530,7 @@ namespace ClassLibrary.Services
 							else
 							{
 								result = ClassLibrary.ShareClass.DownloadFile(strUrlISMobile, strFileNameNew);
-								ClassLibrary.MyMethodExtension.InsertHashData(strFileNameNew, strMobileHash);
+								ClassLibrary.MyMethodExtension.InsertHashData(strFileNameNew, strMobileHash, 1);
 								strTemp = $"SHA256：{strMobileHash}\r\n{strFileNameNew}\r\n文件下载结果：{result}";
 								Console.WriteLine(strTemp);
 								ClassLibrary.MyLogHelper.LogSplit(ClassLibrary.ShareClass._logPath, logTitle, strTemp, logType, logCycle);
@@ -650,7 +650,8 @@ namespace ClassLibrary.Services
 											}
 											else
 											{
-												ClassLibrary.MyMethodExtension.InsertHashData(strDownloadFile, strFileHash);
+												//// 复制聚焦图片时，不做记录，不然分类归档时就被拒了。
+												//ClassLibrary.MyMethodExtension.InsertHashData(strDownloadFile, strFileHash);
 												strTemp = $"SHA256：{strFileHash}\r\n{strDownloadFile}\r\n复制完成。";
 												Console.WriteLine(strTemp);
 												ClassLibrary.MyLogHelper.LogSplit(ClassLibrary.ShareClass._logPath, logTitle, strTemp, logType, logCycle);
@@ -751,6 +752,7 @@ namespace ClassLibrary.Services
 					result = false;
 					bool resultIsRepeat = false;
 					// 准备开始下载
+					// Page Orientation即页面方向，指的是矩形平面以长边为底还是以短边为底，分为 Portrait（纵向<Portrait指的是人物画像>）和 Landscape（横向<Landscape指的则是风景画>）两类。
 					// 电脑壁纸
 					bool landscapeIsRepeat = false;
 					bool resultLandscape = true;
@@ -767,7 +769,7 @@ namespace ClassLibrary.Services
 					else
 					{
 						resultLandscape = ClassLibrary.ShareClass.DownloadFile(windowsSpotlight.ImageFullscreenLandscape.DownloadUrl, strFileNameLandscape);
-						ClassLibrary.MyMethodExtension.InsertHashData(strFileNameLandscape, strFileHashLandscape);
+						ClassLibrary.MyMethodExtension.InsertHashData(strFileNameLandscape, strFileHashLandscape, 0);
 						strTemp = $"SHA256：{strFileHashLandscape}\r\n{strFileNameLandscape}\r\n文件下载结果：{resultLandscape}";
 						Console.WriteLine(strTemp);
 						ClassLibrary.MyLogHelper.LogSplit(ClassLibrary.ShareClass._logPath, logTitle, strTemp, logType, logCycle);
@@ -790,7 +792,7 @@ namespace ClassLibrary.Services
 					else
 					{
 						resultPortrait = ClassLibrary.ShareClass.DownloadFile(windowsSpotlight.ImageFullscreenPortrait.DownloadUrl, strFileNamePortrait);
-						ClassLibrary.MyMethodExtension.InsertHashData(strFileNamePortrait, strFileHashPortrait);
+						ClassLibrary.MyMethodExtension.InsertHashData(strFileNamePortrait, strFileHashPortrait, 1);
 						strTemp = $"SHA256：{strFileHashPortrait}\r\n{strFileNamePortrait}\r\n文件下载结果：{resultPortrait}";
 						Console.WriteLine(strTemp);
 						ClassLibrary.MyLogHelper.LogSplit(ClassLibrary.ShareClass._logPath, logTitle, strTemp, logType, logCycle);
@@ -962,6 +964,9 @@ namespace ClassLibrary.Services
 							#endregion
 
 							string targetFilePath;
+							// 图片的方向是否是竖向的（对应数据库中：横向：0 否，竖向：1 是）
+							int isPortrait = 0;
+
 							// 使用 BitmapDecoder 获取图像尺寸，避免加载整个图像到内存
 							using (FileStream stream = new FileStream(filePath, FileMode.Open, FileAccess.Read))
 							{
@@ -985,6 +990,7 @@ namespace ClassLibrary.Services
 								else
 								{
 									targetFilePath = Path.Combine(BingImageSetting.CategorizeAndMoveSetting.MobileWallpaperPath, fileNewName);
+									isPortrait = 1;
 								}
 							}
 
@@ -1021,7 +1027,7 @@ namespace ClassLibrary.Services
 									default:
 										throw new ArgumentException("指定的文件操作类型无效。\r\nInvalid file operation type specified.", nameof(BingImageSetting.CategorizeAndMoveSetting.fileOperationType));
 								}
-								ClassLibrary.MyMethodExtension.InsertHashData(targetFilePath, strFileHash);
+								ClassLibrary.MyMethodExtension.InsertHashData(targetFilePath, strFileHash, isPortrait);
 								processedFilesCount++;
 								strTemp = $"{processedFilesCount}：{fileNewName} {strFileOperationType} {targetFilePath}";
 								Console.WriteLine(strTemp);
@@ -1052,10 +1058,33 @@ namespace ClassLibrary.Services
 				result = false;
 			}
 
+
 			strTemp = $"{DateTime.Now}：文件分类归档结束，耗时：{ClassLibrary.ShareClass.ToMinutesAgo(dateTimeBingBegin)}";
 			Console.WriteLine(strTemp);
 			ClassLibrary.MyLogHelper.LogSplit(ClassLibrary.ShareClass._logPath, logTitle, strTemp, logType, logCycle);
 
+			// 任务结束，做个数据统计，记录到日志文件中
+			ClassLibrary.MySQLiteHelper mySQLite = new MySQLiteHelper(ClassLibrary.ShareClass._sqliteConnectionString);
+			string sqliteScript_FileHashes = $@"SELECT STRFTIME('%Y-%m-%d',datetime(CreatedTime)) AS CreatedDay,COUNT(1) AS Count FROM FileHashes WHERE 1=1 AND CreatedDay = date('now') GROUP BY CreatedDay;";
+			// string sqliteScript_FileHashes = $@"SELECT COUNT(1) Count FROM FileHashes WHERE 1=1 AND STRFTIME('%Y-%m-%d',datetime(CreatedTime)) = date('now') GROUP BY STRFTIME('%Y-%m-%d',datetime(CreatedTime));";
+			List<Dictionary<string, object>> listResult = mySQLite.GetExecuteResult(sqliteScript_FileHashes);
+			string strDateToDay = string.Empty;
+			string strDataCount = string.Empty;
+			foreach (var item in listResult)
+			{
+				foreach (KeyValuePair<string, object> keyValuePair in item)
+				{
+					if (keyValuePair.Key == "CreatedDay")
+					{
+						strDateToDay = keyValuePair.Value.ToString();
+					}
+					if (keyValuePair.Key == "Count")
+					{
+						strDataCount = keyValuePair.Value.ToString();
+					}
+				}
+			}
+			ClassLibrary.MyLogHelper.LogSplit($"截止当前时间{DateTime.Now}，\r\n\t {strDateToDay} 共获取图片： {strDataCount} 张。");
 			return result;
 		}
 

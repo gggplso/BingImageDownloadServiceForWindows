@@ -266,14 +266,14 @@ namespace ClassLibrary
          */
 		#endregion
 #if DEBUG
-        // Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)
-        // 返回的是当前登录用户的主目录路径，通常这个路径是在系统默认的盘符上（通常是 C 盘）。
-        // 如果用户将自己的文件夹位置改到了 D 盘，那么这个方法返回的仍然是系统默认的主目录路径。
-        public static readonly string _systemUserProfilePath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
-        // 使用 Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
-        // 这个方法返回的是用户的文档目录，即使用户更改了文档目录的位置，它也能返回正确的路径。
-        public static readonly string _userPath = Directory.GetParent(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)).FullName;
-        /*
+		// Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)
+		// 返回的是当前登录用户的主目录路径，通常这个路径是在系统默认的盘符上（通常是 C 盘）。
+		// 如果用户将自己的文件夹位置改到了 D 盘，那么这个方法返回的仍然是系统默认的主目录路径。
+		public static readonly string _systemUserProfilePath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+		// 使用 Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
+		// 这个方法返回的是用户的文档目录，即使用户更改了文档目录的位置，它也能返回正确的路径。
+		public static readonly string _userPath = Directory.GetParent(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)).FullName;
+		/*
          很奇怪的问题，同样的文件在另一台电脑上可以正常运行Windows服务，在这台电脑上报错：
          无法启动服务。
          System.TypeInitializationException: “ClassLibrary.ShareClass”的类型初始值设定项引发异常。
@@ -286,7 +286,7 @@ namespace ClassLibrary
                                    位置 D:\GitFiles\BingImageDownloadServiceForWindows\BingImageDownloadServiceForWindows\BingImageDownloadServiceControl.cs:行号 57 
                                    在 System.ServiceProcess.ServiceBase.ServiceQueuedMainCallback(Object state)
          */
-        //为了解决上面的问题，尝试修改代码如下：
+		//为了解决上面的问题，尝试修改代码如下：
 #else
 		public static readonly string _userPath = InitializeUserPath();
 		public static readonly string _systemUserProfilePath = InitializeSystemUserProfilePath();
@@ -296,7 +296,7 @@ namespace ClassLibrary
 			string myDocumentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 			if (string.IsNullOrWhiteSpace(myDocumentsPath))
 			{
-				ClassLibrary.MyLogHelper.LogSplit(_logPath, "用户自定义文档目录的路径检查", $"MyDocuments路径: {myDocumentsPath}", _logType, _logCycle);
+				ClassLibrary.MyLogHelper.LogSplit(_logPath, "用户自定义文档目录的路径检查", $"MyDocuments路径: {myDocumentsPath} 获取失败，将依赖配置文件", _logType, _logCycle);
 				//throw new ArgumentException("用户自定义文档目录：路径不能为空字符串或全为空白。", nameof(myDocumentsPath));
 				myDocumentsPath = "C:\\Users\\Administrator\\Documents";
 			}
@@ -308,7 +308,7 @@ namespace ClassLibrary
 			string userProfilePath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
 			if (string.IsNullOrWhiteSpace(userProfilePath))
 			{
-				ClassLibrary.MyLogHelper.LogSplit(_logPath, "系统默认用户主目录的路径检查", $"UserProfile路径: {userProfilePath}", _logType, _logCycle);
+				ClassLibrary.MyLogHelper.LogSplit(_logPath, "系统默认用户主目录的路径检查", $"UserProfile路径: {userProfilePath} 获取失败，将依赖配置文件", _logType, _logCycle);
 				//throw new ArgumentException("系统默认用户主目录：路径不能为空字符串或全为空白。", nameof(userProfilePath));
 				userProfilePath = "C:\\Users\\Administrator";
 			}
@@ -482,10 +482,11 @@ namespace ClassLibrary
 		/// </summary>
 		public const string _sqliteCreateTableScript_FileHashes = @"
 CREATE TABLE IF NOT EXISTS FileHashes (
-    Id INTEGER PRIMARY KEY AUTOINCREMENT,
+    ID INTEGER PRIMARY KEY,
     FileName TEXT NOT NULL,
     FilePath TEXT NOT NULL,
     HashValue TEXT NOT NULL,
+    IsPortrait INTEGER DEFAULT NULL,
     CreatedTime TEXT DEFAULT (strftime('%Y-%m-%d %H:%M:%f', 'now', 'localtime')),
     LastModifiedTime TEXT DEFAULT (strftime('%Y-%m-%d %H:%M:%f', 'now', 'localtime')),
     CONSTRAINT uc_HashValue UNIQUE (HashValue)

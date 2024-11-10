@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ClassLibrary.Classes;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -47,9 +48,25 @@ namespace BingImageDownloadSetting
         /// <param name="e"></param>
         private void buttonRead_Click(object sender, EventArgs e)
         {
-            if (comboBoxFileOperationType.SelectedIndex >= 0)
+            // 获取主程序相关参数配置文件信息
+            ClassLibrary.Classes.AppSettingClass appSetting = ClassLibrary.ShareClass.GetAppSettingClass();
+            if (appSetting != null)
             {
-                labelFileOperationTypeUnit.Text = comboBoxFileOperationType.SelectedItem.ToString();
+                textBoxMainSettingFile.Text = appSetting.MainSettingFile;
+                textBoxLogPath.Text = appSetting.LogPath;
+                textBoxLogType.Text = appSetting.LogType;
+                // 日志循环设定("yyyyMMdd")
+                string logCycle = appSetting.LogCycle;
+                logCycle = ClassLibrary.ShareClass.LogCycleConverter.VerifyValidFormatString(logCycle);
+                comboBoxLogCycle.Text = ClassLibrary.ShareClass.LogCycleConverter.ConvertToText(logCycle);
+
+            }
+
+            // 获取下载图片相关参数配置文件信息
+            ClassLibrary.Classes.BingImageSettingClass bingSetting = ClassLibrary.ShareClass.GetBingImageSettingClass();
+            if (bingSetting != null)
+            {
+
             }
         }
         /// <summary>

@@ -87,6 +87,21 @@
             this.labelLogIsDebugExplanation = new System.Windows.Forms.Label();
             this.tabPageImageDownloadSetting = new System.Windows.Forms.TabPage();
             this.tableLayoutPanelImageDownloadSetting = new System.Windows.Forms.TableLayoutPanel();
+            this.labelRejectedPath = new System.Windows.Forms.Label();
+            this.textBoxRejectedPath = new System.Windows.Forms.TextBox();
+            this.buttonRejectedPathBrowse = new System.Windows.Forms.Button();
+            this.labelRejectedPathExplanation = new System.Windows.Forms.Label();
+            this.labelVideoWallpaperPath = new System.Windows.Forms.Label();
+            this.textBoxVideoWallpaperPath = new System.Windows.Forms.TextBox();
+            this.buttonVideoWallpaperPathBrowse = new System.Windows.Forms.Button();
+            this.labelVideoWallpaperPathExplanation = new System.Windows.Forms.Label();
+            this.labelComputerWallpaperPath = new System.Windows.Forms.Label();
+            this.textBoxComputerWallpaperPath = new System.Windows.Forms.TextBox();
+            this.buttonComputerWallpaperPathBrowse = new System.Windows.Forms.Button();
+            this.labelComputerWallpaperPathExplanation = new System.Windows.Forms.Label();
+            this.labelFileOperationTypeExplanation = new System.Windows.Forms.Label();
+            this.labelFileOperationTypeUnit = new System.Windows.Forms.Label();
+            this.comboBoxFileOperationType = new System.Windows.Forms.ComboBox();
             this.textBoxWindowsSpotlightPath = new System.Windows.Forms.TextBox();
             this.buttonWindowsSpotlightPathBrowse = new System.Windows.Forms.Button();
             this.labelWindowsSpotlightPathExplanation = new System.Windows.Forms.Label();
@@ -203,31 +218,16 @@
             this.labelCategorizeAndMoveSettingValue = new System.Windows.Forms.Label();
             this.labelCategorizeAndMoveSettingUnit = new System.Windows.Forms.Label();
             this.labelCategorizeAndMoveSettingExplanation = new System.Windows.Forms.Label();
-            this.toolTipMainSetting = new System.Windows.Forms.ToolTip(this.components);
             this.labelSearchDirectoryPath = new System.Windows.Forms.Label();
             this.textBoxSearchDirectoryPath = new System.Windows.Forms.TextBox();
             this.buttonSearchDirectoryPathBrowse = new System.Windows.Forms.Button();
             this.labelSearchDirectoryPathExplanation = new System.Windows.Forms.Label();
             this.labelFileOperationType = new System.Windows.Forms.Label();
-            this.comboBoxFileOperationType = new System.Windows.Forms.ComboBox();
-            this.labelFileOperationTypeUnit = new System.Windows.Forms.Label();
-            this.labelFileOperationTypeExplanation = new System.Windows.Forms.Label();
+            this.labelMobileWallpaperPath = new System.Windows.Forms.Label();
             this.textBoxMobileWallpaperPath = new System.Windows.Forms.TextBox();
             this.buttonMobileWallpaperPathBrowse = new System.Windows.Forms.Button();
             this.labelMobileWallpaperPathExplanation = new System.Windows.Forms.Label();
-            this.labelMobileWallpaperPath = new System.Windows.Forms.Label();
-            this.labelComputerWallpaperPath = new System.Windows.Forms.Label();
-            this.textBoxComputerWallpaperPath = new System.Windows.Forms.TextBox();
-            this.buttonComputerWallpaperPathBrowse = new System.Windows.Forms.Button();
-            this.labelComputerWallpaperPathExplanation = new System.Windows.Forms.Label();
-            this.labelVideoWallpaperPath = new System.Windows.Forms.Label();
-            this.textBoxVideoWallpaperPath = new System.Windows.Forms.TextBox();
-            this.buttonVideoWallpaperPathBrowse = new System.Windows.Forms.Button();
-            this.labelVideoWallpaperPathExplanation = new System.Windows.Forms.Label();
-            this.labelRejectedPath = new System.Windows.Forms.Label();
-            this.textBoxRejectedPath = new System.Windows.Forms.TextBox();
-            this.buttonRejectedPathBrowse = new System.Windows.Forms.Button();
-            this.labelRejectedPathExplanation = new System.Windows.Forms.Label();
+            this.toolTipMainSetting = new System.Windows.Forms.ToolTip(this.components);
             this.buttonRead = new System.Windows.Forms.Button();
             this.buttonSave = new System.Windows.Forms.Button();
             this.tabControlSettingMain.SuspendLayout();
@@ -348,7 +348,7 @@
             this.tableLayoutPanelAppSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tableLayoutPanelAppSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tableLayoutPanelAppSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tableLayoutPanelAppSetting.Size = new System.Drawing.Size(739, 637);
+            this.tableLayoutPanelAppSetting.Size = new System.Drawing.Size(739, 523);
             this.tableLayoutPanelAppSetting.TabIndex = 0;
             // 
             // labelNetworkStateTestService
@@ -1144,6 +1144,156 @@
             this.tableLayoutPanelImageDownloadSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tableLayoutPanelImageDownloadSetting.Size = new System.Drawing.Size(739, 1183);
             this.tableLayoutPanelImageDownloadSetting.TabIndex = 0;
+            // 
+            // labelRejectedPath
+            // 
+            this.labelRejectedPath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelRejectedPath.AutoSize = true;
+            this.labelRejectedPath.Location = new System.Drawing.Point(3, 1029);
+            this.labelRejectedPath.Name = "labelRejectedPath";
+            this.labelRejectedPath.Size = new System.Drawing.Size(171, 12);
+            this.labelRejectedPath.TabIndex = 184;
+            this.labelRejectedPath.Text = "无用文件的丢弃目录：";
+            // 
+            // textBoxRejectedPath
+            // 
+            this.textBoxRejectedPath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxRejectedPath.Location = new System.Drawing.Point(180, 1024);
+            this.textBoxRejectedPath.Name = "textBoxRejectedPath";
+            this.textBoxRejectedPath.ReadOnly = true;
+            this.textBoxRejectedPath.Size = new System.Drawing.Size(237, 21);
+            this.textBoxRejectedPath.TabIndex = 185;
+            // 
+            // buttonRejectedPathBrowse
+            // 
+            this.buttonRejectedPathBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonRejectedPathBrowse.Location = new System.Drawing.Point(423, 1023);
+            this.buttonRejectedPathBrowse.Name = "buttonRejectedPathBrowse";
+            this.buttonRejectedPathBrowse.Size = new System.Drawing.Size(67, 23);
+            this.buttonRejectedPathBrowse.TabIndex = 186;
+            this.buttonRejectedPathBrowse.Text = "浏览 ...";
+            this.buttonRejectedPathBrowse.UseVisualStyleBackColor = true;
+            // 
+            // labelRejectedPathExplanation
+            // 
+            this.labelRejectedPathExplanation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelRejectedPathExplanation.AutoSize = true;
+            this.labelRejectedPathExplanation.Location = new System.Drawing.Point(496, 1029);
+            this.labelRejectedPathExplanation.Name = "labelRejectedPathExplanation";
+            this.labelRejectedPathExplanation.Size = new System.Drawing.Size(240, 12);
+            this.labelRejectedPathExplanation.TabIndex = 187;
+            this.labelRejectedPathExplanation.Text = "指定存放丢弃抛弃掉的文件的目标路径";
+            this.toolTipMainSetting.SetToolTip(this.labelRejectedPathExplanation, "Windows锁屏聚焦图片中有时会带二维码广告图片，为了屏蔽此类无用图片文件，程序中设定了长宽小于500像素的就抛弃。\r\n(width < 500 || heig" +
+        "ht < 500)");
+            // 
+            // labelVideoWallpaperPath
+            // 
+            this.labelVideoWallpaperPath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelVideoWallpaperPath.AutoSize = true;
+            this.labelVideoWallpaperPath.Location = new System.Drawing.Point(3, 999);
+            this.labelVideoWallpaperPath.Name = "labelVideoWallpaperPath";
+            this.labelVideoWallpaperPath.Size = new System.Drawing.Size(171, 12);
+            this.labelVideoWallpaperPath.TabIndex = 180;
+            this.labelVideoWallpaperPath.Text = "视频文件存储目录：";
+            // 
+            // textBoxVideoWallpaperPath
+            // 
+            this.textBoxVideoWallpaperPath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxVideoWallpaperPath.Location = new System.Drawing.Point(180, 994);
+            this.textBoxVideoWallpaperPath.Name = "textBoxVideoWallpaperPath";
+            this.textBoxVideoWallpaperPath.ReadOnly = true;
+            this.textBoxVideoWallpaperPath.Size = new System.Drawing.Size(237, 21);
+            this.textBoxVideoWallpaperPath.TabIndex = 181;
+            // 
+            // buttonVideoWallpaperPathBrowse
+            // 
+            this.buttonVideoWallpaperPathBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonVideoWallpaperPathBrowse.Location = new System.Drawing.Point(423, 993);
+            this.buttonVideoWallpaperPathBrowse.Name = "buttonVideoWallpaperPathBrowse";
+            this.buttonVideoWallpaperPathBrowse.Size = new System.Drawing.Size(67, 23);
+            this.buttonVideoWallpaperPathBrowse.TabIndex = 182;
+            this.buttonVideoWallpaperPathBrowse.Text = "浏览 ...";
+            this.buttonVideoWallpaperPathBrowse.UseVisualStyleBackColor = true;
+            // 
+            // labelVideoWallpaperPathExplanation
+            // 
+            this.labelVideoWallpaperPathExplanation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelVideoWallpaperPathExplanation.AutoSize = true;
+            this.labelVideoWallpaperPathExplanation.Location = new System.Drawing.Point(496, 999);
+            this.labelVideoWallpaperPathExplanation.Name = "labelVideoWallpaperPathExplanation";
+            this.labelVideoWallpaperPathExplanation.Size = new System.Drawing.Size(240, 12);
+            this.labelVideoWallpaperPathExplanation.TabIndex = 183;
+            this.labelVideoWallpaperPathExplanation.Text = "指定存放视频文件的目标路径";
+            this.toolTipMainSetting.SetToolTip(this.labelVideoWallpaperPathExplanation, "Windows聚焦有时除了图片还会提供视频，如微软Edge浏览器主页的动态视频，也是可以保存下来欣赏的。");
+            // 
+            // labelComputerWallpaperPath
+            // 
+            this.labelComputerWallpaperPath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelComputerWallpaperPath.AutoSize = true;
+            this.labelComputerWallpaperPath.Location = new System.Drawing.Point(3, 939);
+            this.labelComputerWallpaperPath.Name = "labelComputerWallpaperPath";
+            this.labelComputerWallpaperPath.Size = new System.Drawing.Size(171, 12);
+            this.labelComputerWallpaperPath.TabIndex = 176;
+            this.labelComputerWallpaperPath.Text = "电脑壁纸存储目录：";
+            // 
+            // textBoxComputerWallpaperPath
+            // 
+            this.textBoxComputerWallpaperPath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxComputerWallpaperPath.Location = new System.Drawing.Point(180, 934);
+            this.textBoxComputerWallpaperPath.Name = "textBoxComputerWallpaperPath";
+            this.textBoxComputerWallpaperPath.ReadOnly = true;
+            this.textBoxComputerWallpaperPath.Size = new System.Drawing.Size(237, 21);
+            this.textBoxComputerWallpaperPath.TabIndex = 177;
+            // 
+            // buttonComputerWallpaperPathBrowse
+            // 
+            this.buttonComputerWallpaperPathBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonComputerWallpaperPathBrowse.Location = new System.Drawing.Point(423, 933);
+            this.buttonComputerWallpaperPathBrowse.Name = "buttonComputerWallpaperPathBrowse";
+            this.buttonComputerWallpaperPathBrowse.Size = new System.Drawing.Size(67, 23);
+            this.buttonComputerWallpaperPathBrowse.TabIndex = 178;
+            this.buttonComputerWallpaperPathBrowse.Text = "浏览 ...";
+            this.buttonComputerWallpaperPathBrowse.UseVisualStyleBackColor = true;
+            // 
+            // labelComputerWallpaperPathExplanation
+            // 
+            this.labelComputerWallpaperPathExplanation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelComputerWallpaperPathExplanation.AutoSize = true;
+            this.labelComputerWallpaperPathExplanation.Location = new System.Drawing.Point(496, 939);
+            this.labelComputerWallpaperPathExplanation.Name = "labelComputerWallpaperPathExplanation";
+            this.labelComputerWallpaperPathExplanation.Size = new System.Drawing.Size(240, 12);
+            this.labelComputerWallpaperPathExplanation.TabIndex = 179;
+            this.labelComputerWallpaperPathExplanation.Text = "指定存放横向图片电脑壁纸的目标路径";
+            // 
+            // labelFileOperationTypeExplanation
+            // 
+            this.labelFileOperationTypeExplanation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelFileOperationTypeExplanation.AutoSize = true;
+            this.labelFileOperationTypeExplanation.Font = new System.Drawing.Font("宋体", 9F);
+            this.labelFileOperationTypeExplanation.Location = new System.Drawing.Point(496, 879);
+            this.labelFileOperationTypeExplanation.Name = "labelFileOperationTypeExplanation";
+            this.labelFileOperationTypeExplanation.Size = new System.Drawing.Size(240, 12);
+            this.labelFileOperationTypeExplanation.TabIndex = 171;
+            this.labelFileOperationTypeExplanation.Text = "将文件 复制 / 剪切 到目标文件夹中";
+            // 
+            // labelFileOperationTypeUnit
+            // 
+            this.labelFileOperationTypeUnit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelFileOperationTypeUnit.AutoSize = true;
+            this.labelFileOperationTypeUnit.Location = new System.Drawing.Point(423, 879);
+            this.labelFileOperationTypeUnit.Name = "labelFileOperationTypeUnit";
+            this.labelFileOperationTypeUnit.Size = new System.Drawing.Size(67, 12);
+            this.labelFileOperationTypeUnit.TabIndex = 170;
+            // 
+            // comboBoxFileOperationType
+            // 
+            this.comboBoxFileOperationType.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboBoxFileOperationType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxFileOperationType.FormattingEnabled = true;
+            this.comboBoxFileOperationType.Location = new System.Drawing.Point(180, 875);
+            this.comboBoxFileOperationType.Name = "comboBoxFileOperationType";
+            this.comboBoxFileOperationType.Size = new System.Drawing.Size(237, 20);
+            this.comboBoxFileOperationType.TabIndex = 169;
             // 
             // textBoxWindowsSpotlightPath
             // 
@@ -2446,35 +2596,15 @@
             this.labelFileOperationType.TabIndex = 168;
             this.labelFileOperationType.Text = "文件归类的移动类型：";
             // 
-            // comboBoxFileOperationType
+            // labelMobileWallpaperPath
             // 
-            this.comboBoxFileOperationType.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.comboBoxFileOperationType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxFileOperationType.FormattingEnabled = true;
-            this.comboBoxFileOperationType.Location = new System.Drawing.Point(180, 875);
-            this.comboBoxFileOperationType.Name = "comboBoxFileOperationType";
-            this.comboBoxFileOperationType.Size = new System.Drawing.Size(237, 20);
-            this.comboBoxFileOperationType.TabIndex = 169;
-            // 
-            // labelFileOperationTypeUnit
-            // 
-            this.labelFileOperationTypeUnit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelFileOperationTypeUnit.AutoSize = true;
-            this.labelFileOperationTypeUnit.Location = new System.Drawing.Point(423, 879);
-            this.labelFileOperationTypeUnit.Name = "labelFileOperationTypeUnit";
-            this.labelFileOperationTypeUnit.Size = new System.Drawing.Size(67, 12);
-            this.labelFileOperationTypeUnit.TabIndex = 170;
-            // 
-            // labelFileOperationTypeExplanation
-            // 
-            this.labelFileOperationTypeExplanation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelFileOperationTypeExplanation.AutoSize = true;
-            this.labelFileOperationTypeExplanation.Font = new System.Drawing.Font("宋体", 9F);
-            this.labelFileOperationTypeExplanation.Location = new System.Drawing.Point(496, 879);
-            this.labelFileOperationTypeExplanation.Name = "labelFileOperationTypeExplanation";
-            this.labelFileOperationTypeExplanation.Size = new System.Drawing.Size(240, 12);
-            this.labelFileOperationTypeExplanation.TabIndex = 171;
-            this.labelFileOperationTypeExplanation.Text = "将文件 复制 / 剪切 到目标文件夹中";
+            this.labelMobileWallpaperPath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelMobileWallpaperPath.AutoSize = true;
+            this.labelMobileWallpaperPath.Location = new System.Drawing.Point(3, 969);
+            this.labelMobileWallpaperPath.Name = "labelMobileWallpaperPath";
+            this.labelMobileWallpaperPath.Size = new System.Drawing.Size(171, 12);
+            this.labelMobileWallpaperPath.TabIndex = 172;
+            this.labelMobileWallpaperPath.Text = "手机壁纸存储目录：";
             // 
             // textBoxMobileWallpaperPath
             // 
@@ -2504,136 +2634,6 @@
             this.labelMobileWallpaperPathExplanation.Size = new System.Drawing.Size(240, 12);
             this.labelMobileWallpaperPathExplanation.TabIndex = 175;
             this.labelMobileWallpaperPathExplanation.Text = "指定存放竖向图片手机壁纸的目标路径";
-            // 
-            // labelMobileWallpaperPath
-            // 
-            this.labelMobileWallpaperPath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelMobileWallpaperPath.AutoSize = true;
-            this.labelMobileWallpaperPath.Location = new System.Drawing.Point(3, 969);
-            this.labelMobileWallpaperPath.Name = "labelMobileWallpaperPath";
-            this.labelMobileWallpaperPath.Size = new System.Drawing.Size(171, 12);
-            this.labelMobileWallpaperPath.TabIndex = 172;
-            this.labelMobileWallpaperPath.Text = "手机壁纸存储目录：";
-            // 
-            // labelComputerWallpaperPath
-            // 
-            this.labelComputerWallpaperPath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelComputerWallpaperPath.AutoSize = true;
-            this.labelComputerWallpaperPath.Location = new System.Drawing.Point(3, 939);
-            this.labelComputerWallpaperPath.Name = "labelComputerWallpaperPath";
-            this.labelComputerWallpaperPath.Size = new System.Drawing.Size(171, 12);
-            this.labelComputerWallpaperPath.TabIndex = 176;
-            this.labelComputerWallpaperPath.Text = "电脑壁纸存储目录：";
-            // 
-            // textBoxComputerWallpaperPath
-            // 
-            this.textBoxComputerWallpaperPath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxComputerWallpaperPath.Location = new System.Drawing.Point(180, 934);
-            this.textBoxComputerWallpaperPath.Name = "textBoxComputerWallpaperPath";
-            this.textBoxComputerWallpaperPath.ReadOnly = true;
-            this.textBoxComputerWallpaperPath.Size = new System.Drawing.Size(237, 21);
-            this.textBoxComputerWallpaperPath.TabIndex = 177;
-            // 
-            // buttonComputerWallpaperPathBrowse
-            // 
-            this.buttonComputerWallpaperPathBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonComputerWallpaperPathBrowse.Location = new System.Drawing.Point(423, 933);
-            this.buttonComputerWallpaperPathBrowse.Name = "buttonComputerWallpaperPathBrowse";
-            this.buttonComputerWallpaperPathBrowse.Size = new System.Drawing.Size(67, 23);
-            this.buttonComputerWallpaperPathBrowse.TabIndex = 178;
-            this.buttonComputerWallpaperPathBrowse.Text = "浏览 ...";
-            this.buttonComputerWallpaperPathBrowse.UseVisualStyleBackColor = true;
-            // 
-            // labelComputerWallpaperPathExplanation
-            // 
-            this.labelComputerWallpaperPathExplanation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelComputerWallpaperPathExplanation.AutoSize = true;
-            this.labelComputerWallpaperPathExplanation.Location = new System.Drawing.Point(496, 939);
-            this.labelComputerWallpaperPathExplanation.Name = "labelComputerWallpaperPathExplanation";
-            this.labelComputerWallpaperPathExplanation.Size = new System.Drawing.Size(240, 12);
-            this.labelComputerWallpaperPathExplanation.TabIndex = 179;
-            this.labelComputerWallpaperPathExplanation.Text = "指定存放横向图片电脑壁纸的目标路径";
-            // 
-            // labelVideoWallpaperPath
-            // 
-            this.labelVideoWallpaperPath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelVideoWallpaperPath.AutoSize = true;
-            this.labelVideoWallpaperPath.Location = new System.Drawing.Point(3, 999);
-            this.labelVideoWallpaperPath.Name = "labelVideoWallpaperPath";
-            this.labelVideoWallpaperPath.Size = new System.Drawing.Size(171, 12);
-            this.labelVideoWallpaperPath.TabIndex = 180;
-            this.labelVideoWallpaperPath.Text = "视频文件存储目录：";
-            // 
-            // textBoxVideoWallpaperPath
-            // 
-            this.textBoxVideoWallpaperPath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxVideoWallpaperPath.Location = new System.Drawing.Point(180, 994);
-            this.textBoxVideoWallpaperPath.Name = "textBoxVideoWallpaperPath";
-            this.textBoxVideoWallpaperPath.ReadOnly = true;
-            this.textBoxVideoWallpaperPath.Size = new System.Drawing.Size(237, 21);
-            this.textBoxVideoWallpaperPath.TabIndex = 181;
-            // 
-            // buttonVideoWallpaperPathBrowse
-            // 
-            this.buttonVideoWallpaperPathBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonVideoWallpaperPathBrowse.Location = new System.Drawing.Point(423, 993);
-            this.buttonVideoWallpaperPathBrowse.Name = "buttonVideoWallpaperPathBrowse";
-            this.buttonVideoWallpaperPathBrowse.Size = new System.Drawing.Size(67, 23);
-            this.buttonVideoWallpaperPathBrowse.TabIndex = 182;
-            this.buttonVideoWallpaperPathBrowse.Text = "浏览 ...";
-            this.buttonVideoWallpaperPathBrowse.UseVisualStyleBackColor = true;
-            // 
-            // labelVideoWallpaperPathExplanation
-            // 
-            this.labelVideoWallpaperPathExplanation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelVideoWallpaperPathExplanation.AutoSize = true;
-            this.labelVideoWallpaperPathExplanation.Location = new System.Drawing.Point(496, 999);
-            this.labelVideoWallpaperPathExplanation.Name = "labelVideoWallpaperPathExplanation";
-            this.labelVideoWallpaperPathExplanation.Size = new System.Drawing.Size(240, 12);
-            this.labelVideoWallpaperPathExplanation.TabIndex = 183;
-            this.labelVideoWallpaperPathExplanation.Text = "指定存放视频文件的目标路径";
-            this.toolTipMainSetting.SetToolTip(this.labelVideoWallpaperPathExplanation, "Windows聚焦有时除了图片还会提供视频，如微软Edge浏览器主页的动态视频，也是可以保存下来欣赏的。");
-            // 
-            // labelRejectedPath
-            // 
-            this.labelRejectedPath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelRejectedPath.AutoSize = true;
-            this.labelRejectedPath.Location = new System.Drawing.Point(3, 1029);
-            this.labelRejectedPath.Name = "labelRejectedPath";
-            this.labelRejectedPath.Size = new System.Drawing.Size(171, 12);
-            this.labelRejectedPath.TabIndex = 184;
-            this.labelRejectedPath.Text = "无用文件的丢弃目录：";
-            // 
-            // textBoxRejectedPath
-            // 
-            this.textBoxRejectedPath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxRejectedPath.Location = new System.Drawing.Point(180, 1024);
-            this.textBoxRejectedPath.Name = "textBoxRejectedPath";
-            this.textBoxRejectedPath.ReadOnly = true;
-            this.textBoxRejectedPath.Size = new System.Drawing.Size(237, 21);
-            this.textBoxRejectedPath.TabIndex = 185;
-            // 
-            // buttonRejectedPathBrowse
-            // 
-            this.buttonRejectedPathBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonRejectedPathBrowse.Location = new System.Drawing.Point(423, 1023);
-            this.buttonRejectedPathBrowse.Name = "buttonRejectedPathBrowse";
-            this.buttonRejectedPathBrowse.Size = new System.Drawing.Size(67, 23);
-            this.buttonRejectedPathBrowse.TabIndex = 186;
-            this.buttonRejectedPathBrowse.Text = "浏览 ...";
-            this.buttonRejectedPathBrowse.UseVisualStyleBackColor = true;
-            // 
-            // labelRejectedPathExplanation
-            // 
-            this.labelRejectedPathExplanation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelRejectedPathExplanation.AutoSize = true;
-            this.labelRejectedPathExplanation.Location = new System.Drawing.Point(496, 1029);
-            this.labelRejectedPathExplanation.Name = "labelRejectedPathExplanation";
-            this.labelRejectedPathExplanation.Size = new System.Drawing.Size(240, 12);
-            this.labelRejectedPathExplanation.TabIndex = 187;
-            this.labelRejectedPathExplanation.Text = "指定存放丢弃抛弃掉的文件的目标路径";
-            this.toolTipMainSetting.SetToolTip(this.labelRejectedPathExplanation, "Windows锁屏聚焦图片中有时会带二维码广告图片，为了屏蔽此类无用图片文件，程序中设定了长宽小于500像素的就抛弃。\r\n(width < 500 || heig" +
-        "ht < 500)");
             // 
             // buttonRead
             // 

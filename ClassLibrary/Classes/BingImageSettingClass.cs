@@ -163,20 +163,20 @@ namespace ClassLibrary.Classes
 		/// 查询字符串（Query）IDX
 		/// </summary>
 		public string Query3 { get; set; } = "idx";
-		/// <summary>
-		/// idx：从几天前开始下载
-		/// 默认0是从今天开始
-		/// </summary>
-		public int Query3Value { get; set; } = 0;
+        /// <summary>
+        /// idx：开始时间，从几天前开始下载，目前最早是往前7天
+        /// 默认0是从今天开始(原参数名：BingUrlDaysAgo)
+        /// </summary>
+        public int Query3Value { get; set; } = 0;
 		/// <summary>
 		/// 查询字符串（Query）N
 		/// </summary>
 		public string Query4 { get; set; } = "n";
-		/// <summary>
-		/// n：下载多少数量几天
-		/// 默认8是下载8天(8张)的图片
-		/// </summary>
-		public int Query4Value { get; set; } = 8;
+        /// <summary>
+        /// n：请求数量，下载多少数量几天，目前最多一次获取8张
+        /// 默认8是下载8天(8张)的图片(原参数名：BingUrlAFewDays)
+        /// </summary>
+        public int Query4Value { get; set; } = 8;
 		/// <summary>
 		/// 查询字符串（Query）VIDEO
 		/// </summary>
@@ -303,7 +303,7 @@ namespace ClassLibrary.Classes
 		/// <summary>
 		/// lc：语言，例如en-US
 		/// </summary>
-		public string Query5Value { get; set; } = "";
+		public string Query5Value { get; set; } = "zh-CN";
 		/// <summary>
 		/// 查询字符串（Query）CTRY
 		/// </summary>
@@ -332,7 +332,7 @@ namespace ClassLibrary.Classes
 		/// <summary>
 		/// 文件操作类型(处理文件是移动还是复制)
 		/// </summary>
-		public ClassLibrary.ShareClass.FileOperationType fileOperationType { get; set; } = ShareClass.FileOperationType.Move;
+		public ClassLibrary.ShareClass.FileOperationType FileOperationType { get; set; } = ShareClass.FileOperationType.Move;
 		/// <summary>
 		/// 文件所在目录源路径(需要处理的检索的源目录)
 		/// </summary>

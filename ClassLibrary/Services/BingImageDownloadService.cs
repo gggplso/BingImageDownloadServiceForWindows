@@ -1014,7 +1014,7 @@ namespace ClassLibrary.Services
 							try
 							{
 								string strFileOperationType = string.Empty;
-								switch (BingImageSetting.CategorizeAndMoveSetting.fileOperationType)
+								switch (BingImageSetting.CategorizeAndMoveSetting.FileOperationType)
 								{
 									case ClassLibrary.ShareClass.FileOperationType.Move:
 										File.Move(filePath, targetFilePath);
@@ -1025,7 +1025,7 @@ namespace ClassLibrary.Services
 										strFileOperationType = "复制到";
 										break;
 									default:
-										throw new ArgumentException("指定的文件操作类型无效。\r\nInvalid file operation type specified.", nameof(BingImageSetting.CategorizeAndMoveSetting.fileOperationType));
+										throw new ArgumentException("指定的文件操作类型无效。\r\nInvalid file operation type specified.", nameof(BingImageSetting.CategorizeAndMoveSetting.FileOperationType));
 								}
 								ClassLibrary.MyMethodExtension.InsertHashData(targetFilePath, strFileHash, isPortrait);
 								processedFilesCount++;

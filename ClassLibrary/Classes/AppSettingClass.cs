@@ -60,5 +60,9 @@ namespace ClassLibrary.Classes
 		/// Windows聚集API图片下载服务开关
 		/// </summary>
 		public bool WindowsSpotlightDownloadService { get; set; }
+		/// <summary>
+		/// 数据库文件存储路径
+		/// </summary>
+		public string SqliteDataPath { get; set; }
 	}
 }

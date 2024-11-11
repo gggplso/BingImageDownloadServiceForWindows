@@ -8,6 +8,7 @@ using System.Linq;
 using System.Net;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace BingImageDownloadForConsoleApplication
@@ -77,6 +78,7 @@ namespace BingImageDownloadForConsoleApplication
 
 			Console.WriteLine("暂停");
 			Console.ReadKey(true);
+			Console.WriteLine(ClassLibrary.ShareClass._sqliteConnectionString);
 			Console.WriteLine("确定要运行下面的程序？");
 			Console.ReadKey(true);
 #else
@@ -475,7 +477,14 @@ namespace BingImageDownloadForConsoleApplication
 				 */
 			#endregion
 
-			Console.ReadKey(true);
+			if (bingImageDownloadService.BingImageSetting.AppAutoExitWaitTime >= 0)
+			{
+				Thread.Sleep(TimeSpan.FromSeconds(bingImageDownloadService.BingImageSetting.AppAutoExitWaitTime));
+			}
+			else
+			{
+				Console.ReadKey(true);
+			}
 		}
 
 

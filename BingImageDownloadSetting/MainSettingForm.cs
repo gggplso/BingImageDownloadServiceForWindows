@@ -72,13 +72,34 @@ namespace BingImageDownloadSetting
 				string logCycle = appSetting.LogCycle;
 				logCycle = ClassLibrary.ShareClass.LogCycleConverter.VerifyValidFormatString(logCycle);
 				comboBoxLogCycle.Text = ClassLibrary.ShareClass.LogCycleConverter.ConvertToText(logCycle);
-
+				numericUpDownServiceRunningFirstWaitTime.Value = appSetting.ServiceRunningFirstWaitTime;
+				numericUpDownServiceRunningWaitTime.Value = appSetting.ServiceRunningWaitTime;
+				numericUpDownLogCounter.Value = appSetting.LogCounter;
+				comboBoxNetworkStateTestService.SelectedIndex = appSetting.NetworkStateTestService ? 0 : 1;
+				comboBoxBingImageDownloadService.SelectedIndex = appSetting.BingImageDownloadService ? 0 : 1;
+				comboBoxWindowsSpotlightCopyService.SelectedIndex = appSetting.WindowsSpotlightCopyService ? 0 : 1;
+				comboBoxWindowsSpotlightDownloadService.SelectedIndex = appSetting.WindowsSpotlightDownloadService ? 0 : 1;
+				comboBoxCategorizeAndMoveFileService.SelectedIndex = appSetting.CategorizeAndMoveFileService ? 0 : 1;
+				textBoxSqliteDataPath.Text = appSetting.SqliteDataPath;
+				comboBoxLogIsDebug.SelectedIndex = appSetting.LogIsDebug ? 0 : 1;
 			}
 
 			// 获取下载图片相关参数配置文件信息
 			ClassLibrary.Classes.BingImageSettingClass bingSetting = ClassLibrary.ShareClass.GetBingImageSettingClass();
 			if (bingSetting != null)
 			{
+				comboBoxNetworkStateTestSwitch.SelectedIndex = bingSetting.NetworkStateTestSwitch ? 0 : 1;
+				comboBoxBingImageDownloadSwitch.SelectedIndex = bingSetting.BingImageDownloadSwitch ? 0 : 1;
+				comboBoxWindowsSpotlightCopySwitch.SelectedIndex = bingSetting.WindowsSpotlightCopySwitch ? 0 : 1;
+				comboBoxWindowsSpotlightDownloadSwitch.SelectedIndex = bingSetting.WindowsSpotlightDownloadSwitch ? 0 : 1;
+				comboBoxCategorizeAndMoveFileSwitch.SelectedIndex = bingSetting.CategorizeAndMoveFileSwitch ? 0 : 1;
+				numericUpDownAppAutoExitWaitTime.Value = bingSetting.AppAutoExitWaitTime;
+				comboBoxOverwrite.SelectedIndex = bingSetting.Overwrite ? 0 : 1;
+				textBoxImageFileSavePath.Text = bingSetting.ImageFileSavePath;
+				textBoxDnsServerAddress.Text = bingSetting.NetworkInformation.DnsServerAddress;
+				numericUpDownSocketSendTimeout.Value = bingSetting.NetworkInformation.SocketSendTimeout;
+				numericUpDownSocketReceiveTimeout.Value = bingSetting.NetworkInformation.SocketReceiveTimeout;
+				textBoxPingReplyDomain.Text = bingSetting.NetworkInformation.PingReplyDomain;
 
 			}
 		}
@@ -90,6 +111,25 @@ namespace BingImageDownloadSetting
 		private void buttonSave_Click(object sender, EventArgs e)
 		{
 
+		}
+		/// <summary>
+		/// 双击Tab页签时，展现/隐藏 部分选项参数
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void tabControlSettingMain_MouseDoubleClick(object sender, MouseEventArgs e)
+		{
+			// SQL数据文件存放路径：
+			labelSqliteDataPath.Visible = labelSqliteDataPath.Visible == true ? false : true;
+			textBoxSqliteDataPath.Visible = textBoxSqliteDataPath.Visible == true ? false : true;
+			buttonSqliteDataPathBrowse.Visible = buttonSqliteDataPathBrowse.Visible == true ? false : true;
+			labelSqliteDataPathExplanation.Visible = labelSqliteDataPathExplanation.Visible == true ? false : true;
+
+			// 调试日志显示开关：
+			labelLogIsDebug.Visible = labelLogIsDebug.Visible == true ? false : true;
+			comboBoxLogIsDebug.Visible = comboBoxLogIsDebug.Visible == true ? false : true;
+			labelLogIsDebugUnit.Visible = labelLogIsDebugUnit.Visible == true ? false : true;
+			labelLogIsDebugExplanation.Visible = labelLogIsDebugExplanation.Visible == true ? false : true;
 		}
 	}
 }

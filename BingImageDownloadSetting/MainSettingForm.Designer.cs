@@ -33,6 +33,9 @@
 			this.tabControlSettingMain = new System.Windows.Forms.TabControl();
 			this.tabPageAppSetting = new System.Windows.Forms.TabPage();
 			this.tableLayoutPanelAppSetting = new System.Windows.Forms.TableLayoutPanel();
+			this.textBoxSqliteDataPath = new System.Windows.Forms.TextBox();
+			this.buttonSqliteDataPathBrowse = new System.Windows.Forms.Button();
+			this.labelSqliteDataPathExplanation = new System.Windows.Forms.Label();
 			this.labelNetworkStateTestService = new System.Windows.Forms.Label();
 			this.comboBoxNetworkStateTestService = new System.Windows.Forms.ComboBox();
 			this.labelNetworkStateTestServiceUnit = new System.Windows.Forms.Label();
@@ -45,10 +48,10 @@
 			this.comboBoxWindowsSpotlightDownloadService = new System.Windows.Forms.ComboBox();
 			this.labelWindowsSpotlightDownloadServiceUnit = new System.Windows.Forms.Label();
 			this.labelWindowsSpotlightDownloadServiceExplanation = new System.Windows.Forms.Label();
-			this.labelWindowsSpolightCopyService = new System.Windows.Forms.Label();
-			this.comboBoxWindowsSpolightCopyService = new System.Windows.Forms.ComboBox();
-			this.labelWindowsSpolightCopyServiceUnit = new System.Windows.Forms.Label();
-			this.labelWindowsSpolightCopyServiceExplanation = new System.Windows.Forms.Label();
+			this.labelWindowsSpotlightCopyService = new System.Windows.Forms.Label();
+			this.comboBoxWindowsSpotlightCopyService = new System.Windows.Forms.ComboBox();
+			this.labelWindowsSpotlightCopyServiceUnit = new System.Windows.Forms.Label();
+			this.labelWindowsSpotlightCopyServiceExplanation = new System.Windows.Forms.Label();
 			this.labelBingImageDownloadService = new System.Windows.Forms.Label();
 			this.comboBoxBingImageDownloadService = new System.Windows.Forms.ComboBox();
 			this.labelBingImageDownloadServiceUnit = new System.Windows.Forms.Label();
@@ -85,8 +88,13 @@
 			this.comboBoxLogIsDebug = new System.Windows.Forms.ComboBox();
 			this.labelLogIsDebugUnit = new System.Windows.Forms.Label();
 			this.labelLogIsDebugExplanation = new System.Windows.Forms.Label();
+			this.labelSqliteDataPath = new System.Windows.Forms.Label();
 			this.tabPageImageDownloadSetting = new System.Windows.Forms.TabPage();
 			this.tableLayoutPanelImageDownloadSetting = new System.Windows.Forms.TableLayoutPanel();
+			this.labelAppAutoExitWaitTime = new System.Windows.Forms.Label();
+			this.numericUpDownAppAutoExitWaitTime = new System.Windows.Forms.NumericUpDown();
+			this.labelAppAutoExitWaitTimeUnit = new System.Windows.Forms.Label();
+			this.labelAppAutoExitWaitTimeExplanation = new System.Windows.Forms.Label();
 			this.labelRejectedPath = new System.Windows.Forms.Label();
 			this.textBoxRejectedPath = new System.Windows.Forms.TextBox();
 			this.buttonRejectedPathBrowse = new System.Windows.Forms.Button();
@@ -230,14 +238,7 @@
 			this.toolTipMainSetting = new System.Windows.Forms.ToolTip(this.components);
 			this.buttonRead = new System.Windows.Forms.Button();
 			this.buttonSave = new System.Windows.Forms.Button();
-			this.labelSqliteDataPath = new System.Windows.Forms.Label();
-			this.textBoxSqliteDataPath = new System.Windows.Forms.TextBox();
-			this.buttonSqliteDataPathBrowse = new System.Windows.Forms.Button();
-			this.labelSqliteDataPathExplanation = new System.Windows.Forms.Label();
-			this.labelAppAutoExitWaitTime = new System.Windows.Forms.Label();
-			this.numericUpDownAppAutoExitWaitTime = new System.Windows.Forms.NumericUpDown();
-			this.labelAppAutoExitWaitTimeUnit = new System.Windows.Forms.Label();
-			this.labelAppAutoExitWaitTimeExplanation = new System.Windows.Forms.Label();
+			this.tabPageAbout = new System.Windows.Forms.TabPage();
 			this.tabControlSettingMain.SuspendLayout();
 			this.tabPageAppSetting.SuspendLayout();
 			this.tableLayoutPanelAppSetting.SuspendLayout();
@@ -246,6 +247,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownLogCounter)).BeginInit();
 			this.tabPageImageDownloadSetting.SuspendLayout();
 			this.tableLayoutPanelImageDownloadSetting.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.numericUpDownAppAutoExitWaitTime)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownBingUrlDaysAgo)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownSocketReceiveTimeout)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownSocketSendTimeout)).BeginInit();
@@ -253,18 +255,19 @@
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownNetWaitTime)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownBingUrlAFewDays)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownWindowsSpotlightAPIRepeatLimit)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.numericUpDownAppAutoExitWaitTime)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// tabControlSettingMain
 			// 
 			this.tabControlSettingMain.Controls.Add(this.tabPageAppSetting);
 			this.tabControlSettingMain.Controls.Add(this.tabPageImageDownloadSetting);
+			this.tabControlSettingMain.Controls.Add(this.tabPageAbout);
 			this.tabControlSettingMain.Location = new System.Drawing.Point(12, 12);
 			this.tabControlSettingMain.Name = "tabControlSettingMain";
 			this.tabControlSettingMain.SelectedIndex = 0;
 			this.tabControlSettingMain.Size = new System.Drawing.Size(776, 426);
 			this.tabControlSettingMain.TabIndex = 0;
+			this.tabControlSettingMain.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.tabControlSettingMain_MouseDoubleClick);
 			// 
 			// tabPageAppSetting
 			// 
@@ -285,30 +288,29 @@
 			this.tableLayoutPanelAppSetting.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
 			this.tableLayoutPanelAppSetting.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
 			this.tableLayoutPanelAppSetting.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
-			this.tableLayoutPanelAppSetting.Controls.Add(this.textBoxSqliteDataPath, 1, 13);
-			this.tableLayoutPanelAppSetting.Controls.Add(this.buttonSqliteDataPathBrowse, 2, 13);
-			this.tableLayoutPanelAppSetting.Controls.Add(this.labelSqliteDataPathExplanation, 3, 13);
-			this.tableLayoutPanelAppSetting.Controls.Add(this.labelNetworkStateTestService, 0, 8);
-			this.tableLayoutPanelAppSetting.Controls.Add(this.comboBoxNetworkStateTestService, 1, 8);
-			this.tableLayoutPanelAppSetting.Controls.Add(this.labelNetworkStateTestServiceUnit, 2, 8);
-			this.tableLayoutPanelAppSetting.Controls.Add(this.labelNetworkStateTestServiceExplanation, 3, 8);
-			this.tableLayoutPanelAppSetting.Controls.Add(this.labelCategorizeAndMoveFileService, 0, 12);
-			this.tableLayoutPanelAppSetting.Controls.Add(this.comboBoxCategorizeAndMoveFileService, 1, 12);
-			this.tableLayoutPanelAppSetting.Controls.Add(this.labelCategorizeAndMoveFileServiceUnit, 2, 12);
-			this.tableLayoutPanelAppSetting.Controls.Add(this.labelCategorizeAndMoveFileServiceExplanation, 3, 12);
-			this.tableLayoutPanelAppSetting.Controls.Add(this.labelWindowsSpotlightDownloadService, 0, 11);
-			this.tableLayoutPanelAppSetting.Controls.Add(this.comboBoxWindowsSpotlightDownloadService, 1, 11);
-			this.tableLayoutPanelAppSetting.Controls.Add(this.labelWindowsSpotlightDownloadServiceUnit, 2, 11);
-			this.tableLayoutPanelAppSetting.Controls.Add(this.labelWindowsSpotlightDownloadServiceExplanation, 3, 11);
-			this.tableLayoutPanelAppSetting.Controls.Add(this.labelWindowsSpolightCopyService, 0, 10);
-			this.tableLayoutPanelAppSetting.Controls.Add(this.comboBoxWindowsSpolightCopyService, 1, 10);
-			this.tableLayoutPanelAppSetting.Controls.Add(this.labelWindowsSpolightCopyServiceUnit, 2, 10);
-			this.tableLayoutPanelAppSetting.Controls.Add(this.labelWindowsSpolightCopyServiceExplanation, 3, 10);
-			this.tableLayoutPanelAppSetting.Controls.Add(this.labelBingImageDownloadService, 0, 9);
-			this.tableLayoutPanelAppSetting.Controls.Add(this.comboBoxBingImageDownloadService, 1, 9);
-			this.tableLayoutPanelAppSetting.Controls.Add(this.labelBingImageDownloadServiceUnit, 2, 9);
-			this.tableLayoutPanelAppSetting.Controls.Add(this.labelBingImageDownloadServiceExplanation, 3, 9);
-			this.tableLayoutPanelAppSetting.Controls.Add(this.labelLogIsDebug, 0, 7);
+			this.tableLayoutPanelAppSetting.Controls.Add(this.textBoxSqliteDataPath, 1, 12);
+			this.tableLayoutPanelAppSetting.Controls.Add(this.buttonSqliteDataPathBrowse, 2, 12);
+			this.tableLayoutPanelAppSetting.Controls.Add(this.labelSqliteDataPathExplanation, 3, 12);
+			this.tableLayoutPanelAppSetting.Controls.Add(this.labelNetworkStateTestService, 0, 7);
+			this.tableLayoutPanelAppSetting.Controls.Add(this.comboBoxNetworkStateTestService, 1, 7);
+			this.tableLayoutPanelAppSetting.Controls.Add(this.labelNetworkStateTestServiceUnit, 2, 7);
+			this.tableLayoutPanelAppSetting.Controls.Add(this.labelNetworkStateTestServiceExplanation, 3, 7);
+			this.tableLayoutPanelAppSetting.Controls.Add(this.labelCategorizeAndMoveFileService, 0, 11);
+			this.tableLayoutPanelAppSetting.Controls.Add(this.comboBoxCategorizeAndMoveFileService, 1, 11);
+			this.tableLayoutPanelAppSetting.Controls.Add(this.labelCategorizeAndMoveFileServiceUnit, 2, 11);
+			this.tableLayoutPanelAppSetting.Controls.Add(this.labelCategorizeAndMoveFileServiceExplanation, 3, 11);
+			this.tableLayoutPanelAppSetting.Controls.Add(this.labelWindowsSpotlightDownloadService, 0, 10);
+			this.tableLayoutPanelAppSetting.Controls.Add(this.comboBoxWindowsSpotlightDownloadService, 1, 10);
+			this.tableLayoutPanelAppSetting.Controls.Add(this.labelWindowsSpotlightDownloadServiceUnit, 2, 10);
+			this.tableLayoutPanelAppSetting.Controls.Add(this.labelWindowsSpotlightDownloadServiceExplanation, 3, 10);
+			this.tableLayoutPanelAppSetting.Controls.Add(this.labelWindowsSpotlightCopyService, 0, 9);
+			this.tableLayoutPanelAppSetting.Controls.Add(this.comboBoxWindowsSpotlightCopyService, 1, 9);
+			this.tableLayoutPanelAppSetting.Controls.Add(this.labelWindowsSpotlightCopyServiceUnit, 2, 9);
+			this.tableLayoutPanelAppSetting.Controls.Add(this.labelWindowsSpotlightCopyServiceExplanation, 3, 9);
+			this.tableLayoutPanelAppSetting.Controls.Add(this.labelBingImageDownloadService, 0, 8);
+			this.tableLayoutPanelAppSetting.Controls.Add(this.comboBoxBingImageDownloadService, 1, 8);
+			this.tableLayoutPanelAppSetting.Controls.Add(this.labelBingImageDownloadServiceUnit, 2, 8);
+			this.tableLayoutPanelAppSetting.Controls.Add(this.labelBingImageDownloadServiceExplanation, 3, 8);
 			this.tableLayoutPanelAppSetting.Controls.Add(this.labelServiceRunningWaitTimeExplanation, 3, 5);
 			this.tableLayoutPanelAppSetting.Controls.Add(this.labelServiceRunningWaitTimeUnit, 2, 5);
 			this.tableLayoutPanelAppSetting.Controls.Add(this.numericUpDownServiceRunningWaitTime, 1, 5);
@@ -337,13 +339,14 @@
 			this.tableLayoutPanelAppSetting.Controls.Add(this.labelLogCounter, 0, 6);
 			this.tableLayoutPanelAppSetting.Controls.Add(this.labelLogCounterUnit, 2, 6);
 			this.tableLayoutPanelAppSetting.Controls.Add(this.numericUpDownLogCounter, 1, 6);
-			this.tableLayoutPanelAppSetting.Controls.Add(this.comboBoxLogIsDebug, 1, 7);
-			this.tableLayoutPanelAppSetting.Controls.Add(this.labelLogIsDebugUnit, 2, 7);
-			this.tableLayoutPanelAppSetting.Controls.Add(this.labelLogIsDebugExplanation, 3, 7);
-			this.tableLayoutPanelAppSetting.Controls.Add(this.labelSqliteDataPath, 0, 13);
+			this.tableLayoutPanelAppSetting.Controls.Add(this.labelSqliteDataPath, 0, 12);
+			this.tableLayoutPanelAppSetting.Controls.Add(this.labelLogIsDebug, 0, 13);
+			this.tableLayoutPanelAppSetting.Controls.Add(this.comboBoxLogIsDebug, 1, 13);
+			this.tableLayoutPanelAppSetting.Controls.Add(this.labelLogIsDebugUnit, 2, 13);
+			this.tableLayoutPanelAppSetting.Controls.Add(this.labelLogIsDebugExplanation, 3, 13);
 			this.tableLayoutPanelAppSetting.Location = new System.Drawing.Point(6, 6);
 			this.tableLayoutPanelAppSetting.Name = "tableLayoutPanelAppSetting";
-			this.tableLayoutPanelAppSetting.RowCount = 17;
+			this.tableLayoutPanelAppSetting.RowCount = 16;
 			this.tableLayoutPanelAppSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
 			this.tableLayoutPanelAppSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
 			this.tableLayoutPanelAppSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
@@ -360,15 +363,44 @@
 			this.tableLayoutPanelAppSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
 			this.tableLayoutPanelAppSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
 			this.tableLayoutPanelAppSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-			this.tableLayoutPanelAppSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+			this.tableLayoutPanelAppSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
 			this.tableLayoutPanelAppSetting.Size = new System.Drawing.Size(739, 523);
 			this.tableLayoutPanelAppSetting.TabIndex = 0;
+			// 
+			// textBoxSqliteDataPath
+			// 
+			this.textBoxSqliteDataPath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+			this.textBoxSqliteDataPath.Location = new System.Drawing.Point(150, 364);
+			this.textBoxSqliteDataPath.Name = "textBoxSqliteDataPath";
+			this.textBoxSqliteDataPath.ReadOnly = true;
+			this.textBoxSqliteDataPath.Size = new System.Drawing.Size(289, 21);
+			this.textBoxSqliteDataPath.TabIndex = 53;
+			// 
+			// buttonSqliteDataPathBrowse
+			// 
+			this.buttonSqliteDataPathBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+			this.buttonSqliteDataPathBrowse.Location = new System.Drawing.Point(445, 363);
+			this.buttonSqliteDataPathBrowse.Name = "buttonSqliteDataPathBrowse";
+			this.buttonSqliteDataPathBrowse.Size = new System.Drawing.Size(67, 23);
+			this.buttonSqliteDataPathBrowse.TabIndex = 54;
+			this.buttonSqliteDataPathBrowse.Text = "浏览 ...";
+			this.buttonSqliteDataPathBrowse.UseVisualStyleBackColor = true;
+			// 
+			// labelSqliteDataPathExplanation
+			// 
+			this.labelSqliteDataPathExplanation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+			this.labelSqliteDataPathExplanation.AutoSize = true;
+			this.labelSqliteDataPathExplanation.Location = new System.Drawing.Point(518, 363);
+			this.labelSqliteDataPathExplanation.Name = "labelSqliteDataPathExplanation";
+			this.labelSqliteDataPathExplanation.Size = new System.Drawing.Size(218, 24);
+			this.labelSqliteDataPathExplanation.TabIndex = 55;
+			this.labelSqliteDataPathExplanation.Text = "为了解决调试与日常运行程序共用，将数据文件存储路径改为可自由配置项";
 			// 
 			// labelNetworkStateTestService
 			// 
 			this.labelNetworkStateTestService.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelNetworkStateTestService.AutoSize = true;
-			this.labelNetworkStateTestService.Location = new System.Drawing.Point(3, 249);
+			this.labelNetworkStateTestService.Location = new System.Drawing.Point(3, 219);
 			this.labelNetworkStateTestService.Name = "labelNetworkStateTestService";
 			this.labelNetworkStateTestService.Size = new System.Drawing.Size(141, 12);
 			this.labelNetworkStateTestService.TabIndex = 48;
@@ -382,7 +414,7 @@
 			this.comboBoxNetworkStateTestService.Items.AddRange(new object[] {
             "开启",
             "关闭"});
-			this.comboBoxNetworkStateTestService.Location = new System.Drawing.Point(150, 245);
+			this.comboBoxNetworkStateTestService.Location = new System.Drawing.Point(150, 215);
 			this.comboBoxNetworkStateTestService.Name = "comboBoxNetworkStateTestService";
 			this.comboBoxNetworkStateTestService.Size = new System.Drawing.Size(289, 20);
 			this.comboBoxNetworkStateTestService.TabIndex = 49;
@@ -391,7 +423,7 @@
 			// 
 			this.labelNetworkStateTestServiceUnit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelNetworkStateTestServiceUnit.AutoSize = true;
-			this.labelNetworkStateTestServiceUnit.Location = new System.Drawing.Point(445, 249);
+			this.labelNetworkStateTestServiceUnit.Location = new System.Drawing.Point(445, 219);
 			this.labelNetworkStateTestServiceUnit.Name = "labelNetworkStateTestServiceUnit";
 			this.labelNetworkStateTestServiceUnit.Size = new System.Drawing.Size(67, 12);
 			this.labelNetworkStateTestServiceUnit.TabIndex = 50;
@@ -400,7 +432,7 @@
 			// 
 			this.labelNetworkStateTestServiceExplanation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelNetworkStateTestServiceExplanation.AutoSize = true;
-			this.labelNetworkStateTestServiceExplanation.Location = new System.Drawing.Point(518, 249);
+			this.labelNetworkStateTestServiceExplanation.Location = new System.Drawing.Point(518, 219);
 			this.labelNetworkStateTestServiceExplanation.Name = "labelNetworkStateTestServiceExplanation";
 			this.labelNetworkStateTestServiceExplanation.Size = new System.Drawing.Size(218, 12);
 			this.labelNetworkStateTestServiceExplanation.TabIndex = 51;
@@ -410,7 +442,7 @@
 			// 
 			this.labelCategorizeAndMoveFileService.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelCategorizeAndMoveFileService.AutoSize = true;
-			this.labelCategorizeAndMoveFileService.Location = new System.Drawing.Point(3, 369);
+			this.labelCategorizeAndMoveFileService.Location = new System.Drawing.Point(3, 339);
 			this.labelCategorizeAndMoveFileService.Name = "labelCategorizeAndMoveFileService";
 			this.labelCategorizeAndMoveFileService.Size = new System.Drawing.Size(141, 12);
 			this.labelCategorizeAndMoveFileService.TabIndex = 44;
@@ -424,7 +456,7 @@
 			this.comboBoxCategorizeAndMoveFileService.Items.AddRange(new object[] {
             "开启",
             "关闭"});
-			this.comboBoxCategorizeAndMoveFileService.Location = new System.Drawing.Point(150, 365);
+			this.comboBoxCategorizeAndMoveFileService.Location = new System.Drawing.Point(150, 335);
 			this.comboBoxCategorizeAndMoveFileService.Name = "comboBoxCategorizeAndMoveFileService";
 			this.comboBoxCategorizeAndMoveFileService.Size = new System.Drawing.Size(289, 20);
 			this.comboBoxCategorizeAndMoveFileService.TabIndex = 45;
@@ -433,7 +465,7 @@
 			// 
 			this.labelCategorizeAndMoveFileServiceUnit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelCategorizeAndMoveFileServiceUnit.AutoSize = true;
-			this.labelCategorizeAndMoveFileServiceUnit.Location = new System.Drawing.Point(445, 369);
+			this.labelCategorizeAndMoveFileServiceUnit.Location = new System.Drawing.Point(445, 339);
 			this.labelCategorizeAndMoveFileServiceUnit.Name = "labelCategorizeAndMoveFileServiceUnit";
 			this.labelCategorizeAndMoveFileServiceUnit.Size = new System.Drawing.Size(67, 12);
 			this.labelCategorizeAndMoveFileServiceUnit.TabIndex = 46;
@@ -442,7 +474,7 @@
 			// 
 			this.labelCategorizeAndMoveFileServiceExplanation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelCategorizeAndMoveFileServiceExplanation.AutoSize = true;
-			this.labelCategorizeAndMoveFileServiceExplanation.Location = new System.Drawing.Point(518, 369);
+			this.labelCategorizeAndMoveFileServiceExplanation.Location = new System.Drawing.Point(518, 339);
 			this.labelCategorizeAndMoveFileServiceExplanation.Name = "labelCategorizeAndMoveFileServiceExplanation";
 			this.labelCategorizeAndMoveFileServiceExplanation.Size = new System.Drawing.Size(218, 12);
 			this.labelCategorizeAndMoveFileServiceExplanation.TabIndex = 47;
@@ -452,7 +484,7 @@
 			// 
 			this.labelWindowsSpotlightDownloadService.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelWindowsSpotlightDownloadService.AutoSize = true;
-			this.labelWindowsSpotlightDownloadService.Location = new System.Drawing.Point(3, 339);
+			this.labelWindowsSpotlightDownloadService.Location = new System.Drawing.Point(3, 309);
 			this.labelWindowsSpotlightDownloadService.Name = "labelWindowsSpotlightDownloadService";
 			this.labelWindowsSpotlightDownloadService.Size = new System.Drawing.Size(141, 12);
 			this.labelWindowsSpotlightDownloadService.TabIndex = 40;
@@ -466,7 +498,7 @@
 			this.comboBoxWindowsSpotlightDownloadService.Items.AddRange(new object[] {
             "开启",
             "关闭"});
-			this.comboBoxWindowsSpotlightDownloadService.Location = new System.Drawing.Point(150, 335);
+			this.comboBoxWindowsSpotlightDownloadService.Location = new System.Drawing.Point(150, 305);
 			this.comboBoxWindowsSpotlightDownloadService.Name = "comboBoxWindowsSpotlightDownloadService";
 			this.comboBoxWindowsSpotlightDownloadService.Size = new System.Drawing.Size(289, 20);
 			this.comboBoxWindowsSpotlightDownloadService.TabIndex = 41;
@@ -475,7 +507,7 @@
 			// 
 			this.labelWindowsSpotlightDownloadServiceUnit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelWindowsSpotlightDownloadServiceUnit.AutoSize = true;
-			this.labelWindowsSpotlightDownloadServiceUnit.Location = new System.Drawing.Point(445, 339);
+			this.labelWindowsSpotlightDownloadServiceUnit.Location = new System.Drawing.Point(445, 309);
 			this.labelWindowsSpotlightDownloadServiceUnit.Name = "labelWindowsSpotlightDownloadServiceUnit";
 			this.labelWindowsSpotlightDownloadServiceUnit.Size = new System.Drawing.Size(67, 12);
 			this.labelWindowsSpotlightDownloadServiceUnit.TabIndex = 42;
@@ -484,59 +516,59 @@
 			// 
 			this.labelWindowsSpotlightDownloadServiceExplanation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelWindowsSpotlightDownloadServiceExplanation.AutoSize = true;
-			this.labelWindowsSpotlightDownloadServiceExplanation.Location = new System.Drawing.Point(518, 339);
+			this.labelWindowsSpotlightDownloadServiceExplanation.Location = new System.Drawing.Point(518, 309);
 			this.labelWindowsSpotlightDownloadServiceExplanation.Name = "labelWindowsSpotlightDownloadServiceExplanation";
 			this.labelWindowsSpotlightDownloadServiceExplanation.Size = new System.Drawing.Size(218, 12);
 			this.labelWindowsSpotlightDownloadServiceExplanation.TabIndex = 43;
 			this.labelWindowsSpotlightDownloadServiceExplanation.Text = "微软聚焦图片下载服务开关";
 			// 
-			// labelWindowsSpolightCopyService
+			// labelWindowsSpotlightCopyService
 			// 
-			this.labelWindowsSpolightCopyService.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-			this.labelWindowsSpolightCopyService.AutoSize = true;
-			this.labelWindowsSpolightCopyService.Location = new System.Drawing.Point(3, 309);
-			this.labelWindowsSpolightCopyService.Name = "labelWindowsSpolightCopyService";
-			this.labelWindowsSpolightCopyService.Size = new System.Drawing.Size(141, 12);
-			this.labelWindowsSpolightCopyService.TabIndex = 36;
-			this.labelWindowsSpolightCopyService.Text = "聚焦图片复制服务：";
+			this.labelWindowsSpotlightCopyService.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+			this.labelWindowsSpotlightCopyService.AutoSize = true;
+			this.labelWindowsSpotlightCopyService.Location = new System.Drawing.Point(3, 279);
+			this.labelWindowsSpotlightCopyService.Name = "labelWindowsSpotlightCopyService";
+			this.labelWindowsSpotlightCopyService.Size = new System.Drawing.Size(141, 12);
+			this.labelWindowsSpotlightCopyService.TabIndex = 36;
+			this.labelWindowsSpotlightCopyService.Text = "聚焦图片复制服务：";
 			// 
-			// comboBoxWindowsSpolightCopyService
+			// comboBoxWindowsSpotlightCopyService
 			// 
-			this.comboBoxWindowsSpolightCopyService.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-			this.comboBoxWindowsSpolightCopyService.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.comboBoxWindowsSpolightCopyService.FormattingEnabled = true;
-			this.comboBoxWindowsSpolightCopyService.Items.AddRange(new object[] {
+			this.comboBoxWindowsSpotlightCopyService.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+			this.comboBoxWindowsSpotlightCopyService.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.comboBoxWindowsSpotlightCopyService.FormattingEnabled = true;
+			this.comboBoxWindowsSpotlightCopyService.Items.AddRange(new object[] {
             "开启",
             "关闭"});
-			this.comboBoxWindowsSpolightCopyService.Location = new System.Drawing.Point(150, 305);
-			this.comboBoxWindowsSpolightCopyService.Name = "comboBoxWindowsSpolightCopyService";
-			this.comboBoxWindowsSpolightCopyService.Size = new System.Drawing.Size(289, 20);
-			this.comboBoxWindowsSpolightCopyService.TabIndex = 37;
+			this.comboBoxWindowsSpotlightCopyService.Location = new System.Drawing.Point(150, 275);
+			this.comboBoxWindowsSpotlightCopyService.Name = "comboBoxWindowsSpotlightCopyService";
+			this.comboBoxWindowsSpotlightCopyService.Size = new System.Drawing.Size(289, 20);
+			this.comboBoxWindowsSpotlightCopyService.TabIndex = 37;
 			// 
-			// labelWindowsSpolightCopyServiceUnit
+			// labelWindowsSpotlightCopyServiceUnit
 			// 
-			this.labelWindowsSpolightCopyServiceUnit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-			this.labelWindowsSpolightCopyServiceUnit.AutoSize = true;
-			this.labelWindowsSpolightCopyServiceUnit.Location = new System.Drawing.Point(445, 309);
-			this.labelWindowsSpolightCopyServiceUnit.Name = "labelWindowsSpolightCopyServiceUnit";
-			this.labelWindowsSpolightCopyServiceUnit.Size = new System.Drawing.Size(67, 12);
-			this.labelWindowsSpolightCopyServiceUnit.TabIndex = 38;
+			this.labelWindowsSpotlightCopyServiceUnit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+			this.labelWindowsSpotlightCopyServiceUnit.AutoSize = true;
+			this.labelWindowsSpotlightCopyServiceUnit.Location = new System.Drawing.Point(445, 279);
+			this.labelWindowsSpotlightCopyServiceUnit.Name = "labelWindowsSpotlightCopyServiceUnit";
+			this.labelWindowsSpotlightCopyServiceUnit.Size = new System.Drawing.Size(67, 12);
+			this.labelWindowsSpotlightCopyServiceUnit.TabIndex = 38;
 			// 
-			// labelWindowsSpolightCopyServiceExplanation
+			// labelWindowsSpotlightCopyServiceExplanation
 			// 
-			this.labelWindowsSpolightCopyServiceExplanation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-			this.labelWindowsSpolightCopyServiceExplanation.AutoSize = true;
-			this.labelWindowsSpolightCopyServiceExplanation.Location = new System.Drawing.Point(518, 309);
-			this.labelWindowsSpolightCopyServiceExplanation.Name = "labelWindowsSpolightCopyServiceExplanation";
-			this.labelWindowsSpolightCopyServiceExplanation.Size = new System.Drawing.Size(218, 12);
-			this.labelWindowsSpolightCopyServiceExplanation.TabIndex = 39;
-			this.labelWindowsSpolightCopyServiceExplanation.Text = "Windows系统聚焦图片复制服务开关";
+			this.labelWindowsSpotlightCopyServiceExplanation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+			this.labelWindowsSpotlightCopyServiceExplanation.AutoSize = true;
+			this.labelWindowsSpotlightCopyServiceExplanation.Location = new System.Drawing.Point(518, 279);
+			this.labelWindowsSpotlightCopyServiceExplanation.Name = "labelWindowsSpotlightCopyServiceExplanation";
+			this.labelWindowsSpotlightCopyServiceExplanation.Size = new System.Drawing.Size(218, 12);
+			this.labelWindowsSpotlightCopyServiceExplanation.TabIndex = 39;
+			this.labelWindowsSpotlightCopyServiceExplanation.Text = "Windows系统聚焦图片复制服务开关";
 			// 
 			// labelBingImageDownloadService
 			// 
 			this.labelBingImageDownloadService.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelBingImageDownloadService.AutoSize = true;
-			this.labelBingImageDownloadService.Location = new System.Drawing.Point(3, 279);
+			this.labelBingImageDownloadService.Location = new System.Drawing.Point(3, 249);
 			this.labelBingImageDownloadService.Name = "labelBingImageDownloadService";
 			this.labelBingImageDownloadService.Size = new System.Drawing.Size(141, 12);
 			this.labelBingImageDownloadService.TabIndex = 32;
@@ -550,7 +582,7 @@
 			this.comboBoxBingImageDownloadService.Items.AddRange(new object[] {
             "开启",
             "关闭"});
-			this.comboBoxBingImageDownloadService.Location = new System.Drawing.Point(150, 275);
+			this.comboBoxBingImageDownloadService.Location = new System.Drawing.Point(150, 245);
 			this.comboBoxBingImageDownloadService.Name = "comboBoxBingImageDownloadService";
 			this.comboBoxBingImageDownloadService.Size = new System.Drawing.Size(289, 20);
 			this.comboBoxBingImageDownloadService.TabIndex = 33;
@@ -559,7 +591,7 @@
 			// 
 			this.labelBingImageDownloadServiceUnit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelBingImageDownloadServiceUnit.AutoSize = true;
-			this.labelBingImageDownloadServiceUnit.Location = new System.Drawing.Point(445, 279);
+			this.labelBingImageDownloadServiceUnit.Location = new System.Drawing.Point(445, 249);
 			this.labelBingImageDownloadServiceUnit.Name = "labelBingImageDownloadServiceUnit";
 			this.labelBingImageDownloadServiceUnit.Size = new System.Drawing.Size(67, 12);
 			this.labelBingImageDownloadServiceUnit.TabIndex = 34;
@@ -568,7 +600,7 @@
 			// 
 			this.labelBingImageDownloadServiceExplanation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelBingImageDownloadServiceExplanation.AutoSize = true;
-			this.labelBingImageDownloadServiceExplanation.Location = new System.Drawing.Point(518, 279);
+			this.labelBingImageDownloadServiceExplanation.Location = new System.Drawing.Point(518, 249);
 			this.labelBingImageDownloadServiceExplanation.Name = "labelBingImageDownloadServiceExplanation";
 			this.labelBingImageDownloadServiceExplanation.Size = new System.Drawing.Size(218, 12);
 			this.labelBingImageDownloadServiceExplanation.TabIndex = 35;
@@ -578,7 +610,7 @@
 			// 
 			this.labelLogIsDebug.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelLogIsDebug.AutoSize = true;
-			this.labelLogIsDebug.Location = new System.Drawing.Point(3, 219);
+			this.labelLogIsDebug.Location = new System.Drawing.Point(3, 399);
 			this.labelLogIsDebug.Name = "labelLogIsDebug";
 			this.labelLogIsDebug.Size = new System.Drawing.Size(141, 12);
 			this.labelLogIsDebug.TabIndex = 28;
@@ -908,7 +940,7 @@
 			this.comboBoxLogIsDebug.Items.AddRange(new object[] {
             "开启",
             "关闭"});
-			this.comboBoxLogIsDebug.Location = new System.Drawing.Point(150, 215);
+			this.comboBoxLogIsDebug.Location = new System.Drawing.Point(150, 395);
 			this.comboBoxLogIsDebug.Name = "comboBoxLogIsDebug";
 			this.comboBoxLogIsDebug.Size = new System.Drawing.Size(289, 20);
 			this.comboBoxLogIsDebug.TabIndex = 29;
@@ -917,7 +949,7 @@
 			// 
 			this.labelLogIsDebugUnit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelLogIsDebugUnit.AutoSize = true;
-			this.labelLogIsDebugUnit.Location = new System.Drawing.Point(445, 219);
+			this.labelLogIsDebugUnit.Location = new System.Drawing.Point(445, 399);
 			this.labelLogIsDebugUnit.Name = "labelLogIsDebugUnit";
 			this.labelLogIsDebugUnit.Size = new System.Drawing.Size(67, 12);
 			this.labelLogIsDebugUnit.TabIndex = 30;
@@ -926,11 +958,21 @@
 			// 
 			this.labelLogIsDebugExplanation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelLogIsDebugExplanation.AutoSize = true;
-			this.labelLogIsDebugExplanation.Location = new System.Drawing.Point(518, 219);
+			this.labelLogIsDebugExplanation.Location = new System.Drawing.Point(518, 399);
 			this.labelLogIsDebugExplanation.Name = "labelLogIsDebugExplanation";
 			this.labelLogIsDebugExplanation.Size = new System.Drawing.Size(218, 12);
 			this.labelLogIsDebugExplanation.TabIndex = 31;
 			this.labelLogIsDebugExplanation.Text = "调试日志是否显示";
+			// 
+			// labelSqliteDataPath
+			// 
+			this.labelSqliteDataPath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+			this.labelSqliteDataPath.AutoSize = true;
+			this.labelSqliteDataPath.Location = new System.Drawing.Point(3, 369);
+			this.labelSqliteDataPath.Name = "labelSqliteDataPath";
+			this.labelSqliteDataPath.Size = new System.Drawing.Size(141, 12);
+			this.labelSqliteDataPath.TabIndex = 52;
+			this.labelSqliteDataPath.Text = "SQL数据文件存放路径：";
 			// 
 			// tabPageImageDownloadSetting
 			// 
@@ -1162,6 +1204,50 @@
 			this.tableLayoutPanelImageDownloadSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
 			this.tableLayoutPanelImageDownloadSetting.Size = new System.Drawing.Size(739, 1183);
 			this.tableLayoutPanelImageDownloadSetting.TabIndex = 0;
+			// 
+			// labelAppAutoExitWaitTime
+			// 
+			this.labelAppAutoExitWaitTime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+			this.labelAppAutoExitWaitTime.AutoSize = true;
+			this.labelAppAutoExitWaitTime.Location = new System.Drawing.Point(3, 189);
+			this.labelAppAutoExitWaitTime.Name = "labelAppAutoExitWaitTime";
+			this.labelAppAutoExitWaitTime.Size = new System.Drawing.Size(171, 12);
+			this.labelAppAutoExitWaitTime.TabIndex = 188;
+			this.labelAppAutoExitWaitTime.Text = "App程序退出等待时间：";
+			// 
+			// numericUpDownAppAutoExitWaitTime
+			// 
+			this.numericUpDownAppAutoExitWaitTime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+			this.numericUpDownAppAutoExitWaitTime.Location = new System.Drawing.Point(180, 184);
+			this.numericUpDownAppAutoExitWaitTime.Name = "numericUpDownAppAutoExitWaitTime";
+			this.numericUpDownAppAutoExitWaitTime.Size = new System.Drawing.Size(237, 21);
+			this.numericUpDownAppAutoExitWaitTime.TabIndex = 189;
+			this.numericUpDownAppAutoExitWaitTime.Value = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+			// 
+			// labelAppAutoExitWaitTimeUnit
+			// 
+			this.labelAppAutoExitWaitTimeUnit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+			this.labelAppAutoExitWaitTimeUnit.AutoSize = true;
+			this.labelAppAutoExitWaitTimeUnit.Location = new System.Drawing.Point(423, 189);
+			this.labelAppAutoExitWaitTimeUnit.Name = "labelAppAutoExitWaitTimeUnit";
+			this.labelAppAutoExitWaitTimeUnit.Size = new System.Drawing.Size(67, 12);
+			this.labelAppAutoExitWaitTimeUnit.TabIndex = 190;
+			this.labelAppAutoExitWaitTimeUnit.Text = "(秒)";
+			// 
+			// labelAppAutoExitWaitTimeExplanation
+			// 
+			this.labelAppAutoExitWaitTimeExplanation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+			this.labelAppAutoExitWaitTimeExplanation.AutoSize = true;
+			this.labelAppAutoExitWaitTimeExplanation.Location = new System.Drawing.Point(496, 183);
+			this.labelAppAutoExitWaitTimeExplanation.Name = "labelAppAutoExitWaitTimeExplanation";
+			this.labelAppAutoExitWaitTimeExplanation.Size = new System.Drawing.Size(240, 24);
+			this.labelAppAutoExitWaitTimeExplanation.TabIndex = 191;
+			this.labelAppAutoExitWaitTimeExplanation.Text = "设置程序运行完上面的任务后，在等待时间之后自动退出程序。";
+			this.toolTipMainSetting.SetToolTip(this.labelAppAutoExitWaitTimeExplanation, "负数：不自动退出程序(按任意键退出)\r\n正数：等待指定时间后自动退出。\r\n目的：加入开机启动项后，可无需人为干预");
 			// 
 			// labelRejectedPath
 			// 
@@ -2655,7 +2741,7 @@
 			// 
 			// buttonRead
 			// 
-			this.buttonRead.Location = new System.Drawing.Point(613, 4);
+			this.buttonRead.Location = new System.Drawing.Point(597, 4);
 			this.buttonRead.Name = "buttonRead";
 			this.buttonRead.Size = new System.Drawing.Size(75, 25);
 			this.buttonRead.TabIndex = 1;
@@ -2665,7 +2751,7 @@
 			// 
 			// buttonSave
 			// 
-			this.buttonSave.Location = new System.Drawing.Point(709, 4);
+			this.buttonSave.Location = new System.Drawing.Point(693, 4);
 			this.buttonSave.Name = "buttonSave";
 			this.buttonSave.Size = new System.Drawing.Size(75, 25);
 			this.buttonSave.TabIndex = 2;
@@ -2673,88 +2759,14 @@
 			this.buttonSave.UseVisualStyleBackColor = true;
 			this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
 			// 
-			// labelSqliteDataPath
+			// tabPageAbout
 			// 
-			this.labelSqliteDataPath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-			this.labelSqliteDataPath.AutoSize = true;
-			this.labelSqliteDataPath.Location = new System.Drawing.Point(3, 399);
-			this.labelSqliteDataPath.Name = "labelSqliteDataPath";
-			this.labelSqliteDataPath.Size = new System.Drawing.Size(141, 12);
-			this.labelSqliteDataPath.TabIndex = 52;
-			this.labelSqliteDataPath.Text = "SQL数据文件存放路径：";
-			// 
-			// textBoxSqliteDataPath
-			// 
-			this.textBoxSqliteDataPath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-			this.textBoxSqliteDataPath.Location = new System.Drawing.Point(150, 394);
-			this.textBoxSqliteDataPath.Name = "textBoxSqliteDataPath";
-			this.textBoxSqliteDataPath.ReadOnly = true;
-			this.textBoxSqliteDataPath.Size = new System.Drawing.Size(289, 21);
-			this.textBoxSqliteDataPath.TabIndex = 53;
-			// 
-			// buttonSqliteDataPathBrowse
-			// 
-			this.buttonSqliteDataPathBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-			this.buttonSqliteDataPathBrowse.Location = new System.Drawing.Point(445, 393);
-			this.buttonSqliteDataPathBrowse.Name = "buttonSqliteDataPathBrowse";
-			this.buttonSqliteDataPathBrowse.Size = new System.Drawing.Size(67, 23);
-			this.buttonSqliteDataPathBrowse.TabIndex = 54;
-			this.buttonSqliteDataPathBrowse.Text = "浏览 ...";
-			this.buttonSqliteDataPathBrowse.UseVisualStyleBackColor = true;
-			// 
-			// labelSqliteDataPathExplanation
-			// 
-			this.labelSqliteDataPathExplanation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-			this.labelSqliteDataPathExplanation.AutoSize = true;
-			this.labelSqliteDataPathExplanation.Location = new System.Drawing.Point(518, 393);
-			this.labelSqliteDataPathExplanation.Name = "labelSqliteDataPathExplanation";
-			this.labelSqliteDataPathExplanation.Size = new System.Drawing.Size(218, 24);
-			this.labelSqliteDataPathExplanation.TabIndex = 55;
-			this.labelSqliteDataPathExplanation.Text = "为了解决调试与日常运行程序共用，将数据文件存储路径改为可自由配置项";
-			// 
-			// labelAppAutoExitWaitTime
-			// 
-			this.labelAppAutoExitWaitTime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-			this.labelAppAutoExitWaitTime.AutoSize = true;
-			this.labelAppAutoExitWaitTime.Location = new System.Drawing.Point(3, 189);
-			this.labelAppAutoExitWaitTime.Name = "labelAppAutoExitWaitTime";
-			this.labelAppAutoExitWaitTime.Size = new System.Drawing.Size(171, 12);
-			this.labelAppAutoExitWaitTime.TabIndex = 188;
-			this.labelAppAutoExitWaitTime.Text = "App程序退出等待时间：";
-			// 
-			// numericUpDownAppAutoExitWaitTime
-			// 
-			this.numericUpDownAppAutoExitWaitTime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-			this.numericUpDownAppAutoExitWaitTime.Location = new System.Drawing.Point(180, 184);
-			this.numericUpDownAppAutoExitWaitTime.Name = "numericUpDownAppAutoExitWaitTime";
-			this.numericUpDownAppAutoExitWaitTime.Size = new System.Drawing.Size(237, 21);
-			this.numericUpDownAppAutoExitWaitTime.TabIndex = 189;
-			this.numericUpDownAppAutoExitWaitTime.Value = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
-			// 
-			// labelAppAutoExitWaitTimeUnit
-			// 
-			this.labelAppAutoExitWaitTimeUnit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-			this.labelAppAutoExitWaitTimeUnit.AutoSize = true;
-			this.labelAppAutoExitWaitTimeUnit.Location = new System.Drawing.Point(423, 189);
-			this.labelAppAutoExitWaitTimeUnit.Name = "labelAppAutoExitWaitTimeUnit";
-			this.labelAppAutoExitWaitTimeUnit.Size = new System.Drawing.Size(67, 12);
-			this.labelAppAutoExitWaitTimeUnit.TabIndex = 190;
-			this.labelAppAutoExitWaitTimeUnit.Text = "(秒)";
-			// 
-			// labelAppAutoExitWaitTimeExplanation
-			// 
-			this.labelAppAutoExitWaitTimeExplanation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-			this.labelAppAutoExitWaitTimeExplanation.AutoSize = true;
-			this.labelAppAutoExitWaitTimeExplanation.Location = new System.Drawing.Point(496, 183);
-			this.labelAppAutoExitWaitTimeExplanation.Name = "labelAppAutoExitWaitTimeExplanation";
-			this.labelAppAutoExitWaitTimeExplanation.Size = new System.Drawing.Size(240, 24);
-			this.labelAppAutoExitWaitTimeExplanation.TabIndex = 191;
-			this.labelAppAutoExitWaitTimeExplanation.Text = "设置程序运行完上面的任务后，在等待时间之后自动退出程序。";
-			this.toolTipMainSetting.SetToolTip(this.labelAppAutoExitWaitTimeExplanation, "负数：不自动退出程序(按任意键退出)\r\n正数：等待指定时间后自动退出。\r\n目的：加入开机启动项后，可无需人为干预");
+			this.tabPageAbout.Location = new System.Drawing.Point(4, 22);
+			this.tabPageAbout.Name = "tabPageAbout";
+			this.tabPageAbout.Size = new System.Drawing.Size(768, 400);
+			this.tabPageAbout.TabIndex = 2;
+			this.tabPageAbout.Text = " 关于";
+			this.tabPageAbout.UseVisualStyleBackColor = true;
 			// 
 			// FormSettingMain
 			// 
@@ -2781,6 +2793,7 @@
 			this.tabPageImageDownloadSetting.ResumeLayout(false);
 			this.tableLayoutPanelImageDownloadSetting.ResumeLayout(false);
 			this.tableLayoutPanelImageDownloadSetting.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.numericUpDownAppAutoExitWaitTime)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownBingUrlDaysAgo)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownSocketReceiveTimeout)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownSocketSendTimeout)).EndInit();
@@ -2788,7 +2801,6 @@
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownNetWaitTime)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownBingUrlAFewDays)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownWindowsSpotlightAPIRepeatLimit)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.numericUpDownAppAutoExitWaitTime)).EndInit();
 			this.ResumeLayout(false);
 
 		}
@@ -2840,10 +2852,10 @@
 		private System.Windows.Forms.ComboBox comboBoxWindowsSpotlightDownloadService;
 		private System.Windows.Forms.Label labelWindowsSpotlightDownloadServiceUnit;
 		private System.Windows.Forms.Label labelWindowsSpotlightDownloadServiceExplanation;
-		private System.Windows.Forms.Label labelWindowsSpolightCopyService;
-		private System.Windows.Forms.ComboBox comboBoxWindowsSpolightCopyService;
-		private System.Windows.Forms.Label labelWindowsSpolightCopyServiceUnit;
-		private System.Windows.Forms.Label labelWindowsSpolightCopyServiceExplanation;
+		private System.Windows.Forms.Label labelWindowsSpotlightCopyService;
+		private System.Windows.Forms.ComboBox comboBoxWindowsSpotlightCopyService;
+		private System.Windows.Forms.Label labelWindowsSpotlightCopyServiceUnit;
+		private System.Windows.Forms.Label labelWindowsSpotlightCopyServiceExplanation;
 		private System.Windows.Forms.Label labelBingImageDownloadService;
 		private System.Windows.Forms.ComboBox comboBoxBingImageDownloadService;
 		private System.Windows.Forms.Label labelBingImageDownloadServiceUnit;
@@ -3003,6 +3015,7 @@
 		private System.Windows.Forms.NumericUpDown numericUpDownAppAutoExitWaitTime;
 		private System.Windows.Forms.Label labelAppAutoExitWaitTimeUnit;
 		private System.Windows.Forms.Label labelAppAutoExitWaitTimeExplanation;
+		private System.Windows.Forms.TabPage tabPageAbout;
 	}
 }
 

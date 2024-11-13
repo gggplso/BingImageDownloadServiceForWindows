@@ -56,7 +56,6 @@
 			this.comboBoxBingImageDownloadService = new System.Windows.Forms.ComboBox();
 			this.labelBingImageDownloadServiceUnit = new System.Windows.Forms.Label();
 			this.labelBingImageDownloadServiceExplanation = new System.Windows.Forms.Label();
-			this.labelLogIsDebug = new System.Windows.Forms.Label();
 			this.labelServiceRunningWaitTimeExplanation = new System.Windows.Forms.Label();
 			this.labelServiceRunningWaitTimeUnit = new System.Windows.Forms.Label();
 			this.numericUpDownServiceRunningWaitTime = new System.Windows.Forms.NumericUpDown();
@@ -85,10 +84,11 @@
 			this.labelLogCounter = new System.Windows.Forms.Label();
 			this.labelLogCounterUnit = new System.Windows.Forms.Label();
 			this.numericUpDownLogCounter = new System.Windows.Forms.NumericUpDown();
+			this.labelSqliteDataPath = new System.Windows.Forms.Label();
+			this.labelLogIsDebug = new System.Windows.Forms.Label();
 			this.comboBoxLogIsDebug = new System.Windows.Forms.ComboBox();
 			this.labelLogIsDebugUnit = new System.Windows.Forms.Label();
 			this.labelLogIsDebugExplanation = new System.Windows.Forms.Label();
-			this.labelSqliteDataPath = new System.Windows.Forms.Label();
 			this.tabPageImageDownloadSetting = new System.Windows.Forms.TabPage();
 			this.tableLayoutPanelImageDownloadSetting = new System.Windows.Forms.TableLayoutPanel();
 			this.labelAppAutoExitWaitTime = new System.Windows.Forms.Label();
@@ -235,10 +235,10 @@
 			this.textBoxMobileWallpaperPath = new System.Windows.Forms.TextBox();
 			this.buttonMobileWallpaperPathBrowse = new System.Windows.Forms.Button();
 			this.labelMobileWallpaperPathExplanation = new System.Windows.Forms.Label();
+			this.tabPageAbout = new System.Windows.Forms.TabPage();
 			this.toolTipMainSetting = new System.Windows.Forms.ToolTip(this.components);
 			this.buttonRead = new System.Windows.Forms.Button();
 			this.buttonSave = new System.Windows.Forms.Button();
-			this.tabPageAbout = new System.Windows.Forms.TabPage();
 			this.tabControlSettingMain.SuspendLayout();
 			this.tabPageAppSetting.SuspendLayout();
 			this.tableLayoutPanelAppSetting.SuspendLayout();
@@ -606,16 +606,6 @@
 			this.labelBingImageDownloadServiceExplanation.TabIndex = 35;
 			this.labelBingImageDownloadServiceExplanation.Text = "必应每日壁纸下载服务开关";
 			// 
-			// labelLogIsDebug
-			// 
-			this.labelLogIsDebug.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-			this.labelLogIsDebug.AutoSize = true;
-			this.labelLogIsDebug.Location = new System.Drawing.Point(3, 399);
-			this.labelLogIsDebug.Name = "labelLogIsDebug";
-			this.labelLogIsDebug.Size = new System.Drawing.Size(141, 12);
-			this.labelLogIsDebug.TabIndex = 28;
-			this.labelLogIsDebug.Text = "调试日志显示开关：";
-			// 
 			// labelServiceRunningWaitTimeExplanation
 			// 
 			this.labelServiceRunningWaitTimeExplanation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
@@ -932,6 +922,26 @@
             0,
             0});
 			// 
+			// labelSqliteDataPath
+			// 
+			this.labelSqliteDataPath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+			this.labelSqliteDataPath.AutoSize = true;
+			this.labelSqliteDataPath.Location = new System.Drawing.Point(3, 369);
+			this.labelSqliteDataPath.Name = "labelSqliteDataPath";
+			this.labelSqliteDataPath.Size = new System.Drawing.Size(141, 12);
+			this.labelSqliteDataPath.TabIndex = 52;
+			this.labelSqliteDataPath.Text = "SQL数据文件存放路径：";
+			// 
+			// labelLogIsDebug
+			// 
+			this.labelLogIsDebug.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+			this.labelLogIsDebug.AutoSize = true;
+			this.labelLogIsDebug.Location = new System.Drawing.Point(3, 399);
+			this.labelLogIsDebug.Name = "labelLogIsDebug";
+			this.labelLogIsDebug.Size = new System.Drawing.Size(141, 12);
+			this.labelLogIsDebug.TabIndex = 28;
+			this.labelLogIsDebug.Text = "调试日志显示开关：";
+			// 
 			// comboBoxLogIsDebug
 			// 
 			this.comboBoxLogIsDebug.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
@@ -963,16 +973,6 @@
 			this.labelLogIsDebugExplanation.Size = new System.Drawing.Size(218, 12);
 			this.labelLogIsDebugExplanation.TabIndex = 31;
 			this.labelLogIsDebugExplanation.Text = "调试日志是否显示";
-			// 
-			// labelSqliteDataPath
-			// 
-			this.labelSqliteDataPath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-			this.labelSqliteDataPath.AutoSize = true;
-			this.labelSqliteDataPath.Location = new System.Drawing.Point(3, 369);
-			this.labelSqliteDataPath.Name = "labelSqliteDataPath";
-			this.labelSqliteDataPath.Size = new System.Drawing.Size(141, 12);
-			this.labelSqliteDataPath.TabIndex = 52;
-			this.labelSqliteDataPath.Text = "SQL数据文件存放路径：";
 			// 
 			// tabPageImageDownloadSetting
 			// 
@@ -2739,6 +2739,15 @@
 			this.labelMobileWallpaperPathExplanation.TabIndex = 175;
 			this.labelMobileWallpaperPathExplanation.Text = "指定存放竖向图片手机壁纸的目标路径";
 			// 
+			// tabPageAbout
+			// 
+			this.tabPageAbout.Location = new System.Drawing.Point(4, 22);
+			this.tabPageAbout.Name = "tabPageAbout";
+			this.tabPageAbout.Size = new System.Drawing.Size(768, 400);
+			this.tabPageAbout.TabIndex = 2;
+			this.tabPageAbout.Text = " 关于";
+			this.tabPageAbout.UseVisualStyleBackColor = true;
+			// 
 			// buttonRead
 			// 
 			this.buttonRead.Location = new System.Drawing.Point(597, 4);
@@ -2758,15 +2767,6 @@
 			this.buttonSave.Text = "保  存";
 			this.buttonSave.UseVisualStyleBackColor = true;
 			this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
-			// 
-			// tabPageAbout
-			// 
-			this.tabPageAbout.Location = new System.Drawing.Point(4, 22);
-			this.tabPageAbout.Name = "tabPageAbout";
-			this.tabPageAbout.Size = new System.Drawing.Size(768, 400);
-			this.tabPageAbout.TabIndex = 2;
-			this.tabPageAbout.Text = " 关于";
-			this.tabPageAbout.UseVisualStyleBackColor = true;
 			// 
 			// FormSettingMain
 			// 

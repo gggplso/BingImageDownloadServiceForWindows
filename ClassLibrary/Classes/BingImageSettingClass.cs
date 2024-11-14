@@ -8,41 +8,41 @@ using System.Threading.Tasks;
 
 namespace ClassLibrary.Classes
 {
-    /// <summary>
-    /// 必应每日壁纸下载图片相关参数配置类
-    /// </summary>
-    public class BingImageSettingClass
-    {
-        #region 注释掉的代码
+	/// <summary>
+	/// 必应每日壁纸下载图片相关参数配置类
+	/// </summary>
+	public class BingImageSettingClass
+	{
+		#region 注释掉的代码
 
-        ///// <summary>
-        ///// 网络状态测试开关(程序)
-        ///// </summary>
-        //public bool? NetworkStateTestSwitch { get => _networkStateTestSwitch ? (bool?)true : false; set => _networkStateTestSwitch = value ?? true; }
-        ///// <summary>
-        ///// 必应每日壁纸下载开关(程序)
-        ///// </summary>
-        //public bool? BingImageDownloadSwitch
-        //{
-        //    get
-        //    {
-        //        return _bingImageDownloadSwitch ? (bool?)true : false;
-        //    }
-        //    set
-        //    {
-        //        if (value == null)
-        //        {
-        //            _bingImageDownloadSwitch = true;
-        //        }
-        //        else
-        //        {
-        //            _bingImageDownloadSwitch = value.Value;
-        //        }
-        //    }
-        //}
+		///// <summary>
+		///// 网络状态测试开关(程序)
+		///// </summary>
+		//public bool? NetworkStateTestSwitch { get => _networkStateTestSwitch ? (bool?)true : false; set => _networkStateTestSwitch = value ?? true; }
+		///// <summary>
+		///// 必应每日壁纸下载开关(程序)
+		///// </summary>
+		//public bool? BingImageDownloadSwitch
+		//{
+		//    get
+		//    {
+		//        return _bingImageDownloadSwitch ? (bool?)true : false;
+		//    }
+		//    set
+		//    {
+		//        if (value == null)
+		//        {
+		//            _bingImageDownloadSwitch = true;
+		//        }
+		//        else
+		//        {
+		//            _bingImageDownloadSwitch = value.Value;
+		//        }
+		//    }
+		//}
 
-        #region  bool 和 bool? 的区别
-        /*
+		#region  bool 和 bool? 的区别
+		/*
 
                             bool 和 bool? 的区别
                     bool 类型：
@@ -123,360 +123,409 @@ namespace ClassLibrary.Classes
                     bool 类型：直接赋值即可，因为 value 本身就是 bool 类型。
 
         */
-        #endregion
-        #endregion
+		#endregion
+		#endregion
 
-        /// <summary>
-        /// 网络状态测试开关(程序)
-        /// </summary>
-        public bool NetworkStateTestSwitch { get; set; } = true;
-        /// <summary>
-        /// 必应每日壁纸下载开关(程序)
-        /// </summary>
-        public bool BingImageDownloadSwitch { get; set; } = true;
-        /// <summary>
-        /// Windows聚焦图片复制开关(程序)
-        /// </summary>
-        public bool WindowsSpotlightCopySwitch { get; set; } = true;
-        /// <summary>
-        /// Windows聚焦API图片下载开关(程序)
-        /// </summary>
-        public bool WindowsSpotlightDownloadSwitch { get; set; } = true;
-        /// <summary>
-        /// 文件分类归档开关(程序)
-        /// </summary>
-        public bool CategorizeAndMoveFileSwitch { get; set; } = true;
-        /// <summary>
-        /// 表示若有同名文件时重新下载覆盖原文件，false则保留原文件不重新下载。
-        /// </summary>
-        public bool Overwrite { get; set; } = false;
-        /// <summary>
-        /// 不能直接分类归档的图片文件保存目录路径
-        /// </summary>
-        //public string ImageFileSavePath { get; set; } = Environment.ExpandEnvironmentVariables(@"D:\%USERNAME%\Downloads");
-        public string ImageFileSavePath { get; set; } = Path.Combine(ClassLibrary.ShareClass._userPath, "Pictures", "Downloads");
+		private string _imageFileSavePath = Path.Combine(ClassLibrary.ShareClass._userPath ?? "D:", "Pictures", "Downloads");
 
-        /// <summary>
-        /// (程序)运行完成后自动退出的等待时间(单位：秒)
-        /// </summary>
-        public int AppAutoExitWaitTime { get; set; } = 5;
+		/// <summary>
+		/// 网络状态测试开关(程序)
+		/// </summary>
+		public bool NetworkStateTestSwitch { get; set; } = true;
+		/// <summary>
+		/// 必应每日壁纸下载开关(程序)
+		/// </summary>
+		public bool BingImageDownloadSwitch { get; set; } = true;
+		/// <summary>
+		/// Windows聚焦图片复制开关(程序)
+		/// </summary>
+		public bool WindowsSpotlightCopySwitch { get; set; } = true;
+		/// <summary>
+		/// Windows聚焦API图片下载开关(程序)
+		/// </summary>
+		public bool WindowsSpotlightDownloadSwitch { get; set; } = true;
+		/// <summary>
+		/// 文件分类归档开关(程序)
+		/// </summary>
+		public bool CategorizeAndMoveFileSwitch { get; set; } = true;
+		/// <summary>
+		/// 表示若有同名文件时重新下载覆盖原文件，false则保留原文件不重新下载。
+		/// </summary>
+		public bool Overwrite { get; set; } = false;
+		/// <summary>
+		/// 不能直接分类归档的图片文件保存目录路径
+		/// </summary>
+		//public string ImageFileSavePath { get; set; } = Environment.ExpandEnvironmentVariables(@"D:\%USERNAME%\Downloads");
+		public string ImageFileSavePath
+		{
+			get => _imageFileSavePath;
+			set => _imageFileSavePath = string.IsNullOrWhiteSpace(value) ? Path.Combine(ClassLibrary.ShareClass._userPath ?? "D:", "Pictures", "Downloads") : value;
+		}
 
-        /// <summary>
-        /// 网络信息
-        /// </summary>
-        public NetworkInformationClass NetworkInformation { get; set; } = new NetworkInformationClass();
-        /// <summary>
-        /// 必应每日壁纸下载API相关
-        /// </summary>
-        public BingImageApiClass BingImageApi { get; set; } = new BingImageApiClass();
-        /// <summary>
-        /// Windows聚焦的相关参数配置
-        /// </summary>
-        public WindowsSpotlightSettingClass WindowsSpotlightSetting { get; set; } = new WindowsSpotlightSettingClass();
-        /// <summary>
-        /// 文件分类并移动的相关参数配置
-        /// </summary>
-        public CategorizeAndMoveSettingClass CategorizeAndMoveSetting { get; set; } = new CategorizeAndMoveSettingClass();
-    }
-    /// <summary>
-    /// 网络信息类
-    /// </summary>
-    public class NetworkInformationClass
-    {
-        /// <summary>
-        /// 通过Socket网络测试对端DNS服务器地址
-        /// 默认阿里云DNS：223.5.5.5
-        /// </summary>
-        public string DnsServerAddress { get; set; } = "223.5.5.5";
-        /// <summary>
-        /// Socket发送数据时的超时时间
-        /// 默认1秒钟
-        /// </summary>
-        public int SocketSendTimeout { get; set; } = 1000;
-        /// <summary>
-        /// Socket接收数据时的超时时间
-        /// 默认1秒钟
-        /// </summary>
-        public int SocketReceiveTimeout { get; set; } = 1000;
-        /// <summary>
-        /// 通过PingReply(ping回复)测试对端域名地址
-        /// 默认必应域名 www.bing.com
-        /// </summary>
-        public string PingReplyDomain { get; set; } = "www.bing.com";
-        /// <summary>
-        /// 指定PingSender(ping发送)重试次数
-        /// 默认5次
-        /// </summary>
-        public int NetRetryCount { get; set; } = 5;
-        /// <summary>
-        /// 暂停指定的时间间隔(Thread.Sleep(NetWaitTime);)
-        /// 默认2秒
-        /// </summary>
-        //public TimeSpan NetWaitTime { get; set; } = TimeSpan.FromSeconds(2);
-        public int NetWaitTime { get; set; } = 5000;
-    }
-    /// <summary>
-    /// 必应每日壁纸下载API相关类
-    /// </summary>
-    public class BingImageApiClass
-    {
-        /// <summary>
-        /// API请求参数
-        /// </summary>
-        public BingApiRequestParamsClass BingApiRequestParams { get; set; } = new BingApiRequestParamsClass();
-        /// <summary>
-        /// API查询结果
-        /// </summary>
-        public BingApiSearchResultsClass BingApiSearchResults { get; set; } = new BingApiSearchResultsClass();
-    }
-    /// <summary>
-    /// 必应每日壁纸下载API请求参数类
-    /// </summary>
-    public class BingApiRequestParamsClass
-    {
-        //// https://www.bing.com/HPImageArchive.aspx?format=js&cc=cn&idx=0&n=8&video=1
-        //public string BingUrl1 { get; set; } = "https://";
-        //public string BingUrl2 { get; set; } = "www.bing.com";
-        //public string BingUrl3 { get; set; } = "/HPImageArchive.aspx?format=js&cc=cn&idx=";
-        //public string BingUrl4 { get; set; } = "&n=";
-        //public string BingUrl5 { get; set; } = "&video=1";
-        public string BingUrl6 { get; set; } = "&qlt=100";
+		/// <summary>
+		/// (程序)运行完成后自动退出的等待时间(单位：秒)
+		/// </summary>
+		public int AppAutoExitWaitTime { get; set; } = 5;
 
-        /// <summary>
-        /// 方案（Scheme）
-        /// </summary>
-        public string Scheme { get; set; } = "https";
-        /// <summary>
-        /// 主机（Host）
-        /// </summary>
-        public string Host { get; set; } = "www.bing.com";
-        /// <summary>
-        /// 端口（Port）
-        /// </summary>
-        public int Port { get; set; } = 443;
-        /// <summary>
-        /// 路径（Path）
-        /// </summary>
-        public string Path { get; set; } = "/HPImageArchive.aspx";
-        /// <summary>
-        /// 查询字符串（Query）FORMAT
-        /// </summary>
-        public string Query1 { get; set; } = "format";
-        /// <summary>
-        /// format：下载格式
-        /// </summary>
-        public string Query1Value1 { get; set; } = "js";
-        /// <summary>
-        /// format：下载格式
-        /// </summary>
-        public string Query1Value2 { get; set; } = "xml";
-        /// <summary>
-        /// 查询字符串（Query）CC
-        /// </summary>
-        public string Query2 { get; set; } = "cc";
-        /// <summary>
-        /// cc：国家？
-        /// </summary>
-        public string Query2Value { get; set; } = "cn";
-        /// <summary>
-        /// 查询字符串（Query）IDX
-        /// </summary>
-        public string Query3 { get; set; } = "idx";
-        /// <summary>
-        /// idx：开始时间，从几天前开始下载，目前最早是往前7天
-        /// 默认0是从今天开始(原参数名：BingUrlDaysAgo)
-        /// </summary>
-        public int Query3Value { get; set; } = 0;
-        /// <summary>
-        /// 查询字符串（Query）N
-        /// </summary>
-        public string Query4 { get; set; } = "n";
-        /// <summary>
-        /// n：请求数量，下载多少数量几天，目前最多一次获取8张
-        /// 默认8是下载8天(8张)的图片(原参数名：BingUrlAFewDays)
-        /// </summary>
-        public int Query4Value { get; set; } = 8;
-        /// <summary>
-        /// 查询字符串（Query）VIDEO
-        /// </summary>
-        public string Query5 { get; set; } = "video";
-        /// <summary>
-        /// video：是否包含视频
-        /// </summary>
-        public string Query5Value { get; set; } = "1";
+		/// <summary>
+		/// 网络信息
+		/// </summary>
+		public NetworkInformationClass NetworkInformation { get; set; } = new NetworkInformationClass();
+		/// <summary>
+		/// 必应每日壁纸下载API相关
+		/// </summary>
+		public BingImageApiClass BingImageApi { get; set; } = new BingImageApiClass();
+		/// <summary>
+		/// Windows聚焦的相关参数配置
+		/// </summary>
+		public WindowsSpotlightSettingClass WindowsSpotlightSetting { get; set; } = new WindowsSpotlightSettingClass();
+		/// <summary>
+		/// 文件分类并移动的相关参数配置
+		/// </summary>
+		public CategorizeAndMoveSettingClass CategorizeAndMoveSetting { get; set; } = new CategorizeAndMoveSettingClass();
+	}
+	/// <summary>
+	/// 网络信息类
+	/// </summary>
+	public class NetworkInformationClass
+	{
+		private string _dnsServerAddress = "223.5.5.5";
+		private string _pingReplyDomain = "www.bing.com";
 
-        /// <summary>
-        /// 是否下载高清像素的分辨率(横版：landscape)
-        /// </summary>
-        public bool PixelResolutionIsUHD { get; set; } = true;
-        /// <summary>
-        /// 是否下载手机类像素的分辨率(竖版：portrait)
-        /// </summary>
-        public bool PixelResolutionIsMobile { get; set; } = true;
-        /// <summary>
-        /// 是否用中文来命名文件名
-        /// 默认是，取图片的中文说明来当文件名；否，用图片的英文作为文件名。
-        /// </summary>
-        public bool FileNameLanguageIsChinese { get; set; } = true;
-        /// <summary>
-        /// 是否将图片说标题说明添加到文件名中
-        /// </summary>
-        public bool FileNameAddTitle { get; set; } = true;
-        /// <summary>
-        /// 是否将日期添加到文件名中
-        /// </summary>
-        public bool FileNameAddDate { get; set; } = true;
-        /// <summary>
-        /// 是否全量下载
-        /// 默认是：下载今天往前的8张(idx=0 n=8)，额外再下载7天前往前的8张(idx=7 n=8)，总共15张图片。
-        /// </summary>
-        public bool IsFullDownload { get; set; } = true;
-    }
-    /// <summary>
-    /// 必应每日壁纸下载API查询结果类
-    /// </summary>
-    public class BingApiSearchResultsClass
-    {
-        // 结果在另一个单独类中
-        // ClassLibrary.Classes.BingClass
-    }
-    /// <summary>
-    /// Windows聚焦的相关参数配置类
-    /// </summary>
-    public class WindowsSpotlightSettingClass
-    {
-        /// <summary>
-        /// Windows聚焦图片所在目录路径
-        /// </summary>
-        //public string WindowsSpotlightPath { get; set; } = Environment.ExpandEnvironmentVariables(@"%USERPROFILE%\AppData\Local\Packages\Microsoft.Windows.ContentDeliveryManager_cw5n1h2txyewy\LocalState\Assets\");
-        public string WindowsSpotlightPath { get; set; } = Path.Combine(ClassLibrary.ShareClass._systemUserProfilePath, "AppData", "Local", "Packages", "Microsoft.Windows.ContentDeliveryManager_cw5n1h2txyewy", "LocalState", "Assets");
-        /// <summary>
-        /// 微软官方的Windows聚焦API地址
-        /// </summary>
-        public WindowsSpotlightAPIUrlClass WindowsSpotlightAPIUrl { get; set; } = new WindowsSpotlightAPIUrlClass();
-        /// <summary>
-        /// Windows聚焦API图片下载重复次数
-        /// 循环访问，最大重复次数后退出循环
-        /// </summary>
-        public int WindowsSpotlightAPIRepeatLimit { get; set; } = 20;
-    }
-    public class WindowsSpotlightAPIUrlClass
-    {
-        /// <summary>
-        /// 方案（Scheme）
-        /// </summary>
-        public string Scheme { get; set; } = "https";
-        /// <summary>
-        /// 主机（Host）
-        /// </summary>
-        public string Host { get; set; } = "arc.msn.com";
-        /// <summary>
-        /// 端口（Port）
-        /// </summary>
-        public int Port { get; set; } = 443;
-        /// <summary>
-        /// 路径（Path）
-        /// </summary>
-        public string Path { get; set; } = "/v3/Delivery/Placement";
-        /// <summary>
-        /// 查询字符串（Query）PID
-        /// </summary>
-        public string Query1 { get; set; } = "pid";
-        /// <summary>
-        /// pid：Windows锁屏的公共订阅ID。请勿更改此值(209567/209563)
-        /// </summary>
-        public string Query1Value1 { get; set; } = "209563";
-        /// <summary>
-        /// pid：Windows锁屏的公共订阅ID。请勿更改此值(209567/209563)
-        /// </summary>
-        public string Query1Value2 { get; set; } = "209567";
-        /// <summary>
-        /// 查询字符串（Query）FMT
-        /// </summary>
-        public string Query2 { get; set; } = "fmt";
-        /// <summary>
-        /// fmt：输出格式，例如json
-        /// </summary>
-        public string Query2Value1 { get; set; } = "json";
-        /// <summary>
-        /// fmt：输出格式，例如json
-        /// </summary>
-        public string Query2Value2 { get; set; } = "xml";
-        /// <summary>
-        /// 查询字符串（Query）CDM
-        /// </summary>
-        public string Query3 { get; set; } = "cdm";
-        public string Query3Value { get; set; } = "1";
-        /// <summary>
-        /// 查询字符串（Query）PL
-        /// </summary>
-        public string Query4 { get; set; } = "pl";
-        /// <summary>
-        /// pl：语言环境，例如en-US
-        /// </summary>
-        public string Query4Value { get; set; } = "zh-CN";
-        /// <summary>
-        /// 查询字符串（Query）LC
-        /// </summary>
-        public string Query5 { get; set; } = "lc";
-        /// <summary>
-        /// lc：语言，例如en-US
-        /// </summary>
-        public string Query5Value { get; set; } = "zh-CN";
-        /// <summary>
-        /// 查询字符串（Query）CTRY
-        /// </summary>
-        public string Query6 { get; set; } = "ctry";
-        /// <summary>
-        /// ctry：国家，例如us,World
-        /// </summary>
-        public string Query6Value { get; set; } = "CN";
+		/// <summary>
+		/// 通过Socket网络测试对端DNS服务器地址
+		/// 默认阿里云DNS：223.5.5.5
+		/// </summary>
+		public string DnsServerAddress
+		{
+			get => _dnsServerAddress;
+			set => _dnsServerAddress = string.IsNullOrWhiteSpace(value) ? "223.5.5.5" : value;
+		}
+		/// <summary>
+		/// Socket发送数据时的超时时间
+		/// 默认1秒钟
+		/// </summary>
+		public int SocketSendTimeout { get; set; } = 1000;
+		/// <summary>
+		/// Socket接收数据时的超时时间
+		/// 默认1秒钟
+		/// </summary>
+		public int SocketReceiveTimeout { get; set; } = 1000;
+		/// <summary>
+		/// 通过PingReply(ping回复)测试对端域名地址
+		/// 默认必应域名 www.bing.com
+		/// </summary>
+		public string PingReplyDomain
+		{
+			get => _pingReplyDomain;
+			set => _pingReplyDomain = string.IsNullOrWhiteSpace(value) ? "www.bing.com" : value;
+		}
+		/// <summary>
+		/// 指定PingSender(ping发送)重试次数
+		/// 默认5次
+		/// </summary>
+		public int NetRetryCount { get; set; } = 5;
+		/// <summary>
+		/// 暂停指定的时间间隔(Thread.Sleep(NetWaitTime);)
+		/// 默认2秒
+		/// </summary>
+		//public TimeSpan NetWaitTime { get; set; } = TimeSpan.FromSeconds(2);
+		public int NetWaitTime { get; set; } = 5000;
+	}
+	/// <summary>
+	/// 必应每日壁纸下载API相关类
+	/// </summary>
+	public class BingImageApiClass
+	{
+		/// <summary>
+		/// API请求参数
+		/// </summary>
+		public BingApiRequestParamsClass BingApiRequestParams { get; set; } = new BingApiRequestParamsClass();
+		/// <summary>
+		/// API查询结果
+		/// </summary>
+		public BingApiSearchResultsClass BingApiSearchResults { get; set; } = new BingApiSearchResultsClass();
+	}
+	/// <summary>
+	/// 必应每日壁纸下载API请求参数类
+	/// </summary>
+	public class BingApiRequestParamsClass
+	{
+		//// https://www.bing.com/HPImageArchive.aspx?format=js&cc=cn&idx=0&n=8&video=1
+		//public string BingUrl1 { get; set; } = "https://";
+		//public string BingUrl2 { get; set; } = "www.bing.com";
+		//public string BingUrl3 { get; set; } = "/HPImageArchive.aspx?format=js&cc=cn&idx=";
+		//public string BingUrl4 { get; set; } = "&n=";
+		//public string BingUrl5 { get; set; } = "&video=1";
+		public string BingUrl6 { get; set; } = "&qlt=100";
 
-        /// <summary>
-        /// 其他没用到的参数说明：
-        ///  rafb ：目的目前未知，可选
-        ///  ua ：客户端用户代理字符串
-        ///  disphorzres：屏幕宽度（以像素为单位）
-        ///  dispvertres：屏幕高度（以像素为单位）
-        ///  lo ：目前未知的用途，可选
-        ///  time ：时间，例如 2017-12-31T23:59:59Z
-        /// </summary>
+		/// <summary>
+		/// 方案（Scheme）
+		/// </summary>
+		public string Scheme { get; set; } = "https";
+		/// <summary>
+		/// 主机（Host）
+		/// </summary>
+		public string Host { get; set; } = "www.bing.com";
+		/// <summary>
+		/// 端口（Port）
+		/// </summary>
+		public int Port { get; set; } = 443;
+		/// <summary>
+		/// 路径（Path）
+		/// </summary>
+		public string Path { get; set; } = "/HPImageArchive.aspx";
+		/// <summary>
+		/// 查询字符串（Query）FORMAT
+		/// </summary>
+		public string Query1 { get; set; } = "format";
+		/// <summary>
+		/// format：下载格式
+		/// </summary>
+		public string Query1Value1 { get; set; } = "js";
+		/// <summary>
+		/// format：下载格式
+		/// </summary>
+		public string Query1Value2 { get; set; } = "xml";
+		/// <summary>
+		/// 查询字符串（Query）CC
+		/// </summary>
+		public string Query2 { get; set; } = "cc";
+		/// <summary>
+		/// cc：国家？
+		/// </summary>
+		public string Query2Value { get; set; } = "cn";
+		/// <summary>
+		/// 查询字符串（Query）IDX
+		/// </summary>
+		public string Query3 { get; set; } = "idx";
+		/// <summary>
+		/// idx：开始时间，从几天前开始下载，目前最早是往前7天
+		/// 默认0是从今天开始(原参数名：BingUrlDaysAgo)
+		/// </summary>
+		public int Query3Value { get; set; } = 0;
+		/// <summary>
+		/// 查询字符串（Query）N
+		/// </summary>
+		public string Query4 { get; set; } = "n";
+		/// <summary>
+		/// n：请求数量，下载多少数量几天，目前最多一次获取8张
+		/// 默认8是下载8天(8张)的图片(原参数名：BingUrlAFewDays)
+		/// </summary>
+		public int Query4Value { get; set; } = 8;
+		/// <summary>
+		/// 查询字符串（Query）VIDEO
+		/// </summary>
+		public string Query5 { get; set; } = "video";
+		/// <summary>
+		/// video：是否包含视频
+		/// </summary>
+		public string Query5Value { get; set; } = "1";
 
-    }
-    /// <summary>
-    /// 文件分类并移动的相关参数配置类
-    /// </summary>
-    public class CategorizeAndMoveSettingClass
-    {
-        /// <summary>
-        /// 文件操作类型(处理文件是移动还是复制)
-        /// </summary>
-        public ClassLibrary.ShareClass.FileOperationType FileOperationType { get; set; } = ShareClass.FileOperationType.Move;
-        /// <summary>
-        /// 文件所在目录源路径(需要处理的检索的源目录)
-        /// </summary>
-        public string SearchDirectoryPath { get; set; } = Path.Combine(ClassLibrary.ShareClass._userPath, "Pictures", "Downloads");
-        /// <summary>
-        /// 指定存放电脑壁纸的目标路径
-        /// </summary>
-        public string ComputerWallpaperPath { get; set; } = Path.Combine(ClassLibrary.ShareClass._userPath, "Pictures", "Computer");
-        /// <summary>
-        /// 指定存放手机壁纸的目标路径
-        /// </summary>
-        public string MobileWallpaperPath { get; set; } = Path.Combine(ClassLibrary.ShareClass._userPath, "Pictures", "Mobile");
-        /// <summary>
-        /// 指定存放视频文件的目标路径
-        /// </summary>
-        public string VideoWallpaperPath { get; set; } = Path.Combine(ClassLibrary.ShareClass._userPath, "Pictures", "Landscape");
-        /// <summary>
-        /// 指定存放丢弃抛弃掉的文件的目标路径（Rejected/Discard）
-        /// </summary>
-        public string RejectedPath { get; set; } = Path.Combine(ClassLibrary.ShareClass._userPath, "Pictures", "Rejected");
-    }
+		/// <summary>
+		/// 是否下载高清像素的分辨率(横版：landscape)
+		/// </summary>
+		public bool PixelResolutionIsUHD { get; set; } = true;
+		/// <summary>
+		/// 是否下载手机类像素的分辨率(竖版：portrait)
+		/// </summary>
+		public bool PixelResolutionIsMobile { get; set; } = true;
+		/// <summary>
+		/// 是否用中文来命名文件名
+		/// 默认是，取图片的中文说明来当文件名；否，用图片的英文作为文件名。
+		/// </summary>
+		public bool FileNameLanguageIsChinese { get; set; } = true;
+		/// <summary>
+		/// 是否将图片说标题说明添加到文件名中
+		/// </summary>
+		public bool FileNameAddTitle { get; set; } = true;
+		/// <summary>
+		/// 是否将日期添加到文件名中
+		/// </summary>
+		public bool FileNameAddDate { get; set; } = true;
+		/// <summary>
+		/// 是否全量下载
+		/// 默认是：下载今天往前的8张(idx=0 n=8)，额外再下载7天前往前的8张(idx=7 n=8)，总共15张图片。
+		/// </summary>
+		public bool IsFullDownload { get; set; } = true;
+	}
+	/// <summary>
+	/// 必应每日壁纸下载API查询结果类
+	/// </summary>
+	public class BingApiSearchResultsClass
+	{
+		// 结果在另一个单独类中
+		// ClassLibrary.Classes.BingClass
+	}
+	/// <summary>
+	/// Windows聚焦的相关参数配置类
+	/// </summary>
+	public class WindowsSpotlightSettingClass
+	{
+		private string _windowsSpotlightPath = Path.Combine(ClassLibrary.ShareClass._systemUserProfilePath, "AppData", "Local", "Packages", "Microsoft.Windows.ContentDeliveryManager_cw5n1h2txyewy", "LocalState", "Assets");
+
+		/// <summary>
+		/// Windows聚焦图片所在目录路径
+		/// </summary>
+		//public string WindowsSpotlightPath { get; set; } = Environment.ExpandEnvironmentVariables(@"%USERPROFILE%\AppData\Local\Packages\Microsoft.Windows.ContentDeliveryManager_cw5n1h2txyewy\LocalState\Assets\");
+		public string WindowsSpotlightPath
+		{
+			get => _windowsSpotlightPath;
+			set => _windowsSpotlightPath = string.IsNullOrWhiteSpace(value) ? Path.Combine(ClassLibrary.ShareClass._systemUserProfilePath, "AppData", "Local", "Packages", "Microsoft.Windows.ContentDeliveryManager_cw5n1h2txyewy", "LocalState", "Assets") : value;
+		}
+		/// <summary>
+		/// 微软官方的Windows聚焦API地址
+		/// </summary>
+		public WindowsSpotlightAPIUrlClass WindowsSpotlightAPIUrl { get; set; } = new WindowsSpotlightAPIUrlClass();
+		/// <summary>
+		/// Windows聚焦API图片下载重复次数
+		/// 循环访问，最大重复次数后退出循环
+		/// </summary>
+		public int WindowsSpotlightAPIRepeatLimit { get; set; } = 20;
+	}
+	public class WindowsSpotlightAPIUrlClass
+	{
+		/// <summary>
+		/// 方案（Scheme）
+		/// </summary>
+		public string Scheme { get; set; } = "https";
+		/// <summary>
+		/// 主机（Host）
+		/// </summary>
+		public string Host { get; set; } = "arc.msn.com";
+		/// <summary>
+		/// 端口（Port）
+		/// </summary>
+		public int Port { get; set; } = 443;
+		/// <summary>
+		/// 路径（Path）
+		/// </summary>
+		public string Path { get; set; } = "/v3/Delivery/Placement";
+		/// <summary>
+		/// 查询字符串（Query）PID
+		/// </summary>
+		public string Query1 { get; set; } = "pid";
+		/// <summary>
+		/// pid：Windows锁屏的公共订阅ID。请勿更改此值(209567/209563)
+		/// </summary>
+		public string Query1Value1 { get; set; } = "209563";
+		/// <summary>
+		/// pid：Windows锁屏的公共订阅ID。请勿更改此值(209567/209563)
+		/// </summary>
+		public string Query1Value2 { get; set; } = "209567";
+		/// <summary>
+		/// 查询字符串（Query）FMT
+		/// </summary>
+		public string Query2 { get; set; } = "fmt";
+		/// <summary>
+		/// fmt：输出格式，例如json
+		/// </summary>
+		public string Query2Value1 { get; set; } = "json";
+		/// <summary>
+		/// fmt：输出格式，例如json
+		/// </summary>
+		public string Query2Value2 { get; set; } = "xml";
+		/// <summary>
+		/// 查询字符串（Query）CDM
+		/// </summary>
+		public string Query3 { get; set; } = "cdm";
+		public string Query3Value { get; set; } = "1";
+		/// <summary>
+		/// 查询字符串（Query）PL
+		/// </summary>
+		public string Query4 { get; set; } = "pl";
+		/// <summary>
+		/// pl：语言环境，例如en-US
+		/// </summary>
+		public string Query4Value { get; set; } = "zh-CN";
+		/// <summary>
+		/// 查询字符串（Query）LC
+		/// </summary>
+		public string Query5 { get; set; } = "lc";
+		/// <summary>
+		/// lc：语言，例如en-US
+		/// </summary>
+		public string Query5Value { get; set; } = "zh-CN";
+		/// <summary>
+		/// 查询字符串（Query）CTRY
+		/// </summary>
+		public string Query6 { get; set; } = "ctry";
+		/// <summary>
+		/// ctry：国家，例如us,World
+		/// </summary>
+		public string Query6Value { get; set; } = "CN";
+
+		/// <summary>
+		/// 其他没用到的参数说明：
+		///  rafb ：目的目前未知，可选
+		///  ua ：客户端用户代理字符串
+		///  disphorzres：屏幕宽度（以像素为单位）
+		///  dispvertres：屏幕高度（以像素为单位）
+		///  lo ：目前未知的用途，可选
+		///  time ：时间，例如 2017-12-31T23:59:59Z
+		/// </summary>
+
+	}
+	/// <summary>
+	/// 文件分类并移动的相关参数配置类
+	/// </summary>
+	public class CategorizeAndMoveSettingClass
+	{
+		private string _searchDirectoryPath = Path.Combine(ClassLibrary.ShareClass._userPath ?? "D:", "Pictures", "Downloads");
+		private string _computerWallpaperPath = Path.Combine(ClassLibrary.ShareClass._userPath ?? "D:", "Pictures", "Computer");
+		private string _mobileWallpaperPath = Path.Combine(ClassLibrary.ShareClass._userPath ?? "D:", "Pictures", "Mobile");
+		private string _videoWallpaperPath = Path.Combine(ClassLibrary.ShareClass._userPath ?? "D:", "Pictures", "Landscape");
+		private string _rejectedPath = Path.Combine(ClassLibrary.ShareClass._userPath ?? "D:", "Pictures", "Rejected");
+
+		/// <summary>
+		/// 文件操作类型(处理文件是移动还是复制)
+		/// </summary>
+		public ClassLibrary.ShareClass.FileOperationType FileOperationType { get; set; } = ShareClass.FileOperationType.Move;
+		/// <summary>
+		/// 文件所在目录源路径(需要处理的检索的源目录)
+		/// </summary>
+		public string SearchDirectoryPath
+		{
+			get => _searchDirectoryPath;
+			set => _searchDirectoryPath = string.IsNullOrWhiteSpace(value) ? Path.Combine(ClassLibrary.ShareClass._userPath ?? "D:", "Pictures", "Downloads") : value;
+		}
+		/// <summary>
+		/// 指定存放电脑壁纸的目标路径
+		/// </summary>
+		public string ComputerWallpaperPath
+		{
+			get => _computerWallpaperPath;
+			set => _computerWallpaperPath = string.IsNullOrWhiteSpace(value) ? Path.Combine(ClassLibrary.ShareClass._userPath ?? "D:", "Pictures", "Computer") : value;
+		}
+		/// <summary>
+		/// 指定存放手机壁纸的目标路径
+		/// </summary>
+		public string MobileWallpaperPath
+		{
+			get => _mobileWallpaperPath;
+			set => _mobileWallpaperPath = string.IsNullOrWhiteSpace(value) ? Path.Combine(ClassLibrary.ShareClass._userPath ?? "D:", "Pictures", "Mobile") : value;
+		}
+		/// <summary>
+		/// 指定存放视频文件的目标路径
+		/// </summary>
+		public string VideoWallpaperPath
+		{
+			get => _videoWallpaperPath;
+			set => _videoWallpaperPath = string.IsNullOrWhiteSpace(value) ? Path.Combine(ClassLibrary.ShareClass._userPath ?? "D:", "Pictures", "Landscape") : value;
+		}
+		/// <summary>
+		/// 指定存放丢弃抛弃掉的文件的目标路径（Rejected/Discard）
+		/// </summary>
+		public string RejectedPath
+		{
+			get => _rejectedPath;
+			set => _rejectedPath = string.IsNullOrWhiteSpace(value) ? Path.Combine(ClassLibrary.ShareClass._userPath ?? "D:", "Pictures", "Rejected") : value;
+		}
+	}
 
 
-    #region Bing必应官方接口分析说明
-    /*
+	#region Bing必应官方接口分析说明
+	/*
        
     // https://cn.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1&mkt=zh-CN
 
@@ -517,10 +566,10 @@ namespace ClassLibrary.Classes
     //   qlt 参数：表示图像的质量（Quality）。值为 100 表示最高质量。
 
      */
-    #endregion
+	#endregion
 
-    #region 如何在创建大类的对象时自动初始化所有小类
-    /*
+	#region 如何在创建大类的对象时自动初始化所有小类
+	/*
 
      在 C# 中，如果你有一个较大的类包含了许多较小的类，
      并且希望在创建大类的对象时自动初始化所有的小类对象，可以采用以下几种策略：
@@ -708,10 +757,10 @@ namespace ClassLibrary.Classes
 
 
  */
-    #endregion
+	#endregion
 
-    #region 必应近期图片（Bing的图片分辨率格式种类）
-    /*
+	#region 必应近期图片（Bing的图片分辨率格式种类）
+	/*
      https://cn.bing.com/hp/api/v1/imagegallery?format=json
 
         {
@@ -885,10 +934,10 @@ namespace ClassLibrary.Classes
             "statusMessage": ""
         }
      */
-    #endregion
+	#endregion
 
-    #region 必应接口返回的Json数据（以日期2024-09-28为例）
-    /*
+	#region 必应接口返回的Json数据（以日期2024-09-28为例）
+	/*
      * https://cn.bing.com/HPImageArchive.aspx?format=js&idx=7&n=8&mkt=zh-CN
      
          {
@@ -1039,10 +1088,10 @@ namespace ClassLibrary.Classes
             }
         }
      */
-    #endregion
+	#endregion
 
-    #region JSON 知识点记录
-    /*
+	#region JSON 知识点记录
+	/*
      遇到的问题：
                 获取到的存入文件后，
                 用浏览器打开的内容是："item": "{"f":"raf","v":"1.0","rdr":
@@ -1318,5 +1367,5 @@ namespace ClassLibrary.Classes
                     添加错误处理：在 try-catch 块中捕获并处理可能的异常。
 
      */
-    #endregion
+	#endregion
 }

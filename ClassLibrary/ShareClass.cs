@@ -641,7 +641,7 @@ END;
 			if (!File.Exists(ClassLibrary.ShareClass._mainSettingFile))
 			{
 				ClassLibrary.Classes.AppSettingClass appSettingClass = new ClassLibrary.Classes.AppSettingClass();
-				appSettingClass.MainSettingFile = ClassLibrary.ShareClass._mainSettingFile;
+				//appSettingClass.MainSettingFile = ClassLibrary.ShareClass._mainSettingFile;
 				appSettingClass.LogPath = ClassLibrary.ShareClass._logPath;
 				appSettingClass.LogType = ClassLibrary.ShareClass._logType;
 				appSettingClass.LogCycle = ClassLibrary.ShareClass._logCycle;
@@ -676,7 +676,7 @@ END;
 			{
 				ClassLibrary.Classes.AppSettingClass appSettingClass = ClassLibrary.ShareClass.GetAppSettingClass();
 
-				//ClassLibrary.ShareClass._mainSettingFile = appSettingClass.MainSettingFile;
+				// ClassLibrary.ShareClass._mainSettingFile = appSettingClass.MainSettingFile;
 				ClassLibrary.ShareClass._logPath = appSettingClass.LogPath;
 				ClassLibrary.ShareClass._logType = appSettingClass.LogType;
 				ClassLibrary.ShareClass._logCycle = appSettingClass.LogCycle;

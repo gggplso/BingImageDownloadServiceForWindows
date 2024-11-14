@@ -120,9 +120,6 @@
   <metadata name="toolTipMainSetting.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
-  <metadata name="toolTipMainSetting.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
   <data name="labelWindowsSpotlightAPIRepeatLimitExplanation.ToolTip" xml:space="preserve">
     <value>微软提供的Windows聚焦图片下载API接口每次访问只能获取到两张图片的下载地址(一张横向、一张竖向)。
 当我们想要得到更多壁纸图片时，需要多次循环去触发访问，由微软接口返回随机图片。
@@ -131,6 +128,9 @@
 因此，设置的数值越大，耗时越久，请适度均衡配置。
 感谢您的支持。</value>
   </data>
+  <metadata name="toolTipMainSetting.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

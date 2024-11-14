@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,14 +9,26 @@ namespace ClassLibrary.Classes
 {
 	public class AppSettingClass
 	{
+		private string _logPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Logs\\");
+		private string _sqliteDataPath = AppDomain.CurrentDomain.BaseDirectory;
+
+
 		/// <summary>
 		/// 配置文件及路径
 		/// </summary>
-		public string MainSettingFile { get; set; }
+		public string MainSettingFile
+		{
+			get => ClassLibrary.ShareClass._mainSettingFile;
+			//set => _mainSettingFile = string.IsNullOrWhiteSpace(value) ? Path.Combine(AppDomain.CurrentDomain.BaseDirectory, ClassLibrary.ShareClass._mainSetting) : value;
+		}
 		/// <summary>
 		/// 日志保存目录
 		/// </summary>
-		public string LogPath { get; set; }
+		public string LogPath
+		{
+			get => _logPath;
+			set => _logPath = string.IsNullOrWhiteSpace(value) ? Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Logs\\") : value;
+		}
 		/// <summary>
 		/// 默认日志类型
 		/// </summary>
@@ -63,6 +76,10 @@ namespace ClassLibrary.Classes
 		/// <summary>
 		/// 数据库文件存储路径
 		/// </summary>
-		public string SqliteDataPath { get; set; }
+		public string SqliteDataPath
+		{
+			get => _sqliteDataPath;
+			set => _sqliteDataPath = string.IsNullOrWhiteSpace(value) ? AppDomain.CurrentDomain.BaseDirectory : value;
+		}
 	}
 }

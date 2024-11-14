@@ -1044,7 +1044,7 @@ namespace ClassLibrary.Services
 						}
 					}
 					result = true;
-					strTemp = $"共处理了{allFilesCount} - {processedFilesCount} 个文件。";
+					strTemp = $"指定目录：{BingImageSetting.CategorizeAndMoveSetting.SearchDirectoryPath}\r\n共处理了{allFilesCount} - {processedFilesCount} 个文件。";
 					Console.WriteLine(strTemp);
 					ClassLibrary.MyLogHelper.LogSplit(ClassLibrary.ShareClass._logPath, logTitle, strTemp, logType, logCycle);
 				}

@@ -1,7 +1,7 @@
 # BingImageDownloadServiceForWindows
 
 ## 版权
-本程序软件只是本人初入C#的学习之作，本程序完全免费，但下载的图片仅限于壁纸使用。它们是受版权保护的图像，因此您不应将其用于其他目的，但可以将其用作桌面壁纸。  
+本程序软件只是本人初入C#的学习之作，本程序完全开源免费，但根据微软的协议，本程序下载的图片仅限于壁纸使用。它们是受版权保护的图像，因此您不应将其用于其他目的，但可以将其用作桌面壁纸。  
 本程序采用的是微软官方公开的接口，是通过JSON数据提取下载路径，从Bing和MSN官网下载图片。不排除以后下载会因微软的调整而失效。
 
 ### 介绍
@@ -11,15 +11,17 @@
 2、必应API每日壁纸下载；  
 3、Windows聚焦图片复制；  
 4、Windows聚焦API图片下载；  
-4、图片文件按分辨率横纵比来分类归档。
+4、图片文件按分辨率横纵比来分类归档。  
+（不喜欢的每一项可以单独配置关闭不运行）  
+
 
 ### 软件说明
 * 通过访问微软官方的API接口地址来获取图片信息，然后下载图片到本地。  
   * 一个是bing.com的每日图片，一天一张图，通过接口访问共可下载历史15张图，每张图分横向电脑壁纸和竖向手机壁纸，共30个文件。  
   * 一个是Windows聚焦图片，每次访问会随机返回一张图，同样每张图分横向电脑壁纸和竖向手机壁纸两个文件，这里可以通过配置循环次数触发多次访问来获取更多图片。  
-  * 另外就是Windows系统本身如果配置过聚焦，系统会自动下载图片文件，只是它存放在系统目录，路径较深，本程序将其复制到你指定的目录中，并将其添加.png的后缀名。  
+  * 另外就是Windows系统本身如果配置过聚焦功能，系统会自动下载图片文件，只是它存放在系统目录路径较深，本程序将其复制到你指定的目录中，并将其添加.png的后缀名，便于系统识别作为壁纸使用。  
 
-* 通过记录文件的HASH值来判断是否重复下载。（以前老版本程序是通过文件名来识别是否重复下载，误差较大。）  
+* 通过记录文件的HASH值来判断是否已存在，避免重复下载。（以前老版本程序是通过文件名来识别是否重复下载，误判高的离谱。）  
 
 * 通过识别文件的分辨率来分类归档图片。因下载的壁纸有横向高清像素的电脑壁纸和竖向普通像素的手机壁纸，所以本程序将按横纵数值来分类归档图片到不同的目录中。  
 
@@ -27,13 +29,17 @@
 ### 安装教程
 
 1.  带有扳手和螺丝刀图标的`BingImageDownloadSetting.exe` 文件是配置文件，需要自行配置。软件给了初始默认值，自己需要设置一些图片的保存目录等参数。  
-![BingImageDownloadSetting.exe](./README/BingImageDownloadSetting_ico.png)
+![BingImageDownloadSetting.exe](./README/BingImageDownloadSetting_ico.png)  
+注意：第一次用本软件前，一定要先打开使用本文件进行参数配置。
+
 
 2.  带有微软Bing必应图标的`BingImageDownloadForConsoleApplication.exe`文件是Windows控制台应用程序，可以建立快捷方式添加到开机运行项中自动运行下载任务。  
-![BingImageDownloadForConsoleApplication.exe](./README/BingImageDownloadForConsoleApplication_ico.png)
+![BingImageDownloadForConsoleApplication.exe](./README/BingImageDownloadForConsoleApplication_ico.png)  
 
-3.  带有黑色齿轮状图标的`BingImageDownloadServiceForWindows.exe`文件是Windows服务，需要通过双击执行`安装Install.bat`文件将其安装到Windows服务中，以便定时自动多次运行下载服务。  
-![BingImageDownloadServiceForWindows.exe](./README/BingImageDownloadServiceForWindows_ico.png)
+
+3.  带有黑色齿轮状图标的`BingImageDownloadServiceForWindows.exe`文件是Windows服务，需要通过双击执行`安装Install.bat`文件将其安装到Windows服务中，以便按定时自动多次运行下载服务。  
+![BingImageDownloadServiceForWindows.exe](./README/BingImageDownloadServiceForWindows_ico.png)  
+
 
 4.  上面`2`和`3`可以任选其一使用，效果是一样的，差异在于`2`是单次运行，`3`是可以通过配置文件设置多次运行。  
 

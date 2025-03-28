@@ -265,25 +265,29 @@ namespace ClassLibrary
 						else
 						{
 							strTemp = $"JSON 数据中的 'items' 不是数组。";
+                            Console.WriteLine(strTemp);
 							ClassLibrary.MyLogHelper.LogSplit(strTemp);
 						}
 					}
 					else
 					{
 						strTemp = $"JSON 数据中未找到 'items' 键。";
-						ClassLibrary.MyLogHelper.LogSplit(strTemp);
+                        Console.WriteLine(strTemp);
+                        ClassLibrary.MyLogHelper.LogSplit(strTemp);
 					}
 				}
 				else
 				{
 					strTemp = $"JSON 数据中未找到 'batchrsp' 键。";
-					ClassLibrary.MyLogHelper.LogSplit(strTemp);
+                    Console.WriteLine(strTemp);
+                    ClassLibrary.MyLogHelper.LogSplit(strTemp);
 				}
 			}
 			catch (Exception ex)
 			{
 				strTemp = $"解析 JSON 时发生错误: {ex.Message}";
-				ClassLibrary.MyLogHelper.GetExceptionLocation(ex);
+                Console.WriteLine(strTemp);
+                ClassLibrary.MyLogHelper.GetExceptionLocation(ex);
 				ClassLibrary.MyLogHelper.LogSplit(strTemp);
 			}
 

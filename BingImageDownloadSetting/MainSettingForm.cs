@@ -154,6 +154,7 @@ namespace BingImageDownloadSetting
 					comboBoxFileNameAddDate.SelectedIndex = bingImageSetting.BingImageApi.BingApiRequestParams.FileNameAddDate ? 0 : 1;
 					comboBoxIsFullDownload.SelectedIndex = bingImageSetting.BingImageApi.BingApiRequestParams.IsFullDownload ? 0 : 1;
 					textBoxWindowsSpotlightPath.Text = bingImageSetting.WindowsSpotlightSetting.WindowsSpotlightPath;
+					textBoxWindowsSpotlightAPIUrl.Text = bingImageSetting.WindowsSpotlightSetting.WindowsSpotlightAPIUrl;
 					numericUpDownWindowsSpotlightAPIRepeatLimit.Value = bingImageSetting.WindowsSpotlightSetting.WindowsSpotlightAPIRepeatLimit;
 					comboBoxFileOperationType.SelectedIndex = (int)bingImageSetting.CategorizeAndMoveSetting.FileOperationType;
 					textBoxSearchDirectoryPath.Text = bingImageSetting.CategorizeAndMoveSetting.SearchDirectoryPath;
@@ -239,6 +240,7 @@ namespace BingImageDownloadSetting
 				bingImageSetting.BingImageApi.BingApiRequestParams.FileNameAddDate = comboBoxFileNameAddDate.SelectedIndex == 0;
 				bingImageSetting.BingImageApi.BingApiRequestParams.IsFullDownload = comboBoxIsFullDownload.SelectedIndex == 0;
 				bingImageSetting.WindowsSpotlightSetting.WindowsSpotlightPath = textBoxWindowsSpotlightPath.Text;
+				bingImageSetting.WindowsSpotlightSetting.WindowsSpotlightAPIUrl = textBoxWindowsSpotlightAPIUrl.Text;
 				bingImageSetting.WindowsSpotlightSetting.WindowsSpotlightAPIRepeatLimit = (int)numericUpDownWindowsSpotlightAPIRepeatLimit.Value;
 				bingImageSetting.CategorizeAndMoveSetting.FileOperationType = (ClassLibrary.ShareClass.FileOperationType)comboBoxFileOperationType.SelectedIndex;
 				bingImageSetting.CategorizeAndMoveSetting.SearchDirectoryPath = textBoxSearchDirectoryPath.Text;

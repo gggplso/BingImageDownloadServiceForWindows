@@ -10,6 +10,8 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace ClassLibrary.Classes
 {
+	#region 老的Json对应的类结构
+
 	internal class WindowsSpotlightClass
 	{
 		[JsonProperty("image_fullscreen_001_landscape")]
@@ -89,4 +91,34 @@ namespace ClassLibrary.Classes
 		}
 	}
 
+	#endregion
+
+	#region 20250613新的Json对应的类结构
+
+	internal class WindowsSpotlightNewClass
+	{
+		public List<WindowsSpotlightItem> Items { get; set; }
+	}
+	internal class WindowsSpotlightItem
+	{
+		[JsonProperty("landscapeImage")]
+		public ImageAsset LandscapeImage { get; set; }
+
+		[JsonProperty("portraitImage")]
+		public ImageAsset PortraitImage { get; set; }
+
+		[JsonProperty("iconHoverText")]
+		public string IconHoverText { get; set; }
+
+		[JsonProperty("title")]
+		public string Title { get; set; }
+
+	}
+	internal class ImageAsset
+	{
+		[JsonProperty("asset")]
+		public string Asset { get; set; }
+	}
+
+	#endregion
 }

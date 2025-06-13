@@ -36,7 +36,7 @@ namespace BingImageDownloadForConsoleApplication
             // Dictionary<string, List<string>> dicBingDownloadUrltest = bingImageDownloadService.GetDownloadUrlFromResultList();
 
             // 聚焦图片下载的API地址测试（失效）
-            //bingImageDownloadService.WindowsSpotlightDownloadAsync().GetAwaiter().GetResult();
+            bingImageDownloadService.WindowsSpotlightDownloadAsync().GetAwaiter().GetResult();
 
             #region 已注释：调试Hash
             /*

@@ -373,10 +373,12 @@ namespace ClassLibrary.Classes
 			get => _windowsSpotlightPath;
 			set => _windowsSpotlightPath = string.IsNullOrWhiteSpace(value) ? Path.Combine(ClassLibrary.ShareClass._systemUserProfilePath, "AppData", "Local", "Packages", "Microsoft.Windows.ContentDeliveryManager_cw5n1h2txyewy", "LocalState", "Assets") : value;
 		}
-		/// <summary>
-		/// 微软官方的Windows聚焦API地址
-		/// </summary>
-		public WindowsSpotlightAPIUrlClass WindowsSpotlightAPIUrl { get; set; } = new WindowsSpotlightAPIUrlClass();
+        /// <summary>
+        /// 微软官方的Windows聚焦API地址
+        /// </summary>
+        public string WindowsSpotlightAPIUrl { get; set; } = $@"https://fd.api.iris.microsoft.com/v4/api/selection?placement=88000820&bcnt=4&fmt=json&locale=zh-CN&country=CN";
+		//public WindowsSpotlightAPIUrlClass WindowsSpotlightAPIUrl { get; set; } = new WindowsSpotlightAPIUrlClass();
+
 		/// <summary>
 		/// Windows聚焦API图片下载重复次数
 		/// 循环访问，最大重复次数后退出循环

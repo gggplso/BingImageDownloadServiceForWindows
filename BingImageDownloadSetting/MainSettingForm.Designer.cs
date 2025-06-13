@@ -235,6 +235,10 @@
 			this.textBoxMobileWallpaperPath = new System.Windows.Forms.TextBox();
 			this.buttonMobileWallpaperPathBrowse = new System.Windows.Forms.Button();
 			this.labelMobileWallpaperPathExplanation = new System.Windows.Forms.Label();
+			this.labelWindowsSpotlightAPIUrl = new System.Windows.Forms.Label();
+			this.textBoxWindowsSpotlightAPIUrl = new System.Windows.Forms.TextBox();
+			this.labelWindowsSpotlightAPIUrlExplanation = new System.Windows.Forms.Label();
+			this.labelWindowsSpotlightAPIUrlUnit = new System.Windows.Forms.Label();
 			this.tabPageAbout = new System.Windows.Forms.TabPage();
 			this.toolTipMainSetting = new System.Windows.Forms.ToolTip(this.components);
 			this.buttonRead = new System.Windows.Forms.Button();
@@ -1016,27 +1020,27 @@
 			this.tableLayoutPanelImageDownloadSetting.ColumnCount = 4;
 			this.tableLayoutPanelImageDownloadSetting.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 24.00021F));
 			this.tableLayoutPanelImageDownloadSetting.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.00029F));
-			this.tableLayoutPanelImageDownloadSetting.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 9.999202F));
+			this.tableLayoutPanelImageDownloadSetting.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 9.999203F));
 			this.tableLayoutPanelImageDownloadSetting.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.00029F));
 			this.tableLayoutPanelImageDownloadSetting.Controls.Add(this.labelAppAutoExitWaitTime, 0, 6);
 			this.tableLayoutPanelImageDownloadSetting.Controls.Add(this.numericUpDownAppAutoExitWaitTime, 1, 6);
 			this.tableLayoutPanelImageDownloadSetting.Controls.Add(this.labelAppAutoExitWaitTimeUnit, 2, 6);
 			this.tableLayoutPanelImageDownloadSetting.Controls.Add(this.labelAppAutoExitWaitTimeExplanation, 3, 6);
-			this.tableLayoutPanelImageDownloadSetting.Controls.Add(this.labelRejectedPath, 0, 35);
-			this.tableLayoutPanelImageDownloadSetting.Controls.Add(this.textBoxRejectedPath, 1, 35);
-			this.tableLayoutPanelImageDownloadSetting.Controls.Add(this.buttonRejectedPathBrowse, 2, 35);
-			this.tableLayoutPanelImageDownloadSetting.Controls.Add(this.labelRejectedPathExplanation, 3, 35);
-			this.tableLayoutPanelImageDownloadSetting.Controls.Add(this.labelVideoWallpaperPath, 0, 34);
-			this.tableLayoutPanelImageDownloadSetting.Controls.Add(this.textBoxVideoWallpaperPath, 1, 34);
-			this.tableLayoutPanelImageDownloadSetting.Controls.Add(this.buttonVideoWallpaperPathBrowse, 2, 34);
-			this.tableLayoutPanelImageDownloadSetting.Controls.Add(this.labelVideoWallpaperPathExplanation, 3, 34);
-			this.tableLayoutPanelImageDownloadSetting.Controls.Add(this.labelComputerWallpaperPath, 0, 32);
-			this.tableLayoutPanelImageDownloadSetting.Controls.Add(this.textBoxComputerWallpaperPath, 1, 32);
-			this.tableLayoutPanelImageDownloadSetting.Controls.Add(this.buttonComputerWallpaperPathBrowse, 2, 32);
-			this.tableLayoutPanelImageDownloadSetting.Controls.Add(this.labelComputerWallpaperPathExplanation, 3, 32);
-			this.tableLayoutPanelImageDownloadSetting.Controls.Add(this.labelFileOperationTypeExplanation, 3, 30);
-			this.tableLayoutPanelImageDownloadSetting.Controls.Add(this.labelFileOperationTypeUnit, 2, 30);
-			this.tableLayoutPanelImageDownloadSetting.Controls.Add(this.comboBoxFileOperationType, 1, 30);
+			this.tableLayoutPanelImageDownloadSetting.Controls.Add(this.labelRejectedPath, 0, 36);
+			this.tableLayoutPanelImageDownloadSetting.Controls.Add(this.textBoxRejectedPath, 1, 36);
+			this.tableLayoutPanelImageDownloadSetting.Controls.Add(this.buttonRejectedPathBrowse, 2, 36);
+			this.tableLayoutPanelImageDownloadSetting.Controls.Add(this.labelRejectedPathExplanation, 3, 36);
+			this.tableLayoutPanelImageDownloadSetting.Controls.Add(this.labelVideoWallpaperPath, 0, 35);
+			this.tableLayoutPanelImageDownloadSetting.Controls.Add(this.textBoxVideoWallpaperPath, 1, 35);
+			this.tableLayoutPanelImageDownloadSetting.Controls.Add(this.buttonVideoWallpaperPathBrowse, 2, 35);
+			this.tableLayoutPanelImageDownloadSetting.Controls.Add(this.labelVideoWallpaperPathExplanation, 3, 35);
+			this.tableLayoutPanelImageDownloadSetting.Controls.Add(this.labelComputerWallpaperPath, 0, 33);
+			this.tableLayoutPanelImageDownloadSetting.Controls.Add(this.textBoxComputerWallpaperPath, 1, 33);
+			this.tableLayoutPanelImageDownloadSetting.Controls.Add(this.buttonComputerWallpaperPathBrowse, 2, 33);
+			this.tableLayoutPanelImageDownloadSetting.Controls.Add(this.labelComputerWallpaperPathExplanation, 3, 33);
+			this.tableLayoutPanelImageDownloadSetting.Controls.Add(this.labelFileOperationTypeExplanation, 3, 31);
+			this.tableLayoutPanelImageDownloadSetting.Controls.Add(this.labelFileOperationTypeUnit, 2, 31);
+			this.tableLayoutPanelImageDownloadSetting.Controls.Add(this.comboBoxFileOperationType, 1, 31);
 			this.tableLayoutPanelImageDownloadSetting.Controls.Add(this.textBoxWindowsSpotlightPath, 1, 27);
 			this.tableLayoutPanelImageDownloadSetting.Controls.Add(this.buttonWindowsSpotlightPathBrowse, 2, 27);
 			this.tableLayoutPanelImageDownloadSetting.Controls.Add(this.labelWindowsSpotlightPathExplanation, 3, 27);
@@ -1145,26 +1149,48 @@
 			this.tableLayoutPanelImageDownloadSetting.Controls.Add(this.labelWindowsSpotlightSettingUnit, 2, 26);
 			this.tableLayoutPanelImageDownloadSetting.Controls.Add(this.labelWindowsSpotlightSettingExplanation, 3, 26);
 			this.tableLayoutPanelImageDownloadSetting.Controls.Add(this.labelWindowsSpotlightPath, 0, 27);
-			this.tableLayoutPanelImageDownloadSetting.Controls.Add(this.labelWindowsSpotlightAPIRepeatLimit, 0, 28);
-			this.tableLayoutPanelImageDownloadSetting.Controls.Add(this.numericUpDownWindowsSpotlightAPIRepeatLimit, 1, 28);
-			this.tableLayoutPanelImageDownloadSetting.Controls.Add(this.labelWindowsSpotlightAPIRepeatLimitUnit, 2, 28);
-			this.tableLayoutPanelImageDownloadSetting.Controls.Add(this.labelWindowsSpotlightAPIRepeatLimitExplanation, 3, 28);
-			this.tableLayoutPanelImageDownloadSetting.Controls.Add(this.labelCategorizeAndMoveSetting, 0, 29);
-			this.tableLayoutPanelImageDownloadSetting.Controls.Add(this.labelCategorizeAndMoveSettingValue, 1, 29);
-			this.tableLayoutPanelImageDownloadSetting.Controls.Add(this.labelCategorizeAndMoveSettingUnit, 2, 29);
-			this.tableLayoutPanelImageDownloadSetting.Controls.Add(this.labelCategorizeAndMoveSettingExplanation, 3, 29);
-			this.tableLayoutPanelImageDownloadSetting.Controls.Add(this.labelSearchDirectoryPath, 0, 31);
-			this.tableLayoutPanelImageDownloadSetting.Controls.Add(this.textBoxSearchDirectoryPath, 1, 31);
-			this.tableLayoutPanelImageDownloadSetting.Controls.Add(this.buttonSearchDirectoryPathBrowse, 2, 31);
-			this.tableLayoutPanelImageDownloadSetting.Controls.Add(this.labelSearchDirectoryPathExplanation, 3, 31);
-			this.tableLayoutPanelImageDownloadSetting.Controls.Add(this.labelFileOperationType, 0, 30);
-			this.tableLayoutPanelImageDownloadSetting.Controls.Add(this.labelMobileWallpaperPath, 0, 33);
-			this.tableLayoutPanelImageDownloadSetting.Controls.Add(this.textBoxMobileWallpaperPath, 1, 33);
-			this.tableLayoutPanelImageDownloadSetting.Controls.Add(this.buttonMobileWallpaperPathBrowse, 2, 33);
-			this.tableLayoutPanelImageDownloadSetting.Controls.Add(this.labelMobileWallpaperPathExplanation, 3, 33);
+			this.tableLayoutPanelImageDownloadSetting.Controls.Add(this.labelWindowsSpotlightAPIRepeatLimit, 0, 29);
+			this.tableLayoutPanelImageDownloadSetting.Controls.Add(this.numericUpDownWindowsSpotlightAPIRepeatLimit, 1, 29);
+			this.tableLayoutPanelImageDownloadSetting.Controls.Add(this.labelWindowsSpotlightAPIRepeatLimitUnit, 2, 29);
+			this.tableLayoutPanelImageDownloadSetting.Controls.Add(this.labelWindowsSpotlightAPIRepeatLimitExplanation, 3, 29);
+			this.tableLayoutPanelImageDownloadSetting.Controls.Add(this.labelCategorizeAndMoveSetting, 0, 30);
+			this.tableLayoutPanelImageDownloadSetting.Controls.Add(this.labelCategorizeAndMoveSettingValue, 1, 30);
+			this.tableLayoutPanelImageDownloadSetting.Controls.Add(this.labelCategorizeAndMoveSettingUnit, 2, 30);
+			this.tableLayoutPanelImageDownloadSetting.Controls.Add(this.labelCategorizeAndMoveSettingExplanation, 3, 30);
+			this.tableLayoutPanelImageDownloadSetting.Controls.Add(this.labelSearchDirectoryPath, 0, 32);
+			this.tableLayoutPanelImageDownloadSetting.Controls.Add(this.textBoxSearchDirectoryPath, 1, 32);
+			this.tableLayoutPanelImageDownloadSetting.Controls.Add(this.buttonSearchDirectoryPathBrowse, 2, 32);
+			this.tableLayoutPanelImageDownloadSetting.Controls.Add(this.labelSearchDirectoryPathExplanation, 3, 32);
+			this.tableLayoutPanelImageDownloadSetting.Controls.Add(this.labelFileOperationType, 0, 31);
+			this.tableLayoutPanelImageDownloadSetting.Controls.Add(this.labelMobileWallpaperPath, 0, 34);
+			this.tableLayoutPanelImageDownloadSetting.Controls.Add(this.textBoxMobileWallpaperPath, 1, 34);
+			this.tableLayoutPanelImageDownloadSetting.Controls.Add(this.buttonMobileWallpaperPathBrowse, 2, 34);
+			this.tableLayoutPanelImageDownloadSetting.Controls.Add(this.labelMobileWallpaperPathExplanation, 3, 34);
+			this.tableLayoutPanelImageDownloadSetting.Controls.Add(this.labelWindowsSpotlightAPIUrl, 0, 28);
+			this.tableLayoutPanelImageDownloadSetting.Controls.Add(this.textBoxWindowsSpotlightAPIUrl, 1, 28);
+			this.tableLayoutPanelImageDownloadSetting.Controls.Add(this.labelWindowsSpotlightAPIUrlExplanation, 3, 28);
+			this.tableLayoutPanelImageDownloadSetting.Controls.Add(this.labelWindowsSpotlightAPIUrlUnit, 2, 28);
 			this.tableLayoutPanelImageDownloadSetting.Location = new System.Drawing.Point(6, 6);
 			this.tableLayoutPanelImageDownloadSetting.Name = "tableLayoutPanelImageDownloadSetting";
-			this.tableLayoutPanelImageDownloadSetting.RowCount = 62;
+			this.tableLayoutPanelImageDownloadSetting.RowCount = 40;
+			this.tableLayoutPanelImageDownloadSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
+			this.tableLayoutPanelImageDownloadSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+			this.tableLayoutPanelImageDownloadSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+			this.tableLayoutPanelImageDownloadSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+			this.tableLayoutPanelImageDownloadSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+			this.tableLayoutPanelImageDownloadSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+			this.tableLayoutPanelImageDownloadSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+			this.tableLayoutPanelImageDownloadSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
+			this.tableLayoutPanelImageDownloadSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+			this.tableLayoutPanelImageDownloadSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+			this.tableLayoutPanelImageDownloadSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 33F));
+			this.tableLayoutPanelImageDownloadSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+			this.tableLayoutPanelImageDownloadSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+			this.tableLayoutPanelImageDownloadSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+			this.tableLayoutPanelImageDownloadSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+			this.tableLayoutPanelImageDownloadSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+			this.tableLayoutPanelImageDownloadSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+			this.tableLayoutPanelImageDownloadSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 33F));
 			this.tableLayoutPanelImageDownloadSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
 			this.tableLayoutPanelImageDownloadSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
 			this.tableLayoutPanelImageDownloadSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
@@ -1173,68 +1199,28 @@
 			this.tableLayoutPanelImageDownloadSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
 			this.tableLayoutPanelImageDownloadSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
 			this.tableLayoutPanelImageDownloadSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+			this.tableLayoutPanelImageDownloadSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 33F));
+			this.tableLayoutPanelImageDownloadSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+			this.tableLayoutPanelImageDownloadSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+			this.tableLayoutPanelImageDownloadSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+			this.tableLayoutPanelImageDownloadSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 33F));
 			this.tableLayoutPanelImageDownloadSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
 			this.tableLayoutPanelImageDownloadSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
 			this.tableLayoutPanelImageDownloadSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
 			this.tableLayoutPanelImageDownloadSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
 			this.tableLayoutPanelImageDownloadSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
 			this.tableLayoutPanelImageDownloadSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+			this.tableLayoutPanelImageDownloadSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 33F));
 			this.tableLayoutPanelImageDownloadSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
 			this.tableLayoutPanelImageDownloadSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-			this.tableLayoutPanelImageDownloadSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-			this.tableLayoutPanelImageDownloadSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-			this.tableLayoutPanelImageDownloadSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-			this.tableLayoutPanelImageDownloadSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-			this.tableLayoutPanelImageDownloadSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-			this.tableLayoutPanelImageDownloadSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-			this.tableLayoutPanelImageDownloadSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-			this.tableLayoutPanelImageDownloadSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-			this.tableLayoutPanelImageDownloadSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-			this.tableLayoutPanelImageDownloadSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-			this.tableLayoutPanelImageDownloadSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-			this.tableLayoutPanelImageDownloadSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-			this.tableLayoutPanelImageDownloadSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-			this.tableLayoutPanelImageDownloadSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-			this.tableLayoutPanelImageDownloadSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-			this.tableLayoutPanelImageDownloadSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-			this.tableLayoutPanelImageDownloadSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-			this.tableLayoutPanelImageDownloadSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-			this.tableLayoutPanelImageDownloadSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-			this.tableLayoutPanelImageDownloadSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-			this.tableLayoutPanelImageDownloadSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-			this.tableLayoutPanelImageDownloadSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-			this.tableLayoutPanelImageDownloadSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-			this.tableLayoutPanelImageDownloadSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-			this.tableLayoutPanelImageDownloadSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-			this.tableLayoutPanelImageDownloadSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-			this.tableLayoutPanelImageDownloadSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-			this.tableLayoutPanelImageDownloadSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-			this.tableLayoutPanelImageDownloadSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-			this.tableLayoutPanelImageDownloadSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-			this.tableLayoutPanelImageDownloadSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-			this.tableLayoutPanelImageDownloadSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-			this.tableLayoutPanelImageDownloadSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-			this.tableLayoutPanelImageDownloadSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-			this.tableLayoutPanelImageDownloadSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-			this.tableLayoutPanelImageDownloadSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-			this.tableLayoutPanelImageDownloadSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-			this.tableLayoutPanelImageDownloadSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-			this.tableLayoutPanelImageDownloadSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-			this.tableLayoutPanelImageDownloadSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-			this.tableLayoutPanelImageDownloadSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-			this.tableLayoutPanelImageDownloadSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-			this.tableLayoutPanelImageDownloadSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-			this.tableLayoutPanelImageDownloadSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-			this.tableLayoutPanelImageDownloadSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-			this.tableLayoutPanelImageDownloadSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-			this.tableLayoutPanelImageDownloadSetting.Size = new System.Drawing.Size(739, 1183);
+			this.tableLayoutPanelImageDownloadSetting.Size = new System.Drawing.Size(739, 1255);
 			this.tableLayoutPanelImageDownloadSetting.TabIndex = 0;
 			// 
 			// labelAppAutoExitWaitTime
 			// 
 			this.labelAppAutoExitWaitTime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelAppAutoExitWaitTime.AutoSize = true;
-			this.labelAppAutoExitWaitTime.Location = new System.Drawing.Point(3, 189);
+			this.labelAppAutoExitWaitTime.Location = new System.Drawing.Point(3, 194);
 			this.labelAppAutoExitWaitTime.Name = "labelAppAutoExitWaitTime";
 			this.labelAppAutoExitWaitTime.Size = new System.Drawing.Size(171, 12);
 			this.labelAppAutoExitWaitTime.TabIndex = 188;
@@ -1243,7 +1229,7 @@
 			// numericUpDownAppAutoExitWaitTime
 			// 
 			this.numericUpDownAppAutoExitWaitTime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-			this.numericUpDownAppAutoExitWaitTime.Location = new System.Drawing.Point(180, 184);
+			this.numericUpDownAppAutoExitWaitTime.Location = new System.Drawing.Point(180, 189);
 			this.numericUpDownAppAutoExitWaitTime.Name = "numericUpDownAppAutoExitWaitTime";
 			this.numericUpDownAppAutoExitWaitTime.Size = new System.Drawing.Size(237, 21);
 			this.numericUpDownAppAutoExitWaitTime.TabIndex = 189;
@@ -1258,7 +1244,7 @@
 			// 
 			this.labelAppAutoExitWaitTimeUnit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelAppAutoExitWaitTimeUnit.AutoSize = true;
-			this.labelAppAutoExitWaitTimeUnit.Location = new System.Drawing.Point(423, 189);
+			this.labelAppAutoExitWaitTimeUnit.Location = new System.Drawing.Point(423, 194);
 			this.labelAppAutoExitWaitTimeUnit.Name = "labelAppAutoExitWaitTimeUnit";
 			this.labelAppAutoExitWaitTimeUnit.Size = new System.Drawing.Size(67, 12);
 			this.labelAppAutoExitWaitTimeUnit.TabIndex = 190;
@@ -1268,7 +1254,7 @@
 			// 
 			this.labelAppAutoExitWaitTimeExplanation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelAppAutoExitWaitTimeExplanation.AutoSize = true;
-			this.labelAppAutoExitWaitTimeExplanation.Location = new System.Drawing.Point(496, 183);
+			this.labelAppAutoExitWaitTimeExplanation.Location = new System.Drawing.Point(496, 188);
 			this.labelAppAutoExitWaitTimeExplanation.Name = "labelAppAutoExitWaitTimeExplanation";
 			this.labelAppAutoExitWaitTimeExplanation.Size = new System.Drawing.Size(240, 24);
 			this.labelAppAutoExitWaitTimeExplanation.TabIndex = 191;
@@ -1279,7 +1265,7 @@
 			// 
 			this.labelRejectedPath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelRejectedPath.AutoSize = true;
-			this.labelRejectedPath.Location = new System.Drawing.Point(3, 1059);
+			this.labelRejectedPath.Location = new System.Drawing.Point(3, 1111);
 			this.labelRejectedPath.Name = "labelRejectedPath";
 			this.labelRejectedPath.Size = new System.Drawing.Size(171, 12);
 			this.labelRejectedPath.TabIndex = 184;
@@ -1288,7 +1274,7 @@
 			// textBoxRejectedPath
 			// 
 			this.textBoxRejectedPath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-			this.textBoxRejectedPath.Location = new System.Drawing.Point(180, 1054);
+			this.textBoxRejectedPath.Location = new System.Drawing.Point(180, 1106);
 			this.textBoxRejectedPath.Name = "textBoxRejectedPath";
 			this.textBoxRejectedPath.ReadOnly = true;
 			this.textBoxRejectedPath.Size = new System.Drawing.Size(237, 21);
@@ -1298,7 +1284,7 @@
 			// buttonRejectedPathBrowse
 			// 
 			this.buttonRejectedPathBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-			this.buttonRejectedPathBrowse.Location = new System.Drawing.Point(423, 1053);
+			this.buttonRejectedPathBrowse.Location = new System.Drawing.Point(423, 1105);
 			this.buttonRejectedPathBrowse.Name = "buttonRejectedPathBrowse";
 			this.buttonRejectedPathBrowse.Size = new System.Drawing.Size(67, 23);
 			this.buttonRejectedPathBrowse.TabIndex = 186;
@@ -1310,7 +1296,7 @@
 			// 
 			this.labelRejectedPathExplanation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelRejectedPathExplanation.AutoSize = true;
-			this.labelRejectedPathExplanation.Location = new System.Drawing.Point(496, 1059);
+			this.labelRejectedPathExplanation.Location = new System.Drawing.Point(496, 1111);
 			this.labelRejectedPathExplanation.Name = "labelRejectedPathExplanation";
 			this.labelRejectedPathExplanation.Size = new System.Drawing.Size(240, 12);
 			this.labelRejectedPathExplanation.TabIndex = 187;
@@ -1322,7 +1308,7 @@
 			// 
 			this.labelVideoWallpaperPath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelVideoWallpaperPath.AutoSize = true;
-			this.labelVideoWallpaperPath.Location = new System.Drawing.Point(3, 1029);
+			this.labelVideoWallpaperPath.Location = new System.Drawing.Point(3, 1081);
 			this.labelVideoWallpaperPath.Name = "labelVideoWallpaperPath";
 			this.labelVideoWallpaperPath.Size = new System.Drawing.Size(171, 12);
 			this.labelVideoWallpaperPath.TabIndex = 180;
@@ -1331,7 +1317,7 @@
 			// textBoxVideoWallpaperPath
 			// 
 			this.textBoxVideoWallpaperPath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-			this.textBoxVideoWallpaperPath.Location = new System.Drawing.Point(180, 1024);
+			this.textBoxVideoWallpaperPath.Location = new System.Drawing.Point(180, 1076);
 			this.textBoxVideoWallpaperPath.Name = "textBoxVideoWallpaperPath";
 			this.textBoxVideoWallpaperPath.ReadOnly = true;
 			this.textBoxVideoWallpaperPath.Size = new System.Drawing.Size(237, 21);
@@ -1341,7 +1327,7 @@
 			// buttonVideoWallpaperPathBrowse
 			// 
 			this.buttonVideoWallpaperPathBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-			this.buttonVideoWallpaperPathBrowse.Location = new System.Drawing.Point(423, 1023);
+			this.buttonVideoWallpaperPathBrowse.Location = new System.Drawing.Point(423, 1075);
 			this.buttonVideoWallpaperPathBrowse.Name = "buttonVideoWallpaperPathBrowse";
 			this.buttonVideoWallpaperPathBrowse.Size = new System.Drawing.Size(67, 23);
 			this.buttonVideoWallpaperPathBrowse.TabIndex = 182;
@@ -1353,7 +1339,7 @@
 			// 
 			this.labelVideoWallpaperPathExplanation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelVideoWallpaperPathExplanation.AutoSize = true;
-			this.labelVideoWallpaperPathExplanation.Location = new System.Drawing.Point(496, 1029);
+			this.labelVideoWallpaperPathExplanation.Location = new System.Drawing.Point(496, 1081);
 			this.labelVideoWallpaperPathExplanation.Name = "labelVideoWallpaperPathExplanation";
 			this.labelVideoWallpaperPathExplanation.Size = new System.Drawing.Size(240, 12);
 			this.labelVideoWallpaperPathExplanation.TabIndex = 183;
@@ -1364,7 +1350,7 @@
 			// 
 			this.labelComputerWallpaperPath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelComputerWallpaperPath.AutoSize = true;
-			this.labelComputerWallpaperPath.Location = new System.Drawing.Point(3, 969);
+			this.labelComputerWallpaperPath.Location = new System.Drawing.Point(3, 1021);
 			this.labelComputerWallpaperPath.Name = "labelComputerWallpaperPath";
 			this.labelComputerWallpaperPath.Size = new System.Drawing.Size(171, 12);
 			this.labelComputerWallpaperPath.TabIndex = 176;
@@ -1373,7 +1359,7 @@
 			// textBoxComputerWallpaperPath
 			// 
 			this.textBoxComputerWallpaperPath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-			this.textBoxComputerWallpaperPath.Location = new System.Drawing.Point(180, 964);
+			this.textBoxComputerWallpaperPath.Location = new System.Drawing.Point(180, 1016);
 			this.textBoxComputerWallpaperPath.Name = "textBoxComputerWallpaperPath";
 			this.textBoxComputerWallpaperPath.ReadOnly = true;
 			this.textBoxComputerWallpaperPath.Size = new System.Drawing.Size(237, 21);
@@ -1383,7 +1369,7 @@
 			// buttonComputerWallpaperPathBrowse
 			// 
 			this.buttonComputerWallpaperPathBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-			this.buttonComputerWallpaperPathBrowse.Location = new System.Drawing.Point(423, 963);
+			this.buttonComputerWallpaperPathBrowse.Location = new System.Drawing.Point(423, 1015);
 			this.buttonComputerWallpaperPathBrowse.Name = "buttonComputerWallpaperPathBrowse";
 			this.buttonComputerWallpaperPathBrowse.Size = new System.Drawing.Size(67, 23);
 			this.buttonComputerWallpaperPathBrowse.TabIndex = 178;
@@ -1395,7 +1381,7 @@
 			// 
 			this.labelComputerWallpaperPathExplanation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelComputerWallpaperPathExplanation.AutoSize = true;
-			this.labelComputerWallpaperPathExplanation.Location = new System.Drawing.Point(496, 969);
+			this.labelComputerWallpaperPathExplanation.Location = new System.Drawing.Point(496, 1021);
 			this.labelComputerWallpaperPathExplanation.Name = "labelComputerWallpaperPathExplanation";
 			this.labelComputerWallpaperPathExplanation.Size = new System.Drawing.Size(240, 12);
 			this.labelComputerWallpaperPathExplanation.TabIndex = 179;
@@ -1406,7 +1392,7 @@
 			this.labelFileOperationTypeExplanation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelFileOperationTypeExplanation.AutoSize = true;
 			this.labelFileOperationTypeExplanation.Font = new System.Drawing.Font("宋体", 9F);
-			this.labelFileOperationTypeExplanation.Location = new System.Drawing.Point(496, 909);
+			this.labelFileOperationTypeExplanation.Location = new System.Drawing.Point(496, 961);
 			this.labelFileOperationTypeExplanation.Name = "labelFileOperationTypeExplanation";
 			this.labelFileOperationTypeExplanation.Size = new System.Drawing.Size(240, 12);
 			this.labelFileOperationTypeExplanation.TabIndex = 171;
@@ -1416,7 +1402,7 @@
 			// 
 			this.labelFileOperationTypeUnit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelFileOperationTypeUnit.AutoSize = true;
-			this.labelFileOperationTypeUnit.Location = new System.Drawing.Point(423, 909);
+			this.labelFileOperationTypeUnit.Location = new System.Drawing.Point(423, 961);
 			this.labelFileOperationTypeUnit.Name = "labelFileOperationTypeUnit";
 			this.labelFileOperationTypeUnit.Size = new System.Drawing.Size(67, 12);
 			this.labelFileOperationTypeUnit.TabIndex = 170;
@@ -1426,7 +1412,7 @@
 			this.comboBoxFileOperationType.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.comboBoxFileOperationType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.comboBoxFileOperationType.FormattingEnabled = true;
-			this.comboBoxFileOperationType.Location = new System.Drawing.Point(180, 905);
+			this.comboBoxFileOperationType.Location = new System.Drawing.Point(180, 957);
 			this.comboBoxFileOperationType.Name = "comboBoxFileOperationType";
 			this.comboBoxFileOperationType.Size = new System.Drawing.Size(237, 20);
 			this.comboBoxFileOperationType.TabIndex = 169;
@@ -1435,7 +1421,7 @@
 			// textBoxWindowsSpotlightPath
 			// 
 			this.textBoxWindowsSpotlightPath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-			this.textBoxWindowsSpotlightPath.Location = new System.Drawing.Point(180, 814);
+			this.textBoxWindowsSpotlightPath.Location = new System.Drawing.Point(180, 833);
 			this.textBoxWindowsSpotlightPath.Name = "textBoxWindowsSpotlightPath";
 			this.textBoxWindowsSpotlightPath.ReadOnly = true;
 			this.textBoxWindowsSpotlightPath.Size = new System.Drawing.Size(237, 21);
@@ -1445,7 +1431,7 @@
 			// buttonWindowsSpotlightPathBrowse
 			// 
 			this.buttonWindowsSpotlightPathBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-			this.buttonWindowsSpotlightPathBrowse.Location = new System.Drawing.Point(423, 813);
+			this.buttonWindowsSpotlightPathBrowse.Location = new System.Drawing.Point(423, 832);
 			this.buttonWindowsSpotlightPathBrowse.Name = "buttonWindowsSpotlightPathBrowse";
 			this.buttonWindowsSpotlightPathBrowse.Size = new System.Drawing.Size(67, 23);
 			this.buttonWindowsSpotlightPathBrowse.TabIndex = 154;
@@ -1457,7 +1443,7 @@
 			// 
 			this.labelWindowsSpotlightPathExplanation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelWindowsSpotlightPathExplanation.AutoSize = true;
-			this.labelWindowsSpotlightPathExplanation.Location = new System.Drawing.Point(496, 813);
+			this.labelWindowsSpotlightPathExplanation.Location = new System.Drawing.Point(496, 832);
 			this.labelWindowsSpotlightPathExplanation.Name = "labelWindowsSpotlightPathExplanation";
 			this.labelWindowsSpotlightPathExplanation.Size = new System.Drawing.Size(240, 24);
 			this.labelWindowsSpotlightPathExplanation.TabIndex = 155;
@@ -1467,7 +1453,7 @@
 			// 
 			this.labelPixelResolutionIsUHD.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelPixelResolutionIsUHD.AutoSize = true;
-			this.labelPixelResolutionIsUHD.Location = new System.Drawing.Point(3, 609);
+			this.labelPixelResolutionIsUHD.Location = new System.Drawing.Point(3, 625);
 			this.labelPixelResolutionIsUHD.Name = "labelPixelResolutionIsUHD";
 			this.labelPixelResolutionIsUHD.Size = new System.Drawing.Size(171, 12);
 			this.labelPixelResolutionIsUHD.TabIndex = 144;
@@ -1481,7 +1467,7 @@
 			this.comboBoxPixelResolutionIsUHD.Items.AddRange(new object[] {
             "是",
             "否"});
-			this.comboBoxPixelResolutionIsUHD.Location = new System.Drawing.Point(180, 605);
+			this.comboBoxPixelResolutionIsUHD.Location = new System.Drawing.Point(180, 621);
 			this.comboBoxPixelResolutionIsUHD.Name = "comboBoxPixelResolutionIsUHD";
 			this.comboBoxPixelResolutionIsUHD.Size = new System.Drawing.Size(237, 20);
 			this.comboBoxPixelResolutionIsUHD.TabIndex = 145;
@@ -1491,7 +1477,7 @@
 			// 
 			this.labelPixelResolutionIsUHDUnit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelPixelResolutionIsUHDUnit.AutoSize = true;
-			this.labelPixelResolutionIsUHDUnit.Location = new System.Drawing.Point(423, 609);
+			this.labelPixelResolutionIsUHDUnit.Location = new System.Drawing.Point(423, 625);
 			this.labelPixelResolutionIsUHDUnit.Name = "labelPixelResolutionIsUHDUnit";
 			this.labelPixelResolutionIsUHDUnit.Size = new System.Drawing.Size(67, 12);
 			this.labelPixelResolutionIsUHDUnit.TabIndex = 146;
@@ -1500,7 +1486,7 @@
 			// 
 			this.labelPixelResolutionIsUHDExplanation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelPixelResolutionIsUHDExplanation.AutoSize = true;
-			this.labelPixelResolutionIsUHDExplanation.Location = new System.Drawing.Point(496, 603);
+			this.labelPixelResolutionIsUHDExplanation.Location = new System.Drawing.Point(496, 619);
 			this.labelPixelResolutionIsUHDExplanation.Name = "labelPixelResolutionIsUHDExplanation";
 			this.labelPixelResolutionIsUHDExplanation.Size = new System.Drawing.Size(240, 24);
 			this.labelPixelResolutionIsUHDExplanation.TabIndex = 147;
@@ -1510,7 +1496,7 @@
 			// 
 			this.labelPixelResolutionIsMobile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelPixelResolutionIsMobile.AutoSize = true;
-			this.labelPixelResolutionIsMobile.Location = new System.Drawing.Point(3, 639);
+			this.labelPixelResolutionIsMobile.Location = new System.Drawing.Point(3, 655);
 			this.labelPixelResolutionIsMobile.Name = "labelPixelResolutionIsMobile";
 			this.labelPixelResolutionIsMobile.Size = new System.Drawing.Size(171, 12);
 			this.labelPixelResolutionIsMobile.TabIndex = 140;
@@ -1524,7 +1510,7 @@
 			this.comboBoxPixelResolutionIsMobile.Items.AddRange(new object[] {
             "是",
             "否"});
-			this.comboBoxPixelResolutionIsMobile.Location = new System.Drawing.Point(180, 635);
+			this.comboBoxPixelResolutionIsMobile.Location = new System.Drawing.Point(180, 651);
 			this.comboBoxPixelResolutionIsMobile.Name = "comboBoxPixelResolutionIsMobile";
 			this.comboBoxPixelResolutionIsMobile.Size = new System.Drawing.Size(237, 20);
 			this.comboBoxPixelResolutionIsMobile.TabIndex = 141;
@@ -1534,7 +1520,7 @@
 			// 
 			this.labelPixelResolutionIsMobileUnit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelPixelResolutionIsMobileUnit.AutoSize = true;
-			this.labelPixelResolutionIsMobileUnit.Location = new System.Drawing.Point(423, 639);
+			this.labelPixelResolutionIsMobileUnit.Location = new System.Drawing.Point(423, 655);
 			this.labelPixelResolutionIsMobileUnit.Name = "labelPixelResolutionIsMobileUnit";
 			this.labelPixelResolutionIsMobileUnit.Size = new System.Drawing.Size(67, 12);
 			this.labelPixelResolutionIsMobileUnit.TabIndex = 142;
@@ -1543,7 +1529,7 @@
 			// 
 			this.labelPixelResolutionIsMobileExplanation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelPixelResolutionIsMobileExplanation.AutoSize = true;
-			this.labelPixelResolutionIsMobileExplanation.Location = new System.Drawing.Point(496, 633);
+			this.labelPixelResolutionIsMobileExplanation.Location = new System.Drawing.Point(496, 649);
 			this.labelPixelResolutionIsMobileExplanation.Name = "labelPixelResolutionIsMobileExplanation";
 			this.labelPixelResolutionIsMobileExplanation.Size = new System.Drawing.Size(240, 24);
 			this.labelPixelResolutionIsMobileExplanation.TabIndex = 143;
@@ -1553,7 +1539,7 @@
 			// 
 			this.labelFileNameLanguageIsChinese.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelFileNameLanguageIsChinese.AutoSize = true;
-			this.labelFileNameLanguageIsChinese.Location = new System.Drawing.Point(3, 669);
+			this.labelFileNameLanguageIsChinese.Location = new System.Drawing.Point(3, 685);
 			this.labelFileNameLanguageIsChinese.Name = "labelFileNameLanguageIsChinese";
 			this.labelFileNameLanguageIsChinese.Size = new System.Drawing.Size(171, 12);
 			this.labelFileNameLanguageIsChinese.TabIndex = 136;
@@ -1567,7 +1553,7 @@
 			this.comboBoxFileNameLanguageIsChinese.Items.AddRange(new object[] {
             "是",
             "否"});
-			this.comboBoxFileNameLanguageIsChinese.Location = new System.Drawing.Point(180, 665);
+			this.comboBoxFileNameLanguageIsChinese.Location = new System.Drawing.Point(180, 681);
 			this.comboBoxFileNameLanguageIsChinese.Name = "comboBoxFileNameLanguageIsChinese";
 			this.comboBoxFileNameLanguageIsChinese.Size = new System.Drawing.Size(237, 20);
 			this.comboBoxFileNameLanguageIsChinese.TabIndex = 137;
@@ -1577,7 +1563,7 @@
 			// 
 			this.labelFileNameLanguageIsChineseUnit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelFileNameLanguageIsChineseUnit.AutoSize = true;
-			this.labelFileNameLanguageIsChineseUnit.Location = new System.Drawing.Point(423, 669);
+			this.labelFileNameLanguageIsChineseUnit.Location = new System.Drawing.Point(423, 685);
 			this.labelFileNameLanguageIsChineseUnit.Name = "labelFileNameLanguageIsChineseUnit";
 			this.labelFileNameLanguageIsChineseUnit.Size = new System.Drawing.Size(67, 12);
 			this.labelFileNameLanguageIsChineseUnit.TabIndex = 138;
@@ -1586,7 +1572,7 @@
 			// 
 			this.labelFileNameLanguageIsChineseExplanation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelFileNameLanguageIsChineseExplanation.AutoSize = true;
-			this.labelFileNameLanguageIsChineseExplanation.Location = new System.Drawing.Point(496, 663);
+			this.labelFileNameLanguageIsChineseExplanation.Location = new System.Drawing.Point(496, 679);
 			this.labelFileNameLanguageIsChineseExplanation.Name = "labelFileNameLanguageIsChineseExplanation";
 			this.labelFileNameLanguageIsChineseExplanation.Size = new System.Drawing.Size(240, 24);
 			this.labelFileNameLanguageIsChineseExplanation.TabIndex = 139;
@@ -1596,7 +1582,7 @@
 			// 
 			this.labelFileNameAddTitle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelFileNameAddTitle.AutoSize = true;
-			this.labelFileNameAddTitle.Location = new System.Drawing.Point(3, 699);
+			this.labelFileNameAddTitle.Location = new System.Drawing.Point(3, 715);
 			this.labelFileNameAddTitle.Name = "labelFileNameAddTitle";
 			this.labelFileNameAddTitle.Size = new System.Drawing.Size(171, 12);
 			this.labelFileNameAddTitle.TabIndex = 132;
@@ -1610,7 +1596,7 @@
 			this.comboBoxFileNameAddTitle.Items.AddRange(new object[] {
             "是",
             "否"});
-			this.comboBoxFileNameAddTitle.Location = new System.Drawing.Point(180, 695);
+			this.comboBoxFileNameAddTitle.Location = new System.Drawing.Point(180, 711);
 			this.comboBoxFileNameAddTitle.Name = "comboBoxFileNameAddTitle";
 			this.comboBoxFileNameAddTitle.Size = new System.Drawing.Size(237, 20);
 			this.comboBoxFileNameAddTitle.TabIndex = 133;
@@ -1620,7 +1606,7 @@
 			// 
 			this.labelFileNameAddTitleUnit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelFileNameAddTitleUnit.AutoSize = true;
-			this.labelFileNameAddTitleUnit.Location = new System.Drawing.Point(423, 699);
+			this.labelFileNameAddTitleUnit.Location = new System.Drawing.Point(423, 715);
 			this.labelFileNameAddTitleUnit.Name = "labelFileNameAddTitleUnit";
 			this.labelFileNameAddTitleUnit.Size = new System.Drawing.Size(67, 12);
 			this.labelFileNameAddTitleUnit.TabIndex = 134;
@@ -1629,7 +1615,7 @@
 			// 
 			this.labelFileNameAddTitleExplanation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelFileNameAddTitleExplanation.AutoSize = true;
-			this.labelFileNameAddTitleExplanation.Location = new System.Drawing.Point(496, 699);
+			this.labelFileNameAddTitleExplanation.Location = new System.Drawing.Point(496, 715);
 			this.labelFileNameAddTitleExplanation.Name = "labelFileNameAddTitleExplanation";
 			this.labelFileNameAddTitleExplanation.Size = new System.Drawing.Size(240, 12);
 			this.labelFileNameAddTitleExplanation.TabIndex = 135;
@@ -1639,7 +1625,7 @@
 			// 
 			this.labelFileNameAddDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelFileNameAddDate.AutoSize = true;
-			this.labelFileNameAddDate.Location = new System.Drawing.Point(3, 729);
+			this.labelFileNameAddDate.Location = new System.Drawing.Point(3, 745);
 			this.labelFileNameAddDate.Name = "labelFileNameAddDate";
 			this.labelFileNameAddDate.Size = new System.Drawing.Size(171, 12);
 			this.labelFileNameAddDate.TabIndex = 128;
@@ -1653,7 +1639,7 @@
 			this.comboBoxFileNameAddDate.Items.AddRange(new object[] {
             "是",
             "否"});
-			this.comboBoxFileNameAddDate.Location = new System.Drawing.Point(180, 725);
+			this.comboBoxFileNameAddDate.Location = new System.Drawing.Point(180, 741);
 			this.comboBoxFileNameAddDate.Name = "comboBoxFileNameAddDate";
 			this.comboBoxFileNameAddDate.Size = new System.Drawing.Size(237, 20);
 			this.comboBoxFileNameAddDate.TabIndex = 129;
@@ -1663,7 +1649,7 @@
 			// 
 			this.labelFileNameAddDateUnit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelFileNameAddDateUnit.AutoSize = true;
-			this.labelFileNameAddDateUnit.Location = new System.Drawing.Point(423, 729);
+			this.labelFileNameAddDateUnit.Location = new System.Drawing.Point(423, 745);
 			this.labelFileNameAddDateUnit.Name = "labelFileNameAddDateUnit";
 			this.labelFileNameAddDateUnit.Size = new System.Drawing.Size(67, 12);
 			this.labelFileNameAddDateUnit.TabIndex = 130;
@@ -1672,7 +1658,7 @@
 			// 
 			this.labelFileNameAddDateExplanation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelFileNameAddDateExplanation.AutoSize = true;
-			this.labelFileNameAddDateExplanation.Location = new System.Drawing.Point(496, 729);
+			this.labelFileNameAddDateExplanation.Location = new System.Drawing.Point(496, 745);
 			this.labelFileNameAddDateExplanation.Name = "labelFileNameAddDateExplanation";
 			this.labelFileNameAddDateExplanation.Size = new System.Drawing.Size(240, 12);
 			this.labelFileNameAddDateExplanation.TabIndex = 131;
@@ -1682,7 +1668,7 @@
 			// 
 			this.labelIsFullDownload.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelIsFullDownload.AutoSize = true;
-			this.labelIsFullDownload.Location = new System.Drawing.Point(3, 759);
+			this.labelIsFullDownload.Location = new System.Drawing.Point(3, 775);
 			this.labelIsFullDownload.Name = "labelIsFullDownload";
 			this.labelIsFullDownload.Size = new System.Drawing.Size(171, 12);
 			this.labelIsFullDownload.TabIndex = 124;
@@ -1696,7 +1682,7 @@
 			this.comboBoxIsFullDownload.Items.AddRange(new object[] {
             "是",
             "否"});
-			this.comboBoxIsFullDownload.Location = new System.Drawing.Point(180, 755);
+			this.comboBoxIsFullDownload.Location = new System.Drawing.Point(180, 771);
 			this.comboBoxIsFullDownload.Name = "comboBoxIsFullDownload";
 			this.comboBoxIsFullDownload.Size = new System.Drawing.Size(237, 20);
 			this.comboBoxIsFullDownload.TabIndex = 125;
@@ -1707,7 +1693,7 @@
 			// 
 			this.labelIsFullDownloadUnit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelIsFullDownloadUnit.AutoSize = true;
-			this.labelIsFullDownloadUnit.Location = new System.Drawing.Point(423, 759);
+			this.labelIsFullDownloadUnit.Location = new System.Drawing.Point(423, 775);
 			this.labelIsFullDownloadUnit.Name = "labelIsFullDownloadUnit";
 			this.labelIsFullDownloadUnit.Size = new System.Drawing.Size(67, 12);
 			this.labelIsFullDownloadUnit.TabIndex = 126;
@@ -1717,7 +1703,7 @@
 			this.labelIsFullDownloadExplanation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelIsFullDownloadExplanation.AutoSize = true;
 			this.labelIsFullDownloadExplanation.Font = new System.Drawing.Font("宋体", 9F);
-			this.labelIsFullDownloadExplanation.Location = new System.Drawing.Point(496, 759);
+			this.labelIsFullDownloadExplanation.Location = new System.Drawing.Point(496, 775);
 			this.labelIsFullDownloadExplanation.Name = "labelIsFullDownloadExplanation";
 			this.labelIsFullDownloadExplanation.Size = new System.Drawing.Size(240, 12);
 			this.labelIsFullDownloadExplanation.TabIndex = 127;
@@ -1728,7 +1714,7 @@
 			// 
 			this.labelBingUrlAFewDaysUnit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelBingUrlAFewDaysUnit.AutoSize = true;
-			this.labelBingUrlAFewDaysUnit.Location = new System.Drawing.Point(423, 579);
+			this.labelBingUrlAFewDaysUnit.Location = new System.Drawing.Point(423, 595);
 			this.labelBingUrlAFewDaysUnit.Name = "labelBingUrlAFewDaysUnit";
 			this.labelBingUrlAFewDaysUnit.Size = new System.Drawing.Size(67, 12);
 			this.labelBingUrlAFewDaysUnit.TabIndex = 122;
@@ -1738,7 +1724,7 @@
 			// 
 			this.labelBingUrlAFewDaysExplanation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelBingUrlAFewDaysExplanation.AutoSize = true;
-			this.labelBingUrlAFewDaysExplanation.Location = new System.Drawing.Point(496, 573);
+			this.labelBingUrlAFewDaysExplanation.Location = new System.Drawing.Point(496, 589);
 			this.labelBingUrlAFewDaysExplanation.Name = "labelBingUrlAFewDaysExplanation";
 			this.labelBingUrlAFewDaysExplanation.Size = new System.Drawing.Size(240, 24);
 			this.labelBingUrlAFewDaysExplanation.TabIndex = 123;
@@ -1747,7 +1733,7 @@
 			// numericUpDownBingUrlDaysAgo
 			// 
 			this.numericUpDownBingUrlDaysAgo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-			this.numericUpDownBingUrlDaysAgo.Location = new System.Drawing.Point(180, 544);
+			this.numericUpDownBingUrlDaysAgo.Location = new System.Drawing.Point(180, 560);
 			this.numericUpDownBingUrlDaysAgo.Maximum = new decimal(new int[] {
             7,
             0,
@@ -1762,7 +1748,7 @@
 			// 
 			this.labelSocketReceiveTimeout.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelSocketReceiveTimeout.AutoSize = true;
-			this.labelSocketReceiveTimeout.Location = new System.Drawing.Point(3, 399);
+			this.labelSocketReceiveTimeout.Location = new System.Drawing.Point(3, 412);
 			this.labelSocketReceiveTimeout.Name = "labelSocketReceiveTimeout";
 			this.labelSocketReceiveTimeout.Size = new System.Drawing.Size(171, 12);
 			this.labelSocketReceiveTimeout.TabIndex = 96;
@@ -1776,7 +1762,7 @@
             0,
             0,
             0});
-			this.numericUpDownSocketReceiveTimeout.Location = new System.Drawing.Point(180, 394);
+			this.numericUpDownSocketReceiveTimeout.Location = new System.Drawing.Point(180, 407);
 			this.numericUpDownSocketReceiveTimeout.Maximum = new decimal(new int[] {
             2147483647,
             0,
@@ -1801,7 +1787,7 @@
 			// 
 			this.labelSocketReceiveTimeoutUnit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelSocketReceiveTimeoutUnit.AutoSize = true;
-			this.labelSocketReceiveTimeoutUnit.Location = new System.Drawing.Point(423, 399);
+			this.labelSocketReceiveTimeoutUnit.Location = new System.Drawing.Point(423, 412);
 			this.labelSocketReceiveTimeoutUnit.Name = "labelSocketReceiveTimeoutUnit";
 			this.labelSocketReceiveTimeoutUnit.Size = new System.Drawing.Size(67, 12);
 			this.labelSocketReceiveTimeoutUnit.TabIndex = 98;
@@ -1811,7 +1797,7 @@
 			// 
 			this.labelSocketReceiveTimeoutExplanation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelSocketReceiveTimeoutExplanation.AutoSize = true;
-			this.labelSocketReceiveTimeoutExplanation.Location = new System.Drawing.Point(496, 399);
+			this.labelSocketReceiveTimeoutExplanation.Location = new System.Drawing.Point(496, 412);
 			this.labelSocketReceiveTimeoutExplanation.Name = "labelSocketReceiveTimeoutExplanation";
 			this.labelSocketReceiveTimeoutExplanation.Size = new System.Drawing.Size(240, 12);
 			this.labelSocketReceiveTimeoutExplanation.TabIndex = 99;
@@ -1825,7 +1811,7 @@
 			this.comboBoxNetworkStateTestSwitch.Items.AddRange(new object[] {
             "开启",
             "关闭"});
-			this.comboBoxNetworkStateTestSwitch.Location = new System.Drawing.Point(180, 35);
+			this.comboBoxNetworkStateTestSwitch.Location = new System.Drawing.Point(180, 40);
 			this.comboBoxNetworkStateTestSwitch.Name = "comboBoxNetworkStateTestSwitch";
 			this.comboBoxNetworkStateTestSwitch.Size = new System.Drawing.Size(237, 20);
 			this.comboBoxNetworkStateTestSwitch.TabIndex = 55;
@@ -1837,7 +1823,7 @@
 			this.labelImageDownloadSettingApp.AutoSize = true;
 			this.labelImageDownloadSettingApp.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
 			this.labelImageDownloadSettingApp.ForeColor = System.Drawing.SystemColors.Highlight;
-			this.labelImageDownloadSettingApp.Location = new System.Drawing.Point(3, 8);
+			this.labelImageDownloadSettingApp.Location = new System.Drawing.Point(3, 10);
 			this.labelImageDownloadSettingApp.Name = "labelImageDownloadSettingApp";
 			this.labelImageDownloadSettingApp.Size = new System.Drawing.Size(171, 14);
 			this.labelImageDownloadSettingApp.TabIndex = 0;
@@ -1847,7 +1833,7 @@
 			// 
 			this.labelCategorizeAndMoveFileSwitch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelCategorizeAndMoveFileSwitch.AutoSize = true;
-			this.labelCategorizeAndMoveFileSwitch.Location = new System.Drawing.Point(3, 159);
+			this.labelCategorizeAndMoveFileSwitch.Location = new System.Drawing.Point(3, 164);
 			this.labelCategorizeAndMoveFileSwitch.Name = "labelCategorizeAndMoveFileSwitch";
 			this.labelCategorizeAndMoveFileSwitch.Size = new System.Drawing.Size(171, 12);
 			this.labelCategorizeAndMoveFileSwitch.TabIndex = 52;
@@ -1857,7 +1843,7 @@
 			// 
 			this.labelWindowsSpotlightDownloadSwitch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelWindowsSpotlightDownloadSwitch.AutoSize = true;
-			this.labelWindowsSpotlightDownloadSwitch.Location = new System.Drawing.Point(3, 129);
+			this.labelWindowsSpotlightDownloadSwitch.Location = new System.Drawing.Point(3, 134);
 			this.labelWindowsSpotlightDownloadSwitch.Name = "labelWindowsSpotlightDownloadSwitch";
 			this.labelWindowsSpotlightDownloadSwitch.Size = new System.Drawing.Size(171, 12);
 			this.labelWindowsSpotlightDownloadSwitch.TabIndex = 51;
@@ -1867,7 +1853,7 @@
 			// 
 			this.labelWindowsSpotlightCopySwitch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelWindowsSpotlightCopySwitch.AutoSize = true;
-			this.labelWindowsSpotlightCopySwitch.Location = new System.Drawing.Point(3, 99);
+			this.labelWindowsSpotlightCopySwitch.Location = new System.Drawing.Point(3, 104);
 			this.labelWindowsSpotlightCopySwitch.Name = "labelWindowsSpotlightCopySwitch";
 			this.labelWindowsSpotlightCopySwitch.Size = new System.Drawing.Size(171, 12);
 			this.labelWindowsSpotlightCopySwitch.TabIndex = 50;
@@ -1877,7 +1863,7 @@
 			// 
 			this.labelBingImageDownloadSwitch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelBingImageDownloadSwitch.AutoSize = true;
-			this.labelBingImageDownloadSwitch.Location = new System.Drawing.Point(3, 69);
+			this.labelBingImageDownloadSwitch.Location = new System.Drawing.Point(3, 74);
 			this.labelBingImageDownloadSwitch.Name = "labelBingImageDownloadSwitch";
 			this.labelBingImageDownloadSwitch.Size = new System.Drawing.Size(171, 12);
 			this.labelBingImageDownloadSwitch.TabIndex = 49;
@@ -1887,7 +1873,7 @@
 			// 
 			this.labelNetworkStateTestSwitch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelNetworkStateTestSwitch.AutoSize = true;
-			this.labelNetworkStateTestSwitch.Location = new System.Drawing.Point(3, 39);
+			this.labelNetworkStateTestSwitch.Location = new System.Drawing.Point(3, 44);
 			this.labelNetworkStateTestSwitch.Name = "labelNetworkStateTestSwitch";
 			this.labelNetworkStateTestSwitch.Size = new System.Drawing.Size(171, 12);
 			this.labelNetworkStateTestSwitch.TabIndex = 53;
@@ -1901,7 +1887,7 @@
 			this.comboBoxBingImageDownloadSwitch.Items.AddRange(new object[] {
             "开启",
             "关闭"});
-			this.comboBoxBingImageDownloadSwitch.Location = new System.Drawing.Point(180, 65);
+			this.comboBoxBingImageDownloadSwitch.Location = new System.Drawing.Point(180, 70);
 			this.comboBoxBingImageDownloadSwitch.Name = "comboBoxBingImageDownloadSwitch";
 			this.comboBoxBingImageDownloadSwitch.Size = new System.Drawing.Size(237, 20);
 			this.comboBoxBingImageDownloadSwitch.TabIndex = 58;
@@ -1915,7 +1901,7 @@
 			this.comboBoxWindowsSpotlightCopySwitch.Items.AddRange(new object[] {
             "开启",
             "关闭"});
-			this.comboBoxWindowsSpotlightCopySwitch.Location = new System.Drawing.Point(180, 95);
+			this.comboBoxWindowsSpotlightCopySwitch.Location = new System.Drawing.Point(180, 100);
 			this.comboBoxWindowsSpotlightCopySwitch.Name = "comboBoxWindowsSpotlightCopySwitch";
 			this.comboBoxWindowsSpotlightCopySwitch.Size = new System.Drawing.Size(237, 20);
 			this.comboBoxWindowsSpotlightCopySwitch.TabIndex = 54;
@@ -1929,7 +1915,7 @@
 			this.comboBoxWindowsSpotlightDownloadSwitch.Items.AddRange(new object[] {
             "开启",
             "关闭"});
-			this.comboBoxWindowsSpotlightDownloadSwitch.Location = new System.Drawing.Point(180, 125);
+			this.comboBoxWindowsSpotlightDownloadSwitch.Location = new System.Drawing.Point(180, 130);
 			this.comboBoxWindowsSpotlightDownloadSwitch.Name = "comboBoxWindowsSpotlightDownloadSwitch";
 			this.comboBoxWindowsSpotlightDownloadSwitch.Size = new System.Drawing.Size(237, 20);
 			this.comboBoxWindowsSpotlightDownloadSwitch.TabIndex = 57;
@@ -1943,7 +1929,7 @@
 			this.comboBoxCategorizeAndMoveFileSwitch.Items.AddRange(new object[] {
             "开启",
             "关闭"});
-			this.comboBoxCategorizeAndMoveFileSwitch.Location = new System.Drawing.Point(180, 155);
+			this.comboBoxCategorizeAndMoveFileSwitch.Location = new System.Drawing.Point(180, 160);
 			this.comboBoxCategorizeAndMoveFileSwitch.Name = "comboBoxCategorizeAndMoveFileSwitch";
 			this.comboBoxCategorizeAndMoveFileSwitch.Size = new System.Drawing.Size(237, 20);
 			this.comboBoxCategorizeAndMoveFileSwitch.TabIndex = 56;
@@ -1953,7 +1939,7 @@
 			// 
 			this.labelNetworkStateTestSwitchExplanation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelNetworkStateTestSwitchExplanation.AutoSize = true;
-			this.labelNetworkStateTestSwitchExplanation.Location = new System.Drawing.Point(496, 39);
+			this.labelNetworkStateTestSwitchExplanation.Location = new System.Drawing.Point(496, 44);
 			this.labelNetworkStateTestSwitchExplanation.Name = "labelNetworkStateTestSwitchExplanation";
 			this.labelNetworkStateTestSwitchExplanation.Size = new System.Drawing.Size(240, 12);
 			this.labelNetworkStateTestSwitchExplanation.TabIndex = 68;
@@ -1963,7 +1949,7 @@
 			// 
 			this.labelBingImageDownloadSwitchExplanation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelBingImageDownloadSwitchExplanation.AutoSize = true;
-			this.labelBingImageDownloadSwitchExplanation.Location = new System.Drawing.Point(496, 69);
+			this.labelBingImageDownloadSwitchExplanation.Location = new System.Drawing.Point(496, 74);
 			this.labelBingImageDownloadSwitchExplanation.Name = "labelBingImageDownloadSwitchExplanation";
 			this.labelBingImageDownloadSwitchExplanation.Size = new System.Drawing.Size(240, 12);
 			this.labelBingImageDownloadSwitchExplanation.TabIndex = 66;
@@ -1973,7 +1959,7 @@
 			// 
 			this.labelWindowsSpotlightCopySwitchExplanation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelWindowsSpotlightCopySwitchExplanation.AutoSize = true;
-			this.labelWindowsSpotlightCopySwitchExplanation.Location = new System.Drawing.Point(496, 99);
+			this.labelWindowsSpotlightCopySwitchExplanation.Location = new System.Drawing.Point(496, 104);
 			this.labelWindowsSpotlightCopySwitchExplanation.Name = "labelWindowsSpotlightCopySwitchExplanation";
 			this.labelWindowsSpotlightCopySwitchExplanation.Size = new System.Drawing.Size(240, 12);
 			this.labelWindowsSpotlightCopySwitchExplanation.TabIndex = 64;
@@ -1983,7 +1969,7 @@
 			// 
 			this.labelWindowsSpotlightDownloadSwitchExplanation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelWindowsSpotlightDownloadSwitchExplanation.AutoSize = true;
-			this.labelWindowsSpotlightDownloadSwitchExplanation.Location = new System.Drawing.Point(496, 129);
+			this.labelWindowsSpotlightDownloadSwitchExplanation.Location = new System.Drawing.Point(496, 134);
 			this.labelWindowsSpotlightDownloadSwitchExplanation.Name = "labelWindowsSpotlightDownloadSwitchExplanation";
 			this.labelWindowsSpotlightDownloadSwitchExplanation.Size = new System.Drawing.Size(240, 12);
 			this.labelWindowsSpotlightDownloadSwitchExplanation.TabIndex = 62;
@@ -1993,7 +1979,7 @@
 			// 
 			this.labelCategorizeAndMoveFileSwitchExplanation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelCategorizeAndMoveFileSwitchExplanation.AutoSize = true;
-			this.labelCategorizeAndMoveFileSwitchExplanation.Location = new System.Drawing.Point(496, 159);
+			this.labelCategorizeAndMoveFileSwitchExplanation.Location = new System.Drawing.Point(496, 164);
 			this.labelCategorizeAndMoveFileSwitchExplanation.Name = "labelCategorizeAndMoveFileSwitchExplanation";
 			this.labelCategorizeAndMoveFileSwitchExplanation.Size = new System.Drawing.Size(240, 12);
 			this.labelCategorizeAndMoveFileSwitchExplanation.TabIndex = 60;
@@ -2003,7 +1989,7 @@
 			// 
 			this.labelNetworkStateTestSwitchUnit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelNetworkStateTestSwitchUnit.AutoSize = true;
-			this.labelNetworkStateTestSwitchUnit.Location = new System.Drawing.Point(423, 39);
+			this.labelNetworkStateTestSwitchUnit.Location = new System.Drawing.Point(423, 44);
 			this.labelNetworkStateTestSwitchUnit.Name = "labelNetworkStateTestSwitchUnit";
 			this.labelNetworkStateTestSwitchUnit.Size = new System.Drawing.Size(67, 12);
 			this.labelNetworkStateTestSwitchUnit.TabIndex = 63;
@@ -2012,7 +1998,7 @@
 			// 
 			this.labelBingImageDownloadSwitchUnit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelBingImageDownloadSwitchUnit.AutoSize = true;
-			this.labelBingImageDownloadSwitchUnit.Location = new System.Drawing.Point(423, 69);
+			this.labelBingImageDownloadSwitchUnit.Location = new System.Drawing.Point(423, 74);
 			this.labelBingImageDownloadSwitchUnit.Name = "labelBingImageDownloadSwitchUnit";
 			this.labelBingImageDownloadSwitchUnit.Size = new System.Drawing.Size(67, 12);
 			this.labelBingImageDownloadSwitchUnit.TabIndex = 61;
@@ -2021,7 +2007,7 @@
 			// 
 			this.labelCategorizeAndMoveFileSwitchUnit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelCategorizeAndMoveFileSwitchUnit.AutoSize = true;
-			this.labelCategorizeAndMoveFileSwitchUnit.Location = new System.Drawing.Point(423, 159);
+			this.labelCategorizeAndMoveFileSwitchUnit.Location = new System.Drawing.Point(423, 164);
 			this.labelCategorizeAndMoveFileSwitchUnit.Name = "labelCategorizeAndMoveFileSwitchUnit";
 			this.labelCategorizeAndMoveFileSwitchUnit.Size = new System.Drawing.Size(67, 12);
 			this.labelCategorizeAndMoveFileSwitchUnit.TabIndex = 59;
@@ -2030,7 +2016,7 @@
 			// 
 			this.labelWindowsSpotlightCopySwitchUnit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelWindowsSpotlightCopySwitchUnit.AutoSize = true;
-			this.labelWindowsSpotlightCopySwitchUnit.Location = new System.Drawing.Point(423, 99);
+			this.labelWindowsSpotlightCopySwitchUnit.Location = new System.Drawing.Point(423, 104);
 			this.labelWindowsSpotlightCopySwitchUnit.Name = "labelWindowsSpotlightCopySwitchUnit";
 			this.labelWindowsSpotlightCopySwitchUnit.Size = new System.Drawing.Size(67, 12);
 			this.labelWindowsSpotlightCopySwitchUnit.TabIndex = 65;
@@ -2039,7 +2025,7 @@
 			// 
 			this.labelWindowsSpotlightDownloadSwitchUnit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelWindowsSpotlightDownloadSwitchUnit.AutoSize = true;
-			this.labelWindowsSpotlightDownloadSwitchUnit.Location = new System.Drawing.Point(423, 129);
+			this.labelWindowsSpotlightDownloadSwitchUnit.Location = new System.Drawing.Point(423, 134);
 			this.labelWindowsSpotlightDownloadSwitchUnit.Name = "labelWindowsSpotlightDownloadSwitchUnit";
 			this.labelWindowsSpotlightDownloadSwitchUnit.Size = new System.Drawing.Size(67, 12);
 			this.labelWindowsSpotlightDownloadSwitchUnit.TabIndex = 67;
@@ -2050,7 +2036,7 @@
 			this.labelImageDownloadSetting.AutoSize = true;
 			this.labelImageDownloadSetting.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
 			this.labelImageDownloadSetting.ForeColor = System.Drawing.SystemColors.Highlight;
-			this.labelImageDownloadSetting.Location = new System.Drawing.Point(3, 218);
+			this.labelImageDownloadSetting.Location = new System.Drawing.Point(3, 225);
 			this.labelImageDownloadSetting.Name = "labelImageDownloadSetting";
 			this.labelImageDownloadSetting.Size = new System.Drawing.Size(171, 14);
 			this.labelImageDownloadSetting.TabIndex = 69;
@@ -2060,7 +2046,7 @@
 			// 
 			this.labelOverwrite.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelOverwrite.AutoSize = true;
-			this.labelOverwrite.Location = new System.Drawing.Point(3, 249);
+			this.labelOverwrite.Location = new System.Drawing.Point(3, 259);
 			this.labelOverwrite.Name = "labelOverwrite";
 			this.labelOverwrite.Size = new System.Drawing.Size(171, 12);
 			this.labelOverwrite.TabIndex = 70;
@@ -2074,7 +2060,7 @@
 			this.comboBoxOverwrite.Items.AddRange(new object[] {
             "是 (覆盖原文件)",
             "否 (不下载)"});
-			this.comboBoxOverwrite.Location = new System.Drawing.Point(180, 245);
+			this.comboBoxOverwrite.Location = new System.Drawing.Point(180, 255);
 			this.comboBoxOverwrite.Name = "comboBoxOverwrite";
 			this.comboBoxOverwrite.Size = new System.Drawing.Size(237, 20);
 			this.comboBoxOverwrite.TabIndex = 71;
@@ -2084,7 +2070,7 @@
 			// 
 			this.labelOverwriteUnit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelOverwriteUnit.AutoSize = true;
-			this.labelOverwriteUnit.Location = new System.Drawing.Point(423, 249);
+			this.labelOverwriteUnit.Location = new System.Drawing.Point(423, 259);
 			this.labelOverwriteUnit.Name = "labelOverwriteUnit";
 			this.labelOverwriteUnit.Size = new System.Drawing.Size(67, 12);
 			this.labelOverwriteUnit.TabIndex = 72;
@@ -2093,7 +2079,7 @@
 			// 
 			this.labelOverwriteExplanation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelOverwriteExplanation.AutoSize = true;
-			this.labelOverwriteExplanation.Location = new System.Drawing.Point(496, 249);
+			this.labelOverwriteExplanation.Location = new System.Drawing.Point(496, 259);
 			this.labelOverwriteExplanation.Name = "labelOverwriteExplanation";
 			this.labelOverwriteExplanation.Size = new System.Drawing.Size(240, 12);
 			this.labelOverwriteExplanation.TabIndex = 73;
@@ -2103,7 +2089,7 @@
 			// 
 			this.labelImageFileSavePath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelImageFileSavePath.AutoSize = true;
-			this.labelImageFileSavePath.Location = new System.Drawing.Point(3, 279);
+			this.labelImageFileSavePath.Location = new System.Drawing.Point(3, 289);
 			this.labelImageFileSavePath.Name = "labelImageFileSavePath";
 			this.labelImageFileSavePath.Size = new System.Drawing.Size(171, 12);
 			this.labelImageFileSavePath.TabIndex = 74;
@@ -2112,7 +2098,7 @@
 			// textBoxImageFileSavePath
 			// 
 			this.textBoxImageFileSavePath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-			this.textBoxImageFileSavePath.Location = new System.Drawing.Point(180, 274);
+			this.textBoxImageFileSavePath.Location = new System.Drawing.Point(180, 284);
 			this.textBoxImageFileSavePath.Name = "textBoxImageFileSavePath";
 			this.textBoxImageFileSavePath.ReadOnly = true;
 			this.textBoxImageFileSavePath.Size = new System.Drawing.Size(237, 21);
@@ -2122,7 +2108,7 @@
 			// buttonImageFileSavePathBrowse
 			// 
 			this.buttonImageFileSavePathBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-			this.buttonImageFileSavePathBrowse.Location = new System.Drawing.Point(423, 273);
+			this.buttonImageFileSavePathBrowse.Location = new System.Drawing.Point(423, 283);
 			this.buttonImageFileSavePathBrowse.Name = "buttonImageFileSavePathBrowse";
 			this.buttonImageFileSavePathBrowse.Size = new System.Drawing.Size(67, 23);
 			this.buttonImageFileSavePathBrowse.TabIndex = 76;
@@ -2134,7 +2120,7 @@
 			// 
 			this.labelImageFileSavePathExplanation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelImageFileSavePathExplanation.AutoSize = true;
-			this.labelImageFileSavePathExplanation.Location = new System.Drawing.Point(496, 279);
+			this.labelImageFileSavePathExplanation.Location = new System.Drawing.Point(496, 289);
 			this.labelImageFileSavePathExplanation.Name = "labelImageFileSavePathExplanation";
 			this.labelImageFileSavePathExplanation.Size = new System.Drawing.Size(240, 12);
 			this.labelImageFileSavePathExplanation.TabIndex = 77;
@@ -2145,7 +2131,7 @@
 			this.labelNetworkInformation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelNetworkInformation.AutoSize = true;
 			this.labelNetworkInformation.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-			this.labelNetworkInformation.Location = new System.Drawing.Point(3, 308);
+			this.labelNetworkInformation.Location = new System.Drawing.Point(3, 319);
 			this.labelNetworkInformation.Name = "labelNetworkInformation";
 			this.labelNetworkInformation.Size = new System.Drawing.Size(171, 14);
 			this.labelNetworkInformation.TabIndex = 78;
@@ -2155,7 +2141,7 @@
 			// 
 			this.labelDnsServerAddress.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelDnsServerAddress.AutoSize = true;
-			this.labelDnsServerAddress.Location = new System.Drawing.Point(3, 339);
+			this.labelDnsServerAddress.Location = new System.Drawing.Point(3, 352);
 			this.labelDnsServerAddress.Name = "labelDnsServerAddress";
 			this.labelDnsServerAddress.Size = new System.Drawing.Size(171, 12);
 			this.labelDnsServerAddress.TabIndex = 79;
@@ -2165,7 +2151,7 @@
 			// 
 			this.labelSocketSendTimeout.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelSocketSendTimeout.AutoSize = true;
-			this.labelSocketSendTimeout.Location = new System.Drawing.Point(3, 369);
+			this.labelSocketSendTimeout.Location = new System.Drawing.Point(3, 382);
 			this.labelSocketSendTimeout.Name = "labelSocketSendTimeout";
 			this.labelSocketSendTimeout.Size = new System.Drawing.Size(171, 12);
 			this.labelSocketSendTimeout.TabIndex = 80;
@@ -2174,7 +2160,7 @@
 			// textBoxDnsServerAddress
 			// 
 			this.textBoxDnsServerAddress.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-			this.textBoxDnsServerAddress.Location = new System.Drawing.Point(180, 334);
+			this.textBoxDnsServerAddress.Location = new System.Drawing.Point(180, 347);
 			this.textBoxDnsServerAddress.Name = "textBoxDnsServerAddress";
 			this.textBoxDnsServerAddress.Size = new System.Drawing.Size(237, 21);
 			this.textBoxDnsServerAddress.TabIndex = 81;
@@ -2185,7 +2171,7 @@
 			// 
 			this.labelDnsServerAddressUnit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelDnsServerAddressUnit.AutoSize = true;
-			this.labelDnsServerAddressUnit.Location = new System.Drawing.Point(423, 339);
+			this.labelDnsServerAddressUnit.Location = new System.Drawing.Point(423, 352);
 			this.labelDnsServerAddressUnit.Name = "labelDnsServerAddressUnit";
 			this.labelDnsServerAddressUnit.Size = new System.Drawing.Size(67, 12);
 			this.labelDnsServerAddressUnit.TabIndex = 82;
@@ -2194,7 +2180,7 @@
 			// 
 			this.labelDnsServerAddressExplanation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelDnsServerAddressExplanation.AutoSize = true;
-			this.labelDnsServerAddressExplanation.Location = new System.Drawing.Point(496, 333);
+			this.labelDnsServerAddressExplanation.Location = new System.Drawing.Point(496, 346);
 			this.labelDnsServerAddressExplanation.Name = "labelDnsServerAddressExplanation";
 			this.labelDnsServerAddressExplanation.Size = new System.Drawing.Size(240, 24);
 			this.labelDnsServerAddressExplanation.TabIndex = 83;
@@ -2208,7 +2194,7 @@
             0,
             0,
             0});
-			this.numericUpDownSocketSendTimeout.Location = new System.Drawing.Point(180, 364);
+			this.numericUpDownSocketSendTimeout.Location = new System.Drawing.Point(180, 377);
 			this.numericUpDownSocketSendTimeout.Maximum = new decimal(new int[] {
             2147483647,
             0,
@@ -2233,7 +2219,7 @@
 			// 
 			this.labelSocketSendTimeoutUnit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelSocketSendTimeoutUnit.AutoSize = true;
-			this.labelSocketSendTimeoutUnit.Location = new System.Drawing.Point(423, 369);
+			this.labelSocketSendTimeoutUnit.Location = new System.Drawing.Point(423, 382);
 			this.labelSocketSendTimeoutUnit.Name = "labelSocketSendTimeoutUnit";
 			this.labelSocketSendTimeoutUnit.Size = new System.Drawing.Size(67, 12);
 			this.labelSocketSendTimeoutUnit.TabIndex = 85;
@@ -2243,7 +2229,7 @@
 			// 
 			this.labelSocketSendTimeoutExplanation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelSocketSendTimeoutExplanation.AutoSize = true;
-			this.labelSocketSendTimeoutExplanation.Location = new System.Drawing.Point(496, 369);
+			this.labelSocketSendTimeoutExplanation.Location = new System.Drawing.Point(496, 382);
 			this.labelSocketSendTimeoutExplanation.Name = "labelSocketSendTimeoutExplanation";
 			this.labelSocketSendTimeoutExplanation.Size = new System.Drawing.Size(240, 12);
 			this.labelSocketSendTimeoutExplanation.TabIndex = 86;
@@ -2253,7 +2239,7 @@
 			// 
 			this.labelNetworkInformationValue.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelNetworkInformationValue.AutoSize = true;
-			this.labelNetworkInformationValue.Location = new System.Drawing.Point(180, 309);
+			this.labelNetworkInformationValue.Location = new System.Drawing.Point(180, 320);
 			this.labelNetworkInformationValue.Name = "labelNetworkInformationValue";
 			this.labelNetworkInformationValue.Size = new System.Drawing.Size(237, 12);
 			this.labelNetworkInformationValue.TabIndex = 93;
@@ -2262,7 +2248,7 @@
 			// 
 			this.labelNetworkInformationUnit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelNetworkInformationUnit.AutoSize = true;
-			this.labelNetworkInformationUnit.Location = new System.Drawing.Point(423, 309);
+			this.labelNetworkInformationUnit.Location = new System.Drawing.Point(423, 320);
 			this.labelNetworkInformationUnit.Name = "labelNetworkInformationUnit";
 			this.labelNetworkInformationUnit.Size = new System.Drawing.Size(67, 12);
 			this.labelNetworkInformationUnit.TabIndex = 94;
@@ -2271,7 +2257,7 @@
 			// 
 			this.labelNetworkInformationExplanation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelNetworkInformationExplanation.AutoSize = true;
-			this.labelNetworkInformationExplanation.Location = new System.Drawing.Point(496, 309);
+			this.labelNetworkInformationExplanation.Location = new System.Drawing.Point(496, 320);
 			this.labelNetworkInformationExplanation.Name = "labelNetworkInformationExplanation";
 			this.labelNetworkInformationExplanation.Size = new System.Drawing.Size(240, 12);
 			this.labelNetworkInformationExplanation.TabIndex = 95;
@@ -2280,7 +2266,7 @@
 			// 
 			this.labelImageDownloadSettingAppValue.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelImageDownloadSettingAppValue.AutoSize = true;
-			this.labelImageDownloadSettingAppValue.Location = new System.Drawing.Point(180, 9);
+			this.labelImageDownloadSettingAppValue.Location = new System.Drawing.Point(180, 11);
 			this.labelImageDownloadSettingAppValue.Name = "labelImageDownloadSettingAppValue";
 			this.labelImageDownloadSettingAppValue.Size = new System.Drawing.Size(237, 12);
 			this.labelImageDownloadSettingAppValue.TabIndex = 90;
@@ -2289,7 +2275,7 @@
 			// 
 			this.labelImageDownloadSettingValue.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelImageDownloadSettingValue.AutoSize = true;
-			this.labelImageDownloadSettingValue.Location = new System.Drawing.Point(180, 219);
+			this.labelImageDownloadSettingValue.Location = new System.Drawing.Point(180, 226);
 			this.labelImageDownloadSettingValue.Name = "labelImageDownloadSettingValue";
 			this.labelImageDownloadSettingValue.Size = new System.Drawing.Size(237, 12);
 			this.labelImageDownloadSettingValue.TabIndex = 87;
@@ -2298,7 +2284,7 @@
 			// 
 			this.labelImageDownloadSettingAppUnit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelImageDownloadSettingAppUnit.AutoSize = true;
-			this.labelImageDownloadSettingAppUnit.Location = new System.Drawing.Point(423, 9);
+			this.labelImageDownloadSettingAppUnit.Location = new System.Drawing.Point(423, 11);
 			this.labelImageDownloadSettingAppUnit.Name = "labelImageDownloadSettingAppUnit";
 			this.labelImageDownloadSettingAppUnit.Size = new System.Drawing.Size(67, 12);
 			this.labelImageDownloadSettingAppUnit.TabIndex = 91;
@@ -2307,7 +2293,7 @@
 			// 
 			this.labelImageDownloadSettingUnit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelImageDownloadSettingUnit.AutoSize = true;
-			this.labelImageDownloadSettingUnit.Location = new System.Drawing.Point(423, 219);
+			this.labelImageDownloadSettingUnit.Location = new System.Drawing.Point(423, 226);
 			this.labelImageDownloadSettingUnit.Name = "labelImageDownloadSettingUnit";
 			this.labelImageDownloadSettingUnit.Size = new System.Drawing.Size(67, 12);
 			this.labelImageDownloadSettingUnit.TabIndex = 88;
@@ -2316,7 +2302,7 @@
 			// 
 			this.labelImageDownloadSettingAppExplanation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelImageDownloadSettingAppExplanation.AutoSize = true;
-			this.labelImageDownloadSettingAppExplanation.Location = new System.Drawing.Point(496, 9);
+			this.labelImageDownloadSettingAppExplanation.Location = new System.Drawing.Point(496, 11);
 			this.labelImageDownloadSettingAppExplanation.Name = "labelImageDownloadSettingAppExplanation";
 			this.labelImageDownloadSettingAppExplanation.Size = new System.Drawing.Size(240, 12);
 			this.labelImageDownloadSettingAppExplanation.TabIndex = 92;
@@ -2325,7 +2311,7 @@
 			// 
 			this.labelImageDownloadSettingExplanation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelImageDownloadSettingExplanation.AutoSize = true;
-			this.labelImageDownloadSettingExplanation.Location = new System.Drawing.Point(496, 219);
+			this.labelImageDownloadSettingExplanation.Location = new System.Drawing.Point(496, 226);
 			this.labelImageDownloadSettingExplanation.Name = "labelImageDownloadSettingExplanation";
 			this.labelImageDownloadSettingExplanation.Size = new System.Drawing.Size(240, 12);
 			this.labelImageDownloadSettingExplanation.TabIndex = 89;
@@ -2334,7 +2320,7 @@
 			// 
 			this.labelPingReplyDomain.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelPingReplyDomain.AutoSize = true;
-			this.labelPingReplyDomain.Location = new System.Drawing.Point(3, 429);
+			this.labelPingReplyDomain.Location = new System.Drawing.Point(3, 442);
 			this.labelPingReplyDomain.Name = "labelPingReplyDomain";
 			this.labelPingReplyDomain.Size = new System.Drawing.Size(171, 12);
 			this.labelPingReplyDomain.TabIndex = 100;
@@ -2343,7 +2329,7 @@
 			// textBoxPingReplyDomain
 			// 
 			this.textBoxPingReplyDomain.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-			this.textBoxPingReplyDomain.Location = new System.Drawing.Point(180, 424);
+			this.textBoxPingReplyDomain.Location = new System.Drawing.Point(180, 437);
 			this.textBoxPingReplyDomain.Name = "textBoxPingReplyDomain";
 			this.textBoxPingReplyDomain.Size = new System.Drawing.Size(237, 21);
 			this.textBoxPingReplyDomain.TabIndex = 102;
@@ -2354,7 +2340,7 @@
 			// 
 			this.labelPingReplyDomainUnit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelPingReplyDomainUnit.AutoSize = true;
-			this.labelPingReplyDomainUnit.Location = new System.Drawing.Point(423, 429);
+			this.labelPingReplyDomainUnit.Location = new System.Drawing.Point(423, 442);
 			this.labelPingReplyDomainUnit.Name = "labelPingReplyDomainUnit";
 			this.labelPingReplyDomainUnit.Size = new System.Drawing.Size(67, 12);
 			this.labelPingReplyDomainUnit.TabIndex = 103;
@@ -2363,7 +2349,7 @@
 			// 
 			this.labelPingReplyDomainExplanation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelPingReplyDomainExplanation.AutoSize = true;
-			this.labelPingReplyDomainExplanation.Location = new System.Drawing.Point(496, 423);
+			this.labelPingReplyDomainExplanation.Location = new System.Drawing.Point(496, 436);
 			this.labelPingReplyDomainExplanation.Name = "labelPingReplyDomainExplanation";
 			this.labelPingReplyDomainExplanation.Size = new System.Drawing.Size(240, 24);
 			this.labelPingReplyDomainExplanation.TabIndex = 104;
@@ -2373,7 +2359,7 @@
 			// 
 			this.labelNetRetryCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelNetRetryCount.AutoSize = true;
-			this.labelNetRetryCount.Location = new System.Drawing.Point(3, 459);
+			this.labelNetRetryCount.Location = new System.Drawing.Point(3, 472);
 			this.labelNetRetryCount.Name = "labelNetRetryCount";
 			this.labelNetRetryCount.Size = new System.Drawing.Size(171, 12);
 			this.labelNetRetryCount.TabIndex = 101;
@@ -2382,7 +2368,7 @@
 			// numericUpDownNetRetryCount
 			// 
 			this.numericUpDownNetRetryCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-			this.numericUpDownNetRetryCount.Location = new System.Drawing.Point(180, 454);
+			this.numericUpDownNetRetryCount.Location = new System.Drawing.Point(180, 467);
 			this.numericUpDownNetRetryCount.Name = "numericUpDownNetRetryCount";
 			this.numericUpDownNetRetryCount.Size = new System.Drawing.Size(237, 21);
 			this.numericUpDownNetRetryCount.TabIndex = 105;
@@ -2397,7 +2383,7 @@
 			// 
 			this.labelNetRetryCountUnit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelNetRetryCountUnit.AutoSize = true;
-			this.labelNetRetryCountUnit.Location = new System.Drawing.Point(423, 459);
+			this.labelNetRetryCountUnit.Location = new System.Drawing.Point(423, 472);
 			this.labelNetRetryCountUnit.Name = "labelNetRetryCountUnit";
 			this.labelNetRetryCountUnit.Size = new System.Drawing.Size(67, 12);
 			this.labelNetRetryCountUnit.TabIndex = 106;
@@ -2407,7 +2393,7 @@
 			// 
 			this.labelNetRetryCountExplanation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelNetRetryCountExplanation.AutoSize = true;
-			this.labelNetRetryCountExplanation.Location = new System.Drawing.Point(496, 459);
+			this.labelNetRetryCountExplanation.Location = new System.Drawing.Point(496, 472);
 			this.labelNetRetryCountExplanation.Name = "labelNetRetryCountExplanation";
 			this.labelNetRetryCountExplanation.Size = new System.Drawing.Size(240, 12);
 			this.labelNetRetryCountExplanation.TabIndex = 107;
@@ -2417,7 +2403,7 @@
 			// 
 			this.labelNetWaitTime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelNetWaitTime.AutoSize = true;
-			this.labelNetWaitTime.Location = new System.Drawing.Point(3, 489);
+			this.labelNetWaitTime.Location = new System.Drawing.Point(3, 502);
 			this.labelNetWaitTime.Name = "labelNetWaitTime";
 			this.labelNetWaitTime.Size = new System.Drawing.Size(171, 12);
 			this.labelNetWaitTime.TabIndex = 108;
@@ -2431,7 +2417,7 @@
             0,
             0,
             0});
-			this.numericUpDownNetWaitTime.Location = new System.Drawing.Point(180, 484);
+			this.numericUpDownNetWaitTime.Location = new System.Drawing.Point(180, 497);
 			this.numericUpDownNetWaitTime.Maximum = new decimal(new int[] {
             2147483647,
             0,
@@ -2456,7 +2442,7 @@
 			// 
 			this.labelNetWaitTimeUnit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelNetWaitTimeUnit.AutoSize = true;
-			this.labelNetWaitTimeUnit.Location = new System.Drawing.Point(423, 489);
+			this.labelNetWaitTimeUnit.Location = new System.Drawing.Point(423, 502);
 			this.labelNetWaitTimeUnit.Name = "labelNetWaitTimeUnit";
 			this.labelNetWaitTimeUnit.Size = new System.Drawing.Size(67, 12);
 			this.labelNetWaitTimeUnit.TabIndex = 110;
@@ -2466,7 +2452,7 @@
 			// 
 			this.labelNetWaitTimeExplanation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelNetWaitTimeExplanation.AutoSize = true;
-			this.labelNetWaitTimeExplanation.Location = new System.Drawing.Point(496, 483);
+			this.labelNetWaitTimeExplanation.Location = new System.Drawing.Point(496, 496);
 			this.labelNetWaitTimeExplanation.Name = "labelNetWaitTimeExplanation";
 			this.labelNetWaitTimeExplanation.Size = new System.Drawing.Size(240, 24);
 			this.labelNetWaitTimeExplanation.TabIndex = 111;
@@ -2477,7 +2463,7 @@
 			this.labelBingImageApi.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelBingImageApi.AutoSize = true;
 			this.labelBingImageApi.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-			this.labelBingImageApi.Location = new System.Drawing.Point(3, 518);
+			this.labelBingImageApi.Location = new System.Drawing.Point(3, 532);
 			this.labelBingImageApi.Name = "labelBingImageApi";
 			this.labelBingImageApi.Size = new System.Drawing.Size(171, 14);
 			this.labelBingImageApi.TabIndex = 112;
@@ -2487,7 +2473,7 @@
 			// 
 			this.labelBingImageApiValue.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelBingImageApiValue.AutoSize = true;
-			this.labelBingImageApiValue.Location = new System.Drawing.Point(180, 519);
+			this.labelBingImageApiValue.Location = new System.Drawing.Point(180, 533);
 			this.labelBingImageApiValue.Name = "labelBingImageApiValue";
 			this.labelBingImageApiValue.Size = new System.Drawing.Size(237, 12);
 			this.labelBingImageApiValue.TabIndex = 113;
@@ -2496,7 +2482,7 @@
 			// 
 			this.labelBingImageApiUnit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelBingImageApiUnit.AutoSize = true;
-			this.labelBingImageApiUnit.Location = new System.Drawing.Point(423, 519);
+			this.labelBingImageApiUnit.Location = new System.Drawing.Point(423, 533);
 			this.labelBingImageApiUnit.Name = "labelBingImageApiUnit";
 			this.labelBingImageApiUnit.Size = new System.Drawing.Size(67, 12);
 			this.labelBingImageApiUnit.TabIndex = 114;
@@ -2505,7 +2491,7 @@
 			// 
 			this.labelBingImageApiExplanation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelBingImageApiExplanation.AutoSize = true;
-			this.labelBingImageApiExplanation.Location = new System.Drawing.Point(496, 519);
+			this.labelBingImageApiExplanation.Location = new System.Drawing.Point(496, 533);
 			this.labelBingImageApiExplanation.Name = "labelBingImageApiExplanation";
 			this.labelBingImageApiExplanation.Size = new System.Drawing.Size(240, 12);
 			this.labelBingImageApiExplanation.TabIndex = 115;
@@ -2514,7 +2500,7 @@
 			// 
 			this.labelBingUrlDaysAgo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelBingUrlDaysAgo.AutoSize = true;
-			this.labelBingUrlDaysAgo.Location = new System.Drawing.Point(3, 549);
+			this.labelBingUrlDaysAgo.Location = new System.Drawing.Point(3, 565);
 			this.labelBingUrlDaysAgo.Name = "labelBingUrlDaysAgo";
 			this.labelBingUrlDaysAgo.Size = new System.Drawing.Size(171, 12);
 			this.labelBingUrlDaysAgo.TabIndex = 116;
@@ -2524,7 +2510,7 @@
 			// 
 			this.labelBingUrlDaysAgoUnit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelBingUrlDaysAgoUnit.AutoSize = true;
-			this.labelBingUrlDaysAgoUnit.Location = new System.Drawing.Point(423, 549);
+			this.labelBingUrlDaysAgoUnit.Location = new System.Drawing.Point(423, 565);
 			this.labelBingUrlDaysAgoUnit.Name = "labelBingUrlDaysAgoUnit";
 			this.labelBingUrlDaysAgoUnit.Size = new System.Drawing.Size(67, 12);
 			this.labelBingUrlDaysAgoUnit.TabIndex = 118;
@@ -2534,7 +2520,7 @@
 			// 
 			this.labelBingUrlDaysAgoExplanation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelBingUrlDaysAgoExplanation.AutoSize = true;
-			this.labelBingUrlDaysAgoExplanation.Location = new System.Drawing.Point(496, 543);
+			this.labelBingUrlDaysAgoExplanation.Location = new System.Drawing.Point(496, 559);
 			this.labelBingUrlDaysAgoExplanation.Name = "labelBingUrlDaysAgoExplanation";
 			this.labelBingUrlDaysAgoExplanation.Size = new System.Drawing.Size(240, 24);
 			this.labelBingUrlDaysAgoExplanation.TabIndex = 119;
@@ -2544,7 +2530,7 @@
 			// 
 			this.labelBingUrlAFewDays.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelBingUrlAFewDays.AutoSize = true;
-			this.labelBingUrlAFewDays.Location = new System.Drawing.Point(3, 579);
+			this.labelBingUrlAFewDays.Location = new System.Drawing.Point(3, 595);
 			this.labelBingUrlAFewDays.Name = "labelBingUrlAFewDays";
 			this.labelBingUrlAFewDays.Size = new System.Drawing.Size(171, 12);
 			this.labelBingUrlAFewDays.TabIndex = 120;
@@ -2553,7 +2539,7 @@
 			// numericUpDownBingUrlAFewDays
 			// 
 			this.numericUpDownBingUrlAFewDays.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-			this.numericUpDownBingUrlAFewDays.Location = new System.Drawing.Point(180, 574);
+			this.numericUpDownBingUrlAFewDays.Location = new System.Drawing.Point(180, 590);
 			this.numericUpDownBingUrlAFewDays.Maximum = new decimal(new int[] {
             8,
             0,
@@ -2579,7 +2565,7 @@
 			this.labelWindowsSpotlightSetting.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelWindowsSpotlightSetting.AutoSize = true;
 			this.labelWindowsSpotlightSetting.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-			this.labelWindowsSpotlightSetting.Location = new System.Drawing.Point(3, 788);
+			this.labelWindowsSpotlightSetting.Location = new System.Drawing.Point(3, 805);
 			this.labelWindowsSpotlightSetting.Name = "labelWindowsSpotlightSetting";
 			this.labelWindowsSpotlightSetting.Size = new System.Drawing.Size(171, 14);
 			this.labelWindowsSpotlightSetting.TabIndex = 148;
@@ -2589,7 +2575,7 @@
 			// 
 			this.labelWindowsSpotlightSettingValue.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelWindowsSpotlightSettingValue.AutoSize = true;
-			this.labelWindowsSpotlightSettingValue.Location = new System.Drawing.Point(180, 789);
+			this.labelWindowsSpotlightSettingValue.Location = new System.Drawing.Point(180, 806);
 			this.labelWindowsSpotlightSettingValue.Name = "labelWindowsSpotlightSettingValue";
 			this.labelWindowsSpotlightSettingValue.Size = new System.Drawing.Size(237, 12);
 			this.labelWindowsSpotlightSettingValue.TabIndex = 149;
@@ -2598,7 +2584,7 @@
 			// 
 			this.labelWindowsSpotlightSettingUnit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelWindowsSpotlightSettingUnit.AutoSize = true;
-			this.labelWindowsSpotlightSettingUnit.Location = new System.Drawing.Point(423, 789);
+			this.labelWindowsSpotlightSettingUnit.Location = new System.Drawing.Point(423, 806);
 			this.labelWindowsSpotlightSettingUnit.Name = "labelWindowsSpotlightSettingUnit";
 			this.labelWindowsSpotlightSettingUnit.Size = new System.Drawing.Size(67, 12);
 			this.labelWindowsSpotlightSettingUnit.TabIndex = 150;
@@ -2607,7 +2593,7 @@
 			// 
 			this.labelWindowsSpotlightSettingExplanation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelWindowsSpotlightSettingExplanation.AutoSize = true;
-			this.labelWindowsSpotlightSettingExplanation.Location = new System.Drawing.Point(496, 789);
+			this.labelWindowsSpotlightSettingExplanation.Location = new System.Drawing.Point(496, 806);
 			this.labelWindowsSpotlightSettingExplanation.Name = "labelWindowsSpotlightSettingExplanation";
 			this.labelWindowsSpotlightSettingExplanation.Size = new System.Drawing.Size(240, 12);
 			this.labelWindowsSpotlightSettingExplanation.TabIndex = 151;
@@ -2616,7 +2602,7 @@
 			// 
 			this.labelWindowsSpotlightPath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelWindowsSpotlightPath.AutoSize = true;
-			this.labelWindowsSpotlightPath.Location = new System.Drawing.Point(3, 819);
+			this.labelWindowsSpotlightPath.Location = new System.Drawing.Point(3, 838);
 			this.labelWindowsSpotlightPath.Name = "labelWindowsSpotlightPath";
 			this.labelWindowsSpotlightPath.Size = new System.Drawing.Size(171, 12);
 			this.labelWindowsSpotlightPath.TabIndex = 152;
@@ -2626,7 +2612,7 @@
 			// 
 			this.labelWindowsSpotlightAPIRepeatLimit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelWindowsSpotlightAPIRepeatLimit.AutoSize = true;
-			this.labelWindowsSpotlightAPIRepeatLimit.Location = new System.Drawing.Point(3, 849);
+			this.labelWindowsSpotlightAPIRepeatLimit.Location = new System.Drawing.Point(3, 898);
 			this.labelWindowsSpotlightAPIRepeatLimit.Name = "labelWindowsSpotlightAPIRepeatLimit";
 			this.labelWindowsSpotlightAPIRepeatLimit.Size = new System.Drawing.Size(171, 12);
 			this.labelWindowsSpotlightAPIRepeatLimit.TabIndex = 156;
@@ -2635,7 +2621,7 @@
 			// numericUpDownWindowsSpotlightAPIRepeatLimit
 			// 
 			this.numericUpDownWindowsSpotlightAPIRepeatLimit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-			this.numericUpDownWindowsSpotlightAPIRepeatLimit.Location = new System.Drawing.Point(180, 844);
+			this.numericUpDownWindowsSpotlightAPIRepeatLimit.Location = new System.Drawing.Point(180, 893);
 			this.numericUpDownWindowsSpotlightAPIRepeatLimit.Minimum = new decimal(new int[] {
             1,
             0,
@@ -2655,7 +2641,7 @@
 			// 
 			this.labelWindowsSpotlightAPIRepeatLimitUnit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelWindowsSpotlightAPIRepeatLimitUnit.AutoSize = true;
-			this.labelWindowsSpotlightAPIRepeatLimitUnit.Location = new System.Drawing.Point(423, 849);
+			this.labelWindowsSpotlightAPIRepeatLimitUnit.Location = new System.Drawing.Point(423, 898);
 			this.labelWindowsSpotlightAPIRepeatLimitUnit.Name = "labelWindowsSpotlightAPIRepeatLimitUnit";
 			this.labelWindowsSpotlightAPIRepeatLimitUnit.Size = new System.Drawing.Size(67, 12);
 			this.labelWindowsSpotlightAPIRepeatLimitUnit.TabIndex = 158;
@@ -2665,7 +2651,7 @@
 			// 
 			this.labelWindowsSpotlightAPIRepeatLimitExplanation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelWindowsSpotlightAPIRepeatLimitExplanation.AutoSize = true;
-			this.labelWindowsSpotlightAPIRepeatLimitExplanation.Location = new System.Drawing.Point(496, 843);
+			this.labelWindowsSpotlightAPIRepeatLimitExplanation.Location = new System.Drawing.Point(496, 892);
 			this.labelWindowsSpotlightAPIRepeatLimitExplanation.Name = "labelWindowsSpotlightAPIRepeatLimitExplanation";
 			this.labelWindowsSpotlightAPIRepeatLimitExplanation.Size = new System.Drawing.Size(240, 24);
 			this.labelWindowsSpotlightAPIRepeatLimitExplanation.TabIndex = 159;
@@ -2677,7 +2663,7 @@
 			this.labelCategorizeAndMoveSetting.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelCategorizeAndMoveSetting.AutoSize = true;
 			this.labelCategorizeAndMoveSetting.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-			this.labelCategorizeAndMoveSetting.Location = new System.Drawing.Point(3, 878);
+			this.labelCategorizeAndMoveSetting.Location = new System.Drawing.Point(3, 928);
 			this.labelCategorizeAndMoveSetting.Name = "labelCategorizeAndMoveSetting";
 			this.labelCategorizeAndMoveSetting.Size = new System.Drawing.Size(171, 14);
 			this.labelCategorizeAndMoveSetting.TabIndex = 160;
@@ -2687,7 +2673,7 @@
 			// 
 			this.labelCategorizeAndMoveSettingValue.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelCategorizeAndMoveSettingValue.AutoSize = true;
-			this.labelCategorizeAndMoveSettingValue.Location = new System.Drawing.Point(180, 879);
+			this.labelCategorizeAndMoveSettingValue.Location = new System.Drawing.Point(180, 929);
 			this.labelCategorizeAndMoveSettingValue.Name = "labelCategorizeAndMoveSettingValue";
 			this.labelCategorizeAndMoveSettingValue.Size = new System.Drawing.Size(237, 12);
 			this.labelCategorizeAndMoveSettingValue.TabIndex = 161;
@@ -2696,7 +2682,7 @@
 			// 
 			this.labelCategorizeAndMoveSettingUnit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelCategorizeAndMoveSettingUnit.AutoSize = true;
-			this.labelCategorizeAndMoveSettingUnit.Location = new System.Drawing.Point(423, 879);
+			this.labelCategorizeAndMoveSettingUnit.Location = new System.Drawing.Point(423, 929);
 			this.labelCategorizeAndMoveSettingUnit.Name = "labelCategorizeAndMoveSettingUnit";
 			this.labelCategorizeAndMoveSettingUnit.Size = new System.Drawing.Size(67, 12);
 			this.labelCategorizeAndMoveSettingUnit.TabIndex = 162;
@@ -2705,7 +2691,7 @@
 			// 
 			this.labelCategorizeAndMoveSettingExplanation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelCategorizeAndMoveSettingExplanation.AutoSize = true;
-			this.labelCategorizeAndMoveSettingExplanation.Location = new System.Drawing.Point(496, 879);
+			this.labelCategorizeAndMoveSettingExplanation.Location = new System.Drawing.Point(496, 929);
 			this.labelCategorizeAndMoveSettingExplanation.Name = "labelCategorizeAndMoveSettingExplanation";
 			this.labelCategorizeAndMoveSettingExplanation.Size = new System.Drawing.Size(240, 12);
 			this.labelCategorizeAndMoveSettingExplanation.TabIndex = 163;
@@ -2714,7 +2700,7 @@
 			// 
 			this.labelSearchDirectoryPath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelSearchDirectoryPath.AutoSize = true;
-			this.labelSearchDirectoryPath.Location = new System.Drawing.Point(3, 939);
+			this.labelSearchDirectoryPath.Location = new System.Drawing.Point(3, 991);
 			this.labelSearchDirectoryPath.Name = "labelSearchDirectoryPath";
 			this.labelSearchDirectoryPath.Size = new System.Drawing.Size(171, 12);
 			this.labelSearchDirectoryPath.TabIndex = 164;
@@ -2723,7 +2709,7 @@
 			// textBoxSearchDirectoryPath
 			// 
 			this.textBoxSearchDirectoryPath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-			this.textBoxSearchDirectoryPath.Location = new System.Drawing.Point(180, 934);
+			this.textBoxSearchDirectoryPath.Location = new System.Drawing.Point(180, 986);
 			this.textBoxSearchDirectoryPath.Name = "textBoxSearchDirectoryPath";
 			this.textBoxSearchDirectoryPath.ReadOnly = true;
 			this.textBoxSearchDirectoryPath.Size = new System.Drawing.Size(237, 21);
@@ -2733,7 +2719,7 @@
 			// buttonSearchDirectoryPathBrowse
 			// 
 			this.buttonSearchDirectoryPathBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-			this.buttonSearchDirectoryPathBrowse.Location = new System.Drawing.Point(423, 933);
+			this.buttonSearchDirectoryPathBrowse.Location = new System.Drawing.Point(423, 985);
 			this.buttonSearchDirectoryPathBrowse.Name = "buttonSearchDirectoryPathBrowse";
 			this.buttonSearchDirectoryPathBrowse.Size = new System.Drawing.Size(67, 23);
 			this.buttonSearchDirectoryPathBrowse.TabIndex = 166;
@@ -2745,7 +2731,7 @@
 			// 
 			this.labelSearchDirectoryPathExplanation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelSearchDirectoryPathExplanation.AutoSize = true;
-			this.labelSearchDirectoryPathExplanation.Location = new System.Drawing.Point(496, 939);
+			this.labelSearchDirectoryPathExplanation.Location = new System.Drawing.Point(496, 991);
 			this.labelSearchDirectoryPathExplanation.Name = "labelSearchDirectoryPathExplanation";
 			this.labelSearchDirectoryPathExplanation.Size = new System.Drawing.Size(240, 12);
 			this.labelSearchDirectoryPathExplanation.TabIndex = 167;
@@ -2755,7 +2741,7 @@
 			// 
 			this.labelFileOperationType.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelFileOperationType.AutoSize = true;
-			this.labelFileOperationType.Location = new System.Drawing.Point(3, 909);
+			this.labelFileOperationType.Location = new System.Drawing.Point(3, 961);
 			this.labelFileOperationType.Name = "labelFileOperationType";
 			this.labelFileOperationType.Size = new System.Drawing.Size(171, 12);
 			this.labelFileOperationType.TabIndex = 168;
@@ -2765,7 +2751,7 @@
 			// 
 			this.labelMobileWallpaperPath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelMobileWallpaperPath.AutoSize = true;
-			this.labelMobileWallpaperPath.Location = new System.Drawing.Point(3, 999);
+			this.labelMobileWallpaperPath.Location = new System.Drawing.Point(3, 1051);
 			this.labelMobileWallpaperPath.Name = "labelMobileWallpaperPath";
 			this.labelMobileWallpaperPath.Size = new System.Drawing.Size(171, 12);
 			this.labelMobileWallpaperPath.TabIndex = 172;
@@ -2774,7 +2760,7 @@
 			// textBoxMobileWallpaperPath
 			// 
 			this.textBoxMobileWallpaperPath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-			this.textBoxMobileWallpaperPath.Location = new System.Drawing.Point(180, 994);
+			this.textBoxMobileWallpaperPath.Location = new System.Drawing.Point(180, 1046);
 			this.textBoxMobileWallpaperPath.Name = "textBoxMobileWallpaperPath";
 			this.textBoxMobileWallpaperPath.ReadOnly = true;
 			this.textBoxMobileWallpaperPath.Size = new System.Drawing.Size(237, 21);
@@ -2784,7 +2770,7 @@
 			// buttonMobileWallpaperPathBrowse
 			// 
 			this.buttonMobileWallpaperPathBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-			this.buttonMobileWallpaperPathBrowse.Location = new System.Drawing.Point(423, 993);
+			this.buttonMobileWallpaperPathBrowse.Location = new System.Drawing.Point(423, 1045);
 			this.buttonMobileWallpaperPathBrowse.Name = "buttonMobileWallpaperPathBrowse";
 			this.buttonMobileWallpaperPathBrowse.Size = new System.Drawing.Size(67, 23);
 			this.buttonMobileWallpaperPathBrowse.TabIndex = 174;
@@ -2796,11 +2782,50 @@
 			// 
 			this.labelMobileWallpaperPathExplanation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelMobileWallpaperPathExplanation.AutoSize = true;
-			this.labelMobileWallpaperPathExplanation.Location = new System.Drawing.Point(496, 999);
+			this.labelMobileWallpaperPathExplanation.Location = new System.Drawing.Point(496, 1051);
 			this.labelMobileWallpaperPathExplanation.Name = "labelMobileWallpaperPathExplanation";
 			this.labelMobileWallpaperPathExplanation.Size = new System.Drawing.Size(240, 12);
 			this.labelMobileWallpaperPathExplanation.TabIndex = 175;
 			this.labelMobileWallpaperPathExplanation.Text = "指定存放竖向图片手机壁纸的目标路径";
+			// 
+			// labelWindowsSpotlightAPIUrl
+			// 
+			this.labelWindowsSpotlightAPIUrl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+			this.labelWindowsSpotlightAPIUrl.AutoSize = true;
+			this.labelWindowsSpotlightAPIUrl.Location = new System.Drawing.Point(3, 868);
+			this.labelWindowsSpotlightAPIUrl.Name = "labelWindowsSpotlightAPIUrl";
+			this.labelWindowsSpotlightAPIUrl.Size = new System.Drawing.Size(171, 12);
+			this.labelWindowsSpotlightAPIUrl.TabIndex = 156;
+			this.labelWindowsSpotlightAPIUrl.Text = "微软聚焦图片API访问地址：";
+			// 
+			// textBoxWindowsSpotlightAPIUrl
+			// 
+			this.textBoxWindowsSpotlightAPIUrl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+			this.textBoxWindowsSpotlightAPIUrl.Location = new System.Drawing.Point(180, 863);
+			this.textBoxWindowsSpotlightAPIUrl.Name = "textBoxWindowsSpotlightAPIUrl";
+			this.textBoxWindowsSpotlightAPIUrl.ReadOnly = true;
+			this.textBoxWindowsSpotlightAPIUrl.Size = new System.Drawing.Size(237, 21);
+			this.textBoxWindowsSpotlightAPIUrl.TabIndex = 153;
+			this.textBoxWindowsSpotlightAPIUrl.Tag = "下载微软聚焦图片的API地址";
+			// 
+			// labelWindowsSpotlightAPIUrlExplanation
+			// 
+			this.labelWindowsSpotlightAPIUrlExplanation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+			this.labelWindowsSpotlightAPIUrlExplanation.AutoSize = true;
+			this.labelWindowsSpotlightAPIUrlExplanation.Location = new System.Drawing.Point(496, 862);
+			this.labelWindowsSpotlightAPIUrlExplanation.Name = "labelWindowsSpotlightAPIUrlExplanation";
+			this.labelWindowsSpotlightAPIUrlExplanation.Size = new System.Drawing.Size(240, 24);
+			this.labelWindowsSpotlightAPIUrlExplanation.TabIndex = 155;
+			this.labelWindowsSpotlightAPIUrlExplanation.Text = "下载微软聚焦图片访问的API地址，解析相关图片具体下载地址。";
+			// 
+			// labelWindowsSpotlightAPIUrlUnit
+			// 
+			this.labelWindowsSpotlightAPIUrlUnit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+			this.labelWindowsSpotlightAPIUrlUnit.AutoSize = true;
+			this.labelWindowsSpotlightAPIUrlUnit.Location = new System.Drawing.Point(423, 868);
+			this.labelWindowsSpotlightAPIUrlUnit.Name = "labelWindowsSpotlightAPIUrlUnit";
+			this.labelWindowsSpotlightAPIUrlUnit.Size = new System.Drawing.Size(67, 12);
+			this.labelWindowsSpotlightAPIUrlUnit.TabIndex = 162;
 			// 
 			// tabPageAbout
 			// 
@@ -3079,6 +3104,10 @@
 		private System.Windows.Forms.Label labelAppAutoExitWaitTimeUnit;
 		private System.Windows.Forms.Label labelAppAutoExitWaitTimeExplanation;
 		private System.Windows.Forms.TabPage tabPageAbout;
+		private System.Windows.Forms.Label labelWindowsSpotlightAPIUrl;
+		private System.Windows.Forms.TextBox textBoxWindowsSpotlightAPIUrl;
+		private System.Windows.Forms.Label labelWindowsSpotlightAPIUrlExplanation;
+		private System.Windows.Forms.Label labelWindowsSpotlightAPIUrlUnit;
 	}
 }
 

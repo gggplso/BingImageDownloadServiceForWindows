@@ -2,7 +2,7 @@
 
 ## 版权
 本程序软件只是本人初入C#的学习之作，本程序完全开源免费，但根据微软的协议，本程序下载的图片仅限于壁纸使用。它们是受版权保护的图像，因此您不应将其用于其他目的，但可以将其用作桌面壁纸。  
-本程序采用的是微软官方公开的接口，是通过JSON数据提取下载路径，从Bing和MSN官网下载图片。不排除以后下载会因微软的调整而失效。
+本程序采用的是微软官方公开的接口，是通过JSON数据提取下载路径，从微软官网（必应Bing和微软MSN网站接口）下载图片。不排除以后下载会因微软的调整而失效。
 
 ### 介绍
 本程序软件基于Windows系统的Bing必应每日壁纸自动下载服务。（不支持Linux、MacOS等其他系统）  
@@ -77,7 +77,10 @@
 ![BingImageDownloadServiceForWindows.exe](https://gitee.com/gggplso/MarkdownPhotos/raw/master/Photos/BingImageDownloadServiceForWindows/README/BingImageDownloadServiceForWindows_Install.png)  
     * 3.2 检查服务是否启动  
       * 3.2.1 在Windows“开始”菜单上点击右键，选择“运行”，输入`services.msc`回车运行，在打开的系统服务列表窗口中，找到必应每日壁纸下载服务，检查是否正常运行  
-![BingImageDownloadServiceForWindows.exe](https://gitee.com/gggplso/MarkdownPhotos/raw/master/Photos/BingImageDownloadServiceForWindows/README/BingImageDownloadForConsoleApplication_startup.png) ![BingImageDownloadServiceForWindows.exe](https://gitee.com/gggplso/MarkdownPhotos/raw/master/Photos/BingImageDownloadServiceForWindows/README/BingImageDownloadServiceForWindows_services.png) ![BingImageDownloadServiceForWindows.exe](https://gitee.com/gggplso/MarkdownPhotos/raw/master/Photos/BingImageDownloadServiceForWindows/README/BingImageDownloadServiceForWindows_servicelist.png)  
+![BingImageDownloadServiceForWindows.exe](https://gitee.com/gggplso/MarkdownPhotos/raw/master/Photos/BingImageDownloadServiceForWindows/README/BingImageDownloadForConsoleApplication_startup.png)  
+![BingImageDownloadServiceForWindows.exe](https://gitee.com/gggplso/MarkdownPhotos/raw/master/Photos/BingImageDownloadServiceForWindows/README/BingImageDownloadServiceForWindows_services.png)  
+![BingImageDownloadServiceForWindows.exe](https://gitee.com/gggplso/MarkdownPhotos/raw/master/Photos/BingImageDownloadServiceForWindows/README/BingImageDownloadServiceForWindows_servicelist.png)  
+![BingImageDownloadServiceForWindows.exe](https://gitee.com/gggplso/MarkdownPhotos/raw/master/Photos/BingImageDownloadServiceForWindows/README/%E7%B3%BB%E7%BB%9F%E6%9C%8D%E5%8A%A1%E4%B8%ADBing%E5%9B%BE%E7%89%87%E4%B8%8B%E8%BD%BD%E6%9C%8D%E5%8A%A1%E6%88%AA%E5%9B%BE.png)  
     * 3.3 卸载服务： 双击执行`卸载Uninstall.bat`文件，将服务从系统服务列表中移除。本程序软件代码开源，纯绿色无注册表写入，执行服务卸载后删除整个文件夹`D:\WindowsServiceBingImage`即可。   
 
 
@@ -129,6 +132,14 @@
         2024-11-08：新建WinForm窗体做配置参数可视界面
     </summary> 
 </details>
+<details>
+    <summary>
+        2025-06-13：微软API接口地址变更，程序更新了相关代码  
+    </summary> 
+    从原来的接口地址：arc.msn.com  
+    更换为新的接口地址：fd.api.iris.microsoft.com  
+    更换后，原来的程序会报错，需要更新程序版本。  
+</details>
 
 
 ## 效果展示
@@ -138,8 +149,9 @@
 
 2、将需要分类的图片放入对应文件夹中，如Downloads：  
 ![参数配置](https://gitee.com/gggplso/MarkdownPhotos/raw/master/Photos/BingImageDownloadServiceForWindows/README/参数配置效果1.png)  
-放在该目录中的图片，程序将会自动按分辨率移动到对应的分类文件夹中，处理完成后，若还有遗留的，可删除。（如果你参数配置无误的话，本目录处理过后，会是空文件夹，若有遗留的，都是重复的图片文件）  
-本程序会把横向的图片移动到Computer文件夹中，纵向的图片移动到Mobile文件夹中。  
+放在该目录中的图片，程序将会**自动按分辨率移动**到对应的分类文件夹中，处理完成后，若还有遗留的，可删除。（如果你参数配置无误的话，本目录处理过后，会是空文件夹，**若有遗留的，都是重复的图片文件**）  
+根据配置，本程序会把横向的图片移动到Computer文件夹中，纵向的图片移动到Mobile文件夹中。  
+![参数配置-日志说明](https://gitee.com/gggplso/MarkdownPhotos/raw/master/Photos/BingImageDownloadServiceForWindows/README/%E4%BB%8EDownload%E5%A4%8D%E5%88%B6%E5%9B%BE%E7%89%87%E6%96%87%E4%BB%B6%E7%9A%84%E6%97%A5%E5%BF%97%E8%AE%B0%E5%BD%95.png)
 
 3、电脑壁纸，Computer：  
 ![参数配置](https://gitee.com/gggplso/MarkdownPhotos/raw/master/Photos/BingImageDownloadServiceForWindows/README/参数配置效果2.png)

@@ -834,7 +834,8 @@ namespace ClassLibrary.Services
         /// </summary>
         /// <returns></returns>
         public async Task<bool> WindowsSpotlightDownloadAsync()
-        {// 定义配置文件路径和相关日志信息
+        {
+            // 定义配置文件路径和相关日志信息
             var logTitle = "Windows聚焦API图片下载(方法)";
             var logType = "WindowsSpotlightDownloadService";
             var logCycle = "yyyyMMdd";
@@ -865,8 +866,12 @@ namespace ClassLibrary.Services
 
             try
             {
+                // 循环极限次数记录数（当此记录数大于等于配置文件中的设定值时，退出循环）
                 int loopLimit = 0;
-                int loopCount = 0;
+                // 外循环计数
+                int outputLoopCount = 0;
+                // 内循环计数
+                int innerLoopCount = 0;
                 while (loopLimit < BingImageSetting.WindowsSpotlightSetting.WindowsSpotlightAPIRepeatLimit)
                 {
                     // 获取下载地址等素材
@@ -961,11 +966,17 @@ namespace ClassLibrary.Services
                     ClassLibrary.MyJsonHelper.WriteClassToJsonFile<WindowsSpotlightNewClass>(windowsSpotlightNew, Path.Combine(ClassLibrary.ShareClass._logPath, $"{DateTime.Now.ToString("yyyyMMddHHmmss")}.json"));
 #else
 #endif
+                    // 外循环记录结果
+                    outputLoopCount++;
+
                     if (windowsSpotlightNew.Items.Count > 0)
                     {
+                        // 当前外循环下载文件计数
+                        int outputCount = 0;
                         foreach (var item in windowsSpotlightNew.Items)
                         {
-                            int count = 0;
+                            // 当前内循环下载文件计数
+                            int innerCount = 0;
                             result = false;
                             bool resultIsRepeat = false;
                             // 准备开始下载
@@ -1014,7 +1025,7 @@ namespace ClassLibrary.Services
                                 strTemp = $"{strFileDownloadUrl}\r\nSHA256：{strFileHashLandscape}\r\n{strFileNameLandscape}\r\n文件下载结果：{resultLandscape}";
                                 Console.WriteLine(strTemp);
                                 ClassLibrary.MyLogHelper.LogSplit(ClassLibrary.ShareClass._logPath, logTitle, strTemp, logType, logCycle);
-                                if (resultLandscape) { intDownloadCount++; count++; }
+                                if (resultLandscape) { intDownloadCount++; outputCount++; innerCount++; }
                             }
 
                             // 手机壁纸
@@ -1040,13 +1051,14 @@ namespace ClassLibrary.Services
                                 strTemp = $"{strFileDownloadUrl}\r\nSHA256：{strFileHashPortrait}\r\n{strFileNamePortrait}\r\n文件下载结果：{resultPortrait}";
                                 Console.WriteLine(strTemp);
                                 ClassLibrary.MyLogHelper.LogSplit(ClassLibrary.ShareClass._logPath, logTitle, strTemp, logType, logCycle);
-                                if (resultPortrait) { intDownloadCount++; count++; }
+                                if (resultPortrait) { intDownloadCount++; outputCount++; innerCount++; }
                             }
 
 
-                            // 记录结果
-                            loopCount++;
+                            // 内循环记录结果
+                            innerLoopCount++;
                             resultIsRepeat = (landscapeIsRepeat && portraitIsRepeat);
+                            // 当横向和纵向壁纸都重复时，循环极限次数记录数+1
                             if (resultIsRepeat)
                             {
                                 loopLimit++;
@@ -1063,9 +1075,7 @@ namespace ClassLibrary.Services
                                 //	}
                             }
                             result = (resultLandscape && resultPortrait);
-                            int intResult = loopLimit < BingImageSetting.WindowsSpotlightSetting.WindowsSpotlightAPIRepeatLimit ? count : intDownloadCount;
-                            string strTest = loopLimit < BingImageSetting.WindowsSpotlightSetting.WindowsSpotlightAPIRepeatLimit ? "当前" : "共";
-                            strTemp = $"Windows聚焦API图片下载完成({result})重复{loopCount.ToString()}-{loopLimit.ToString()}：{strTest}下载{intResult}个文件。";
+                            strTemp = $"Windows聚焦API图片下载完成({result})，外循环{outputLoopCount}次(本次下载文件{outputCount})，内循环{innerLoopCount}次(本次下载文件{innerCount})，极限循环计数{loopLimit}次共下载{intDownloadCount}个文件。";
                             Console.WriteLine(strTemp);
                             ClassLibrary.MyLogHelper.LogSplit(ClassLibrary.ShareClass._logPath, logTitle, strTemp, logType, logCycle);
                         }

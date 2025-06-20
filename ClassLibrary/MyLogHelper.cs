@@ -164,17 +164,66 @@ namespace ClassLibrary
             ClassLibrary.MyLogHelper.Log(strContent: sb.ToString(), logType: "Error_Exception");
             return strings;
         }
-        #endregion
-        #region 扩展日志方法
+		/// <summary>
+		/// 将异常对象从其构造的堆栈跟踪，获取引发异常的具体文件位置信息
+		/// </summary>
+		/// <param name="ex">异常对象</param>
+		/// <param name="additional">追加补充信息(方便定位找问题)</param>
+		/// <returns></returns>
+		public static string[] GetExceptionLocation(Exception ex, string additional)
+		{
+			string[] strings = new string[4] { "未知异常信息", "未知文件", "未知行号", "未知列号" };
+			while (ex.InnerException != null)
+			{
+				ex = ex.InnerException;
+			}
+			StackTrace stackTrace = new StackTrace(ex, true);
+			if (stackTrace.FrameCount > 0)
+			{
+				StackFrame stackFrame = stackTrace.GetFrame(0);
+				if (stackFrame != null)
+				{
+					strings[1] = stackFrame.GetFileName() ?? "未知文件";
+					strings[2] = stackFrame.GetFileLineNumber().ToString();
+					strings[3] = stackFrame.GetFileColumnNumber().ToString();
 
-        /// <summary>
-        /// 以星号*分隔开的基础日志
-        /// </summary>
-        /// <param name="logPath">日志存放路径</param>
-        /// <param name="logContent">日志内容</param>
-        /// <param name="logType">日志类型</param>
-        /// <param name="logCycle">新建日志的循环周期</param>
-        private static void LogSplit(string logPath, string logContent, string logType, string logCycle)
+					// 如果获取不到行号或列号，则使用默认值
+					if (string.IsNullOrEmpty(strings[2])) strings[2] = "未知行号";
+					if (string.IsNullOrEmpty(strings[3])) strings[3] = "未知列号";
+				}
+			}
+			// 构建异常描述
+			strings[0] = $"在文件{strings[1]}中的第{strings[2]}行第{strings[3]}列引发异常：{ex.Message}";
+
+			//记录日志
+			StringBuilder sb = new StringBuilder();
+			sb.AppendLine("".PadRight(30, '*'));
+			sb.AppendLine($"补充信息：{additional}");
+			sb.AppendLine("异常发生时间：" + DateTime.Now.ToString("yyyyMMddHHmmss.fffffff"));
+			sb.AppendLine($"异常类型：{ex.HResult}");
+			sb.AppendLine(string.Format("导致当前异常的 Exception 实例：{0}", ex.InnerException));
+			sb.AppendLine(@"导致异常的应用程序或对象的名称：" + ex.Source);
+			sb.Append("引发异常的方法：");
+			sb.AppendLine(ex.TargetSite?.ToString());
+			sb.AppendFormat("异常堆栈信息：{0} \r\n", ex.StackTrace);
+			sb.AppendFormat("异常消息：{0}", ex.Message);
+			sb.AppendLine("\r\n 异常位置：" + strings[0]);
+			sb.Append("".PadLeft(30, '*'));
+
+			ClassLibrary.MyLogHelper.Log(strContent: sb.ToString(), logType: "ExceptionError");
+			return strings;
+		}
+		#endregion
+		#region 扩展日志方法
+
+		/// <summary>
+		/// 以星号*分隔开的基础日志
+		/// </summary>
+		/// <param name="logPath">日志存放路径</param>
+		/// <param name="logContent">日志内容</param>
+		/// <param name="logType">日志类型</param>
+		/// <param name="logCycle">新建日志的循环周期</param>
+		private static void LogSplit(string logPath, string logContent, string logType, string logCycle)
         {
             string str = "".PadRight(30, '*') + "\r\n";
             logContent = "\r\n" + str + logContent + "\r\n" + str;

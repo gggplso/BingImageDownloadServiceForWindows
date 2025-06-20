@@ -1435,19 +1435,37 @@ END;
 			catch (DirectoryNotFoundException ex)
 			{
 				// 处理目录未找到的异常
-				MyLogHelper.GetExceptionLocation(ex);
+				MyLogHelper.GetExceptionLocation(ex, $"根据提供的地址，下载文件到指定的路径：处理目录未找到的异常\r\n{strUrl}\r\n{filePath}");
 				return false;
 			}
 			catch (FileNotFoundException ex)
 			{
 				// 处理文件未找到的异常
-				MyLogHelper.GetExceptionLocation(ex);
+				MyLogHelper.GetExceptionLocation(ex, $"根据提供的地址，下载文件到指定的路径：处理文件未找到的异常\r\n{strUrl}\r\n{filePath}");
+				return false;
+			}
+			catch (WebException ex) when (ex.Status == WebExceptionStatus.NameResolutionFailure)
+			{
+				// 处理DNS解析失败
+				MyLogHelper.GetExceptionLocation(ex, $"根据提供的地址，下载文件到指定的路径：处理DNS解析失败\r\n{strUrl}\r\n{filePath}");
+
+				string errorLog = $"DNS解析失败: {strUrl}, 错误信息: {ex.Message}";
+				MyLogHelper.LogSplit(_logPath, "网络错误", errorLog, "NetworkError", _logCycle);
+				return false;
+			}
+			catch (WebException ex)
+			{
+				// 处理其他WebException
+				MyLogHelper.GetExceptionLocation(ex, $"根据提供的地址，下载文件到指定的路径：处理其他WebException\r\n{strUrl}\r\n{filePath}");
+
+				string errorLog = $"网络请求失败: {strUrl}, 错误状态: {ex.Status}, 错误信息: {ex.Message}";
+				MyLogHelper.LogSplit(_logPath, "网络错误", errorLog, "NetworkError", _logCycle);
 				return false;
 			}
 			catch (Exception ex)
 			{
 				// 处理其他异常
-				MyLogHelper.GetExceptionLocation(ex);
+				MyLogHelper.GetExceptionLocation(ex, $"根据提供的地址，下载文件到指定的路径：处理其他异常\r\n{strUrl}\r\n{filePath}");
 				return false;
 			}
 			finally

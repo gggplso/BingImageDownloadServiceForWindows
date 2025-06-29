@@ -128,6 +128,16 @@
 因此，设置的数值越大，耗时越久，请适度均衡配置。
 感谢您的支持。</value>
   </data>
+  <data name="labelTranscodedWallpaperExplanation.ToolTip" xml:space="preserve">
+    <value>【无用的复制图片】：如果是配置了聚焦每日更换桌面，那此配置有用，不然就是【无用的复制图片】：
+1、在Windows系统中的 %appdata%\Microsoft\Windows\Themes 目录下，也就是：C:\\Users\\用户名\\AppData\\Roaming\\Microsoft\\ Windows \\Themes 路径下，有一个名称为【TranscodedWallpaper】但无后缀的文件，它就是你的当前桌面背景图。
+2、然而windows系统会对图片进行85%质量的压缩，然后生成如上的一个文件，提高系统性能。 如果是你自己建的高清壁纸图片，那么不用复制此文件，不用设置此配置就可以跳过这个【无用的复制图片】功能。
+3、你可以点【浏览】后，将生成(得到)的文件路径复制，通过系统自带工具【画图】打开此路径文件，查看是否是你要的背景图。C:\Users\电脑系统当前用户名\AppData\Roaming\Microsoft\Windows\Themes\TranscodedWallpaper
+4、有时候你的系统聚焦配置是对的，但桌面无法自动更新背景，或直接变为纯色，那把这个【TranscodedWallpaper】文件删除即可。</value>
+  </data>
+  <metadata name="toolTipMainSetting.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

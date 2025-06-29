@@ -154,6 +154,7 @@ namespace BingImageDownloadSetting
 					comboBoxFileNameAddDate.SelectedIndex = bingImageSetting.BingImageApi.BingApiRequestParams.FileNameAddDate ? 0 : 1;
 					comboBoxIsFullDownload.SelectedIndex = bingImageSetting.BingImageApi.BingApiRequestParams.IsFullDownload ? 0 : 1;
 					textBoxWindowsSpotlightPath.Text = bingImageSetting.WindowsSpotlightSetting.WindowsSpotlightPath;
+                    textBoxTranscodedWallpaperPath.Text = bingImageSetting.WindowsSpotlightSetting.TranscodedWallpaperPath;
 					textBoxWindowsSpotlightAPIUrl.Text = bingImageSetting.WindowsSpotlightSetting.WindowsSpotlightAPIUrl;
 					numericUpDownWindowsSpotlightAPIRepeatLimit.Value = bingImageSetting.WindowsSpotlightSetting.WindowsSpotlightAPIRepeatLimit;
 					comboBoxFileOperationType.SelectedIndex = (int)bingImageSetting.CategorizeAndMoveSetting.FileOperationType;
@@ -240,6 +241,7 @@ namespace BingImageDownloadSetting
 				bingImageSetting.BingImageApi.BingApiRequestParams.FileNameAddDate = comboBoxFileNameAddDate.SelectedIndex == 0;
 				bingImageSetting.BingImageApi.BingApiRequestParams.IsFullDownload = comboBoxIsFullDownload.SelectedIndex == 0;
 				bingImageSetting.WindowsSpotlightSetting.WindowsSpotlightPath = textBoxWindowsSpotlightPath.Text;
+				bingImageSetting.WindowsSpotlightSetting.TranscodedWallpaperPath = textBoxTranscodedWallpaperPath.Text;
 				bingImageSetting.WindowsSpotlightSetting.WindowsSpotlightAPIUrl = textBoxWindowsSpotlightAPIUrl.Text;
 				bingImageSetting.WindowsSpotlightSetting.WindowsSpotlightAPIRepeatLimit = (int)numericUpDownWindowsSpotlightAPIRepeatLimit.Value;
 				bingImageSetting.CategorizeAndMoveSetting.FileOperationType = (ClassLibrary.ShareClass.FileOperationType)comboBoxFileOperationType.SelectedIndex;
@@ -431,13 +433,22 @@ namespace BingImageDownloadSetting
 		private void buttonWindowsSpotlightPathBrowse_Click(object sender, EventArgs e)
 		{
 			BrowseFolder(Path.Combine(ClassLibrary.ShareClass._systemUserProfilePath, "AppData", "Local", "Packages", "Microsoft.Windows.ContentDeliveryManager_cw5n1h2txyewy", "LocalState", "Assets"), "请选择Windows系统聚焦图片所在的目录路径", textBoxWindowsSpotlightPath);
-		}
-		/// <summary>
-		/// 浏览选择：需整理图片所在目录源路径、【待整理图片】保存目录
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		private void buttonSearchDirectoryPathBrowse_Click(object sender, EventArgs e)
+        }
+        /// <summary>
+        /// [桌面背景缓存][了解此图片]【TranscodedWallpaper】文件路径浏览... %appdata%\Microsoft\Windows\Themes
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonTranscodedWallpaperBrowse_Click(object sender, EventArgs e)
+        {
+            BrowseFolder(Path.Combine(ClassLibrary.ShareClass._systemUserProfilePath, "AppData", "Roaming", "Microsoft", "Windows", "Themes"), "请选择Windows桌面背景图片缓存所在的目录路径", textBoxTranscodedWallpaperPath, "TranscodedWallpaper");
+        }
+        /// <summary>
+        /// 浏览选择：需整理图片所在目录源路径、【待整理图片】保存目录
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonSearchDirectoryPathBrowse_Click(object sender, EventArgs e)
 		{
 			BrowseFolder(Path.Combine(ClassLibrary.ShareClass._userPath ?? "D:", "Pictures", "Downloads"), "请选择一个需要整理分类归档的【待整理图片】所在文件夹目录", textBoxSearchDirectoryPath);
 		}
@@ -477,5 +488,5 @@ namespace BingImageDownloadSetting
 		{
 			BrowseFolder(Path.Combine(ClassLibrary.ShareClass._userPath ?? "D:", "Pictures", "Rejected"), "请选择一个目录作为存放选择文件的文件夹", textBoxRejectedPath);
 		}
-	}
+    }
 }

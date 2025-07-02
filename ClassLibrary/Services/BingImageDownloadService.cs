@@ -646,12 +646,12 @@ namespace ClassLibrary.Services
                         }
                         else
                         {
-                            strTemp = $"TranscodedWallpaper桌面背景缓存图片：{sourceFilePath} 下的{fileName}文件不存在。";
+                            strTemp = $"TranscodedWallpaper桌面背景缓存图片：{sourceFilePath} 下的{fileName}文件名获取失败。";
                         }
                     }
                     else
                     {
-                        strTemp = $"TranscodedWallpaper桌面背景缓存图片：{sourceFilePath} 文件不存在。";
+                        strTemp = $"TranscodedWallpaper桌面背景缓存图片：{sourceFilePath} 文件不存在。请选择桌面背景图片TranscodedWallpaper的正确目录%appdata%";
                     }
                     Console.WriteLine(strTemp);
                     ClassLibrary.MyLogHelper.LogSplit(ClassLibrary.ShareClass._logPath, logTitle + "_TranscodedWallpaper", strTemp, logType, logCycle);

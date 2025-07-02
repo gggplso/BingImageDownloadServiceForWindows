@@ -365,7 +365,7 @@ namespace ClassLibrary.Classes
         /// <summary>
         /// Windows聚焦图片所在目录路径(字段)
         /// </summary>
-        private string _windowsSpotlightPath = Path.Combine(ClassLibrary.ShareClass._systemUserProfilePath, "AppData", "Local", "Packages", "Microsoft.Windows.ContentDeliveryManager_cw5n1h2txyewy", "LocalState", "Assets");
+        private string _windowsSpotlightPath = Path.Combine(ClassLibrary.ShareClass._systemLocalAppDataPath, "Packages", "Microsoft.Windows.ContentDeliveryManager_cw5n1h2txyewy", "LocalState", "Assets");
         //public string WindowsSpotlightPath { get; set; } = Environment.ExpandEnvironmentVariables(@"%USERPROFILE%\AppData\Local\Packages\Microsoft.Windows.ContentDeliveryManager_cw5n1h2txyewy\LocalState\Assets\");
         /// <summary>
         /// Windows聚焦图片所在目录路径
@@ -373,13 +373,13 @@ namespace ClassLibrary.Classes
         public string WindowsSpotlightPath
 		{
 			get => _windowsSpotlightPath;
-			set => _windowsSpotlightPath = string.IsNullOrWhiteSpace(value) ? Path.Combine(ClassLibrary.ShareClass._systemUserProfilePath, "AppData", "Local", "Packages", "Microsoft.Windows.ContentDeliveryManager_cw5n1h2txyewy", "LocalState", "Assets") : value;
+			set => _windowsSpotlightPath = string.IsNullOrWhiteSpace(value) ? Path.Combine(ClassLibrary.ShareClass._systemLocalAppDataPath, "Packages", "Microsoft.Windows.ContentDeliveryManager_cw5n1h2txyewy", "LocalState", "Assets") : value;
         }
 
         /// <summary>
         /// 桌面背景缓存图片所在目录路径(字段)
         /// </summary>
-        private string _transcodedWallpaperPath = Path.Combine(ClassLibrary.ShareClass._systemUserProfilePath, "AppData", "Roaming", "Microsoft", "Windows", "Themes", "TranscodedWallpaper");
+        private string _transcodedWallpaperPath = Path.Combine(ClassLibrary.ShareClass._systemAppDataPath, "Microsoft", "Windows", "Themes", "TranscodedWallpaper");
         //public string TranscodedWallpaperPath { get; set; } = Environment.ExpandEnvironmentVariables(@"%appdata%\Microsoft\Windows\Themes\TranscodedWallpaper");
         /// <summary>
         /// 桌面背景缓存图片所在目录路径
@@ -387,7 +387,7 @@ namespace ClassLibrary.Classes
         public string TranscodedWallpaperPath
         {
             get => _transcodedWallpaperPath;
-            set => _transcodedWallpaperPath = string.IsNullOrWhiteSpace(value) ? Path.Combine(ClassLibrary.ShareClass._systemUserProfilePath, "AppData", "Roaming", "Microsoft", "Windows", "Themes", "TranscodedWallpaper") : value;
+            set => _transcodedWallpaperPath = string.IsNullOrWhiteSpace(value) ? Path.Combine(ClassLibrary.ShareClass._systemAppDataPath, "Microsoft", "Windows", "Themes", "TranscodedWallpaper") : value;
         }
         /// <summary>
         /// 微软官方的Windows聚焦API地址

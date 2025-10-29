@@ -30,7 +30,8 @@
 
 1.  带有扳手和螺丝刀图标的`BingImageDownloadSetting.exe` 文件是配置文件，需要自行配置。软件给了初始默认值，自己需要设置一些图片的保存目录等参数。  
 ![BingImageDownloadSetting.exe](https://gitee.com/gggplso/MarkdownPhotos/raw/master/Photos/BingImageDownloadServiceForWindows/README/BingImageDownloadSetting_ico.png)  
-<font size=5 color=red>注意</font>：第一次用本软件前，一定要先打开使用本文件进行参数配置。
+<font size=5 color=red>注意</font>：第一次用本软件前，一定要先打开使用本文件进行参数配置。  
+![BingImageDownloadSetting.exe](https://gitee.com/gggplso/MarkdownPhotos/raw/master/Photos/BingImageDownloadServiceForWindows/README/BingImageDownloadSetting_Setting4.png)  
 
 
 2.  带有微软Bing必应图标的`BingImageDownloadForConsoleApplication.exe`文件是Windows控制台应用程序，可以建立快捷方式添加到开机运行项中自动运行下载任务。  
@@ -73,7 +74,8 @@
 
 3.  将服务添加到系统服务列表中。  
 ![BingImageDownloadServiceForWindows.exe](https://gitee.com/gggplso/MarkdownPhotos/raw/master/Photos/BingImageDownloadServiceForWindows/README/BingImageDownloadServiceForWindows_ico_list.png)  
-    * 3.1 安装服务：双击执行`安装Install.bat`文件，将服务安装到系统服务列表中。  
+    * 3.1 安装服务：双击执行`安装Install.bat`文件，将服务安装到系统服务列表中。（安装Windows服务需要管理员权限，选择“是”）  
+![BingImageDownloadServiceForWindows.exe](https://gitee.com/gggplso/MarkdownPhotos/raw/master/Photos/BingImageDownloadServiceForWindows/README/BingImageDownloadServiceForWindows_Install_setup.png)  
 ![BingImageDownloadServiceForWindows.exe](https://gitee.com/gggplso/MarkdownPhotos/raw/master/Photos/BingImageDownloadServiceForWindows/README/BingImageDownloadServiceForWindows_Install.png)  
     * 3.2 检查服务是否启动  
       * 3.2.1 在Windows“开始”菜单上点击右键，选择“运行”，输入`services.msc`回车运行，在打开的系统服务列表窗口中，找到必应每日壁纸下载服务，检查是否正常运行  
@@ -139,6 +141,11 @@
     从原来的接口地址：arc.msn.com  
     更换为新的接口地址：fd.api.iris.microsoft.com  
     更换后，原来的程序会报错，需要更新程序版本。  
+</details>
+<details>
+    <summary>
+        2025-10-29：因Windows系统更新，导致Windows服务安装/卸载脚本中的批处理命令失效，改为用PowerShell脚本提升管理员权限来执行安装服务。
+    </summary> 
 </details>
 
 

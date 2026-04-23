@@ -36,13 +36,15 @@ namespace ClassLibrary
 		/// <param name="hash">文件的Hash值</param>
 		/// <param name="IsPortrait">图片的方向是否是竖向的（对应数据库中：横向：0 否，竖向：1 是）
 		/// <para/>（Page Orientation即页面方向，指的是矩形平面以长边为底还是以短边为底，分为 Portrait（纵向：Portrait指的是人物画像）和 Landscape（横向：Landscape指的则是风景画）两类。）</param>
-		public static void InsertHashData(string filePath, string hash, int? IsPortrait = null)
+		/// <param name="DownloadUrl">文件下载Url地址</param>
+		public static void InsertHashData(string filePath, string hash, int? IsPortrait = null, string DownloadUrl = null)
 		{
 			var necessary = new (string column, object value)[] {
 									("FileName",Path.GetFileName(filePath)),
 									("FilePath",filePath),
 									("HashValue",hash),
 									("IsPortrait",IsPortrait),
+									("DownloadUrl",DownloadUrl),
 							};
 			ClassLibrary.MySQLiteHelper mySQLite = new MySQLiteHelper(ClassLibrary.ShareClass._sqliteConnectionString);
 			mySQLite.InsertData("FileHashes", necessary);
